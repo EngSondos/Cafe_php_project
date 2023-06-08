@@ -1,7 +1,7 @@
 <?php
 include "../layout/head.php";
 // include "../Controllers/User/UserController.php";
-include "../Models/products/categories.php";
+include "../Models/categories.php";
 include "../connection_credits.php";
 include "../connection.php";
 // include  "../validation.php";
@@ -9,7 +9,7 @@ include "../connection.php";
 
 if (isset($_POST) && !empty($_POST)) {
     AddCategory($_POST);
-    var_dump($_POST);
+    // var_dump($_POST);
 }
 
 ?>
@@ -26,6 +26,36 @@ if (isset($_POST) && !empty($_POST)) {
 
     </form>
     <br>
+    <table class="table table-striped table-dark border-light  text-center table-bordered">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>Show</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $rows = DisplayCategory();
+            // var_dump($rows);
+            foreach ($rows as $row) {
+            ?>
+                <tr>
+                    <?php foreach ($row as $field) {
+                        // var_dump($field);
+                    ?>
+                        <td><?= $field ?></td>
+                    <?php     }   ?>
+                    <td><a href="" class="btn btn-primary">Show</a></td>
+                    <td><a href="" class="btn btn-warning">Edit</a></td>
+                    <td><a href="" class="btn btn-danger">Delete</a></td>
+                </tr>
+            <?php     }   ?>
+        </tbody>
+    </table>
+
 </div>
 
 
