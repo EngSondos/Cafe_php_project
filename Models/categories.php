@@ -48,3 +48,52 @@ function DisplayCategory()
         echo $e->getMessage();
     }
 }
+
+
+// ----------------------------------------------------------------
+
+//SELECT CATEGORY BY ID 
+function SelectCategoryByID($id)
+{
+    global $db;
+    global $table;
+
+    try {
+        $query = "SELECT * FROM `cafe_project`. $table WHERE  id =:id";;
+        // var_dump($query);
+
+        ### prepare query
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $row = $stmt->fetchObject(PDO::FETCH_ASSOC);
+        return $row;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
+//DELETE CATEGORY 
+function DeleteCategory($id)
+{
+    global $db;
+    global $table;
+    // try {
+        // alert($id);
+        $query = "DELETE FROM `cafe_project`. $table WHERE id = :id";
+        // var_dump($query);
+
+        ### prepare query
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+
+        return $stmt->rowCount();
+    // } catch (Exception $e) {
+    //     echo $e->getMessage();
+    // }
+}
+
+// function alert ($id){
+//     alert($id);
+// }
