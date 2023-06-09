@@ -41,9 +41,6 @@ function getAllOrders()
 
 
 
-
-
-
 function createOrder($userId, $products, $notes, $totalPrice, $status) {
   global $pdo;
 
@@ -91,3 +88,32 @@ function getOrderProducts($orderId) {
 }
 
 
+function filterOrdersByDate($start_date, $end_date)
+{
+  global $pdo;
+
+  try {
+    $stmt = $pdo->prepare('SELECT * FROM orders WHERE created_at BETWEEN :start_date AND :end_date ORDER BY created_at DESC');
+    $stmt->bindParam(':start_date', $start_date);
+    $stmt->bindParam(':end_date', $end_date);
+    $stmt->execute();
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($orders as &$order) {
+      $stmt = $pdo->prepare('SELECT * FROM order_product WHERE order_id = :order_id');
+      $stmt->bindParam(':order_id', $order['id']);
+      $stmt->execute();
+      $orderProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $totalPrice =0;
+      foreach ($orderProducts as $product){
+        $totalPrice += $product['quantity'] * $product['price'];
+      }
+      $order['total_price'] = $totalPrice;
+    }
+
+    return $orders;
+  } catch(PDOException $e) {
+    throw $e;
+  }
+}
