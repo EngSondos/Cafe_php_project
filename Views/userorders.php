@@ -2,8 +2,13 @@
 include '../layout.php';
 include '../Controllers/order_controller.php';
 
+if (!isset($_POST['start_date']) && !isset($_POST['end_date'])) {
   $orders = all();
-
+} else {
+  $startDate = $_POST['start_date'];
+  $endDate = $_POST['end_date'];
+  $orders = filterorder( $startDate, $endDate);
+}
 ?>
 
 <div class="container">
