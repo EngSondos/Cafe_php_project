@@ -21,7 +21,11 @@ function validationForEndDate($end_date,&$error):bool
   return  validationForEmpty($end_date,"Date To",$error);
 
 }
+function validationForUser($user,&$error):bool
+{
+  return  validationForEmpty($user,"User",$error);
 
+}
 
 
 function validation($data) :array
@@ -29,6 +33,8 @@ function validation($data) :array
     global $error;
     validationForStartDate($data['start_date'],$error);
     validationForEndDate($data['end_date'],$error);
+    validationForEndDate($data['user'],$error);
+
     return $error;
 }
 

@@ -6,7 +6,6 @@ function getAllUserMakeOrder()
     $query= "SELECT `id`,`username` FROM users"; 
    $result = $conn->query($query);
     return  $result->fetchAll();
-
 }
 
 function filterorderByUserId($user_id)
@@ -32,4 +31,14 @@ function getOrderDetalis($order_id,$user_id)
 
 }
 
-// function
+function getOrdersByDate($start_date,$end_date)
+{
+  global  $conn;
+  $query = "Select * from orders where  orders.`created_at` between :start_date and :end_date ";
+  $result1 = $conn->prepare($query);
+  $result1->bindParam(':start_date',$start_date);
+  $result1->bindParam(':end_date',$end_date);
+  $result1->execute();
+    return $result1->fetchAll() ;
+
+}

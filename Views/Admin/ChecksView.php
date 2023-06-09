@@ -16,7 +16,7 @@ if (!empty($_GET['details'])) {
 }
 
 if(!empty($_POST)){
-  filterOrderByUserAndDate();
+  $error = filterOrderByUserAndDate($_POST);
 }
 ?>
  <div class="container">
@@ -26,10 +26,15 @@ if(!empty($_POST)){
         <div class="d-flex">
           <div class="form-group mx-3">
             <input class="form-control" id="date" name="start_date" placeholder="Date From" type="date" />
+            <div class="text-danger"><?= $error['Date From'] ?? ""?></div>
+
           </div>
           <div class="form-group">
             <input class="form-control" id="date" name="end_date" placeholder="Date To" type="date" />
+            <div class="text-danger"><?= $error['Date To'] ?? ""?></div>
+
           </div>
+
         </div>
         <div class="form-group mx-3">
 
