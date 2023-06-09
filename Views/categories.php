@@ -1,29 +1,37 @@
 <?php
 include "../layout/head.php";
+// session_destroy();
+session_start();
 // include "../Controllers/User/UserController.php";
 include "../Models/categories.php";
+include "../Controllers/categories.php";
 include "../connection_credits.php";
 include "../connection.php";
-// include  "../validation.php";
-// DeleteCategory(13);
 
-if (isset($_POST) && !empty($_POST)) {
-    AddCategory($_POST);
-    // var_dump($_POST);
-}
 
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
     DeleteCategory($_GET['delete_id']);
 }
 
-if (isset($_GET['update_id']) && !empty($_GET['update_id'])) {
-    DeleteCategory($_GET['delete_id']);
-}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
+    if ($_GET['action'] === 'add') {
+      AddCategory($_POST);
+      // Handle add form data here
+    } else if ($_GET['action'] === 'update') {
+        $category_id = $_GET['category_id'];
+        // var_dump(  $category_id );
+        // var_dump(  $_POST );
+      UpdateCategory($category_id, $_POST);
+      // Handle update form data here
+    }
+  }
+
 ?>
 
 <div class="container w-50">
     <h1 class="text-primary mx-auto w-50">Registration Form</h1>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" action="?action=add" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name">
@@ -46,31 +54,25 @@ if (isset($_GET['update_id']) && !empty($_GET['update_id'])) {
         <tbody>
             <?php
             $rows = DisplayCategory();
-            // var_dump($rows);
             foreach ($rows as $row) {
-
             ?>
-                <tr>
-                    <?php foreach ($row as $field) {
-                        // var_dump($field);
+            <tr>
+                <?php foreach ($row as $field) {
                     ?>
-                        <td><?= $field ?></td>
-                    <?php     }   ?>
-                    <td><a href="" class="btn btn-primary">Show</a></td>
-                    <!-- <td><button class="btn btn-warning">Edit</button></td> -->
-
-                    <!-- Button trigger modal -->
-                    <td><button class="btn btn-warning" data-toggle="modal" data-target="#modelId">Edit</button></td>
-                    <!-- <td><button onclick="DeleteCategory(<?= $row['id'] ?>)" class="btn btn-danger">Delete</button></td> -->
-                    <!-- <td><a onclick="DeleteCategory(12)" class="btn btn-danger">Delete</a></td> -->
-                    <!-- <td><a href="" onclick="alert(<?= $row['id'] ?>)" class="btn btn-danger">Delete</a></td> -->
-                    <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
-                </tr>
-
-
+                <td><?= $field ?></td>
+                <?php     }   ?>
+                <td><a href="" class="btn btn-primary">Show</a></td>
                 <!-- Button trigger modal -->
+                <!-- <td><button href="?category_id=<?= $row['id'] ?>" class="btn btn-warning" data-toggle="modal" data-target="#modelId"
+                        onclick="getCategoryId(<?= $row['id'] ?>)">Edit</button></td> -->
+                <td><a href="" class="btn btn-warning edit-category" data-toggle="modal" data-target="#modelId"
+                        data-category-id="<?= $row['id'] ?>">Edit</a></td>
+                <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
+            </tr>
+            <!-- Button trigger modal -->
 
-            <?php     }   ?>
+            <?php }  ?>
         </tbody>
     </table>
 </div>
@@ -87,10 +89,10 @@ if (isset($_GET['update_id']) && !empty($_GET['update_id'])) {
                 </button>
             </div>
             <div class="modal-body">
-                <form method="post" enctype="multipart/form-data">
+                <form method="post" enctype="multipart/form-data" action="">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name">
+                        <input type="text" class="form-control" id="category_id" name="name">
                     </div>
                     <button type="submit" class="btn btn-primary my-3">Submit</button>
                     <button type="reset" class="btn btn-danger  my-3">Reset</button>
@@ -107,7 +109,16 @@ if (isset($_GET['update_id']) && !empty($_GET['update_id'])) {
 
 <!-- Optional: Place to the bottom of scripts -->
 <script>
-    const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
+    const editButtons = document.querySelectorAll('.edit-category');
+    editButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const categoryId = event.target.dataset.categoryId;
+            const editUrl = `?action=update&category_id=${categoryId}`;
+            document.querySelector('#modelId form').setAttribute('action', editUrl);
+        });
+    });
+
+    // const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 </script>
 
 <?php

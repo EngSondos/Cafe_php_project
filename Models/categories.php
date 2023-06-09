@@ -73,27 +73,49 @@ function SelectCategoryByID($id)
     }
 }
 
+// ----------------------------------------------------------------
+
 //DELETE CATEGORY 
 function DeleteCategory($id)
 {
     global $db;
     global $table;
     // try {
-        // alert($id);
-        $query = "DELETE FROM `cafe_project`. $table WHERE id = :id";
-        // var_dump($query);
+    // alert($id);
+    $query = "DELETE FROM `cafe_project`. $table WHERE id = :id";
+    // var_dump($query);
 
-        ### prepare query
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(":id", $id);
-        $stmt->execute();
+    ### prepare query
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
 
-        return $stmt->rowCount();
+    return $stmt->rowCount();
     // } catch (Exception $e) {
     //     echo $e->getMessage();
     // }
 }
 
-// function alert ($id){
-//     alert($id);
-// }
+// ----------------------------------------------------------------
+
+//UPDATE CATEGORY 
+function UpdateCategory($id, $data)
+{
+    global $db;
+    global $table;
+    try {
+        $query = "UPDATE `cafe_project`. $table SET name = :cateName WHERE id = :id";
+        // var_dump($query);
+
+        ### prepare query
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":cateName", $data['name']);
+        # true --> query executed successfully
+        session_destroy();
+        return $stmt->execute();
+
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
