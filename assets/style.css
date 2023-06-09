@@ -1,0 +1,14 @@
+
+.signup-btn {
+    background-color: #fbb95b;
+    border-color: #e78803;
+}
+.signup-btn:hover {
+    background-color: #f19e2a94;
+    border-color: #e78803;
+}
+.errors-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+}
