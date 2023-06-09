@@ -3,7 +3,7 @@
 $table = 'categories';
 
 //ADD CATEGORY 
-function AddCategory($data)
+function AddCategoryQuery($data)
 {
     global $db;
     global $table;
@@ -30,7 +30,7 @@ function AddCategory($data)
 
 //DISPLAY CATEGORY 
 
-function DisplayCategory()
+function DisplayCategoryQuery()
 {
     global $db;
     global $table;
@@ -53,7 +53,7 @@ function DisplayCategory()
 // ----------------------------------------------------------------
 
 //SELECT CATEGORY BY ID 
-function SelectCategoryByID($id)
+function SelectCategoryByIdQuery($id)
 {
     global $db;
     global $table;
@@ -76,7 +76,7 @@ function SelectCategoryByID($id)
 // ----------------------------------------------------------------
 
 //DELETE CATEGORY 
-function DeleteCategory($id)
+function DeleteCategoryQuery($id)
 {
     global $db;
     global $table;
@@ -99,7 +99,7 @@ function DeleteCategory($id)
 // ----------------------------------------------------------------
 
 //UPDATE CATEGORY 
-function UpdateCategory($id, $data)
+function UpdateCategoryQuery($id, $data)
 {
     global $db;
     global $table;

@@ -3,26 +3,28 @@ include "../layout/head.php";
 // session_destroy();
 session_start();
 // include "../Controllers/User/UserController.php";
-include "../Models/categories.php";
 include "../Controllers/categories.php";
+include "../Models/categories.php";
 include "../connection_credits.php";
 include "../connection.php";
-
-
+include "../validation.php";
+$error_add;
+$error_update;
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
     DeleteCategory($_GET['delete_id']);
 }
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
+    
     if ($_GET['action'] === 'add') {
-      AddCategory($_POST);
+     AddCategory($_POST);
       // Handle add form data here
+      $error_add= $error['name'];
+
     } else if ($_GET['action'] === 'update') {
         $category_id = $_GET['category_id'];
-        // var_dump(  $category_id );
-        // var_dump(  $_POST );
-      UpdateCategory($category_id, $_POST);
+        UpdateCategory($category_id, $_POST);
+        // $error_update= $error['name'];
       // Handle update form data here
     }
   }
@@ -36,6 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name">
         </div>
+        <?= $error_add ?? '' ?>
         <button type="submit" class="btn btn-primary my-3">Submit</button>
         <button type="reset" class="btn btn-danger  my-3">Reset</button>
 
@@ -63,15 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                 <?php     }   ?>
                 <td><a href="" class="btn btn-primary">Show</a></td>
                 <!-- Button trigger modal -->
-                <!-- <td><button href="?category_id=<?= $row['id'] ?>" class="btn btn-warning" data-toggle="modal" data-target="#modelId"
-                        onclick="getCategoryId(<?= $row['id'] ?>)">Edit</button></td> -->
                 <td><a href="" class="btn btn-warning edit-category" data-toggle="modal" data-target="#modelId"
                         data-category-id="<?= $row['id'] ?>">Edit</a></td>
                 <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger"
                         onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
             </tr>
-            <!-- Button trigger modal -->
-
             <?php }  ?>
         </tbody>
     </table>
@@ -92,8 +91,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                 <form method="post" enctype="multipart/form-data" action="">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="category_id" name="name">
+                        <input type="text" class="form-control" id="category_id" name="name" >
                     </div>
+                    <?= $error_update ?? '' ?>
                     <button type="submit" class="btn btn-primary my-3">Submit</button>
                     <button type="reset" class="btn btn-danger  my-3">Reset</button>
 
