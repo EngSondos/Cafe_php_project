@@ -37,17 +37,14 @@ if (!isset($_POST['start_date']) && !isset($_POST['end_date'])) {
     </thead>
     <tbody>
       <?php foreach ($orders as $order): ?>
-        <tr>
+        <tr class="order-row" data-order-id="<?php echo $order['id']; ?>">
           <td scope="row"><?php echo $order['id']; ?></td>
           <td><?php echo $order['total_price']; ?></td>
           <td><?php echo $order['status']; ?></td>
           <td><?php echo $order['created_at']; ?></td>
-          <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#order-<?php echo $order['id']; ?>">View Products</button>
-          </td>
         </tr>
-        <tr id="order-<?php echo $order['id']; ?>" class="collapse">
-          <td colspan="5">
+        <tr class="products-container" id="products-<?php echo $order['id']; ?>" style="display:none;">
+          <td colspan="4">
             <table class="table table-striped">
               <thead>
                 <tr>
@@ -72,3 +69,21 @@ if (!isset($_POST['start_date']) && !isset($_POST['end_date'])) {
     </tbody>
   </table>
 </div>
+
+
+<script>
+  const orderRows = document.querySelectorAll('.order-row');
+
+  orderRows.forEach(row => {
+    const orderId = row.getAttribute('data-order-id');
+    const productsContainer = document.querySelector(`#products-${orderId}`);
+
+    row.addEventListener('click', () => {
+      if (productsContainer.style.display === 'none') {
+        productsContainer.style.display = 'table-row';
+      } else {
+        productsContainer.style.display = 'none';
+      }
+    });
+  });
+</script>
