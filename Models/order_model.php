@@ -71,5 +71,19 @@ function createOrder($userId, $products, $notes, $totalPrice, $status) {
   }
 }
 
+function getOrderProducts($orderId) {
+  global $pdo;
+
+  try {
+    $stmt = $pdo->prepare('SELECT op.quantity, p.name, p.image, op.price FROM order_product op JOIN products p ON op.product_id = p.id WHERE order_id = :order_id');
+    $stmt->bindParam(':order_id', $orderId);
+    $stmt->execute();
+    $orderProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    return $orderProducts;
+  } catch(PDOException $e) {
+    throw $e;
+  }
+}
 
 
