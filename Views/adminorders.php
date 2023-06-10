@@ -16,6 +16,7 @@ include '../Controllers/order_controller.php';
         <th scope="col">Order ID</th>
         <th scope="col">Total Price</th>
         <th scope="col">Status</th>
+        <th scope="col">User</th>
         <th scope="col">Created At</th>
       </tr>
     </thead>
@@ -25,6 +26,7 @@ include '../Controllers/order_controller.php';
           <td scope="row"><?php echo $order['id']; ?></td>
           <td><?php echo $order['total_price']; ?></td>
           <td><?php echo $order['status']; ?></td>
+          <td><?php echo $order['username']; ?></td>
           <td><?php echo $order['created_at']; ?></td>
     
         </tr>

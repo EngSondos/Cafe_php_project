@@ -15,7 +15,7 @@ function getAllOrders()
   global $pdo;
 
   try {
-    $stmt = $pdo->prepare('SELECT * FROM orders ORDER BY created_at DESC');
+    $stmt = $pdo->prepare('SELECT o.*, u.username FROM orders o JOIN users u ON o.user_id = u.id ORDER BY created_at DESC');
     $stmt->execute();
     $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
