@@ -13,3 +13,7 @@ $res2 = select_products();
 //last step send those data to the view to be rendered
 render_carts($res2,$res);
 
+//
+// if (isset($_POST)) {
+//     update_quantity();
+// }
