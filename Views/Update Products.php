@@ -1,9 +1,8 @@
 <?php
 include "../layout/head.php";
-// session_destroy();
-session_start();
-// include "../Controllers/User/UserController.php";
+
 include "../Controllers/categories.php";
+include "../Models/products.php";
 include "../Models/categories.php";
 include "../connection_credits.php";
 include "../connection.php";
@@ -15,29 +14,55 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
-
+    
     if ($_GET['action'] === 'add') {
-        AddCategory($_POST);
-        // Handle add form data here
-        $error_add = $error['name'] ?? '';
+        AddProductQuery($_POST);
+      // Handle add form data here
+      $error_add= $error['name'];
+
     } else if ($_GET['action'] === 'update') {
         $category_id = $_GET['category_id'];
         UpdateCategory($category_id, $_POST);
-        $error_update = $error['name'] ?? "";
-        // Handle update form data here
+        // $error_update= $error['name'];
+      // Handle update form data here
     }
-}
-
+  }
 ?>
 
 <div class="container w-50">
-    <h1 class="text-primary mx-auto w-50">Registration Form</h1>
+    <h1 class="text-primary mx-auto w-50">Products</h1>
     <form method="post" action="?action=add" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name">
         </div>
-        <?= $error_add ?? '' ?>
+        <div class="form-group">
+            <label for="name">price:</label>
+            <input type="number" class="form-control" id="price" name="price">
+        </div>
+        <div class="form-group">
+            <label for="name">category_id:</label>
+
+             
+            <select name="" id="">
+                <?php
+                $rows = DisplayCategory();
+                var_dump( $rows); 
+               foreach ($rows as $row){  ?>
+                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+            <?php    }
+           
+?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="name">quantity:</label>
+            <input type="text" class="form-control" id="quantity" name="quantity">
+        </div>
+        <!-- <div class="form-group">
+            <label for="name">image:</label>
+            <input type="file" class="form-control" id="image" name="image">
+        </div> -->
         <button type="submit" class="btn btn-primary my-3">Submit</button>
         <button type="reset" class="btn btn-danger  my-3">Reset</button>
 
@@ -48,26 +73,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
             <tr>
                 <th>id</th>
                 <th>name</th>
+                <th>price</th>
+                <th>Category Name</th>
+                <th>quantity</th>
+                <th>image</th>
                 <th>Edit</th>
                 <th>Delete</th>
             </tr>
         </thead>
-        <tbody>
+        <!-- <tbody>
             <?php
             $rows = DisplayCategory();
             foreach ($rows as $row) {
             ?>
-                <tr>
-                    <?php foreach ($row as $field) {
+            <tr>
+                <?php foreach ($row as $field) {
                     ?>
-                        <td><?= $field ?></td>
-                    <?php     }   ?>
-                    <!-- Button trigger modal -->
-                    <td><a href="" class="btn btn-warning edit-category" data-toggle="modal" data-target="#modelId" data-category-id="<?= $row['id'] ?>">Edit</a></td>
-                    <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
-                </tr>
+                <td><?= $field ?></td>
+                <?php     }   ?>
+                <td><a href="" class="btn btn-primary">Show</a></td>
+                Button trigger modal
+                <td><a href="" class="btn btn-warning edit-category" data-toggle="modal" data-target="#modelId"
+                        data-category-id="<?= $row['id'] ?>">Edit</a></td>
+                <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
+            </tr>
             <?php }  ?>
-        </tbody>
+        </tbody>   -->
     </table>
 </div>
 
@@ -86,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                 <form method="post" enctype="multipart/form-data" action="">
                     <div class="form-group">
                         <label for="name">Name:</label>
-                        <input type="text" class="form-control" id="category_id" name="name">
+                        <input type="text" class="form-control" id="category_id" name="name" >
                     </div>
                     <?= $error_update ?? '' ?>
                     <button type="submit" class="btn btn-primary my-3">Submit</button>

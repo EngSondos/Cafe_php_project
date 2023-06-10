@@ -14,7 +14,6 @@ function AddCategoryQuery($data)
 
         ### prepare query
         $stmt = $db->prepare($query);
-        var_dump($stmt);
 
         $stmt->bindParam(":cateId", $data['id']);
         $stmt->bindParam(":cateName", $data['name']);
