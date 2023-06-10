@@ -144,3 +144,45 @@ body{
     margin-right: 12px;
     font-size: 18px;
 }
+.emptyrow{
+        justify-content: center;
+    /* margin-top: auto; */
+    align-items: center;
+    height: 100%;
+}
+.emptycart{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.emptycart i{
+    margin-bottom: 10px;
+    font-size: 170px;
+    color: rgb(229, 149, 0);
+}
+.emptycart p{
+    font-size: 27px;
+    text-transform: uppercase;
+    color: rgba(0, 0, 0, 0.423);
+    user-select: none;
+}
+textarea{
+    background: #f8e6bb;
+    min-height: 350px;
+    max-height: 350px;
+    width: 100%;
+    height: 392px;
+    border: none;
+}
+.notes{
+    position: fixed;
+    left: 0;
+    height: 100%;
+}
+.notes p{
+    text-align: left;
+    color: rgb(51, 51, 51);
+    background-color: aliceblue;
+    height: 100%;
+}

@@ -60,7 +60,8 @@ function update_quantity()
 
     
 
-    echo json_encode($cart);
+    // echo json_encode($cart);
+    return json_encode($cart);
 }
 
 //function to delete cart
@@ -168,10 +169,32 @@ function countTotalPrice($userid){
 }
 
 //update usercarts
+function updateUserCarts()
+{
+    // global $db;
 
+    // $delete_query = "delete from `Cafe`.`carts` where `user_id` = :usrid";
+
+    // $stmt = $db->prepare($delete_query);
+
+    // $stmt->bindParam(':usrid', $userid);
+
+    // $stmt->execute();
+}
 
 //delete usercarts
+function deleteUserCarts($userid )
+{
+    global $db;
 
+    $delete_query = "delete from `Cafe`.`carts` where `user_id` = :usrid";
+
+    $stmt = $db->prepare($delete_query);
+
+    $stmt->bindParam(':usrid', $userid);
+
+    $stmt->execute();
+}
 
 if (isset($_POST)) {
     update_quantity();
