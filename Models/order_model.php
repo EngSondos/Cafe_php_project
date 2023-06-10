@@ -40,7 +40,6 @@ function getAllOrders()
 
 
 
-
 function createOrder($userId, $products, $notes, $totalPrice, $status) {
   global $pdo;
 
@@ -57,7 +56,7 @@ function createOrder($userId, $products, $notes, $totalPrice, $status) {
 
     $stmt = $pdo->prepare("INSERT INTO order_product (order_id, product_id, price, quantity) VALUES (:order_id, :product_id, :price, :quantity)");
 
-    foreach ($$products as $product) {
+    foreach ($products as $product) {
       $stmt->bindParam(':order_id', $orderId);
       $stmt->bindParam(':product_id', $product['product_id']);
       $stmt->bindParam(':price', $product['price']);
@@ -113,6 +112,24 @@ function filterOrdersByDate($start_date, $end_date)
     }
 
     return $orders;
+  } catch(PDOException $e) {
+    throw $e;
+  }
+}
+
+function getOrderById($orderId) {
+  global $pdo;
+
+  try {
+    $stmt = $pdo->prepare('SELECT * FROM orders WHERE id = :order_id');
+    $stmt->bindParam(':order_id', $orderId);
+    $stmt->execute();
+    $order = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if (!$order) {
+      return false;
+    }
+    return $order;
   } catch(PDOException $e) {
     throw $e;
   }

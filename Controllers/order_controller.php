@@ -39,3 +39,15 @@ function filterorder($start_date, $end_date){
   return $orders;
 }
 
+
+function getById($orderId) {
+  $order = getOrderById($orderId);
+
+  if (!$order) {
+    return false;
+  }
+
+  return $order;
+}
+
+

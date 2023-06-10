@@ -3,11 +3,33 @@ include '../layout.php';
 include '../Controllers/order_controller.php';
 
 if (!isset($_POST['start_date']) && !isset($_POST['end_date'])) {
-  $orders = all();
+    $orders = all();
 } else {
-  $startDate = $_POST['start_date'];
-  $endDate = $_POST['end_date'];
-  $orders = filterorder( $startDate, $endDate);
+    $startDate = $_POST['start_date'];
+    $endDate = $_POST['end_date'];
+    $orders = filterorder($startDate, $endDate);
+}
+
+
+if (isset($_POST['cancel_order'])) {
+    $orderId = $_POST['cancel_order'];
+    $order = getById($orderId);
+    if ($order['status'] == 'pending') {
+        try {
+          $stmt = $pdo->prepare('UPDATE orders SET status = :status, deleted_at = :deleted_at WHERE id = :order_id');
+          $status = 'canceled';
+          $deleted_at = date('Y-m-d H:i:s');
+          $stmt->bindParam(':status', $status);
+          $stmt->bindParam(':deleted_at', $deleted_at);
+          $stmt->bindParam(':order_id', $orderId);
+          $stmt->execute();
+            echo "<div class='alert alert-success' style='text-align: center' role='alert'>Order $orderId has been canceled.</div>";
+        } catch(PDOException $e) {
+            echo "<div class='alert alert-danger' style='text-align: center'role='alert'>Error canceling order $orderId.</div>";
+        }
+    } else {
+        echo "<div class='alert alert-warning' style='text-align: center' role='alert'>Order $orderId cannot be canceled because it is not in 'pending' status.</div>";
+    }
 }
 ?>
 
@@ -42,6 +64,12 @@ if (!isset($_POST['start_date']) && !isset($_POST['end_date'])) {
           <td><?php echo $order['total_price']; ?></td>
           <td><?php echo $order['status']; ?></td>
           <td><?php echo $order['created_at']; ?></td>
+          <td>
+                    <form method="post" action="" onclick="event.stopPropagation();">
+                        <input type="hidden" name="cancel_order" value="<?php echo $order['id']; ?>">
+                        <button type="submit" class="btn btn-danger">Cancel</button>
+                    </form>
+                </td>
         </tr>
         <tr class="products-container" id="products-<?php echo $order['id']; ?>" style="display:none;">
           <td colspan="4">
@@ -69,6 +97,7 @@ if (!isset($_POST['start_date']) && !isset($_POST['end_date'])) {
     </tbody>
   </table>
 </div>
+
 
 
 <script>
