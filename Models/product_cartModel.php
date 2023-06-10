@@ -64,22 +64,24 @@ function delete_cart(){
     global $db;
     $data = file_get_contents("php://input");
     $cart = json_decode($data,true);
+ 
+    $cart_id = $cart['cartid'];
 
-    $quantity = $cart['quantity'];
-    $product_id = $cart['product_id'];
-    $user_id = $cart['user_id'];
-
-
-    $update_query = "delete from table `Cafe`.`cart_product` set `quantity`=:stdquantity where `product_id`=:stdid";
+    $update_query = "delete from `Cafe`.`cart_product` where `cartid`=:stdid";
 
     $stmt = $db->prepare($update_query);  # send template to the server
-    $stmt->bindParam(":stdquantity", $quantity);
-    $stmt->bindParam(":stdid", $product_id);
+    $stmt->bindParam(":stdid", $cart_id);
     $stmt->execute();  # true means that the query exectued by the database successfully
-    echo json_encode($cart['quantity']);
+
+
 }
 /////////////////
 //
 if (isset($_POST)) {
     update_quantity();
+}
+
+if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
+    delete_cart();
+    header("Refresh:1");
 }

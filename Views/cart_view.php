@@ -13,7 +13,7 @@ function render_carts($products, $carts)
                 <div class='col-xl-4'>
                     <div class='card'>
                         <div class='cart-img'>
-                            <img src='https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8NXx8fGVufDB8fHx8fA%3D%3D&w=1000&q=80' class='card-img-top' alt='product image'>
+                            <img src='../assets/imgs/{$product["image"]}'class='card-img-top' alt='product image'>
                             <div class='cartcontroller'>
                                 <button class='btn btn-info w-25' onclick='incrementquantity({$product["quantity"]},{$product["id"]},{$cart['user_id']},{$product['price']})'>plus</button>
                                 <span class='card-quantity w-25' id='{$product["id"]}'>";
@@ -42,7 +42,7 @@ function render_carts($products, $carts)
                                 <span class='card-price' id='prod{$product["id"]}price'>{$cart["price"]} EGP</span>
                             </div>
                         
-                        <button class='btn btn-danger rmv-btn' onclick='removecart()'>Remove From Cart</button>
+                        <button class='btn btn-danger rmv-btn' onclick='removecart({$cart["cartid"]})'>Remove From Cart</button>
                         </div>
                     </div>
                 </div>";
@@ -51,6 +51,25 @@ function render_carts($products, $carts)
     }
 
     echo "</div></div>";
+
+
+    echo "<div class='row align-items-center justify-content-center mb-5'>
+        <button class='btn btn-primary' onclick='createorder()'>Order Now</button>
+    </div>";
+
+    echo "<div class='popupscreen'>
+            <div class='popupbox'>
+            <p class='warning-mssg'>Are you sure you want to delete this card?</p>
+            <div class='warningbtns'>
+                <button class='popbtn btn btn-primary'>cancle</button>
+                <button class='popbtn btn btn-danger' >ok</button>
+            </div>
+        </div>
+
+    </div>";
+
+   
+
     echo "<script src='script.js'></script>";
    
 }

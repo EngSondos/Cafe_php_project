@@ -1,11 +1,17 @@
 body {
-    background-color: rgb(255, 230, 184)
+    /* background-color: rgb(255, 230, 184) */
 }
 
 .card {
     border-radius: 15px;
     overflow: hidden;
     margin-bottom: 30px;
+    background-color: rgba(255, 255, 255, 0.659);
+    backdrop-filter: blur(50px);
+    border-right: 1px solid rgba(0, 0, 0, 0.379);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.379);
+    box-shadow: 3px 3px 1px rgb(222, 222, 222);
+    transition: all 0.5s;
 }
 
 .cart-img {
@@ -25,7 +31,7 @@ img {
     text-transform: capitalize;
     font-weight: 400;
     font-size: 23px;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.376);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.097);
 }
 
 .card-body {
@@ -105,4 +111,36 @@ img {
     font-weight: 800;
     z-index: 2;
     letter-spacing: 1.5;
+}
+.card:hover {
+    transform: scale(1.05);
+}
+body{
+    position: relative;
+}
+.popupscreen{
+    position: fixed;
+    z-index: 100;
+    inset: 0;
+    display: none;
+    background: #0000006e;
+    align-items: center;
+    justify-content: center;
+}
+.popupbox{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+}
+.warning-mssg{
+    font-size: 23px;
+    text-align: left;
+}
+.warningbtns{
+    display: flex;
+    justify-content: center;
+}
+.warningbtns .btn-primary,.warningbtns .btn-danger{
+    margin-right: 12px;
+    font-size: 18px;
 }
