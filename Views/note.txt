@@ -22,6 +22,8 @@ update table `Cafe`.`products` set `quantity` = '{$num}' where `id`={$id}
     // global $db;
     // $db = $res;
 
+    // <?php update_quantity('quantity','product_id','user_id');?>
+
 
 
 $db = '';
@@ -31,3 +33,9 @@ function setdb($res){
   $db = $res;
   var_dump($db);
 }
+
+ // $.ajax({
+    //     url:"products_cartModel.php",
+    //     method:"put",
+    //     data:
+    // })

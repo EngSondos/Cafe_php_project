@@ -36,22 +36,47 @@ function select_carts()
 }
 
 //function to update quantity
-function update_quantity($quantity,$productid,$userid)
-{
-    echo $quantity.''.$productid.''.$userid;
+function update_quantity(){
     global $db;
+    $data = file_get_contents("php://input");
+    $cart = json_decode($data,true);
 
-    $update_query = "update `Cafe`.`cart_product` set `quantity` = :stdquantity where `product_id` =:stdprodid and `user_id` =:stdusrid ";
+    $quantity = $cart['quantity'];
+    $product_id = $cart['product_id'];
+    $user_id = $cart['user_id'];
 
-    $update_stmt = $db->prepare($update_query);
 
-    $update_stmt->bindParam(":stdquantity",$quantity);
+    $update_query = "update `Cafe`.`cart_product` set `quantity`=:stdquantity where `product_id`=:stdid";
 
-    $update_stmt->bindParam(":stdprodid",$productid);
+    $stmt = $db->prepare($update_query);  # send template to the server
+    $stmt->bindParam(":stdquantity", $quantity);
+    $stmt->bindParam(":stdid", $product_id);
+    $stmt->execute();  # true means that the query exectued by the database successfully
+    echo json_encode($cart['quantity']);
+}
 
-    $update_stmt->bindParam(":stdusrid",$userid);
+///////////////
+//function to delete cart
+function delete_cart(){
+    global $db;
+    $data = file_get_contents("php://input");
+    $cart = json_decode($data,true);
 
-    $update_stmt->execute();
+    $quantity = $cart['quantity'];
+    $product_id = $cart['product_id'];
+    $user_id = $cart['user_id'];
 
-    return $quantity;
+
+    $update_query = "update `Cafe`.`cart_product` set `quantity`=:stdquantity where `product_id`=:stdid";
+
+    $stmt = $db->prepare($update_query);  # send template to the server
+    $stmt->bindParam(":stdquantity", $quantity);
+    $stmt->bindParam(":stdid", $product_id);
+    $stmt->execute();  # true means that the query exectued by the database successfully
+    echo json_encode($cart['quantity']);
+}
+/////////////////
+//
+if (isset($_POST)) {
+    update_quantity();
 }
