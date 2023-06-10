@@ -4,7 +4,7 @@ include '../Views/cart_view.php';
 
 
 //first we need to get all carts from the model
-$res = select_carts();
+$res = select_carts(1);
 
 // second we need to get all products from the model
 $res2 = select_products();

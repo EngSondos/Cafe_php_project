@@ -54,7 +54,7 @@ function render_carts($products, $carts)
 
 
     echo "<div class='row align-items-center justify-content-center mb-5'>
-        <button class='btn btn-primary' onclick='createorder()'>Order Now</button>
+        <button class='btn btn-primary' onclick='createorder(1)'>Order Now</button>
     </div>";
 
     echo "<div class='popupscreen'>

@@ -84,6 +84,16 @@ function removecart(id) {
 
 }
 
+function createorder(userid) {
+    console.log(userid);
+    fetch("../Models/ordersModel.php", {
+        "method": "POST",
+        "headers": {
+            "Content-Type": "application/json;charset=utf-8"
+        },
+        "body": JSON.stringify({ "user_id": userid })
+    })
+}
 // let carts = document.getElementsByClassName('cart-img');
 // audio = new Audio('../assets/plateput.mp3')
 // // console.log(carts)
