@@ -1,9 +1,23 @@
 <?php
+
+session_start();
+
+
+ini_set('display_errors', 1);
+ini_set('error_reporting', E_ALL);
 include '../layout.php';
 include '../Controllers/order_controller.php';
 
+
+// if (!isset($_SESSION['user_id'])) {
+//   header('Location: login.html');
+//   exit();
+// }
+
+$userId = $_SESSION['user_id'];
+
 if (!isset($_POST['start_date']) && !isset($_POST['end_date'])) {
-    $orders = all();
+    $orders = usersorder($userId);
 } else {
     $startDate = $_POST['start_date'];
     $endDate = $_POST['end_date'];
@@ -65,9 +79,16 @@ if (isset($_POST['cancel_order'])) {
           <td><?php echo $order['status']; ?></td>
           <td><?php echo $order['created_at']; ?></td>
           <td>
+
+          <?php
+          $disabled = '';
+          if ($order['status'] !== 'pending') {
+              $disabled = 'disabled';
+          }
+          ?>
                     <form method="post" action="" onclick="event.stopPropagation();">
                         <input type="hidden" name="cancel_order" value="<?php echo $order['id']; ?>">
-                        <button type="submit" class="btn btn-danger">Cancel</button>
+                        <button type="submit" class="btn btn-danger" <?php echo $disabled; ?>>Cancel</button>
                     </form>
                 </td>
         </tr>
@@ -79,6 +100,7 @@ if (isset($_POST['cancel_order'])) {
                   <th scope="col">Product</th>
                   <th scope="col">Quantity</th>
                   <th scope="col">Price</th>
+
                 </tr>
               </thead>
               <tbody>
@@ -87,6 +109,7 @@ if (isset($_POST['cancel_order'])) {
                     <td><?php echo $product['name']; ?></td>
                     <td><?php echo $product['quantity']; ?></td>
                     <td><?php echo $product['price']; ?></td>
+
                   </tr>
                 <?php endforeach; ?>
               </tbody>

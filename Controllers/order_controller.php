@@ -4,10 +4,23 @@ include '../Models/order_model.php';
 
 
 
-function all(){
+function allorders(){
 
   $orders = getAllOrders();
 
+
+  foreach ($orders as &$order) {
+    $orderProducts = getOrderProducts($order['id']);
+    $order['products'] = $orderProducts;
+  }
+
+  return $orders;
+}
+
+
+
+function usersorder($userId){
+  $orders = getUserOrders($userId);
 
   foreach ($orders as &$order) {
     $orderProducts = getOrderProducts($order['id']);

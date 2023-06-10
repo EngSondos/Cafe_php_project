@@ -40,6 +40,48 @@ function getAllOrders()
 
 
 
+
+
+function getUserOrders($userId)
+{
+  global $pdo;
+
+  try {
+    $stmt = $pdo->prepare('SELECT * FROM orders WHERE user_id = :user_id ORDER BY created_at DESC');
+    $stmt->bindParam(':user_id', $userId);
+    $stmt->execute();
+    $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    foreach ($orders as &$order) {
+      $stmt = $pdo->prepare('SELECT * FROM order_product WHERE order_id = :order_id');
+      $stmt->bindParam(':order_id', $order['id']);
+      $stmt->execute();
+      $orderProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      $totalPrice =0;
+      foreach ($orderProducts as $product){
+        $totalPrice += $product['quantity'] * $product['price'];
+      }
+      $order['total_price'] = $totalPrice;
+    }
+
+    return $orders;
+  } catch(PDOException $e) {
+    throw $e;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 function createOrder($userId, $products, $notes, $totalPrice, $status) {
   global $pdo;
 
