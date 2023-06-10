@@ -74,28 +74,28 @@ function AddProductQuery($image,$price,$quantity,$category_id)
 
 
 
-// // ----------------------------------------------------------------
+// ----------------------------------------------------------------
 
-// //DISPLAY CATEGORY 
+//DISPLAY CATEGORY 
 
-// function DisplayCategoryQuery()
-// {
-//     global $db;
-//     global $table;
+function DisplayProductsQuery()
+{
+    global $db;
+    global $table;
 
-//     try {
-//         $query = "SELECT * FROM `cafe_project`. $table";
-//         // var_dump($query);
+    try {
+        $query = "SELECT * FROM `cafe_project`. `products`";
+        // var_dump($query);
 
-//         ### prepare query
-//         $stmt = $db->prepare($query);
-//         $stmt->execute();
-//         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//         return $row;
-//     } catch (Exception $e) {
-//         echo $e->getMessage();
-//     }
-// }
+        ### prepare query
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
 
 
 // // ----------------------------------------------------------------

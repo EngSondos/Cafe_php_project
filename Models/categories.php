@@ -48,25 +48,52 @@ function DisplayCategoryQuery()
     }
 }
 
+// function DisplayCategoryNameByIdQuery($category_id){
+//     global $db;
+//     global $table;
+
+//     try {
+//         $query = "SELECT `name` FROM `cafe_project`. $table WHERE `id` = :category_id ";
+//         // var_dump($query);
+
+//         ### prepare query
+//         $stmt = $db->prepare($query);
+//         $stmt->execute();
+//         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//         return $row;
+//     } catch (Exception $e) {
+//         echo $e->getMessage();
+//     }
+// }
+
+
+
+
+
+
+
+
+
+
 
 // ----------------------------------------------------------------
 
 //SELECT CATEGORY BY ID 
-function SelectCategoryByIdQuery($id)
+function SelectCategoryByIdQuery($category_id)
 {
     global $db;
     global $table;
 
     try {
-        $query = "SELECT * FROM `cafe_project`. $table WHERE  id =:id";;
+        $query = "SELECT `name` FROM `cafe_project`. $table WHERE  id =:category_id";;
         // var_dump($query);
 
         ### prepare query
         $stmt = $db->prepare($query);
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":category_id", $category_id);
         $stmt->execute();
-        $row = $stmt->fetchObject(PDO::FETCH_ASSOC);
-        return $row;
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row["name"];
     } catch (Exception $e) {
         echo $e->getMessage();
     }
@@ -117,4 +144,9 @@ function UpdateCategoryQuery($id, $data)
     } catch (Exception $e) {
         echo $e->getMessage();
     }
+
+
+
+
+
 }

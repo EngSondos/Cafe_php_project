@@ -29,9 +29,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
   }
 ?>
 
-<div class="container w-50">
+<div class="container ">
     <h1 class="text-primary mx-auto w-50">Products</h1>
-    <table class="table table-striped table-dark border-light  text-center table-bordered">
+    <!-- <table class="table table-striped table-dark border-light  text-center table-bordered">
         <thead>
             <tr>
                 <th>id</th>
@@ -66,7 +66,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                         <?php     }   ?>
             </tr>
         </tbody>  
-    </table>
+    </table> -->
+    <div class="row ">
+        <?php
+            $Products = DisplayProductsQuery();
+            // var_dump(   $Products );
+            foreach ($Products as $row) {
+            ?>
+        <div class="col-3 mb-4">
+            <div class="card h-100">
+                <img height="300" src="../uploads/<?= $row['image'] ?>"
+                    class="card-img-top border border-secondary rounded" alt="...">
+                <div class="card-body">
+                    <div class="top d-flex justify-content-between align-items-center">
+                        <h5 class="card-title text-left "><?= $row['name'] ?></h5>
+                        <h5 class="card-title text-right btn-primary p-2 rounded ">Stock : <?= $row['quantity'] ?></h5>
+                    </div>
+                    <div class="bottom d-flex justify-content-between align-items-center ">
+                        <p class="card-text m-0">Category :<b> <?= SelectCategoryByIdQuery( $row['category_id'] )   ?> </b>
+                        </p>
+                        <p class="card-text btn-warning p-2 rounded ">Price : <b><?= $row['price'] ?> </b>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <?php     }   ?>
+
+    </div>
+</div>
+
+
+
+
+
 </div>
 
 <!-- Optional: Place to the bottom of scripts -->
