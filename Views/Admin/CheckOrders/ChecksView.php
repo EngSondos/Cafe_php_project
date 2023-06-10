@@ -1,9 +1,9 @@
 <?php
-include "../../connection.php";
-include "../../Models/AdminOrder.php";
-include "../../Controllers/AdminController.php";
-include "../../layout/head.php";
-include "../../Validation/adminChecksValidation.php";
+include "../../../connection.php";
+include "../../../Models/AdminOrder.php";
+include "../../../Controllers/AdminController.php";
+include "../../../layout/head.php";
+include "../../../Validation/adminChecksValidation.php";
 
 
 $users = getAllUser();
@@ -16,7 +16,8 @@ if (!empty($_GET['details'])) {
 }
 
 if(!empty($_POST)){
-  $error = filterOrderByUserAndDate($_POST);
+  $orders = filterOrderByUserAndDate($_POST);
+  var_dump($orders);
 }
 ?>
  <div class="container">
@@ -26,12 +27,12 @@ if(!empty($_POST)){
         <div class="d-flex">
           <div class="form-group mx-3">
             <input class="form-control" id="date" name="start_date" placeholder="Date From" type="date" />
-            <div class="text-danger"><?= $error['Date From'] ?? ""?></div>
+<!--            <div class="text-danger">--><?php //= $error['Date From'] ?? ""?><!--</div>-->
 
           </div>
           <div class="form-group">
             <input class="form-control" id="date" name="end_date" placeholder="Date To" type="date" />
-            <div class="text-danger"><?= $error['Date To'] ?? ""?></div>
+<!--            <div class="text-danger">--><?php //= $error['Date To'] ?? ""?><!--</div>-->
 
           </div>
 
@@ -61,7 +62,6 @@ if(!empty($_POST)){
         <table class="table table-stripped">
           <tr>
             <th>show orders
-            <th>
             <th>User Name</th>
             <th>Total Amount</th>
           </tr>
@@ -86,7 +86,9 @@ if(!empty($_POST)){
 
         <?php } ?>
         </div>
-      <?php } else {  ?>
+      <?php } else {
+      include "./checkordertable.php";
+      ?>
 
         <div class="row mt-5">
 
@@ -100,5 +102,5 @@ if(!empty($_POST)){
 
 
     <?php
-    include "../../layout/footer.php";
+    include "../../../layout/footer.php";
     ?>

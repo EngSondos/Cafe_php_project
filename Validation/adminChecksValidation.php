@@ -33,7 +33,7 @@ function validation($data) :array
     global $error;
     validationForStartDate($data['start_date'],$error);
     validationForEndDate($data['end_date'],$error);
-    validationForEndDate($data['user'],$error);
+    validationForUser($data['user'],$error);
 
     return $error;
 }
