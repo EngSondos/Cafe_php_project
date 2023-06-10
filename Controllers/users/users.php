@@ -27,11 +27,9 @@ function loginUser($email, $password) {
 }
 
 // if logout destroy the session
-function logout() {
-    session_start();
-    session_unset();
-    session_destroy();
-}
+// function logout() {
+
+// }
 
 // if User Login Start Session
 function isLoggedIn() {

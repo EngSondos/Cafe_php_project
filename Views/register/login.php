@@ -1,15 +1,9 @@
 <?php
+
+$pageTitle = 'login';
 include '../../layout/head.php';
+include '../../layout/navbar.php';
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-</head>
-<body>
 <section class="vh-100">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center h-100">
@@ -45,8 +39,12 @@ include '../../layout/head.php';
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include '../../Validation/registerValidation/login.php';
-                // include  '../../Controllers/users/users.php';
-                loginValidation($_POST['email'], $_POST['password']);
+                if(isset($_POST['email']) && isset($_POST['password'])) {
+                    loginValidation($_POST['email'], $_POST['password']);
+                } else {
+                    echo '<span class="alert alert-primary">You are logged out!</span>';
+                    header('refresh:3');
+                }
             }
         ?>
         </div>
@@ -54,8 +52,6 @@ include '../../layout/head.php';
     </div>
 </div>
 </section>
-</body>
-</html>
 
 <?php
 include '../../layout/footer.php';

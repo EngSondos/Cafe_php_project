@@ -1,5 +1,7 @@
 <?php
-include '../../layout/head.php';
+    $pageTitle = 'Signup';
+    include '../../layout/head.php';
+    include '../../layout/navbar.php';
 
 ?>
 <section class="vh-100">
