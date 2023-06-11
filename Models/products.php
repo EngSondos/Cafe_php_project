@@ -29,12 +29,12 @@ $table = 'products';
 //     }
 // }
 
-function AddProductQuery($image, $price, $quantity, $category_id)
+function AddProductQuery($name, $image, $price, $quantity, $category_id)
 {
     global $db;
     global $table;
 
-    $query = "INSERT INTO `cafe_project`.`{$table}` (image, price, quantity, category_id) VALUES ( :productImage :price, :quantity, :category_id)";
+    $query = "INSERT INTO `products` (name,image, price, quantity, category_id) VALUES ( :productName, :productImage :price, :quantity, :category_id)";
 
     $stmt = $db->prepare($query);
     // $image = $_FILES['image']['name'];
@@ -42,7 +42,7 @@ function AddProductQuery($image, $price, $quantity, $category_id)
     $image_path =  $target . $image;
     move_uploaded_file($_FILES['image']['tmp_name'], $image_path); // Upload the image with the unique name
     // $stmt->bindParam(':productName', $name);
-    // $stmt->bindParam(':productImage', $image);
+    // $stmt->bindParam(':productImage', $image_path);
     // $stmt->bindParam(':price', $price);
     // $stmt->bindParam(':quantity', $quantity);
     // $stmt->bindParam(':category_id', $category_id);
@@ -54,7 +54,7 @@ function AddProductQuery($image, $price, $quantity, $category_id)
     // }
 
     $stmt->execute(array(
-        // ':productName'    => $name,
+        ':productName'    => $name,
         ':productImage' =>  $image_path,
         ':price' => $price,
         ':quantity'    => $quantity,
@@ -127,10 +127,9 @@ function DisplayProductsQuery()
 function DeleteProductQuery($id)
 {
     global $db;
-    global $table;
     // try {
     // alert($id);
-    $query = "DELETE FROM $table WHERE id = :id";
+    $query = "DELETE FROM `products` WHERE id = :id";
     // var_dump($query);
 
     ### prepare query

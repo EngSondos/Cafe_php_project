@@ -14,33 +14,29 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
+
     $image = $_FILES['image']['name'];
-    
-    // $name=$_POST['name'];
-   
-$price=$_POST['price'];
-    $quantity=$_POST['quantity'];
-    $category_id=$_POST ['category_id'];
-
-
-
+    $name=$_POST['name'];
+    $price = $_POST['price'];
+    $quantity = $_POST['quantity'];
+    $category_id = $_POST['category_id'];
 
     if ($_GET['action'] === 'add') {
         // Handle add form data here
-        AddProductQuery($image,$price,$quantity,$category_id);
-    //   $target = "../uploads/";
-    //   $image_path =  $target . $image;
-    //   move_uploaded_file($_FILES['image']['tmp_name'], $image_path); // Upload the image with the unique name
-//   var_dump($image);
-      var_dump($_POST);
-    //   $error_add= $error['name'];
+        AddProductQuery($name, $image, $price, $quantity, $category_id);
+        //   $target = "../uploads/";
+        //   $image_path =  $target . $image;
+        //   move_uploaded_file($_FILES['image']['tmp_name'], $image_path); // Upload the image with the unique name
+        //   var_dump($image);
+        var_dump($_POST);
+        //   $error_add= $error['name'];
 
     } else if ($_GET['action'] === 'update') {
         $category_id = $_GET['category_id'];
         UpdateCategory($category_id, $_POST);
     }
-  }
-  //name`,`image`, `price`, `quantity`, `category_id`
+}
+//name`,`image`, `price`, `quantity`, `category_id`
 //   $data=[
 //     'name'=>"khaled",
 //     'image'=>'',
@@ -59,10 +55,10 @@ $price=$_POST['price'];
 <div class="container w-50">
     <h1 class="text-primary mx-auto w-50">Products</h1>
     <form method="post" action="?action=add" enctype="multipart/form-data">
-        <!-- <div class="form-group">
+        <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name">
-        </div> -->
+        </div>
         <div class="form-group">
             <label for="name">price:</label>
             <input type="number" class="form-control" id="price" name="price">
@@ -72,12 +68,12 @@ $price=$_POST['price'];
             <select name="category_id" id="">
                 <?php
                 $rows = DisplayCategory();
-                var_dump( $rows); 
-               foreach ($rows as $row){  ?>
-                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                var_dump($rows);
+                foreach ($rows as $row) {  ?>
+                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                 <?php    }
-           
-?>
+
+                ?>
             </select>
         </div>
         <div class="form-group">
