@@ -19,10 +19,11 @@ function getAllUserMakeOrder()
 function filterorderByUserId($user_id)
 {
 global  $conn ;
-$query = "select * from orders where user_id =:user_id";
+$query = "select * from orders where user_id = :user_id";
 $result = $conn->prepare($query);
-$result->bindParam(':user_id',$$user_id);
-return $result->fetchAll(PDO::FETCH_ASSOC);
+$result->bindParam(':user_id',$user_id);
+$result->execute();
+return $result->fetchAll();
 
 }
 
