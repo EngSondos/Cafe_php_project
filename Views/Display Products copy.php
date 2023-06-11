@@ -10,7 +10,8 @@ include "../validation.php";
 $error_add;
 $error_update;
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
-    DeleteCategory($_GET['delete_id']);
+    var_dump($_GET['delete_id']);
+    DeleteProductQuery($_GET['delete_id']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
@@ -87,8 +88,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                         </p>
                         <p class="card-text btn-warning p-2 rounded ">Price : <b><?= $row['price'] ?> </b>
                         </p>
-
+                        
                     </div>
+                    <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
                 </div>
             </div>
         </div>

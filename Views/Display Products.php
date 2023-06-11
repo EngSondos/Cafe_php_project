@@ -10,7 +10,8 @@ include "../validation.php";
 $error_add;
 $error_update;
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
-    DeleteCategory($_GET['delete_id']);
+    var_dump($_GET['delete_id']);
+    DeleteProductQuery($_GET['delete_id']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {

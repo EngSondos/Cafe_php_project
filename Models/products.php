@@ -29,7 +29,7 @@ $table = 'products';
 //     }
 // }
 
-function AddProductQuery($image,$price,$quantity,$category_id)
+function AddProductQuery($image, $price, $quantity, $category_id)
 {
     global $db;
     global $table;
@@ -55,19 +55,19 @@ function AddProductQuery($image,$price,$quantity,$category_id)
 
     $stmt->execute(array(
         // ':productName'    => $name,
-        ':productImage' =>  $image_path ,
+        ':productImage' =>  $image_path,
         ':price' => $price,
         ':quantity'    => $quantity,
         ':category_id'    => $category_id
     ));
 
-// try {
-//     $stmt->execute();
+    // try {
+    //     $stmt->execute();
 
-// } catch (Exception $e) {
+    // } catch (Exception $e) {
 
-// echo $e->getMessage();
-// }
+    // echo $e->getMessage();
+    // }
 
 
 }
@@ -121,28 +121,28 @@ function DisplayProductsQuery()
 //     }
 // }
 
-// // ----------------------------------------------------------------
+// ----------------------------------------------------------------
 
-// //DELETE CATEGORY 
-// function DeleteCategoryQuery($id)
-// {
-//     global $db;
-//     global $table;
-//     // try {
-//     // alert($id);
-//     $query = "DELETE FROM `cafe_project`. $table WHERE id = :id";
-//     // var_dump($query);
+//DELETE CATEGORY 
+function DeleteProductQuery($id)
+{
+    global $db;
+    global $table;
+    // try {
+    // alert($id);
+    $query = "DELETE FROM $table WHERE id = :id";
+    // var_dump($query);
 
-//     ### prepare query
-//     $stmt = $db->prepare($query);
-//     $stmt->bindParam(":id", $id);
-//     $stmt->execute();
-
-//     return $stmt->rowCount();
-//     // } catch (Exception $e) {
-//     //     echo $e->getMessage();
-//     // }
-// }
+    ### prepare query
+    $stmt = $db->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    var_dump($id);
+    return $stmt->rowCount();
+    // } catch (Exception $e) {
+    //     echo $e->getMessage();
+    // }
+}
 
 // // ----------------------------------------------------------------
 
