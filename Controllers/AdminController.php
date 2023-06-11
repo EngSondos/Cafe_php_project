@@ -25,10 +25,15 @@ function filterOrderByUserAndDate($data)
     $error = validation($data);
     var_dump($error);
     if(!empty($error)){
-        if(!isset($erorr['end_date'])&&!isset($erorr['start_date']))
-                return getOrdersByDate($data['start_date'],$data['end_date']);
-        elseif(!isset($error['User'])){
-//            var_dump("Sssssssss");
+        if(
+            !empty($erorr['Date From'])&&
+            !empty($erorr['Date To'])) {
+            var_dump($error['Date From']);
+
+            return getOrdersByDate($data['start_date'], $data['end_date']);
+        }
+        elseif(!empty($error['User'])){
+            var_dump("Sssssssss");
               return filterorderByUserId($data['user']);
             }
         else

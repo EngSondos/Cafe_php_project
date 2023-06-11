@@ -1,5 +1,13 @@
 <?php 
 
+function getUserName($user_id)
+{
+    global  $conn ;
+    $query = "select `username` from users where id =$user_id";
+    $result = $conn->query($query);
+//    var_dump($result->fetch());
+    return $result->fetch();
+}
 function getAllUserMakeOrder()
 {
     global $conn ;

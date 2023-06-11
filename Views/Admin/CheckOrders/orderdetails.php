@@ -1,20 +1,32 @@
-<h4> orders by <?= $user['username'] ?></h4>
-          <table class="table table-stripped">
+<h4> Details order by <?= getUserName($_GET['user'])['username'] ?></h4>
+
+<table class="table table-stripped">
             <tr>
             <!-- <th> Detalis</th> -->
               <th>Order Id</th>
               <th>Date</th>
+                <th>Notes</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
               <!-- <th>Total Amount</th> -->
             </tr>
-            <?php foreach ( $orderdetails as $order) { ?>
+
+            <?php
+
+            if(isset($orderdetails)){
+            foreach ( $orderdetails as $order) { ?>
               <tr>
-                <!-- <td>
-                  <a class="btn btn-primary" href="/Cafe_Project/Views/Admin/ChecksView.php?details=<?= $order['id'] ?>&&user=<?= $user['id'] ?>">Detalis of Order</a>
-                </td> -->
                 <td><?= $order['order_id'] ?></td>
-                <td><?= $order['total_price'] ?></td>
+                <td><?= $order['created_at'] ?></td>
+              <td><?= $order['notes'] ?></td>
+              <td><?= $order['product_name'] ?></td>
+                  <td><?= $order['product_quantity'] ?></td>
+                  <td><?= $order['product_price'] ?></td>
+                  <td><?= $order['total'] ?></td>
               </tr>
              
-            <?php } ?>
+            <?php } }?>
           </table>
      
