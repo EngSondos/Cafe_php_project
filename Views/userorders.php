@@ -138,4 +138,5 @@ if (isset($_POST['cancel_order'])) {
       }
     });
   });
+  
 </script>

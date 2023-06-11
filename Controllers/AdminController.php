@@ -42,3 +42,9 @@ function filterOrderByUserAndDate($data)
         return  getOrdersByDateandUserId($data['start_date'],$data['end_date'],$data['user'] );
 
 }
+
+
+function ChangeOrderStatus($order_id,$status)
+{
+    return ChangeStatus($order_id,$status);
+}
