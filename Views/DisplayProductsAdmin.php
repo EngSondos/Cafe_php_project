@@ -38,7 +38,7 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
         </thead>
         <tbody>
             <?php
-            $Products = DisplayProductsQuery();
+            $Products = DisplayAllProductsQuery();
             // var_dump(   $Products );
             foreach ($Products as $row) {
             ?>

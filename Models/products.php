@@ -47,8 +47,8 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
 
 // ----------------------------------------------------------------
 
-//**DISPLAY CATEGORY 
-function DisplayProductsQuery()
+//**DISPLAY ALL CATEGORY 
+function DisplayAllProductsQuery()
 {
     global $db;
     global $table;
@@ -67,6 +67,26 @@ function DisplayProductsQuery()
     }
 }
 
+
+
+//**DISPLAY CATEGORY 
+function DisplayAvailableProductsQuery()
+{
+    global $db;
+
+    try {
+        $query = "SELECT * FROM `cafe_project`. `products` WHERE `quantity` > 0";
+        // var_dump($query);
+
+        ### prepare query
+        $stmt = $db->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
 
 // // ----------------------------------------------------------------
 
@@ -132,7 +152,7 @@ function UpdateProductQuery($id, $name, $image, $price, $quantity, $category_id)
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':quantity', $quantity);
         $stmt->bindParam(':category_id', $category_id);
-        $stmt->bindParam(":id",$id);        # true --> query executed successfully
+        $stmt->bindParam(":id", $id);        # true --> query executed successfully
         return $stmt->execute();
     } catch (Exception $e) {
         echo $e->getMessage();
