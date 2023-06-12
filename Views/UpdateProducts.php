@@ -20,21 +20,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
     $category_id = $_POST['category_id'];
-
-    if ($_GET['action'] === 'add') {
-        // Handle add form data here
-        AddProductQuery($name, $image, $price, $quantity, $category_id);
-        var_dump($_POST);
-        //   $error_add= $error['name'];
-
+    var_dump($_POST);
+    if ($_GET['action'] === 'update') {
+        $product_id = $_GET['product_id'];
+        var_dump($product_id);
+        UpdateProductQuery($product_id, $name, $image, $price, $quantity, $category_id);
+    //    header('Location:DisplayProductsAdmin.php');
+        // $error_update= $error['name'];
+        // Handle update form data here
+    }
 }
-}
-
 ?>
 
 <div class="container w-50">
-    <h1 class="text-primary mx-auto w-50 my-5">Add Products</h1>
-    <form method="post" action="?action=add" enctype="multipart/form-data">
+    <h1 class="text-primary mx-auto w-50">Update Products <?= $_GET['product_id'] ?></h1>
+    <form method="post" action="?action=update&product_id=<?= $_GET['product_id'] ?>" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name">
@@ -45,6 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         </div>
         <div class="form-group">
             <label for="name">category_id:</label>
+
+
             <select name="category_id" id="">
                 <?php
                 $rows = DisplayCategory();
@@ -68,10 +70,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         <button type="reset" class="btn btn-danger  my-3">Reset</button>
 
     </form>
+    <br>
+
 </div>
-
-
-
+<!-- Optional: Place to the bottom of scripts -->
+<script>
+    const editButtons = document.querySelectorAll('.edit-category');
+    editButtons.forEach(button => {
+        button.addEventListener('click', (event) => {
+            const categoryId = event.target.dataset.categoryId;
+            const editUrl = `?action=update&category_id=${categoryId}`;
+            document.querySelector('#modelId form').setAttribute('action', editUrl);
+        });
+    });
+</script>
 
 <?php
 include "../layout/footer.php"

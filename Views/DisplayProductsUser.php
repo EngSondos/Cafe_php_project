@@ -15,19 +15,18 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
-    
+
     if ($_GET['action'] === 'add') {
         // AddProductQuery($_POST);
-      // Handle add form data here
-      $error_add= $error['name'];
-
+        // Handle add form data here
+        $error_add = $error['name'];
     } else if ($_GET['action'] === 'update') {
         $category_id = $_GET['category_id'];
         UpdateCategory($category_id, $_POST);
         // $error_update= $error['name'];
-      // Handle update form data here
+        // Handle update form data here
     }
-  }
+}
 ?>
 
 <div class="container ">
@@ -56,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                 <td><?= $row['id'] ?></td>
                 <td><?= $row['name'] ?></td>
                 <td><?= $row['price'] ?></td>
-                <td><?= SelectCategoryByIdQuery( $row['category_id'] )   ?></td>
+                <td><?= SelectCategoryByIdQuery($row['category_id'])   ?></td>
                 <td><?= $row['quantity'] ?></td>
                 <td> <img height="100"  width="100" src="../uploads/<?= $row['image'] ?>" alt=""> </td>
               
@@ -69,32 +68,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         </tbody>  
     </table> -->
     <div class="row ">
+        <h2 class="my-4">Products</h2>
+        <a class="btn btn-primary" href="Add Products.php">Add Product</a>
         <?php
-            $Products = DisplayProductsQuery();
-            // var_dump(   $Products );
-            foreach ($Products as $row) {
-            ?>
-        <div class="col-3 mb-4">
-            <div class="card h-100">
-                <img height="300" src="../uploads/<?= $row['image'] ?>"
-                    class="card-img-top border border-secondary rounded" alt="...">
-                <div class="card-body">
-                    <div class="top d-flex justify-content-between align-items-center">
-                        <h5 class="card-title text-left "><?= $row['name'] ?></h5>
-                        <h5 class="card-title text-right btn-primary p-2 rounded ">Stock : <?= $row['quantity'] ?></h5>
+        $Products = DisplayProductsQuery();
+        // var_dump(   $Products );
+        foreach ($Products as $row) {
+        ?>
+            <div class="col-3 mb-4">
+                <div class="card h-100">
+                    <img height="300" src="../uploads/<?= $row['image'] ?>" class="card-img-top border border-secondary rounded" alt="...">
+                    <div class="card-body">
+                        <div class="top d-flex justify-content-between align-items-center">
+                            <h5 class="card-title text-left "><?= $row['name'] ?></h5>
+                            <h5 class="card-title text-right btn-primary p-2 rounded ">Stock : <?= $row['quantity'] ?></h5>
+                        </div>
+                        <div class="bottom d-flex justify-content-between align-items-center ">
+                            <p class="card-text m-0">Category :<b> <?= SelectCategoryByIdQuery($row['category_id'])   ?> </b>
+                            </p>
+                            <p class="card-text btn-warning p-2 rounded ">Price : <b><?= $row['price'] ?> </b>
+                            </p>
+
+                        </div>
+                        <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
                     </div>
-                    <div class="bottom d-flex justify-content-between align-items-center ">
-                        <p class="card-text m-0">Category :<b> <?= SelectCategoryByIdQuery( $row['category_id'] )   ?> </b>
-                        </p>
-                        <p class="card-text btn-warning p-2 rounded ">Price : <b><?= $row['price'] ?> </b>
-                        </p>
-                        
-                    </div>
-                    <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger"
-                        onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
                 </div>
             </div>
-        </div>
         <?php     }   ?>
 
     </div>
