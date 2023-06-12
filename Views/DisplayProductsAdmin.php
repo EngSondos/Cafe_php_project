@@ -49,14 +49,14 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
                     <td><?= $row['price'] ?></td>
                     <td><?= SelectCategoryByIdQuery($row['category_id'])   ?></td>
                     <td><?= $row['quantity'] ?></td>
-                    <td><?php
-                        if ($row['quantity'] <= 0) {
-                            echo "Not Available";
-                        } else {
-                            echo "Available";
-                        }
+                    <td> <?php
+                            if ($row['quantity'] <= 0) {
+                                echo "Not Available";
+                            } else {
+                                echo "Available";
+                            }
 
-                        ?></td>
+                            ?> </td>
                     <td> <img height="100" width="100" src="../uploads/<?= $row['image'] ?>" alt=""> </td>
 
                     <td><a href="UpdateProducts.php?product_id=<?= $row['id'] ?>" class="btn btn-warning edit-category">Edit</a></td>
