@@ -39,11 +39,11 @@ include '../../layout/navbar.php';
         <?php
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             include '../../Validation/registerValidation/login.php';
-                if(isset($_POST['email']) && isset($_POST['password'])) {
+    
+            if(isset($_POST['email']) && isset($_POST['password'])) {
+    
                     loginValidation($_POST['email'], $_POST['password']);
-                } else {
-                    echo '<span class="alert alert-primary">You are logged out!</span>';
-                    header('refresh:3');
+                
                 }
             }
         ?>

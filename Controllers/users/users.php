@@ -18,7 +18,6 @@ function loginUser($email, $password) {
 
     $user = getUserByEmail($email);
     if($user && password_verify($password, $user['password'])) {
-        session_start();
         $_SESSION['user'] = $user;
         return true;
     } else {
@@ -26,14 +25,9 @@ function loginUser($email, $password) {
     }
 }
 
-// if logout destroy the session
-// function logout() {
-
-// }
-
 // if User Login Start Session
 function isLoggedIn() {
-    session_start();
+
     return isset($_SESSION['user']);
 }
 // to Get The Data Of User who already login

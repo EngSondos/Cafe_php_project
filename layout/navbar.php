@@ -1,5 +1,7 @@
 <?php 
-    
+    // include '../../Controllers/users/users.php';
+    session_start();
+
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Caffee<img width="25" src="../../assets/design-imgs/Food_(1).png" alt=""></a>
@@ -19,14 +21,14 @@
         <a class="nav-link" href="signup.php">SignUp</a>
       </li>
     </ul>
-    <?php 
-    if(!isset($_SESSION['user'])){ ?>
-        <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
+    <?php
+        
+        if(isset($_SESSION['user'])){ ?>
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
                     <a class="nav-link" href="logout.php">LogOut</a>
-                    </li>
-                </ul>
-        <?php }?>
-    
+                </li>
+            </ul>
+    <?php }?>
   </div>
 </nav>

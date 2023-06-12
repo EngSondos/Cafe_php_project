@@ -22,6 +22,7 @@
 
         if(empty($errors)) {
             loginUser($email, $password);
+            // session_start();
             echo '<span class="alert alert-success">Welcome You Will Redircet To Home Now</span>';
             header("refresh:3;url=home.php");
             exit();
