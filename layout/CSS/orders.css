@@ -1,0 +1,11 @@
+.colorbtn {
+    background-color: #AB7024;
+    padding:10px 20px;
+    border-radius: 10%;
+    color:white;
+    border:1px solid white;
+}
+
+.checktext{
+    color:#AB7024
+}
