@@ -17,7 +17,3 @@ function connect() {
             echo "Connection failed: " . $e->getMessage();
         }
 }
-
-
-
-

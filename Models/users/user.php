@@ -35,18 +35,3 @@ function getUserByEmail($email) {
 
     return $user;
 }
-
-
-
-// function GetAllUsers() {
-    
-//     $conn = connect();
-
-//     $stmt = $conn->prepare("SELECT * FROM users;");
-//     $stmt->execute();
-//     $user = $stmt->fetch();
-
-//     var_dump($user);
-// }
-
-// GetAllUsers();
