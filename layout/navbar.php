@@ -1,7 +1,8 @@
 <?php 
     // include '../../Controllers/users/users.php';
-    session_start();
-
+    if(isset($_SESSION['user'])) {
+      $user = $_SESSION['user'];
+    }
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="#">Caffee<img width="25" src="../../assets/design-imgs/Food_(1).png" alt=""></a>
@@ -22,9 +23,28 @@
       </li>
     </ul>
     <?php
-        
-        if(isset($_SESSION['user'])){ ?>
+        if(isset($user) && $user['role'] === 0){ ?>
             <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+              <a href="#" class="nav-link">User Corner</a>
+              </li>
+            <li class="nav-item">
+                    <a><img src="<?php echo $user['image'] ?>" width="30" alt=""></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="logout.php">LogOut</a>
+                </li>
+            </ul>
+    <?php }?>
+    <?php
+        if(isset($user) && $user['role'] === 1){ ?>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a href="#">Admin Corner</a>
+              </li>
+            <li class="nav-item">
+                    <a><img src="<?php echo $user['image'] ?>" width="30" alt=""></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">LogOut</a>
                 </li>

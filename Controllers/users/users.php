@@ -1,6 +1,6 @@
 <?php
 
-include '../../Validation/registerValidation/signup.php';
+include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Validation/registerValidation/signup.php';
 
 // Create a new User (Sign up)
 function userController($data, $imageFile) {
@@ -19,7 +19,7 @@ function loginUser($email, $password) {
     $user = getUserByEmail($email);
     if($user && password_verify($password, $user['password'])) {
         $_SESSION['user'] = $user;
-        return true;
+        return $_SESSION['user'];
     } else {
         return 'Your Are Not User Please try to signup';
     }

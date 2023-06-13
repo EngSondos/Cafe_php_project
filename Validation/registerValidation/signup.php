@@ -1,6 +1,6 @@
 <?php
 
-include('../../Models/users/user.php');
+include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/users/user.php';
     function userValidation($data, $imageFile) {
         
         $errors = [];
@@ -8,6 +8,7 @@ include('../../Models/users/user.php');
         $username = $data['username'];
         $password = $data['password'];
         $email = $data['email'];
+        $role = $data['role'];
 
         // Password Regx
         $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
@@ -29,7 +30,7 @@ include('../../Models/users/user.php');
     
         if (in_array($image_ext, $allowed_exts)) {
     
-            $image_dest = '../../uploads/users/' . uniqid('', true) . '.' . $image_ext;
+            $image_dest = $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/uploads/users/' . uniqid('', true) . '.' . $image_ext;
            
             move_uploaded_file($image_tmp_name, $image_dest);
 
@@ -65,12 +66,23 @@ include('../../Models/users/user.php');
             $errors[] = 'Username Not Match';
         }
 
+        // Role Validation
+        if($role == 1) {
+            $role = 1;
+        } else {
+            $role = 0;
+        }
         if (empty($errors)) {
-
-            createNewUser($email, $password, $username, $image_dest);
-            echo '<span class="alert alert-success">Sign Up Successfully</span>';
-            header("refresh:3;url=login.php");
-            exit();
+            createNewUser($email, $password, $username, $image_dest, $role);
+            if($role === 0 || $role === 1) {
+                header("refresh:3;url=listAllUsers.php");
+                echo '<span class="alert alert-success">Added User Successfully</span>';
+                exit();
+            } else {
+                header("refresh:3;url=login.php");
+                echo '<span class="alert alert-success">Sign Up Successfully</span>';
+                exit();
+            }
         } 
         else {
             foreach ($errors as $err) {
