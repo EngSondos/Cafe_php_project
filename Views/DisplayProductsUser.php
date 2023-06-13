@@ -32,10 +32,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 ?>
 
 <div class="container ">
-    <h1 class="text-primary mx-auto w-50">Products</h1>
+    <h1 class="text-primary mx-auto text-center my-4">All Products</h1>
+    <!-- <h2 class="my-4">Products</h2> -->
+    <!-- <a class="btn btn-primary" href="Add Products.php">Add Product</a> -->
     <div class="row ">
-        <h2 class="my-4">Products</h2>
-        <a class="btn btn-primary" href="Add Products.php">Add Product</a>
         <?php
         $Products = DisplayAvailableProductsQuery();
         // var_dump(   $Products );
@@ -52,11 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                         <div class="bottom d-flex justify-content-between align-items-center ">
                             <p class="card-text m-0">Category :<b> <?= SelectCategoryByIdQuery($row['category_id'])   ?> </b>
                             </p>
-                            <p class="card-text btn-warning p-2 rounded ">Price : <b><?= $row['price'] ?> </b>
+                            <p class="card-text btn-warning p-2 rounded ">Price : <b><?= $row['price'] ?> EGP </b>
                             </p>
 
                         </div>
-                        <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a>
+                        <!-- <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a> -->
                     </div>
                 </div>
             </div>

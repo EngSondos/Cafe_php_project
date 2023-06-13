@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                         <input type="text" class="form-control" id="category_id" name="name">
                     </div>
                     <?= $error_update ?? '' ?>
-                    <button type="submit" class="btn btn-primary my-3">Submit</button>
+                    <button type="submit" id="submit_button" class="btn btn-primary my-3" disabled>Submit</button>
                     <button type="reset" class="btn btn-danger  my-3">Reset</button>
 
                 </form>
@@ -112,6 +112,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
             document.querySelector('#modelId form').setAttribute('action', editUrl);
         });
     });
+
+    //*If The Input Is Empty Make the Submit Button Disable
+// let inputValue =document.getElementById('category_id').value;
+// if(inputValue == ''){
+//     let submit_button =document.getElementById('submit_button');
+//     submit_button.setAttribute('disabled',true)  ;
+// }else{
+//     submit_button.setAttribute('disabled',false) ;  
+// }
+
+// let categoryInput = document.getElementById('category_id');
+// let submitButton = document.getElementById('submit_button');
+
+// categoryInput.addEventListener('input', function() {
+//   if (categoryInput.value === '') {
+//     submit_button.setAttribute('disabled',true)  ;
+//   } else {
+//     submit_button.setAttribute('disabled',false) ;  
+//   }
+// });
+
+
+
+  let categoryInput = document.getElementById('category_id');
+  let submitButton = document.getElementById('submit_button');
+
+  categoryInput.addEventListener('input', function() {
+    if (categoryInput.value !== '') {
+    //   submitButton.disabled = true;
+    submitButton.disabled = false;
+    
+} else {
+          submitButton.disabled = true;
+    //   submitButton.disabled = false;
+    }
+  });
 
     // const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 </script>

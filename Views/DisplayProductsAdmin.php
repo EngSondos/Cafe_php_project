@@ -65,7 +65,7 @@ td {
 
                     <td><?= $row['id'] ?></td>
                     <td><?= $row['name'] ?></td>
-                    <td><?= $row['price'] ?></td>
+                    <td><?= $row['price'] ?> EGP</td>
                     <td><?= SelectCategoryByIdQuery($row['category_id'])   ?></td>
                     <td><?= $row['quantity'] ?></td>
                     <td> <?php
