@@ -9,7 +9,7 @@ include "../../Models/products.php";
 include "../../Models/categories.php";
 include "../../connection_credits.php";
 include "../../connection.php";
-include "../../validation.php";
+include "../../Validation/validation.php";
 $error_add;
 $error_update;
 $product_updated = SelectProductByIdQuery($_GET['product_id']);
