@@ -1,21 +1,21 @@
 <?php
-include '../db_connection.php';
+// include '../connection.php';
 
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$db = dbconnect();
+// $conn = dbconnect();
 
 //function to select all products
 function select_products()
 {
-    global $db;
+    global $conn;
 
-    $select_query = "select * from `Cafe`.`products`";
+    $select_query = "select * from `products`";
 
-    $select_stmt = $db->prepare($select_query);
+    $select_stmt = $conn->prepare($select_query);
 
     $select_stmt->execute();
 
@@ -27,11 +27,11 @@ function select_products()
 //function to select all carts
 function select_carts($userid)
 {
-    global $db;
+    global $conn;
 
-    $select_query = "select * from `Cafe`.`cart_product` where `user_id`= :stdusrid order by `cartid`;";
+    $select_query = "select * from `cart_product` where `user_id`= :stdusrid order by `cartid`;";
 
-    $stmt = $db->prepare($select_query);
+    $stmt = $conn->prepare($select_query);
 
     $stmt->bindParam(':stdusrid',$userid);
 
@@ -45,7 +45,7 @@ function select_carts($userid)
 //function to update quantity
 function update_quantity()
 {
-    global $db;
+    global $conn;
     $data = file_get_contents("php://input");
     $cart = json_decode($data, true);
 
@@ -54,9 +54,9 @@ function update_quantity()
     $user_id = $cart['user_id'];
     $productprice = $cart['price'];
 
-    $update_query = "update `Cafe`.`cart_product` set `quantity`=:stdquantity,`price`=:stdprdprice where `product_id`=:stdprdctid and `user_id` = :stduserid";
+    $update_query = "update `cart_product` set `quantity`=:stdquantity,`price`=:stdprdprice where `product_id`=:stdprdctid and `user_id` = :stduserid";
 
-    $stmt = $db->prepare($update_query);
+    $stmt = $conn->prepare($update_query);
     $stmt->bindParam(":stdquantity", $quantity);
     $stmt->bindParam(":stdprdprice", $productprice);
     $stmt->bindParam(":stdprdctid", $product_id);
@@ -72,15 +72,15 @@ function update_quantity()
 //function to delete cart
 function delete_cart()
 {
-    global $db;
+    global $conn;
     $data = file_get_contents("php://input");
     $cart = json_decode($data, true);
 
     $cart_id = $cart['cartid'];
 
-    $update_query = "delete from `Cafe`.`cart_product` where `cartid`=:stdid";
+    $update_query = "delete from `cart_product` where `cartid`=:stdid";
 
-    $stmt = $db->prepare($update_query);  # send template to the server
+    $stmt = $conn->prepare($update_query);  # send template to the server
     $stmt->bindParam(":stdid", $cart_id);
     $stmt->execute();  # true means that the query exectued by the database successfully
 
@@ -89,11 +89,11 @@ function delete_cart()
 //function to save totalprice of all carts 
 function deleteAllCarts()
 {
-    global $db;
+    global $conn;
 
-    $delete_query = "delete from `Cafe`.`cart_product`";
+    $delete_query = "delete from `cart_product`";
 
-    $stmt = $db->prepare($delete_query);
+    $stmt = $conn->prepare($delete_query);
 
     $stmt->execute();
 }
@@ -101,11 +101,11 @@ function deleteAllCarts()
 //select usercarts
 function selectUserCarts($userid )
 {
-    global $db;
+    global $conn;
 
-    $create_query = "select * from `Cafe`.`carts` where `user_id` = :usrid";
+    $create_query = "select * from `carts` where `user_id` = :usrid";
 
-    $stmt = $db->prepare($create_query);
+    $stmt = $conn->prepare($create_query);
 
     $stmt->bindParam(':usrid', $userid);
 
@@ -119,7 +119,7 @@ function selectUserCarts($userid )
 //update usercarts
 function updateUserCarts()
 {
-    global $db;
+    global $conn;
 
     $data = file_get_contents("php://input");
     $carts = json_decode($data, true);
@@ -127,9 +127,9 @@ function updateUserCarts()
     $notes = $carts['notes'];
     $userid = $carts['userid'];
 
-    $update_query = "update `Cafe`.`carts` set `notes` = :note where `user_id`=:usrid" ;
+    $update_query = "update `carts` set `notes` = :note where `user_id`=:usrid" ;
 
-    $stmt = $db->prepare($update_query);
+    $stmt = $conn->prepare($update_query);
 
     $stmt->bindParam(':usrid', $userid);
     $stmt->bindParam(':note', $notes);
@@ -141,11 +141,11 @@ function updateUserCarts()
 //delete usercarts
 function deleteUserCarts($userid )
 {
-    global $db;
+    global $conn;
 
-    $delete_query = "delete from `Cafe`.`carts` where `user_id` = :usrid";
+    $delete_query = "delete from `carts` where `user_id` = :usrid";
 
-    $stmt = $db->prepare($delete_query);
+    $stmt = $conn->prepare($delete_query);
 
     $stmt->bindParam(':usrid', $userid);
 
@@ -157,7 +157,7 @@ function deleteUserCarts($userid )
 //function to select all carts 
 function create_cart()
 {
-    global $db;
+    global $conn;
 
     $data = file_get_contents("php://input");
     $product = json_decode($data, true);
@@ -166,9 +166,10 @@ function create_cart()
     $prodid = $product['productid'];
     $price = $product['price'];
 
-    $create_query = "insert into `Cafe`.`cart_product` (user_id,product_id,price) values (:usrid,:product_id,:price);";
 
-    $stmt = $db->prepare($create_query);
+    $create_query = "insert into `cart_product` (user_id,product_id,price) values (:usrid,:product_id,:price);";
+
+    $stmt = $conn->prepare($create_query);
 
     $stmt->bindParam(':product_id', $prodid);
     $stmt->bindParam(':usrid', $userid);
@@ -177,18 +178,21 @@ function create_cart()
     $stmt->execute();
 
     createUserCarts($userid);
+
+    return $product;
+
 }
 
 //function to save totalprice of all carts 
 function createUserCarts($userid )
 {
-    global $db;
+    global $conn;
 
     $totalPrice = countTotalPrice($userid);
 
-    $create_query = "insert into `Cafe`.`carts` (total_price,user_id) values (:totalprice,:usrid)";
+    $create_query = "insert into `carts` (total_price,user_id) values (:totalprice,:usrid)";
 
-    $stmt = $db->prepare($create_query);
+    $stmt = $conn->prepare($create_query);
 
     $stmt->bindParam(':totalprice', $totalPrice);
     $stmt->bindParam(':usrid', $userid);
@@ -209,9 +213,11 @@ function countTotalPrice($userid){
     return $totalPrice;
 }
 
-
+var_dump($_SERVER["REQUEST_METHOD"]);
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    update_quantity();
+    create_cart();
+    // var_dump(   "kkkk");
+
 }
 
 if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {

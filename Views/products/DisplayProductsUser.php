@@ -9,6 +9,8 @@ include "../../Models/categories.php";
 include "../../connection_credits.php";
 include "../../connection.php";
 include "../../Validation/validation.php";
+include "../../Models/product_cartModel.php";
+
 $error_add;
 $error_update;
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
@@ -29,6 +31,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         // Handle update form data here
     }
 }
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    var_dump($_POST);
+}
+
 ?>
 
 <div class="container ">
@@ -56,19 +64,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                             </p>
 
                         </div>
-                        <!-- <a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a> -->
+                        <a href="" class="btn btn-primary" onclick="addToCart(<?= $row['id'] ?>,<?= $row['price'] ?>,1 )">Add To Cart</a>
                     </div>
                 </div>
             </div>
         <?php     }   ?>
 
     </div>
-</div>
-
-
-
-
-
 </div>
 
 <!-- Optional: Place to the bottom of scripts -->
@@ -84,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
     // const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 </script>
-
+<script src="../../Controllers/script.js"></script>
 <?php
 include "../../layout/footer.php"
 ?>
