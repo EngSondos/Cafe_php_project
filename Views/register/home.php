@@ -1,15 +1,16 @@
 <?php
-    
+    session_start();
     include '../../layout/head.php';
     include '../../layout/navbar.php';
     include '../../Controllers/users/users.php';
     
-    if (!isLoggedIn()) {
+    // if (!isLoggedIn()) {
         
-        header('Location: login.php');
+    //     header('Location: login.php');
         
-        exit();
-    }
+    //     exit();
+    // }
+
     $user = getCurrentUser();
 ?>
 

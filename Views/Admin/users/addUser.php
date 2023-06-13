@@ -3,6 +3,7 @@
     $pageTitle = 'Add User';
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/navbar.php';
+
 ?>
 <section class="vh-100">
     <div class="container py-5 h-100">

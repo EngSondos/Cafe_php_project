@@ -22,12 +22,17 @@
 
         if(empty($errors)) {
             loginUser($email, $password);
-            // session_start();
+            
             echo '<span class="alert alert-success">Welcome You Will Redircet To Home Now</span>';
+            
             if($_SESSION['user']['role'] === 0) {
+
                 header("refresh:3;url=home.php");
+
             } elseif ($_SESSION['user']['role'] === 1) {
+
                 header("refresh:3;url=../Admin/users/listAllUsers.php");
+            
             }
             exit();
         } else {

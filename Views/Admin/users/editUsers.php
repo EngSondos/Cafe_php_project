@@ -1,5 +1,5 @@
 <?php
-
+    ob_start();
     require_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
     // session_start();
@@ -22,6 +22,7 @@
             $count = $stmt->rowCount();
             // if there's such id show the form
             if ($stmt->rowCount() > 0) { ?>
+
                 <h1 class="text-center">Edit User</h1>
                 <div class="container">
                     <form class="form-horizontal" method="POST">
@@ -79,9 +80,8 @@
                         <!-- End Button Field -->
                     </form>
                 </div>
-    <?php
-    
-}
+    <?php }
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $errors = [];
@@ -103,11 +103,11 @@
             }
     
             // pssword Validtion
-            // if(empty($password)) {
-            //     $errors[] = 'Password Is Required';
-            // } elseif (!preg_match($password_regex, $password)) {
-            //     $errors[] = 'Write Strong Password';
-            // }
+            if(empty($password)) {
+                $errors[] = 'Password Is Required';
+            } elseif (!preg_match($password_regex, $password)) {
+                $errors[] = 'Write Strong Password';
+            }
             // Username Validation
             if(empty($username)) {
                 $errors[] = 'Username Is Required';
@@ -122,7 +122,6 @@
                 $role = 0;
             }
             if (empty($errors)) {
-
                 $stmt2 = $conn->prepare("SELECT * FROM users WHERE email = ?");
                 $stmt2->execute(array($email));
                 $count = $stmt2->rowCount();
@@ -130,12 +129,10 @@
                     $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, role = ? WHERE email = ?");
                     $stmt->execute(array($username, $password, $role, $email));
                     $count = $stmt2->rowCount();
-                    if($count > 0) {
-                        // echo Success Message
-                        echo '<div class="alert alert-success">' . $stmt->rowCount() . ' Data Updated</div>';
-                        header("refresh:3;url=listAllUsers.php");
-                        exit();
-                    }
+                    // echo Success Message
+                    echo '<div class="alert alert-success">' . $stmt->rowCount() . ' Data Updated</div>';
+                    header("refresh:3;url=listAllUsers.php");
+                    exit();
                 } else {
                     echo 'Something Wrong';
                 }
@@ -147,6 +144,6 @@
             }
         }
     } 
-
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php';
+ob_end_flush();
 ?>
