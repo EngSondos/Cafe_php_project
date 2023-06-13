@@ -39,9 +39,6 @@ function getAllOrders()
 }
 
 
-
-
-
 function getUserOrders($userId)
 {
   global $conn;
@@ -70,15 +67,6 @@ function getUserOrders($userId)
     throw $e;
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 
