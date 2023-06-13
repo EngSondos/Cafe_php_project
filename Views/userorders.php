@@ -62,15 +62,19 @@ if (isset($_POST['cancel_order'])) {
 <div class="container" style="margin-top: 50px;">
   <h2  style="text-align: center;">My Orders</h2>
   <form method="post" action="">
-  <div class="form-group">
+  <div class="d-flex">
+
+  <div class="form-group me-3  w-25">
     <label for="start_date">Start Date:</label>
-    <input type="date" class="form-control w-50"  id="start_date" name="start_date">
+    <input type="date" class="form-control"  id="start_date" name="start_date">
   </div>
-  <div class="form-group">
+  <div class="form-group me-3  w-25">
     <label for="end_date">End Date:</label>
-    <input type="date" class="form-control w-50 " id="end_date" name="end_date" >
+    <input type="date" class="form-control" id="end_date" name="end_date" >
   </div>
   <button type="submit" class="btn btn-primary mt-4 ">View Orders</button>
+  </div>
+
 </form>
   <br>
   <table class="table table-light">
