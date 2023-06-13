@@ -1,7 +1,7 @@
 <?php
+$title="Category Page";
+
 include "../layout/head.php";
-// session_destroy();
-session_start();
 // include "../Controllers/User/UserController.php";
 include "../Controllers/categories.php";
 include "../Models/categories.php";

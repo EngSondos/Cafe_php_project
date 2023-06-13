@@ -138,7 +138,6 @@ function UpdateCategoryQuery($id, $data)
         $stmt->bindParam(":id", $id);
         $stmt->bindParam(":cateName", $data['name']);
         # true --> query executed successfully
-        session_destroy();
         return $stmt->execute();
 
     } catch (Exception $e) {
