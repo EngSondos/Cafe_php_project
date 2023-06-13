@@ -3,52 +3,59 @@ include '../layout.php';
 
 function render_carts($products, $carts)
 {
-    echo "<div class='row justify-content-end'>";
-    echo "<div class='col-xl-3 p-0 notes'>
-                <textarea placeholder='write here the notes you need to add to the order...'></textarea>
-                <p>
-                1.add\n2.create\n3.delete
-                </p>
+    echo "<div class='row justify-content-end h-100'>";
+    echo "  <div class='col-xl-3 p-0 sidebar'>
+                <div id='row1'>
+                    <div class='line-numbers'>
+                        <span></span>
+                    </div>
+                    <textarea placeholder='write here the notes you need...'></textarea>
+                    
+                </div>
+                <button class='btn btn-success savebtn' onclick='savenotes(1)'>Save</button>
+                <div id='row2'>
+                    <p id='notes'></p>
+                </div>
             </div>";
     echo "<div class='col-xl-9 '>
-    <div class='container py-5'>
-    <div class='row emptyrow'>";
+    <div class='container '>
+    <div class='row justify-content-center align-items-center h-100'>";
 
-    if(sizeof($carts)>0){
-        
-        
+    if (sizeof($carts) > 0) {
+
+
         foreach ($carts as $cart) {
             foreach ($products as $product) {
                 if ($product['id'] === $cart['product_id']) {
                     echo "
                     <div class='col-xl-4'>
                         <div class='card'>
-                            <div class='cart-img'>
+                            <div class='card-img'>
                                 <img src='../assets/imgs/{$product["image"]}'class='card-img-top' alt='product image'>
-                                <div class='cartcontroller'>
+                                <div class='cardcontroller'>
                                     <button class='btn btn-info w-25' onclick='incrementquantity({$product["quantity"]},{$product["id"]},{$cart['user_id']},{$product['price']})'>plus</button>
                                     <span class='card-quantity w-25' id='{$product["id"]}'>";
-                                    if($product["quantity"] > 0){
-                                        echo "{$cart["quantity"]}";
-                                    }else{
-                                        echo "0";
-                                    };
-                                    echo"</span>
+                    if ($product["quantity"] > 0) {
+                        echo "{$cart["quantity"]}";
+                    } else {
+                        echo "0";
+                    };
+                    echo "</span>
                                     <button class='btn btn-warning w-25' onclick='decrementquantity({$product["id"]},{$cart['user_id']},{$product['price']})'>minus</button>
                                 </div>";
-                                if($product["quantity"] == 0){
-                                    echo "<div class='unavailable pro{$product["id"]}'>
+                    if ($product["quantity"] == 0) {
+                        echo "<div class='unavailable pro{$product["id"]}'>
                                         <span>Unavailable</span>
                                     </div>";
-                                }else{
-                                    echo "<div class='available pro{$product["id"]}'>
+                    } else {
+                        echo "<div class='available pro{$product["id"]}'>
                                         <span>Available</span>
                                     </div>";
-                                };
-                               
-                            echo "</div>
-                            <div class='card-body'>
-                                <div class='cart-title justify-content-around align-items-center row flex-row mb-4'>
+                    };
+
+                    echo "</div>
+                            <div class='card-body p-0 pb-3'>
+                                <div class='card-header justify-content-around align-items-center row flex-row mb-4'>
                                     <h5 class='card-title'>{$product["name"]}</h5>
                                     <span class='card-price' id='prod{$product["id"]}price'>{$cart["price"]} EGP</span>
                                 </div>
@@ -63,8 +70,7 @@ function render_carts($products, $carts)
         echo "<div class='row align-items-center justify-content-center mb-5 w-100'>
                 <button class='btn btn-primary' onclick='createorder(1)'>Order Now</button>
             </div>";
-    }
-    else{
+    } else {
         echo "<div class='emptycart'>
             <i class='fa-solid fa-cart-plus'></i>
             <p>You may need to add something to cart</p>
@@ -85,9 +91,7 @@ function render_carts($products, $carts)
 
     </div>";
 
-   
+
 
     echo "<script src='script.js'></script>";
-   
 }
-?>

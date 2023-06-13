@@ -18,8 +18,10 @@ function incrementquantity(availablequantity, product_id, user_id, product_price
             },
             "body": JSON.stringify({ "quantity": quantity, "user_id": user_id, "product_id": product_id, "price": product_price })
         }).then((res) => {
-            return res.json()
+            // console.log(res)
+            return res.json();
         }).then((data) => {
+            // console.log(data);
             span.innerHTML = data['quantity'];
             span2.innerHTML = data['price'].toFixed(2) + " EGP";
         })
@@ -48,6 +50,7 @@ function decrementquantity(product_id, user_id, product_price) {
             },
             "body": JSON.stringify({ "quantity": quantity, "user_id": user_id, "product_id": product_id, "price": product_price })
         }).then((res) => {
+            // console.log(res.json())
             return res.json()
         }).then((data) => {
             span.innerHTML = data['quantity'];
@@ -93,6 +96,58 @@ function createorder(userid) {
         },
         "body": JSON.stringify({ "user_id": userid })
     })
+}
+
+//check if the textarea has a content or not
+const Notes = document.getElementsByTagName("textarea")[0],
+lineNumbers = document.querySelector('.line-numbers');
+let numberOfLines = 0;
+
+if(Notes.value.length > 0){
+    //so reload the numberline
+    numberOfLines =Notes.value.split('\n').length - 1;
+    for(let i = 0; i < numberOfLines; i++){
+        numberLines();
+    }
+}
+
+function numberLines(){
+    lineNumbers.innerHTML = Array(numberOfLines)
+    .fill('<span></span>')
+    .join('');
+    // Notes.style.height = "100vh";
+    // Notes.style.resize='vertical';
+}
+
+Notes.addEventListener('keyup',(e)=>{
+    if(e.keyCode==13){
+        numberOfLines =e.target.value.split('\n').length;
+        if(numberOfLines < 150)
+            numberLines();
+    }
+})
+Notes.addEventListener('keydown', event => {
+    if (event.key === 'Tab') {
+      const start = Notes.selectionStart
+      const end = Notes.selectionEnd
+  
+      Notes.value = Notes.value.substring(0, start) + '\t' + Notes.value.substring(end)
+  
+      event.preventDefault()
+    }
+  })
+
+
+function savenotes($id){
+    if(Notes.value.length > 0){
+        fetch("../Models/ordersModel.php", {
+            "method": "UPDATE",
+            "headers": {
+                "Content-Type": "application/json;charset=utf-8"
+            },
+            "body": JSON.stringify({ "notes": Notes.value })
+        })
+    }
 }
 // let carts = document.getElementsByClassName('cart-img');
 // audio = new Audio('../assets/plateput.mp3')

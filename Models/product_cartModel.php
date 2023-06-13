@@ -1,6 +1,11 @@
 <?php
 include '../db_connection.php';
 
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $db = dbconnect();
 
 //function to select all products
@@ -60,8 +65,8 @@ function update_quantity()
 
     
 
-    // echo json_encode($cart);
-    return json_encode($cart);
+    echo json_encode($cart);
+    // return $cart;
 }
 
 //function to delete cart
@@ -196,7 +201,7 @@ function deleteUserCarts($userid )
     $stmt->execute();
 }
 
-if (isset($_POST)) {
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     update_quantity();
 }
 
