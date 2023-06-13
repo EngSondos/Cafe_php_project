@@ -3,14 +3,11 @@
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
     session_start();
-        
+
     $do = $_GET['do'];
-        
         if ($do == 'edit') { 
-            
             // check if request userid is numeric & get the integer value of it
-            $userid = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 0;      
-            echo $userid;
+            $userid = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 0;
         }
             $conn = connect();
             // To Get All Data From DataBase
@@ -23,17 +20,15 @@
             $count = $stmt->rowCount();
             // if there's such id show the form
             if ($stmt->rowCount() > 0) { ?>
-
                 <h1 class="text-center">Edit User</h1>
-
                 <div class="container">
-                    <form class="form-horizontal" action="?do=Update" method="POST">
+                    <form class="form-horizontal" action="" method="POST">
                         <!-- <input type="hidden" name="userid" value="<?php echo $userid ?>" /> -->
                         <!-- Start Username Field -->
                         <div class="form-group">
                             <lable class="col-sm-2 control-lable">Username</lable>
                             <div class="col-sm-10 col-md-5">
-                                <input type="text" name="username" value="<?php echo $row['username'] ?>" class="form-control" autocomplete="off" required="requier" />
+                                <input type="text" name="username" value="<?php echo $row['username'] ?>" class="form-control" autocomplete="off" />
                             </div>
                         </div>
                         <!-- End Username Field -->
@@ -50,7 +45,7 @@
                         <div class="form-group">
                             <lable class="col-sm-2 control-lable">Email</lable>
                             <div class="col-sm-10 col-md-5">
-                                <input type="email" name="email" class="form-control" value="<?php echo $row['email'] ?>" autocomplete="off" required />
+                                <input type="email" name="email" class="form-control" value="<?php echo $row['email'] ?>" autocomplete="off" />
                             </div>
                         </div>
                         <!-- End Email Field -->
@@ -66,6 +61,13 @@
                             </div>
                         </div>
                         <!-- End Fullname Field -->
+                        <!-- Image -->
+                        <div class="form-group">
+                            <lable class="col-sm-2 control-lable">Image</lable>
+                            <div class="col-sm-10 col-md-5">
+                                <input type="file" name="image" class="form-control" value="<?php echo $row['image'] ?>" autocomplete="off" />
+                            </div>
+                        </div>
                         <!-- Start Button Field -->
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
@@ -76,14 +78,18 @@
                     </form>
                 </div>
     <?php
-                    // if there's no such ID show error message
-        } else {
+    }
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                include 'update.php';
+                updateUser($_POST, $_FILES);
+        }
+    else {
             
             echo '<div class="container">'; 
             
             $theMsg = '<div class="alert alert-danger">Error: Theres No Such ID</div>';
 
-               header('Location:listAllUsers.php');
+            // header('Location:listAllUsers.php');
             
             echo '</div>';
         }
