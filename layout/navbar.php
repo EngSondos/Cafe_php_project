@@ -1,6 +1,5 @@
 <?php 
     ob_start();
-    // include '../../Controllers/users/users.php';
     if(isset($_SESSION['user'])) {
       $user = $_SESSION['user'];
     }
@@ -48,10 +47,10 @@
       if(!isset($user)){ ?>
       <ul class="navbar-nav ms-auto">
         <li class="nav-item ">
-        <a class="nav-link" href="login.php">Login</a>
+        <a class="nav-link" href="/Cafe_php_project/Views/register/login.php">Login</a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="signup.php">SignUp</a>
+        <a class="nav-link" href="/Cafe_php_project/Views/register/signup.php">SignUp</a>
       </li>
    <?php } ?>
   </ul>
