@@ -1,4 +1,6 @@
 <?php
+$title="Shopping List";
+
 include "../layout/head.php";
 
 include "../Controllers/categories.php";

@@ -1,4 +1,5 @@
 <?php
+$title="Admin Panel";
 include "../layout/head.php";
 
 include "../Controllers/categories.php";

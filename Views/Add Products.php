@@ -1,4 +1,6 @@
 <?php
+$title="Add Product";
+
 include "../layout/head.php";
 
 include "../Controllers/categories.php";

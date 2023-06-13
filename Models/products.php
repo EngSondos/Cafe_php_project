@@ -88,32 +88,31 @@ function DisplayAvailableProductsQuery()
     }
 }
 
-// // ----------------------------------------------------------------
+// ----------------------------------------------------------------
 
-// //SELECT CATEGORY BY ID 
-// function SelectCategoryByIdQuery($id)
-// {
-//     global $db;
-//     global $table;
+//*SELECT PRODUCT BY ID 
+function SelectProductByIdQuery($id)
+{
+    global $db;
 
-//     try {
-//         $query = "SELECT * FROM `cafe_project`. $table WHERE  id =:id";;
-//         // var_dump($query);
+    try {
+        $query = "SELECT * FROM `cafe_project`. `products` WHERE  id =:id";;
+        // var_dump($query);
 
-//         ### prepare query
-//         $stmt = $db->prepare($query);
-//         $stmt->bindParam(":id", $id);
-//         $stmt->execute();
-//         $row = $stmt->fetchObject(PDO::FETCH_ASSOC);
-//         return $row;
-//     } catch (Exception $e) {
-//         echo $e->getMessage();
-//     }
-// }
+        ### prepare query
+        $stmt = $db->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        $row = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $row;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
 
 // ----------------------------------------------------------------
 
-//DELETE CATEGORY 
+//*DELETE PRODUCT 
 function DeleteProductQuery($id)
 {
     global $db;
@@ -133,9 +132,9 @@ function DeleteProductQuery($id)
     // }
 }
 
-// // ----------------------------------------------------------------
+// ----------------------------------------------------------------
 
-//**UPDATE CATEGORY 
+//**UPDATE PRODUCT 
 function UpdateProductQuery($id, $name, $image, $price, $quantity, $category_id)
 {
     global $db;
