@@ -23,13 +23,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     $quantity = $_POST['quantity'];
     $category_id = $_POST['category_id'];
 
-    if ($_GET['action'] === 'add') {
+    // if ($_GET['action'] === 'add') {
         // Handle add form data here
         AddProductQuery($name, $image, $price, $quantity, $category_id);
         var_dump($_POST);
+        // header('Location:DisplayProductsAdmin.php');
+
         //   $error_add= $error['name'];
 
-}
+// }
 }
 
 ?>
@@ -71,9 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
     </form>
 </div>
-
-
-
 
 <?php
 include "../layout/footer.php"

@@ -18,12 +18,31 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 }
 
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+table {
+  border-collapse: collapse;
+}
 
-<div class="container w-50">
-    <h1 class="text-primary mx-auto w-50 my-4">Products</h1>
-    <a class="btn btn-primary" href="Add Products.php">Add Product</a>
+td {
+  padding: 30px;
+  border: 1px solid #ccc;
+  vertical-align: middle !important;
+}
+</style>
+</head>
+<body>
+<div class="container ">
+    <h1 class="text-primary mx-auto text-center my-4">Add Product</h1>
+    <a class="btn btn-primary my-3"  href="Add Products.php">Add Product</a>
 
-    <table class="table table-striped table-dark border-light  text-center table-bordered">
+    <table class="table table-striped table-hover table-Secondary border-dark  text-center table-bordered align-vertical">
         <thead>
             <tr>
                 <th>id</th>
@@ -40,7 +59,6 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
         <tbody>
             <?php
             $Products = DisplayAllProductsQuery();
-            // var_dump(   $Products );
             foreach ($Products as $row) {
             ?>
                 <tr>
@@ -52,13 +70,13 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
                     <td><?= $row['quantity'] ?></td>
                     <td> <?php
                             if ($row['quantity'] <= 0) {
-                                echo "Not Available";
+                                echo  '<p class="bold" style="color:red;font-weight:700" >Not Available </p> ';
                             } else {
-                                echo "Available";
+                                echo '<p class="bold" style="color:green;font-weight:700" >Available </p> ';
                             }
 
                             ?> </td>
-                    <td> <img height="100" width="100" src="../uploads/<?= $row['image'] ?>" alt=""> </td>
+                    <td> <img height="70" width="70" src="<?= $row['image'] ?>" alt=""> </td>
 
                     <td><a href="UpdateProducts.php?product_id=<?= $row['id'] ?>" class="btn btn-warning edit-category">Edit</a></td>
                     <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
@@ -81,6 +99,10 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 
     // const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 </script>
+</body>
+</html>
+
+
 
 <?php
 include "../layout/footer.php"

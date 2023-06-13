@@ -36,7 +36,6 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
     // ));
     try {
         $stmt->execute();
-        header('Location:Display products.php');
     } catch (Exception $e) {
 
         echo $e->getMessage();
