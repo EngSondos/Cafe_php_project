@@ -56,24 +56,24 @@ if (isset($_POST['cancel_order'])) {
     }
 }
 ?>
-  <div class="container">
+<section>
 
 
-<div class="container">
-  <h2>View Orders</h2>
+<div class="container" style="margin-top: 50px;">
+  <h2  style="text-align: center;">My Orders</h2>
   <form method="post" action="">
   <div class="form-group">
     <label for="start_date">Start Date:</label>
-    <input type="date" class="form-control w-50" style="color: white;" id="start_date" name="start_date">
+    <input type="date" class="form-control w-50"  id="start_date" name="start_date">
   </div>
   <div class="form-group">
     <label for="end_date">End Date:</label>
-    <input type="date" class="form-control w-50 "  style="color: white;" id="end_date" name="end_date" >
+    <input type="date" class="form-control w-50 " id="end_date" name="end_date" >
   </div>
-  <button type="submit" class="btn btn-primary">View Orders</button>
+  <button type="submit" class="btn btn-primary mt-4 ">View Orders</button>
 </form>
   <br>
-  <table class="table table-striped">
+  <table class="table table-light">
     <thead>
       <tr>
         <th scope="col">Order ID</th>
@@ -104,16 +104,15 @@ if (isset($_POST['cancel_order'])) {
                     </form>
                 </td>
         </tr>
-        <tr class="products-container" id="products-<?php echo $order['id']; ?>" style="display:none;">
+        <tr  class="products-container" id="products-<?php echo $order['id']; ?>" style="display:none; margin-top: 20px; ">
           <td colspan="4">
             <table class="table table-striped">
               <thead>
-                <tr>
+                <tr style="padding-bottom: 10px;">
                   <th scope="col">Product</th>
                   <th scope="col">Quantity</th>
                   <th scope="col">Price</th>
                   <th scope="col">Image</th>
-
 
                 </tr>
               </thead>
@@ -139,7 +138,6 @@ if (isset($_POST['cancel_order'])) {
     </tbody>
   </table>
 </div>
-  </div>
 
 
 <script>
@@ -159,3 +157,5 @@ if (isset($_POST['cancel_order'])) {
   });
   
 </script>
+
+</section>
