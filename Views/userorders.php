@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
 include '../layout.php';
 include '../Controllers/order_controller.php';
+include '../Validation/orderValidation.php';
 
 
 // if (!isset($_SESSION['user_id'])) {
@@ -15,15 +16,20 @@ include '../Controllers/order_controller.php';
 // }
 
 $userId = $_SESSION['user_id'];
+$orders = array();
 
-if (!isset($_POST['start_date']) && !isset($_POST['end_date'])) {
-    $orders = usersorder($userId);
+if (isset($_POST['start_date'], $_POST['end_date'])) {
+  $start_date = $_POST['start_date'];
+  $end_date = $_POST['end_date'];
+
+  if (!validateDates($start_date, $end_date)) {
+    echo "<div class='alert alert-danger' style='text-align: center' role='alert'>Invalid dates.</div>";
+  } else {
+    $orders = filterOrdersByDate($start_date, $end_date);
+  }
 } else {
-    $startDate = $_POST['start_date'];
-    $endDate = $_POST['end_date'];
-    $orders = filterorder($startDate, $endDate);
+  $orders = usersorder($userId);
 }
-
 
 if (isset($_POST['cancel_order'])) {
     $orderId = $_POST['cancel_order'];
@@ -100,6 +106,8 @@ if (isset($_POST['cancel_order'])) {
                   <th scope="col">Product</th>
                   <th scope="col">Quantity</th>
                   <th scope="col">Price</th>
+                  <th scope="col">Image</th>
+
 
                 </tr>
               </thead>
@@ -109,6 +117,8 @@ if (isset($_POST['cancel_order'])) {
                     <td><?php echo $product['name']; ?></td>
                     <td><?php echo $product['quantity']; ?></td>
                     <td><?php echo $product['price']; ?></td>
+                    <td>   <img src=" <?php echo $product['image'];?>" alt="" ></td>
+
 
                   </tr>
                 <?php endforeach; ?>
