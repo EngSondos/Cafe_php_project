@@ -1,6 +1,5 @@
 <?php
 include '../connection_credits.php';
-
 include '../connection.php';
 
 
