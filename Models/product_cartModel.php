@@ -9,20 +9,33 @@ error_reporting(E_ALL);
 
 // $conn = dbconnect();
 
-//function to select all products
-function select_products()
+//function to select all carts 
+function create_cart()
 {
     global $conn;
 
-    $select_query = "select * from `products`";
+    $data = file_get_contents("php://input");
+    $product = json_decode($data, true);
 
-    $select_stmt = $conn->prepare($select_query);
+    $userid = $product['usrid'];
+    $prodid = $product['productid'];
+    $price = $product['price'];
 
-    $select_stmt->execute();
 
-    $products = $select_stmt->fetchAll();
+    $create_query = "insert into `cart_product` (user_id,product_id,price) values (:usrid,:product_id,:price);";
 
-    return $products;
+    $stmt = $conn->prepare($create_query);
+
+    $stmt->bindParam(':product_id', $prodid);
+    $stmt->bindParam(':usrid', $userid);
+    $stmt->bindParam(':price', $price);
+
+    $stmt->execute();
+
+    createUserCarts($userid);
+
+    return $product;
+
 }
 
 //function to select all carts
@@ -99,126 +112,27 @@ function deleteAllCarts()
     $stmt->execute();
 }
 
-//select usercarts
-function selectUserCarts($userid )
-{
-    global $conn;
-
-    $create_query = "select * from `carts` where `user_id` = :usrid";
-
-    $stmt = $conn->prepare($create_query);
-
-    $stmt->bindParam(':usrid', $userid);
-
-    $stmt->execute();
-
-    $res = $stmt->fetchAll();
-
-    return $res;
-}
-
-//update usercarts
-function updateUserCarts()
-{
-    global $conn;
-
-    $data = file_get_contents("php://input");
-    $carts = json_decode($data, true);
-
-    $notes = $carts['notes'];
-    $userid = $carts['userid'];
-
-    $update_query = "update `carts` set `notes` = :note where `user_id`=:usrid" ;
-
-    $stmt = $conn->prepare($update_query);
-
-    $stmt->bindParam(':usrid', $userid);
-    $stmt->bindParam(':note', $notes);
-
-
-    $stmt->execute();
-}
-
-//delete usercarts
-function deleteUserCarts($userid )
-{
-    global $conn;
-
-    $delete_query = "delete from `carts` where `user_id` = :usrid";
-
-    $stmt = $conn->prepare($delete_query);
-
-    $stmt->bindParam(':usrid', $userid);
-
-    $stmt->execute();
-}
-
 ///////////////////////////// not used yet ///////////////////////////////////////////
 
-//function to select all carts 
-function create_cart()
+//function to select all products
+function select_products()
 {
     global $conn;
 
-    $data = file_get_contents("php://input");
-    $product = json_decode($data, true);
+    $select_query = "select * from `products`";
 
-    $userid = $product['usrid'];
-    $prodid = $product['productid'];
-    $price = $product['price'];
+    $select_stmt = $conn->prepare($select_query);
 
+    $select_stmt->execute();
 
-    $create_query = "insert into `cart_product` (user_id,product_id,price) values (:usrid,:product_id,:price);";
+    $products = $select_stmt->fetchAll();
 
-    $stmt = $conn->prepare($create_query);
-
-    $stmt->bindParam(':product_id', $prodid);
-    $stmt->bindParam(':usrid', $userid);
-    $stmt->bindParam(':price', $price);
-
-    $stmt->execute();
-
-    createUserCarts($userid);
-
-    return $product;
-
+    return $products;
 }
 
-//function to save totalprice of all carts 
-function createUserCarts($userid )
-{
-    global $conn;
 
-    $totalPrice = countTotalPrice($userid);
-
-    $create_query = "insert into `carts` (total_price,user_id) values (:totalprice,:usrid)";
-
-    $stmt = $conn->prepare($create_query);
-
-    $stmt->bindParam(':totalprice', $totalPrice);
-    $stmt->bindParam(':usrid', $userid);
-
-    $stmt->execute();
-}
-
-//function to count totalprice
-function countTotalPrice($userid){
-
-    $allcarts = select_carts($userid);
-    $totalPrice = 0;
-
-    for($i=0;$i<sizeof($allcarts);$i++){
-        $totalPrice+= $allcarts[$i]['price'];
-    }
-
-    return $totalPrice;
-}
-
-var_dump($_SERVER["REQUEST_METHOD"]);
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     create_cart();
-    // var_dump(   "kkkk");
-
 }
 
 if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
@@ -226,5 +140,9 @@ if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
 }
 
 if ($_SERVER["REQUEST_METHOD"] === 'UPDATE') {
-    updateUserCarts();
+    // updateUserCarts();
+    update_quantity();
+}
+if($_SERVER["REQUEST_METHOD"] === 'GET'){
+    // select_carts();
 }

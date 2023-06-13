@@ -88,7 +88,7 @@ function removecart(id) {
           body: JSON.stringify({ cartid: id }),
         });
         popup[0].style = "display:none";
-        // location.reload();
+        location.reload();
       } else if (res == "cancle") {
         popup[0].style = "display:none";
       }
@@ -97,7 +97,6 @@ function removecart(id) {
 }
 
 function createorder(userid) {
-  console.log(userid);
   fetch("../Models/ordersModel.php", {
     method: "POST",
     headers: {
@@ -105,6 +104,7 @@ function createorder(userid) {
     },
     body: JSON.stringify({ user_id: userid }),
   });
+  location.reload();
 }
 
 //check if the textarea has a content or not
@@ -139,8 +139,6 @@ if (Notes) {
 
 function numberLines() {
   lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
-  // Notes.style.height = "100vh";
-  // Notes.style.resize='vertical';
 }
 
 
@@ -154,7 +152,7 @@ function savenotes(id) {
       },
       body: JSON.stringify({ notes: Notes.value, userid: id }),
     });
-    // location.reload();
+    location.reload();
   }
 }
 // let carts = document.getElementsByClassName('cart-img');
