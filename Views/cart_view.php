@@ -7,7 +7,7 @@ function render_carts($products, $carts, $totalcarts)
     echo "
     <div class='row h-100 mr-0'>".
     //first column
-        "<div class='col-xl-4 h-100 pr-0'><div class='sidebar'>".
+        "<div class='col-xl-4 h-100 pr-0 border'><div class='sidebar'>".
     //show number of carts
             "<h4 class='mycarts bg-light d-flex justify-content-center'>My Carts<span class='cartsnum'>" . sizeof($carts) . "</span></h4>".
     //inject textarea to store notes in
@@ -19,12 +19,21 @@ function render_carts($products, $carts, $totalcarts)
                      <textarea placeholder='write here the notes you need...'></textarea>
                     </div>
                     <button class='btn btn-danger savebtn' onclick='savenotes(1)'><i class='fa-solid fa-chevron-right'></i></button>
-                    <div id='row2'>
-                        <pre id=''>".trim($totalcarts[0]["notes"])."</pre>
-                    </div>
-                </div>".
-                "<span class='totalprice'>Total Price: ".$totalcarts[0]["total_price"].' EGP'."</span>".
-                "<div class='row align-items-center justify-content-center mb-5 w-100'>
+                    <div id='row2'>";
+                    if(sizeof($totalcarts) > 0){
+                        echo "<pre id=''>".trim($totalcarts[0]["notes"])."</pre>";
+                    }else{
+                        echo "You don't have any cart";
+                    }
+                        
+                echo "</div>
+                </div>";
+                    if(sizeof($totalcarts) > 0){
+                        echo "<span class='totalprice'>Total Price: ".$totalcarts[0]["total_price"].' EGP'."</span>";
+                    }else{
+                        echo "<span class='totalprice'>Total Price: 0 EGP </span>";
+                    }
+                echo "<div class='row align-items-center justify-content-center mb-5 w-100'>
                     <button class='btn btn-primary' onclick='createorder(1)'>Order Now</button>
                 </div>".
             "</div>
@@ -32,7 +41,7 @@ function render_carts($products, $carts, $totalcarts)
         "<div class='col-xl-8'>".
         //container
             "<div class='container'>".
-                "<div class='row'>";
+                "<div class='row' style='justify-content: center;height: 100%;align-items: center;'>";
                     //three columns of carts
                     if (sizeof($carts) > 0) {
                         foreach ($carts as $cart) {
