@@ -1,14 +1,16 @@
 <?php
-    $pageTitle = 'Edit Users';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
-    session_start();
 
+    require_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
+    // session_start();
+    
     $do = $_GET['do'];
-        if ($do == 'edit') { 
-            // check if request userid is numeric & get the integer value of it
+    
+    if ($do == 'edit') { 
+        
+        // check if request userid is numeric & get the integer value of it
             $userid = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 0;
-        }
+            
             $conn = connect();
             // To Get All Data From DataBase
             $stmt = $conn->prepare("SELECT * FROM users WHERE id = ? LIMIT 1");
@@ -22,7 +24,7 @@
             if ($stmt->rowCount() > 0) { ?>
                 <h1 class="text-center">Edit User</h1>
                 <div class="container">
-                    <form class="form-horizontal" action="" method="POST">
+                    <form class="form-horizontal" method="POST">
                         <!-- <input type="hidden" name="userid" value="<?php echo $userid ?>" /> -->
                         <!-- Start Username Field -->
                         <div class="form-group">
@@ -78,21 +80,73 @@
                     </form>
                 </div>
     <?php
-    }
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                include 'update.php';
-                updateUser($_POST, $_FILES);
-        }
-    else {
-            
-            echo '<div class="container">'; 
-            
-            $theMsg = '<div class="alert alert-danger">Error: Theres No Such ID</div>';
-
-            // header('Location:listAllUsers.php');
-            
-            echo '</div>';
-        }
     
+}
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $errors = [];
+            $data = $_POST;
+            $username = $data['username'];
+            $email = $data['email'];
+            $role = $data['role'];
+            $password = empty($data['newpassword']) ? $data['oldpassword'] : sha1($data['newpassword']);
+            
+            // Password Regx
+            $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+            
+            // Email Validation
+    
+            if(empty($email)) {
+                $errors[] = 'Email Is Required';
+            }   elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Write a Valid Email';
+            }
+    
+            // pssword Validtion
+            // if(empty($password)) {
+            //     $errors[] = 'Password Is Required';
+            // } elseif (!preg_match($password_regex, $password)) {
+            //     $errors[] = 'Write Strong Password';
+            // }
+            // Username Validation
+            if(empty($username)) {
+                $errors[] = 'Username Is Required';
+            } elseif (strlen($username) < 3) {
+                $errors[] = 'Username Not Match';
+            }
+    
+            // Role Validation
+            if($role == 1) {
+                $role = 1;
+            } else {
+                $role = 0;
+            }
+            if (empty($errors)) {
+
+                $stmt2 = $conn->prepare("SELECT * FROM users WHERE email = ?");
+                $stmt2->execute(array($email));
+                $count = $stmt2->rowCount();
+                if ($count == 1) {
+                    $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, role = ? WHERE email = ?");
+                    $stmt->execute(array($username, $password, $role, $email));
+                    $count = $stmt2->rowCount();
+                    if($count > 0) {
+                        // echo Success Message
+                        echo '<div class="alert alert-success">' . $stmt->rowCount() . ' Data Updated</div>';
+                        header("refresh:3;url=listAllUsers.php");
+                        exit();
+                    }
+                } else {
+                    echo 'Something Wrong';
+                }
+            } 
+            else {
+                foreach ($errors as $err) {
+                    echo '<span class="alert alert-danger">' . $err . '</span>';
+                }
+            }
+        }
+    } 
+
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php';
- ?>
+?>

@@ -64,4 +64,4 @@
 
 <?php
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php';
-    ?>
+?>
