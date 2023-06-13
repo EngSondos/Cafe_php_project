@@ -9,7 +9,7 @@ function AddCategoryQuery($data)
     global $table;
 
     try {
-        $query = "INSERT INTO `cafe_project`. $table (`id`, `name`) VALUES (:cateId,:cateName)";
+        $query = "INSERT INTO  $table (`id`, `name`) VALUES (:cateId,:cateName)";
         // var_dump($query);
 
         ### prepare query
@@ -35,7 +35,7 @@ function DisplayCategoryQuery()
     global $table;
 
     try {
-        $query = "SELECT * FROM `cafe_project`. $table";
+        $query = "SELECT * FROM  $table";
         // var_dump($query);
 
         ### prepare query
@@ -53,7 +53,7 @@ function DisplayCategoryQuery()
 //     global $table;
 
 //     try {
-//         $query = "SELECT `name` FROM `cafe_project`. $table WHERE `id` = :category_id ";
+//         $query = "SELECT `name` FROM  $table WHERE `id` = :category_id ";
 //         // var_dump($query);
 
 //         ### prepare query
@@ -85,7 +85,7 @@ function SelectCategoryByIdQuery($category_id)
     global $table;
 
     try {
-        $query = "SELECT `name` FROM `cafe_project`. $table WHERE  id =:category_id";;
+        $query = "SELECT `name` FROM  $table WHERE  id =:category_id";;
         // var_dump($query);
 
         ### prepare query
@@ -108,7 +108,7 @@ function DeleteCategoryQuery($id)
     global $table;
     // try {
     // alert($id);
-    $query = "DELETE FROM `cafe_project`. $table WHERE id = :id";
+    $query = "DELETE FROM  $table WHERE id = :id";
     // var_dump($query);
 
     ### prepare query
@@ -130,7 +130,7 @@ function UpdateCategoryQuery($id, $data)
     global $conn;
     global $table;
     try {
-        $query = "UPDATE `cafe_project`. $table SET name = :cateName WHERE id = :id";
+        $query = "UPDATE  $table SET name = :cateName WHERE id = :id";
         // var_dump($query);
 
         ### prepare query

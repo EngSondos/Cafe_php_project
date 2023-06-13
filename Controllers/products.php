@@ -23,3 +23,28 @@ function imageValid (){
 
 return $image;
 }
+
+//*Add Product
+function AddProduct($name, $image, $price, $quantity, $category_id)
+{
+    $error = [];
+
+  //Store the product information in the database
+      $data=[
+        'name' => $name,
+        'image' => $image,
+        'price' => $price,
+        'quantity' => $quantity,
+        'category_id' => $category_id,
+      ];
+        $error = validation($data);
+      
+
+    if(empty($error)){
+        // AddCategoryQuery($data);
+        AddProductQuery($name, $image, $price, $quantity, $category_id);
+    }
+    return $error; 
+  
+}
+

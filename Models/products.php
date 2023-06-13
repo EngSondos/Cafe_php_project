@@ -39,7 +39,7 @@ function DisplayAllProductsQuery()
     global $table;
 
     try {
-        $query = "SELECT * FROM `cafe_project`. `products`";
+        $query = "SELECT * FROM  `products`";
         // var_dump($query);
 
         ### prepare query
@@ -60,7 +60,7 @@ function DisplayAvailableProductsQuery()
     global $conn;
 
     try {
-        $query = "SELECT * FROM `cafe_project`. `products` WHERE `quantity` > 0";
+        $query = "SELECT * FROM  `products` WHERE `quantity` > 0";
         // var_dump($query);
 
         ### prepare query
@@ -81,7 +81,7 @@ function SelectProductByIdQuery($id)
     global $conn;
 
     try {
-        $query = "SELECT * FROM `cafe_project`. `products` WHERE  id =:id";;
+        $query = "SELECT * FROM  `products` WHERE  id =:id";;
         // var_dump($query);
 
         ### prepare query
@@ -124,7 +124,7 @@ function UpdateProductQuery($id, $name, $image, $price, $quantity, $category_id)
 {
     global $conn;
     try {
-        $query = "UPDATE `cafe_project`. `products` SET name = :productName ,image=:productImage,price=:price,quantity=:quantity,category_id=:category_id  WHERE id = :id";
+        $query = "UPDATE  `products` SET name = :productName ,image=:productImage,price=:price,quantity=:quantity,category_id=:category_id  WHERE id = :id";
 
         $target = "../../uploads/";
         $image_path =  $target . $image;

@@ -2,6 +2,6 @@
 
 $dbuser = 'root';  # database user
 $dbpassword = 'Project_php1';
-$dbname = 'cafe_project';  # database name
+$dbname = 'cafe';  # database name
 $dbhost = 'localhost';
 $dbport = 3306;
