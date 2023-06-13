@@ -116,6 +116,42 @@ function selectUserCarts($userid )
     return $res;
 }
 
+//update usercarts
+function updateUserCarts()
+{
+    global $db;
+
+    $data = file_get_contents("php://input");
+    $carts = json_decode($data, true);
+
+    $notes = $carts['notes'];
+    $userid = $carts['userid'];
+
+    $update_query = "update `Cafe`.`carts` set `notes` = :note where `user_id`=:usrid" ;
+
+    $stmt = $db->prepare($update_query);
+
+    $stmt->bindParam(':usrid', $userid);
+    $stmt->bindParam(':note', $notes);
+
+
+    $stmt->execute();
+}
+
+//delete usercarts
+function deleteUserCarts($userid )
+{
+    global $db;
+
+    $delete_query = "delete from `Cafe`.`carts` where `user_id` = :usrid";
+
+    $stmt = $db->prepare($delete_query);
+
+    $stmt->bindParam(':usrid', $userid);
+
+    $stmt->execute();
+}
+
 ///////////////////////////// not used yet ///////////////////////////////////////////
 
 //function to select all carts 
@@ -173,33 +209,6 @@ function countTotalPrice($userid){
     return $totalPrice;
 }
 
-//update usercarts
-function updateUserCarts()
-{
-    // global $db;
-
-    // $delete_query = "delete from `Cafe`.`carts` where `user_id` = :usrid";
-
-    // $stmt = $db->prepare($delete_query);
-
-    // $stmt->bindParam(':usrid', $userid);
-
-    // $stmt->execute();
-}
-
-//delete usercarts
-function deleteUserCarts($userid )
-{
-    global $db;
-
-    $delete_query = "delete from `Cafe`.`carts` where `user_id` = :usrid";
-
-    $stmt = $db->prepare($delete_query);
-
-    $stmt->bindParam(':usrid', $userid);
-
-    $stmt->execute();
-}
 
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     update_quantity();
@@ -207,5 +216,8 @@ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
 
 if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
     delete_cart();
-    header("Refresh:1");
+}
+
+if ($_SERVER["REQUEST_METHOD"] === 'UPDATE') {
+    updateUserCarts();
 }

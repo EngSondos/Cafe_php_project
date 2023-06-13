@@ -138,15 +138,16 @@ Notes.addEventListener('keydown', event => {
   })
 
 
-function savenotes($id){
+function savenotes(id){
     if(Notes.value.length > 0){
         fetch("../Models/ordersModel.php", {
             "method": "UPDATE",
             "headers": {
                 "Content-Type": "application/json;charset=utf-8"
             },
-            "body": JSON.stringify({ "notes": Notes.value })
+            "body": JSON.stringify({ "notes": Notes.value , "userid":id })
         })
+        location.reload();
     }
 }
 // let carts = document.getElementsByClassName('cart-img');

@@ -33,14 +33,15 @@ function createOrder()
             $stmt->execute();
         }
 
-        deleteAllCarts();    
+        deleteAllCarts();   
+        deleteUserCarts($userId); 
         
         // return $orderId;
     } catch (PDOException $e) {
         throw $e;
     }
 }
-if (isset($_POST)) {
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     createOrder();
-    header("Refresh:1");
+    // header("Refresh:1");
 }
