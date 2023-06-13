@@ -10,16 +10,16 @@ function connect_to_database($dbuser, $dbhost, $dbport, $dbname)
 {
     $dsn = "mysql:host={$dbhost};dbname={$dbname};port={$dbport}";
 
-    $db = new PDO($dsn, $dbuser);
+    $conn= new PDO($dsn, $dbuser);
     try {
-        if ($db) {
+        if ($conn) {
             // echo "connection succeeded";
-            return $db;
+            return $conn;
         }
     } catch (Exception $e) {
         echo $e->getMessage();
     };
 }
 
-$db = connect_to_database($dbuser, $dbhost, $dbport, $dbname);
+$conn = connect_to_database($dbuser, $dbhost, $dbport, $dbname);
 // echo $db;

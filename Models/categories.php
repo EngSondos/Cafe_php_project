@@ -5,7 +5,7 @@ $table = 'categories';
 //ADD CATEGORY 
 function AddCategoryQuery($data)
 {
-    global $db;
+    global $conn;
     global $table;
 
     try {
@@ -13,7 +13,7 @@ function AddCategoryQuery($data)
         // var_dump($query);
 
         ### prepare query
-        $stmt = $db->prepare($query);
+        $stmt = $conn->prepare($query);
 
         $stmt->bindParam(":cateId", $data['id']);
         $stmt->bindParam(":cateName", $data['name']);
@@ -31,7 +31,7 @@ function AddCategoryQuery($data)
 
 function DisplayCategoryQuery()
 {
-    global $db;
+    global $conn;
     global $table;
 
     try {
@@ -39,7 +39,7 @@ function DisplayCategoryQuery()
         // var_dump($query);
 
         ### prepare query
-        $stmt = $db->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->execute();
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $row;
@@ -49,7 +49,7 @@ function DisplayCategoryQuery()
 }
 
 // function DisplayCategoryNameByIdQuery($category_id){
-//     global $db;
+//     global $conn;
 //     global $table;
 
 //     try {
@@ -57,7 +57,7 @@ function DisplayCategoryQuery()
 //         // var_dump($query);
 
 //         ### prepare query
-//         $stmt = $db->prepare($query);
+//         $stmt = $conn->prepare($query);
 //         $stmt->execute();
 //         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
 //         return $row;
@@ -81,7 +81,7 @@ function DisplayCategoryQuery()
 //SELECT CATEGORY BY ID 
 function SelectCategoryByIdQuery($category_id)
 {
-    global $db;
+    global $conn;
     global $table;
 
     try {
@@ -89,7 +89,7 @@ function SelectCategoryByIdQuery($category_id)
         // var_dump($query);
 
         ### prepare query
-        $stmt = $db->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->bindParam(":category_id", $category_id);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -104,7 +104,7 @@ function SelectCategoryByIdQuery($category_id)
 //DELETE CATEGORY 
 function DeleteCategoryQuery($id)
 {
-    global $db;
+    global $conn;
     global $table;
     // try {
     // alert($id);
@@ -112,7 +112,7 @@ function DeleteCategoryQuery($id)
     // var_dump($query);
 
     ### prepare query
-    $stmt = $db->prepare($query);
+    $stmt = $conn->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
 
@@ -127,14 +127,14 @@ function DeleteCategoryQuery($id)
 //UPDATE CATEGORY 
 function UpdateCategoryQuery($id, $data)
 {
-    global $db;
+    global $conn;
     global $table;
     try {
         $query = "UPDATE `cafe_project`. $table SET name = :cateName WHERE id = :id";
         // var_dump($query);
 
         ### prepare query
-        $stmt = $db->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->bindParam(":id", $id);
         $stmt->bindParam(":cateName", $data['name']);
         # true --> query executed successfully

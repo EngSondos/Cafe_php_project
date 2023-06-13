@@ -5,12 +5,12 @@ $table = 'products';
 //**ADD CATEGORY 
 function AddProductQuery($name, $image, $price, $quantity, $category_id)
 {
-    global $db;
+    global $conn;
     global $table;
 
     $query = "INSERT INTO `products` (`name`,`image`, price, quantity, category_id) VALUES ( :productName, :productImage, :price, :quantity, :category_id)";
 
-    $stmt = $db->prepare($query);
+    $stmt = $conn->prepare($query);
     // $image = $_FILES['image']['name'];
     $target = "../../uploads/";
     $image_path =  $target . $image;
@@ -20,20 +20,6 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
     $stmt->bindParam(':price', $price);
     $stmt->bindParam(':quantity', $quantity);
     $stmt->bindParam(':category_id', $category_id);
-
-    // if ($stmt->execute()) {
-    //     return true; // Insert successful
-    // } else {
-    //     return false; // Insert failed
-    // }
-
-    // $stmt->execute(array(
-    //     ':productName'    => $name,
-    //     ':productImage' =>  $image_path,
-    //     ':price' => $price,
-    //     ':quantity'    => $quantity,
-    //     ':category_id'    => $category_id
-    // ));
     try {
         $stmt->execute();
     } catch (Exception $e) {
@@ -49,7 +35,7 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
 //**DISPLAY ALL CATEGORY 
 function DisplayAllProductsQuery()
 {
-    global $db;
+    global $conn;
     global $table;
 
     try {
@@ -57,7 +43,7 @@ function DisplayAllProductsQuery()
         // var_dump($query);
 
         ### prepare query
-        $stmt = $db->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->execute();
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $row;
@@ -71,14 +57,14 @@ function DisplayAllProductsQuery()
 //**DISPLAY CATEGORY 
 function DisplayAvailableProductsQuery()
 {
-    global $db;
+    global $conn;
 
     try {
         $query = "SELECT * FROM `cafe_project`. `products` WHERE `quantity` > 0";
         // var_dump($query);
 
         ### prepare query
-        $stmt = $db->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->execute();
         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $row;
@@ -92,14 +78,14 @@ function DisplayAvailableProductsQuery()
 //*SELECT PRODUCT BY ID 
 function SelectProductByIdQuery($id)
 {
-    global $db;
+    global $conn;
 
     try {
         $query = "SELECT * FROM `cafe_project`. `products` WHERE  id =:id";;
         // var_dump($query);
 
         ### prepare query
-        $stmt = $db->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->bindParam(":id", $id);
         $stmt->execute();
         $row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -114,14 +100,14 @@ function SelectProductByIdQuery($id)
 //*DELETE PRODUCT 
 function DeleteProductQuery($id)
 {
-    global $db;
+    global $conn;
     // try {
     // alert($id);
     $query = "DELETE FROM `products` WHERE id = :id";
     // var_dump($query);
 
     ### prepare query
-    $stmt = $db->prepare($query);
+    $stmt = $conn->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
     var_dump($id);
@@ -136,15 +122,15 @@ function DeleteProductQuery($id)
 //**UPDATE PRODUCT 
 function UpdateProductQuery($id, $name, $image, $price, $quantity, $category_id)
 {
-    global $db;
+    global $conn;
     try {
         $query = "UPDATE `cafe_project`. `products` SET name = :productName ,image=:productImage,price=:price,quantity=:quantity,category_id=:category_id  WHERE id = :id";
 
-        $target = "../uploads/";
+        $target = "../../uploads/";
         $image_path =  $target . $image;
         move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
         ### prepare query
-        $stmt = $db->prepare($query);
+        $stmt = $conn->prepare($query);
         $stmt->bindParam(':productName', $name);
         $stmt->bindParam(':productImage', $image_path);
         $stmt->bindParam(':price', $price);

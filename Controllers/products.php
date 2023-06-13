@@ -15,9 +15,9 @@ function imageValid (){
     // Process the file
 } else {
     // File upload error occurred
-    $image =  substr( $product_updated['image'],11);
+    $image =  substr( $product_updated['image'],13);
     
-    // "../uploads/icecream9.jpg" 
+    // "../../uploads/icecream9.jpg" 
     // Handle the error
 }
 
