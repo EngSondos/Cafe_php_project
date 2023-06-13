@@ -2,7 +2,7 @@
 
 $table = 'products';
 
-//**ADD CATEGORY 
+//**ADD Product 
 function AddProductQuery($name, $image, $price, $quantity, $category_id)
 {
     global $conn;
@@ -32,7 +32,7 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
 
 // ----------------------------------------------------------------
 
-//**DISPLAY ALL CATEGORY 
+//**DISPLAY ALL Products 
 function DisplayAllProductsQuery()
 {
     global $conn;
@@ -54,7 +54,7 @@ function DisplayAllProductsQuery()
 
 
 
-//**DISPLAY CATEGORY 
+//**DISPLAY Product 
 function DisplayAvailableProductsQuery()
 {
     global $conn;

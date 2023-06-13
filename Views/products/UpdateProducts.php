@@ -21,22 +21,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
   
     $image=imageValid();
-    var_dump( $image );
     $name = $_POST['name'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
     $category_id = $_POST['category_id'];
     if ($_GET['action'] === 'update') {
         $product_id = $_GET['product_id'];
-        UpdateProductQuery($product_id, $name, $image, $price, $quantity, $category_id);
-       header('Location:DisplayProductsAdmin.php');
-        // $error_update= $error['name'];
-        // Handle update form data here
+        updateProduct($product_id, $name, $image, $price, $quantity, $category_id);
+       if(empty($error)){
+           header('Location:DisplayProductsAdmin.php');
+        }
     }
 }
-
-
-// var_dump($product_updated );
 ?>
 
 <div class="container w-50">
@@ -47,11 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" value="<?= $product_updated['name'] ?>">
+            <?= $error['name'] ?? "" ?>  <!--  Name is required -->
         </div>
         <!--Price Input -->
         <div class="form-group">
             <label for="name">price:</label>
             <input type="number" class="form-control" id="price" name="price" value="<?= $product_updated['price'] ?>">
+            <?= $error['price'] ?? "" ?>  <!--  price is required -->
         </div>
         <!--Category_id Input -->
         <div class="form-group">
@@ -67,23 +65,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
                 ?>
             </select>
+            <?= $error['category_id'] ?? "" ?>  <!--  category_id is required -->
         </div>
         <!--Quantity Input -->
         <div class="form-group">
             <label for="name">quantity:</label>
             <input type="text" class="form-control" id="quantity" name="quantity"
                 value="<?= $product_updated['quantity'] ?>">
-        </div>
+                <?= $error['quantity'] ?? "" ?>  <!--  quantity is required -->
+            </div>
         <!--Image Input -->
         <div class="form-group">
             <label for="name">image:</label>
             <input type="file" class="form-control" id="image" accept="image/*" name="image">
-
-
+            <?= $error['image'] ?? "" ?>  <!--  image is required -->
         </div>
         <button type="submit" class="btn btn-primary my-3">Submit</button>
         <button type="reset" class="btn btn-danger  my-3">Reset</button>
-
     </form>
     <br>
 

@@ -28,7 +28,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         // Handle add form data here
         AddProduct($name, $image, $price, $quantity, $category_id);
         var_dump($_POST);
-        // header('Location:DisplayProductsAdmin.php');
+        if(empty($error)){
+            header('Location:DisplayProductsAdmin.php');
+        }
 }
 }
 
@@ -79,7 +81,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         </div>
         <button type="submit" class="btn btn-primary my-3">Submit</button>
         <button type="reset" class="btn btn-danger  my-3">Reset</button>
-
     </form>
 </div>
 

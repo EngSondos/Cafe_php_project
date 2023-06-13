@@ -48,3 +48,44 @@ function AddProduct($name, $image, $price, $quantity, $category_id)
   
 }
 
+//*Update Product
+
+// function updateProduct($name, $image, $price, $quantity, $category_id)
+// {
+//     $error = [];
+
+//   //Store the product information in the database
+//       $data=[
+//         'name' => $name,
+//         'image' => $image,
+//         'price' => $price,
+//         'quantity' => $quantity,
+//         'category_id' => $category_id,
+//       ];
+//         $error = validation($data);
+      
+
+//     if(empty($error)){
+//         // AddCategoryQuery($data);
+//         AddProductQuery($name, $image, $price, $quantity, $category_id);
+//     }
+//     return $error; 
+  
+// }
+
+function updateProduct($product_id, $name, $image, $price, $quantity, $category_id){
+  $error = [];
+  $data=[
+    'name' => $name,
+    'image' => $image,
+    'price' => $price,
+    'quantity' => $quantity,
+    'category_id' => $category_id,
+  ];
+      $error = validation($data);
+      if(empty($error)){
+        UpdateProductQuery($product_id, $name, $image, $price, $quantity, $category_id);
+      }
+  return $error; 
+
+}
