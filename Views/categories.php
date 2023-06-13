@@ -57,15 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
             $rows = DisplayCategory();
             foreach ($rows as $row) {
             ?>
-                <tr>
-                    <?php foreach ($row as $field) {
+            <tr>
+                <?php foreach ($row as $field) {
                     ?>
-                        <td><?= $field ?></td>
-                    <?php     }   ?>
-                    <!-- Button trigger modal -->
-                    <td><a href="" class="btn btn-warning edit-category" data-toggle="modal" data-target="#modelId" data-category-id="<?= $row['id'] ?>">Edit</a></td>
-                    <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
-                </tr>
+                <td><?= $field ?></td>
+                <?php     }   ?>
+                <!-- Button trigger modal -->
+                <td><a href="" class="btn btn-warning edit-category" data-toggle="modal" data-target="#modelId"
+                        data-category-id="<?= $row['id'] ?>">Edit</a></td>
+                <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger"
+                        onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
+            </tr>
             <?php }  ?>
         </tbody>
     </table>
@@ -89,21 +91,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                         <input type="text" class="form-control" id="category_id" name="name">
                     </div>
                     <?= $error_update ?? '' ?>
-                    <button type="submit" id="submit_button" class="btn btn-primary my-3" disabled>Submit</button>
-                    <button type="reset" class="btn btn-danger  my-3">Reset</button>
-
-                </form>
+                    <!-- <button type="submit" id="submit_button" class="btn btn-primary my-3" disabled>Submit</button> -->
+                    <!-- <button type="reset" class="btn btn-danger  my-3">Reset</button> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <!-- <button type="button" class="btn btn-primary">Save</button> -->
+                <button type="submit" id="submit_button" class="btn btn-primary my-3" disabled>Submit</button>
+
             </div>
+            </form>
         </div>
     </div>
 </div>
 
 <!-- Optional: Place to the bottom of scripts -->
 <script>
+        //*Passing the Category Id to the Url When Submit 
     const editButtons = document.querySelectorAll('.edit-category');
     editButtons.forEach(button => {
         button.addEventListener('click', (event) => {
@@ -112,44 +116,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
             document.querySelector('#modelId form').setAttribute('action', editUrl);
         });
     });
-
+//------------------------------------------------------------------------------------------------
     //*If The Input Is Empty Make the Submit Button Disable
-// let inputValue =document.getElementById('category_id').value;
-// if(inputValue == ''){
-//     let submit_button =document.getElementById('submit_button');
-//     submit_button.setAttribute('disabled',true)  ;
-// }else{
-//     submit_button.setAttribute('disabled',false) ;  
-// }
+    let categoryInput = document.getElementById('category_id');
+    let submitButton = document.getElementById('submit_button');
 
-// let categoryInput = document.getElementById('category_id');
-// let submitButton = document.getElementById('submit_button');
+    categoryInput.addEventListener('input', function () {
+        if (categoryInput.value !== '') {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    });
 
-// categoryInput.addEventListener('input', function() {
-//   if (categoryInput.value === '') {
-//     submit_button.setAttribute('disabled',true)  ;
-//   } else {
-//     submit_button.setAttribute('disabled',false) ;  
-//   }
-// });
-
-
-
-  let categoryInput = document.getElementById('category_id');
-  let submitButton = document.getElementById('submit_button');
-
-  categoryInput.addEventListener('input', function() {
-    if (categoryInput.value !== '') {
-    //   submitButton.disabled = true;
-    submitButton.disabled = false;
-    
-} else {
-          submitButton.disabled = true;
-    //   submitButton.disabled = false;
-    }
-  });
-
-    // const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
 </script>
 
 <?php
