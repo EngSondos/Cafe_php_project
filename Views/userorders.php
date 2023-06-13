@@ -6,6 +6,9 @@ session_start();
 ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
 include '../layout.php';
+
+include '../layout/head.php';
+
 include '../Controllers/order_controller.php';
 include '../Validation/orderValidation.php';
 
@@ -18,6 +21,7 @@ include '../Validation/orderValidation.php';
 $userId = $_SESSION['user_id'];
 $orders = array();
 
+
 if (isset($_POST['start_date'], $_POST['end_date'])) {
   $start_date = $_POST['start_date'];
   $end_date = $_POST['end_date'];
@@ -25,7 +29,7 @@ if (isset($_POST['start_date'], $_POST['end_date'])) {
   if (!validateDates($start_date, $end_date)) {
     echo "<div class='alert alert-danger' style='text-align: center' role='alert'>Invalid dates.</div>";
   } else {
-    $orders = filterOrdersByDate($start_date, $end_date);
+    $orders = filterorder($start_date, $end_date);
   }
 } else {
   $orders = usersorder($userId);
@@ -52,20 +56,22 @@ if (isset($_POST['cancel_order'])) {
     }
 }
 ?>
+  <div class="container">
+
 
 <div class="container">
   <h2>View Orders</h2>
   <form method="post" action="">
-    <div class="form-group">
-      <label for="start_date">Start Date:</label>
-      <input type="date" class="form-control" id="start_date" name="start_date">
-    </div>
-    <div class="form-group">
-      <label for="end_date">End Date:</label>
-      <input type="date" class="form-control" id="end_date" name="end_date">
-    </div>
-    <button type="submit" class="btn btn-primary">View Orders</button>
-  </form>
+  <div class="form-group">
+    <label for="start_date">Start Date:</label>
+    <input type="date" class="form-control w-50" style="color: white;" id="start_date" name="start_date">
+  </div>
+  <div class="form-group">
+    <label for="end_date">End Date:</label>
+    <input type="date" class="form-control w-50 "  style="color: white;" id="end_date" name="end_date" >
+  </div>
+  <button type="submit" class="btn btn-primary">View Orders</button>
+</form>
   <br>
   <table class="table table-striped">
     <thead>
@@ -112,6 +118,7 @@ if (isset($_POST['cancel_order'])) {
                 </tr>
               </thead>
               <tbody>
+                
                 <?php foreach ($order['products'] as $product): ?>
                   <tr>
                     <td><?php echo $product['name']; ?></td>
@@ -122,6 +129,8 @@ if (isset($_POST['cancel_order'])) {
 
                   </tr>
                 <?php endforeach; ?>
+                
+                
               </tbody>
             </table>
           </td>
@@ -130,7 +139,7 @@ if (isset($_POST['cancel_order'])) {
     </tbody>
   </table>
 </div>
-
+  </div>
 
 
 <script>
