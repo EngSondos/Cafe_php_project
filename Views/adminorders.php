@@ -1,9 +1,17 @@
 <?php
 include '../layout.php';
 include '../Controllers/order_controller.php';
+include "../Controllers/AdminController.php";
+include "../Models/AdminOrder.php";
 
     $orders = allorders();
 
+    if(isset($_GET['status'])&&isset($_GET['id']))
+    {
+  
+     var_dump( ChangeOrderStatus($_GET['id'],$_GET['status']));
+     header("location:/Cafe_Project/Views/adminorders.php");
+    }
 
 ?>
 
@@ -18,16 +26,30 @@ include '../Controllers/order_controller.php';
         <th scope="col">Status</th>
         <th scope="col">User</th>
         <th scope="col">Created At</th>
+        <th>Change Status</th>
+
       </tr>
     </thead>
     <tbody>
       <?php foreach ($orders as $order): ?>
+        
         <tr class="order-row" data-order-id="<?php echo $order['id']; ?>">
           <td scope="row"><?php echo $order['id']; ?></td>
           <td><?php echo $order['total_price']; ?></td>
           <td><?php echo $order['status']; ?></td>
           <td><?php echo $order['username']; ?></td>
           <td><?php echo $order['created_at']; ?></td>
+          <td>
+            <?php if(($order['status'] != 'canceled')){?>
+            <form onclick="event.stopPropagation();" >
+              <select onchange="changeStatus(<?=$order['id']?>);" id="status<?=$order['id']?>" class="form-control">
+                  <option  <?=($order['status'] == 'complete') ? 'selected' : ''?> value="complete" >Compolete</option>
+                  <option <?=($order['status'] == 'delivered') ? 'selected' : ''?>  value="delivered" >Delivered</option>
+                  <option <?=($order['status'] == 'pending') ? 'selected' : ''?>  value="pending">Pending</option>
+              </select>
+            </form>
+        <?php }  ?>
+          </td>
     
         </tr>
         <tr class="products-container" id="products-<?php echo $order['id']; ?>" style="display:none;">
@@ -47,6 +69,7 @@ include '../Controllers/order_controller.php';
                     <td><?php echo $product['name']; ?></td>
                     <td><?php echo $product['quantity']; ?></td>
                     <td><?php echo $product['price']; ?></td>
+                  
 
                   </tr>
                 <?php endforeach; ?>
@@ -76,4 +99,8 @@ include '../Controllers/order_controller.php';
       }
     });
   });
+
+  function changeStatus(orderId) {
+    window.location.href = "/Cafe_Project/Views/adminorders.php?id=" + orderId + "&status=" + document.getElementById("status"+orderId).value;
+}
 </script>

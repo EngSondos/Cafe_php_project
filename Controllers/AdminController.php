@@ -23,22 +23,30 @@ function getDetalisOfOrder($order_id,$user_id){
 function filterOrderByUserAndDate($data)
 {
     $error = validation($data);
-    var_dump($error);
     if(!empty($error)){
-        if(
-            !empty($erorr['Date From'])&&
-            !empty($erorr['Date To'])) {
-            var_dump($error['Date From']);
+var_dump(!empty($data['user']));
+var_dump($data);
+        if(!empty($data['start_date'])&& !empty($data['end_date'])) {
+            
 
             return getOrdersByDate($data['start_date'], $data['end_date']);
         }
-        elseif(!empty($error['User'])){
-            var_dump("Sssssssss");
+        else if(!empty($data['user'])){
               return filterorderByUserId($data['user']);
             }
-        else
+
+        else{
+            
             return $error;
+
+        }
     }else
         return  getOrdersByDateandUserId($data['start_date'],$data['end_date'],$data['user'] );
 
+}
+
+
+function ChangeOrderStatus($order_id,$status)
+{
+    return ChangeStatus($order_id,$status);
 }
