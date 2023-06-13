@@ -165,8 +165,9 @@ function savenotes(id) {
 //    })
 // }
 
-function addToCart(product_id, product_price, user_id) {
-  fetch("../Models/product_cartModel.php", {
+function addToCart(e,product_id, product_price, user_id) {
+  e.preventDefault();
+  fetch("../../Models/product_cartModel.php", {
     method: "POST",
     headers: {
       "Content-Type": "application/json;charset=utf-8",

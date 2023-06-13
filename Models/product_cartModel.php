@@ -1,5 +1,7 @@
 <?php
-// include '../connection.php';
+include '../connection_credits.php';
+
+include '../connection.php';
 
 
 ini_set('display_errors', 1);
