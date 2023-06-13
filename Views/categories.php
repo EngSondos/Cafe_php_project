@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 ?>
 
 <div class="container w-50">
-    <h1 class="text-primary mx-auto w-50">Registration Form</h1>
+    <h1 class="text-primary mx-auto w-50">categories</h1>
     <form method="post" action="?action=add" enctype="multipart/form-data">
         <div class="form-group">
             <label for="name">Name:</label>

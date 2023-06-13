@@ -1,14 +1,14 @@
 <?php
 $title="Shopping List";
 
-include "../layout/head.php";
+include "../../layout/head.php";
 
-include "../Controllers/categories.php";
-include "../Models/products.php";
-include "../Models/categories.php";
-include "../connection_credits.php";
-include "../connection.php";
-include "../validation.php";
+include "../../Controllers/categories.php";
+include "../../Models/products.php";
+include "../../Models/categories.php";
+include "../../connection_credits.php";
+include "../../connection.php";
+include "../../validation.php";
 $error_add;
 $error_update;
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         ?>
             <div class="col-3 mb-4">
                 <div class="card h-100">
-                    <img height="300" src="../uploads/<?= $row['image'] ?>" class="card-img-top border border-secondary rounded" alt="...">
+                    <img height="300" src="<?= $row['image'] ?>" class="card-img-top border border-secondary rounded" alt="...">
                     <div class="card-body">
                         <div class="top d-flex justify-content-between align-items-center">
                             <h5 class="card-title text-left "><?= $row['name'] ?></h5>
@@ -86,5 +86,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 </script>
 
 <?php
-include "../layout/footer.php"
+include "../../layout/footer.php"
 ?>

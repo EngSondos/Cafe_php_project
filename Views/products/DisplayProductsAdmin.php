@@ -1,13 +1,13 @@
 <?php
 $title="Admin Panel";
-include "../layout/head.php";
+include "../../layout/head.php";
 
-include "../Controllers/categories.php";
-include "../Models/products.php";
-include "../Models/categories.php";
-include "../connection_credits.php";
-include "../connection.php";
-include "../validation.php";
+include "../../Controllers/categories.php";
+include "../../Models/products.php";
+include "../../Models/categories.php";
+include "../../connection_credits.php";
+include "../../connection.php";
+include "../../validation.php";
 $error_add;
 $error_update;
 
@@ -105,5 +105,5 @@ td {
 
 
 <?php
-include "../layout/footer.php"
+include "../../layout/footer.php"
 ?>
