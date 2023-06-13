@@ -50,3 +50,9 @@ function ChangeOrderStatus($order_id,$status)
 {
     return ChangeStatus($order_id,$status);
 }
+
+
+function totalAmount($user_id)
+{
+return totalAmountDB($user_id);
+}

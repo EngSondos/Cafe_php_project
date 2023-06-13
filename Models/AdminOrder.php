@@ -75,3 +75,14 @@ $result->bindParam('status',$status);
 return $result->execute();
 
 }
+
+
+function totalAmountDB($user_id)
+{
+    $total_amount=0;
+    $userOrders = filterorderByUserId($user_id);
+    foreach($userOrders as $order )  {
+        $total_amount +=$order['total_price'];
+    }
+    return $total_amount;
+}

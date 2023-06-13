@@ -1,3 +1,5 @@
+<link rel="stylesheet" href = "../../../layout/CSS/orders.css">
+
 <?php
 include "../../../connection.php";
 include "../../../Models/AdminOrder.php";
@@ -21,34 +23,48 @@ if(!empty($_POST)){
 }
 ?>
  <div class="container">
-  <div class="row mt-5">
-    <div class="col-6 w-50">
+  <div class="row mt-5 ">
+    <div class="col-6 my-auto checktext"><h2>Checks Orders</h2></div>
+    <div class="col-6" >
       <form method ="post">
         <div class="d-flex">
-          <div class="form-group mx-3">
-            <input class="form-control" id="date" name="start_date" placeholder="Date From" type="date" />
-<!--            <div class="text-danger">--><?php //= $error['Date From'] ?? ""?><!--</div>-->
+          <div class="form-group me-3 w-25">
+            <label for="start_date">Start Date</label>
+            <input class="form-control " id="start_date" name="start_date" placeholder="Date From" type="date"
+            value = "<?=$_POST['start_date'] ?? ""?>"
+            />
 
           </div>
-          <div class="form-group">
-            <input class="form-control" id="date" name="end_date" placeholder="Date To" type="date" />
-<!--            <div class="text-danger">--><?php //= $error['Date To'] ?? ""?><!--</div>-->
+          <div class="form-group w-25">
+          <label for="start_date">End Date</label>
+
+            <input class="form-control" id="end_date" name="end_date" placeholder="Date To" type="date" 
+            value = "<?=$_POST['end_date'] ?? ""?>"
+            />
 
           </div>
 
         </div>
-        <div class="form-group mx-3">
+        <div class="form-group m-3 w-50 ">
+        <label for="user">Choose User</label>
 
           <select class="form-control" name="user" placeholder="select user">
             <option></option>
             <?php foreach ($users as $user) { ?>
-              <option value="<?= $user['id'] ?>"> <?= $user['username'] ?></option>
+              <option value="<?= $user['id'] ?>"
+             <?php 
+             if(isset($_POST['user'])){
+             if($user['id']==$_POST['user'])
+             echo "selected";
+             }
+             ?>
+              > <?= $user['username'] ?></option>
             <?php } ?>
           </select>
         </div>
 
-        <div class="form-group"> <!-- Submit button -->
-          <button class="btn btn-primary " name="submit" type="submit">Submit</button>
+        <div class="form-group "> <!-- Submit button -->
+          <button class="colorbtn" name="submit" type="submit"><i class="fa fa-search"></i></button>
         </div>
       </form>
     </div>
@@ -59,7 +75,7 @@ if(!empty($_POST)){
 
     <div class="row mt-5">
       <?php if (empty($_GET['orders']) && empty($GET['user']) && empty($_GET['details'])) { ?>
-        <table class="table table-stripped">
+        <table class="table table-striped border ">
           <tr>
             <th>show orders
             <th>User Name</th>
@@ -70,11 +86,11 @@ if(!empty($_POST)){
               <td>
 
                 <form>
-                  <button class="btn btn-primary" name="orders" value="<?= $user['id'] ?>" data-bs-toggle="collapse" data-bs-target="#userorders">show</button>
+                  <button class="colorbtn" name="orders" value="<?= $user['id'] ?>"><i class="fa fa-eye"></i></button>
                 </form>
               </td>
               <td><?= $user['username'] ?></td>
-              <td>10000</td>
+              <td><?= totalAmount($user['id'] )?></td>
             </tr>
           <?php } ?>
         </table>
@@ -86,12 +102,12 @@ if(!empty($_POST)){
 
         <?php } ?>
         </div>
-      <?php } else {
-      include "./checkordertable.php";
-      ?>
+      <?php } else {?>
+     
 
         <div class="row mt-5">
-
+      <?php  include "./checkordertable.php";
+      ?>
 
         </div>
 
