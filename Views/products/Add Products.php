@@ -26,11 +26,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     if ($_GET['action'] === 'add') {
         // Handle add form data here
         AddProductQuery($name, $image, $price, $quantity, $category_id);
-        var_dump($_POST);
         header('Location:DisplayProductsAdmin.php');
     }
 }
-
 ?>
 
 <div class="container w-50">

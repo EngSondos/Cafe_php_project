@@ -1,5 +1,5 @@
 <?php
-$title="My Carts";
+$title = "My Carts";
 // include '../layout.php';
 include '../layout/head.php';
 
@@ -20,20 +20,20 @@ function render_carts($products, $carts, $totalcarts)
                         </div>
                         <button class='btn btn-danger savebtn' onclick='savenotes(1)'><i class='fa-solid fa-chevron-right'></i></button>
                         <div id='row2'>";
-                        if(sizeof($totalcarts) > 0){
-                            echo "<pre id=''>".$totalcarts[0]["notes"]."</pre>";
-                        }else{
-                            echo "You don't have any cart";
-                        }
-                            
-                    echo "</div>
+    if (sizeof($totalcarts) > 0) {
+        echo "<pre id=''>" . $totalcarts[0]["notes"] . "</pre>";
+    } else {
+        echo "You don't have any cart";
+    }
+
+    echo "</div>
                     </div>";
-                        if(sizeof($totalcarts) > 0){
-                            echo "<span class='totalprice'>Total Price: ".$totalcarts[0]["total_price"].' EGP'."</span>";
-                        }else{
-                            echo "<span class='totalprice'>Total Price: 0 EGP </span>";
-                        }
-                    echo "<div class='row align-items-center justify-content-center mb-5 w-100'>
+    if (sizeof($totalcarts) > 0) {
+        echo "<span class='totalprice'>Total Price: " . $totalcarts[0]["total_price"] . ' EGP' . "</span>";
+    } else {
+        echo "<span class='totalprice'>Total Price: 0 EGP </span>";
+    }
+    echo "<div class='row align-items-center justify-content-center mb-5 w-100'>
                         <button class='btn btn-primary' onclick='createorder(1)'>Order Now</button>
                     </div>
                 </div>
@@ -41,42 +41,42 @@ function render_carts($products, $carts, $totalcarts)
             <div class='col-xl-8'>
                 <div class='container pt-5'>
                     <div class='row' style='justify-content: center;height: 100%;align-items: center;'>";
-                        //three columns of carts
-                        if (sizeof($carts) > 0) {
-                            foreach ($carts as $cart) {
-                                foreach ($products as $product) {
-                                    if ($product['id'] === $cart['product_id']) {
-                                        echo "
+    //three columns of carts
+    if (sizeof($carts) > 0) {
+        foreach ($carts as $cart) {
+            foreach ($products as $product) {
+                if ($product['id'] === $cart['product_id']) {
+                    echo "
                                         <div class='col-xl-4'>
                                             <div class='card'>
                                                 <div class='card-img'>
-                                                    <img src='../assets/imgs/{$product["image"]}'class='card-img-top' alt='product image'>
+                                                    <img src='../{$product["image"]}'class='card-img-top' alt='product image'>
                                                     <div class='cardcontroller'>
                                                         <button class='btn btn-increment w-15' onclick='incrementquantity({$product["quantity"]},{$product["id"]},{$cart['user_id']},{$product['price']})'>
                                                             <i class='fa-solid fa-plus'></i>
                                                         </button>
                                                         <span class='card-quantity w-25' id='{$product["id"]}'>";
-                                        if ($product["quantity"] > 0) {
-                                            echo "{$cart["quantity"]}";
-                                        } else {
-                                            echo "0";
-                                        };
-                                        echo "</span>
+                    if ($product["quantity"] > 0) {
+                        echo "{$cart["quantity"]}";
+                    } else {
+                        echo "0";
+                    };
+                    echo "</span>
                                                 <button class='btn btn-decrement w-15' onclick='decrementquantity({$product["id"]},{$cart['user_id']},{$product['price']})'>
                                                     <i class='fa-solid fa-minus'></i>
                                                 </button>
                                             </div>";
-                                        if ($product["quantity"] == 0) {
-                                            echo "<div class='unavailable pro{$product["id"]}'>
+                    if ($product["quantity"] == 0) {
+                        echo "<div class='unavailable pro{$product["id"]}'>
                                                     <span>Unavailable</span>
                                                 </div>";
-                                        } else {
-                                            echo "<div class='available pro{$product["id"]}'>
+                    } else {
+                        echo "<div class='available pro{$product["id"]}'>
                                                     <span>Available</span>
                                                 </div>";
-                                        };
-                    
-                                        echo "</div>
+                    };
+
+                    echo "</div>
                                                 <div class='card-body p-0 pb-3'>
                                                     <div class='card-header justify-content-around align-items-center row flex-row mb-4'>
                                                         <h5 class='card-title'>{$product["name"]}</h5>
@@ -87,17 +87,16 @@ function render_carts($products, $carts, $totalcarts)
                                                 </div>
                                             </div>
                                         </div>";
-                                    }
-                                }
-                            }
-                            
-                        } else {
-                            echo "<div class='emptycart'>
+                }
+            }
+        }
+    } else {
+        echo "<div class='emptycart'>
                                 <i class='fa-solid fa-cart-plus'></i>
                                 <p>You may need to add something to cart</p>
                             </div>";
-                        }
-                echo"</div>
+    }
+    echo "</div>
                 </div>
             </div>
         </div>
@@ -111,5 +110,4 @@ function render_carts($products, $carts, $totalcarts)
         </div>
     </main>
     <script src='script.js'></script>";
-
-}   
+}

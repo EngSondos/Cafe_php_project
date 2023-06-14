@@ -14,7 +14,7 @@ function imageValid()
     // Process the file
   } else {
     // File upload error occurred
-    $image = $_FILES['image']['name'];
+    $image = $product_updated['image'];
   }
 
   return $image;

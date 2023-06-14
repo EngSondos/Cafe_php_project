@@ -136,13 +136,13 @@ function UpdateProductQuery($id, $name, $image, $price, $quantity, $category_id)
     try {
         $query = "UPDATE  `products` SET name = :productName ,image=:productImage,price=:price,quantity=:quantity,category_id=:category_id  WHERE id = :id";
 
-        $target = "../../uploads/";
+        $target = "../../";
         $image_path =  $target . $image;
         move_uploaded_file($_FILES['image']['tmp_name'], $image_path);
         ### prepare query
         $stmt = $conn->prepare($query);
         $stmt->bindParam(':productName', $name);
-        $stmt->bindParam(':productImage', $image_path);
+        $stmt->bindParam(':productImage', $image);
         $stmt->bindParam(':price', $price);
         $stmt->bindParam(':quantity', $quantity);
         $stmt->bindParam(':category_id', $category_id);

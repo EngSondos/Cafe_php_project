@@ -18,10 +18,7 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
-
-
     $image = imageValid();
-    var_dump($image);
     $name = $_POST['name'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
