@@ -1,8 +1,9 @@
 <?php
-    session_start();
     include '../../layout/head.php';
-    include '../../layout/navbar.php';
     include '../../Controllers/users/users.php';
+    include "../../MiddleWares/auth.php";
+    // include "../../MiddleWares/user.php";
+
     
     // if (!isLoggedIn()) {
         

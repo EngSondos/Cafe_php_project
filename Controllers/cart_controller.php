@@ -3,6 +3,7 @@ include '../Models/product_cartModel.php';
 include '../Views/cart_view.php';
 
 
+
 //first we need to get all carts from the model
 $res = select_carts(1);
 

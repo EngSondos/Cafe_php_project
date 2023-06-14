@@ -2,8 +2,8 @@
 
 $pageTitle = 'login';
 include '../../layout/head.php';
-include '../../layout/navbar.php';
 include '../../Validation/registerValidation/login.php';
+include "../../MiddleWares/guest.php";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 

@@ -1,8 +1,8 @@
 <?php
 
-$dbuser = 'sallyz';
-$dbpassword = '123';
-$dbname = 'cafe';
+$dbuser = 'root';
+$dbpassword = '';
+$dbname = 'Cafe';
 $dbhost = 'localhost';
 $dbport = 3306;
 

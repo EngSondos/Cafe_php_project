@@ -3,6 +3,8 @@
 include '../layout/head.php';
 include '../connection_credits.php';
 include '../connection.php';
+include "../MiddleWares/auth.php";
+
 function render_carts($products, $carts, $totalcarts)
 {
     /*first divide our page to two columns the sidebar and the carts */

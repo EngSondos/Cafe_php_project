@@ -1,6 +1,5 @@
 <?php
 
-session_start();
 
 
 ini_set('display_errors', 1);
@@ -8,9 +7,15 @@ ini_set('error_reporting', E_ALL);
 include '../layout.php';
 
 include '../layout/head.php';
+include '../connection_credits.php';
+include '../connection.php';
 
 include '../Controllers/order_controller.php';
 include '../Validation/orderValidation.php';
+
+include "../MiddleWares/auth.php";
+
+include "../MiddleWares/user.php";
 
 
 // if (!isset($_SESSION['user_id'])) {
@@ -18,7 +23,7 @@ include '../Validation/orderValidation.php';
 //   exit();
 // }
 
-$userId = $_SESSION['user_id'];
+$userId = $_SESSION['user']['id'];
 $orders = array();
 
 

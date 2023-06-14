@@ -12,7 +12,7 @@
             foreach ($orders as $order) { ?>
               <tr>
                 <td>
-                  <a class="colorbtn" href="/Cafe_Project/Views/Admin/CheckOrders/ChecksView.php?details=<?= $order['id'] ?>&&user=<?= $order['user_id'] ?>"><i class="fa fa-eye"></i></a>
+                  <a class="colorbtn" href="/Cafe_php_project/Views/Admin/CheckOrders/ChecksView.php?details=<?= $order['id'] ?>&&user=<?= $order['user_id'] ?>"><i class="fa fa-eye"></i></a>
 
                 </td>
                 <td><?= $order['id'] ?></td>

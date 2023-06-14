@@ -11,6 +11,11 @@ include "../../connection.php";
 include "../../Validation/validation.php";
 include "../../Models/product_cartModel.php";
 
+include "../../MiddleWares/auth.php";
+
+
+
+
 $error_add;
 $error_update;
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {

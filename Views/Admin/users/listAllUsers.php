@@ -1,10 +1,10 @@
 <?php 
-    session_start();
     $pageTitle = 'List Users';
     include "../../../layout/head.php";
-    include "../../../layout/navbar.php";
     include "../../../Models/Admin/getUsers.php";
     include "../../../config/connectToDB.php";
+    include "../../../MiddleWares/auth.php";
+    include "../../../MiddleWares/admin.php";
 
     $users  = getAllUsers();
 ?>

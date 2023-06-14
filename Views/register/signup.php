@@ -3,8 +3,8 @@
 
     $pageTitle = 'Signup';
     include '../../layout/head.php';
-    include '../../layout/navbar.php';
 
+    include "../../MiddleWares/guest.php";
 
 ?>
 <section class="vh-100">

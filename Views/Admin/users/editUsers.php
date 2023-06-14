@@ -1,8 +1,12 @@
 <?php
     ob_start();
+
     require_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
     // session_start();
+    include "../../../MiddleWares/auth.php";
+    include "../MiddleWares/admin.php";
+
     
     $do = $_GET['do'];
     

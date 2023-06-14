@@ -1,8 +1,11 @@
 <?php
 
     $pageTitle = 'Add User';
+
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/navbar.php';
+    include "../../../MiddleWares/auth.php";
+include "../MiddleWares/admin.php";
+
 
 ?>
 <section class="vh-100">

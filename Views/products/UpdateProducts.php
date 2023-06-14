@@ -7,9 +7,13 @@ include "../../Controllers/products.php";
 include "../../Controllers/categories.php";
 include "../../Models/products.php";
 include "../../Models/categories.php";
-include "../../connection_credits.php";
-include "../../connection.php";
+include "/Cafe_php_cafe/connection_credits.php";
+include "/Cafe_php_cafe/connection.php";
 include "../../Validation/validation.php";
+include "../../MiddleWares/auth.php";
+include "../../MiddleWares/admin.php";
+
+
 $error_add;
 $error_update;
 $product_updated = SelectProductByIdQuery($_GET['product_id']);

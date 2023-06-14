@@ -1,12 +1,6 @@
 <?php
-include '../connection_credits.php';
-include '../connection.php';
-
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
+// include "../connection_credits.php";
+// include "../connection.php";
 // $conn = dbconnect();
 
 //function to select all products
@@ -158,8 +152,9 @@ function deleteUserCarts($userid )
 //function to select all carts 
 function create_cart()
 {
-    global $conn;
 
+    global $conn;
+    var_dump($conn);
     $data = file_get_contents("php://input");
     $product = json_decode($data, true);
 
@@ -214,7 +209,7 @@ function countTotalPrice($userid){
     return $totalPrice;
 }
 
-var_dump($_SERVER["REQUEST_METHOD"]);
+// var_dump($_SERVER["REQUEST_METHOD"]);
 if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     create_cart();
     // var_dump(   "kkkk");

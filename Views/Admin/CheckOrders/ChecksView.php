@@ -1,11 +1,14 @@
 <link rel="stylesheet" href = "../../../layout/CSS/orders.css">
 
 <?php
-include "../../../connection.php";
+include '../../../connection_credits.php';
+include '../../../connection.php';
 include "../../../Models/AdminOrder.php";
 include "../../../Controllers/AdminController.php";
 include "../../../layout/head.php";
 include "../../../Validation/adminChecksValidation.php";
+include "../../../MiddleWares/auth.php";
+include "../../../MiddleWares/admin.php";
 
 
 $users = getAllUser();

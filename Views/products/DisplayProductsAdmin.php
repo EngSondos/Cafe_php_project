@@ -8,6 +8,9 @@ include "../../Models/categories.php";
 include "../../connection_credits.php";
 include "../../connection.php";
 include "../../Validation/validation.php";
+include "../../MiddleWares/auth.php";
+include "../../MiddleWares/admin.php";
+
 $error_add;
 $error_update;
 

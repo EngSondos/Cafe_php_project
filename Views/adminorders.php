@@ -1,16 +1,22 @@
 <?php
-include '../layout.php';
+// include '../layout.php';
+include "../layout/head.php";
 include '../Controllers/order_controller.php';
 include "../Controllers/AdminController.php";
 include "../Models/AdminOrder.php";
+include "../connection_credits.php";
+include "../connection.php";
+include "../MiddleWares/auth.php";
+include "../MiddleWares/admin.php";
+
 
     $orders = allorders();
 
     if(isset($_GET['status'])&&isset($_GET['id']))
     {
   
-     var_dump( ChangeOrderStatus($_GET['id'],$_GET['status']));
-     header("location:/Cafe_Project/Views/adminorders.php");
+     ChangeOrderStatus($_GET['id'],$_GET['status']);
+     header("location:/Cafe_php_project/Views/adminorders.php");
     }
 
 ?>
