@@ -2,7 +2,9 @@
     // session_start();
     ob_start();
 
-    include "../../Models/users/user.php";
+    // include_once "../../Models/users/user.php";
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/users/user.php';
+
     function userValidation($data, $imageFile) {
         
         $errors = [];

@@ -49,7 +49,7 @@
                 <td><?php echo $user['username']; ?></td>
                 <td><?php echo $user['email']; ?></td>
                 <td><?php echo ($user['role'] === 0) ? "Normal User" : "admin"; ?></td>
-                <td><img class="tableimg" width='30' src="<?php echo substr($user['image'], 15)?>" alt=""></td>
+                <td><img class="tableimg" width='30' src="<?php echo substr($user['image'], 17)?>" alt=""></td>
                 <td>
                     <a href="<?php echo 'editUsers.php?do=edit&id=' . $user['id']; ?>"  class="btn btn-primary">Edit</a>
                     <a href="<?php echo '?delete&id=' . $user['id']; ?>" class="btn btn-danger">Delete</a>
@@ -59,11 +59,7 @@
     </tbody>
 </table>
 </div>
-<<<<<<< HEAD
-<?php include '../../../layout/footer.php'; ?>
-=======
 <?php 
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php'; 
     ob_end_flush();
 ?>
->>>>>>> origin/ahmedmangood

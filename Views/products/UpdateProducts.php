@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     //**Set Old Value For Category Id
     let category_id = document.querySelectorAll('#category_id option');
     for (let i = 0; i < category_id.length; i++) {
-        if (category_id[i].value == < ? = $product_updated['category_id'] ? > ) {
+        if (category_id[i].value == <?= $product_updated['category_id'] ?> ) {
             let selected = category_id[i].setAttribute('selected', true); //**Set Selected Attribute 
         }
     }

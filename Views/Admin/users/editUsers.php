@@ -4,7 +4,7 @@
     require_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
     include "../../../MiddleWares/auth.php";
-    include "../../MiddleWares/admin.php";
+    include "../../../MiddleWares/admin.php";
 
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
    
@@ -95,7 +95,7 @@
             $role = $data['role'];
             $password = empty($data['newpassword']) ? $data['oldpassword'] : password_hash($data['newpassword'], PASSWORD_DEFAULT);
             
-            if(isset($_FILES)) {
+            if(!empty($_FILES['image']['name'])) {
 
                 // Handle image upload
                 $image = $_FILES['image'];
@@ -124,15 +124,15 @@
                 }
             } else {
         
-                    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
+                    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
                     $user = getUserByEmail($email);
-
+                    var_dump($user);
                     $image_dest = $user['image'];
                 
-                    if (!$image_dest) {
+                //     if (!$image_dest) {
                         
-                        $image_dest = null;
-                }
+                //         $image_dest = null;
+                // }
             }
             
             // Email Validation
@@ -184,6 +184,6 @@
             }
         }
     } 
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php';
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php';
 ob_end_flush();
 ?>

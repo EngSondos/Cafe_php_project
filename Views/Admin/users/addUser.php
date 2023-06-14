@@ -1,12 +1,17 @@
 <?php
     ob_start();
-    session_start();
+    // session_start();
     $pageTitle = 'Add User';
 
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
-    include "../../../MiddleWares/auth.php";
-include "../MiddleWares/admin.php";
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
+    include_once "../../../MiddleWares/auth.php";
+    include_once  "../../../MiddleWares/admin.php";
 
+
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        include_once $_SERVER["DOCUMENT_ROOT"]."/Cafe_php_project/Controllers/users/users.php";
+            userController($_POST, $_FILES);
+        }
 
 ?>
 <section class="vh-100">
@@ -52,13 +57,7 @@ include "../MiddleWares/admin.php";
             <button type="submit" class="btn btn-primary btn-lg btn-block signup-btn mb-5">Add</button>
         </form>
         <div class='errors-container'>
-        <?php
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                include  $_SERVER["DOCUMENT_ROOT"]."/Cafe_php_project/Controllers/users/users.php";
-                userController($_POST, $_FILES);
-            }
-        ?>
+      
         </div>
         </div>
         </div>
