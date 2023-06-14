@@ -53,10 +53,6 @@ function updateCart($quantity,$product_id,$user_id,$productprice)
     $stmt->bindParam(":stduserid", $user_id);
     $stmt->execute();
 
-    
-
-    // echo json_encode($cart);
-    // return $cart;
 }
 
 //function to delete cart

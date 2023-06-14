@@ -3,6 +3,41 @@ lineNumbers = document.querySelector(".line-numbers");
 
 let numberOfLines = 0;
 
+console.log(Notes);
+
+if (Notes) {
+  
+  numberOfLines = Notes.value.split("\n").length - 1;
+  console.log(Notes.value);
+  for (let i = 0; i < numberOfLines; i++) {
+    numberLines();
+  }
+
+  Notes.addEventListener("keyup", (event) => {
+    if (event.key === "Enter") {
+      numberOfLines = e.target.value.split("\n").length;
+      if (numberOfLines < 150) numberLines();
+    }
+  });
+
+  Notes.addEventListener("keydown", (event) => {
+    if (event.key === "Tab") {
+      const start = Notes.selectionStart;
+      const end = Notes.selectionEnd;
+
+      Notes.value =
+        Notes.value.substring(0, start) + "\t" + Notes.value.substring(end);
+
+      event.preventDefault();
+    }
+  });
+
+}
+
+function numberLines() {
+  console.log("sdffsd");
+  lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
+}
 
 function incrementquantity(availablequantity, product_id, user_id, product_price) {
   span = document.getElementById(product_id);
@@ -23,7 +58,9 @@ function incrementquantity(availablequantity, product_id, user_id, product_price
         product_id: product_id,
         price: product_price,
       }),
-    })
+    });
+    span.innerHTML = quantity;
+    span2.innerHTML = product_price;
   }
 }
 
@@ -48,6 +85,8 @@ function decrementquantity(product_id, user_id, product_price) {
         price: product_price,
       }),
     })
+    span.innerHTML = quantity;
+    span2.innerHTML = product_price;
   }
 }
 
@@ -110,37 +149,7 @@ function savenotes(id) {
 }
 
 
-if (Notes) {
-  numberOfLines = Notes.value.split("\n").length - 1;
-  for (let i = 0; i < numberOfLines; i++) {
-    numberLines();
-  }
 
-  Notes.addEventListener("keyup", (event) => {
-    console.log(event);
-    if (event.key === "Enter") {
-      numberOfLines = e.target.value.split("\n").length;
-      if (numberOfLines < 150) numberLines();
-    }
-  });
-
-  Notes.addEventListener("keydown", (event) => {
-    if (event.key === "Tab") {
-      const start = Notes.selectionStart;
-      const end = Notes.selectionEnd;
-
-      Notes.value =
-        Notes.value.substring(0, start) + "\t" + Notes.value.substring(end);
-
-      event.preventDefault();
-    }
-  });
-
-}
-
-function numberLines() {
-  lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
-}
 
 
 

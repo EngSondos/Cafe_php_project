@@ -1,3 +1,126 @@
+main{
+    height: 100vh;
+}
+.container{
+    height: 100%;
+}
+/*First Column*/
+.sidebar {
+    position: fixed;
+    width: 24%;
+    background-color: rgb(188, 118, 5);
+    left: 0;
+    height: 100%;
+    border-right:1px solid rgba(0, 0, 0, 0.301);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+}
+.mycarts{
+    font-size: 26px;
+    display: flex;
+    background-color: rgb(201, 200, 200);
+    padding: 10px 0;
+    justify-content: space-between;
+}
+.cartsnum{
+    background-color: #FFC107;
+    padding: 2px 10px;
+    border-radius: 15px;
+    font-size: 15px;
+    display: flex;
+    font-weight: 800;
+    align-items: center;
+}
+#row1,
+#row2 {
+    width:45%;
+    height: 100%;
+    border-radius: 15px;
+    background-color: rgb(251, 251, 251);
+}
+#row2{
+    padding: 10px;
+}
+#row1 {
+    overflow-y: scroll;
+    border-right:1px solid black;
+    display: flex;
+    position: relative;
+}
+#row1::-webkit-scrollbar{
+    border-radius: 0 10px 10px 0 ;
+    background-color: rgb(191, 191, 191);
+}
+#row1::-webkit-scrollbar-thumb{
+    border-radius: 0 10px 0 0 ;
+    background-color: rgb(57, 57, 57);
+}
+.line-numbers {
+    width: 10%;
+    line-height: 1.9;
+    padding-top: 6px;
+    padding-left: 10px;
+    text-align: center;
+}
+
+.line-numbers span {
+    counter-increment: linenumber;
+    height: 23px;
+    display: block;
+    margin-bottom: 13px;
+}
+
+.line-numbers span::before {
+    content: counter(linenumber)'-';
+    display: flex;
+    height: 100%;
+    font-size: 20px;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #000000;
+}
+textarea {
+    width: 90%;
+    line-height: 1.96;
+    overflow: hidden;
+    text-transform: capitalize;
+    background-color: transparent;
+    padding-left: 10px;
+    font-size: 18px;
+    height: 65in;
+    display: inline-flex;
+    min-height: 62in;
+    max-height: 62in;
+    resize: vertical;
+    border: none;
+}
+textarea::placeholder{
+    font-size: 18px;
+}
+textarea:focus {
+    box-shadow: none;
+    outline: none;
+}
+.line-numbers,
+p:first-child {
+    height: 100%;
+}
+
+#notes {
+    background-color: rgb(221, 221, 223);
+    height: 100%;
+}
+.totalprice{
+    color: white;
+    font-size: 30px;
+}
+
+.savebtn{
+    border-radius: 5px 19px 19px 4px;
+    cursor: pointer;
+}
+/*Second Column*/
 .card {
     border-radius: 15px;
     overflow: hidden;
@@ -24,7 +147,8 @@ img {
 .card-header {
     padding: 10px 0;
     text-align: center;
-    background-color: rgb(0, 255, 191);
+    background-color: rgb(188, 118, 5);
+    color: white;
     text-transform: capitalize;
     font-weight: 400;
     font-size: 23px;
@@ -99,8 +223,7 @@ img {
     font-size: 18px;
     font-weight: 500;
 }
-
-/*****************************************/
+/**/
 .popupscreen {
     position: fixed;
     z-index: 100;
@@ -152,133 +275,4 @@ img {
     text-transform: uppercase;
     color: rgba(0, 0, 0, 0.423);
     user-select: none;
-}
-
-/******************************************/
-.sidebar {
-    /* position: fixed;
-    width: 100%; */
-    background-color: #f9ab36;
-    left: 0;
-    height: 100%;
-    border-right:1px solid rgba(0, 0, 0, 0.301);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; 
-}
-.mycarts{
-    font-size: 26px;
-    display: flex;
-    background-color: rgb(201, 200, 200);
-    padding: 10px 0;
-    justify-content: space-between;
-}
-.cartsnum{
-    background-color: #FFC107;
-    padding: 2px 10px;
-    border-radius: 15px;
-    font-size: 15px;
-    display: flex;
-    font-weight: 800;
-    align-items: center;
-}
-#row1,
-#row2 {
-    width:45%;
-    height: 100%;
-    /* padding-left:10px ; */
-    border-radius: 15px;
-    background-color: rgb(251, 251, 251);
-}
-#row2{
-    padding: 10px;
-}
-#row1 {
-    overflow-y: scroll;
-    border-right:1px solid black;
-    display: flex;
-    position: relative;
-    
-    /* margin-bottom: 10px; */
-}
-#row1::-webkit-scrollbar{
-    border-radius: 0 10px 10px 0 ;
-    background-color: rgb(191, 191, 191);
-}
-#row1::-webkit-scrollbar-thumb{
-    border-radius: 0 10px 0 0 ;
-    background-color: rgb(57, 57, 57);
-}
-.totalprice{
-    color: white;
-    font-size: 30px;
-}
-.line-numbers,
-p {
-    height: 100%;
-}
-
-#notes {
-    background-color: rgb(221, 221, 223);
-    height: 100%;
-}
-
-.line-numbers {
-    width: 10%;
-    line-height: 1.9;
-    padding-top: 6px;
-    padding-left: 10px;
-    text-align: center;
-}
-
-.line-numbers span {
-    counter-increment: linenumber;
-    height: 23px;
-    display: block;
-    margin-bottom: 13px;
-}
-
-.line-numbers span::before {
-    content: counter(linenumber)'-';
-    display: flex;
-    height: 100%;
-    font-size: 20px;
-    align-items: center;
-    margin-bottom: 10px;
-    color: #000000;
-}
-
-textarea {
-    width: 90%;
-    line-height: 1.96;
-    /* padding-top: 4px; */
-    overflow: hidden;
-    text-transform: capitalize;
-    background-color: transparent;
-    padding-left: 10px;
-    font-size: 18px;
-    height: 65in;
-    display: inline-flex;
-    min-height: 62in;
-    max-height: 62in;
-    resize: vertical;
-    border: none;
-}
-textarea::placeholder{
-    font-size: 18px;
-}
-textarea:focus {
-    box-shadow: none;
-    outline: none;
-}
-.savebtn{
-    /* position: absolute;
-    bottom: 0;
-    margin: auto;
-    left: 0;
-    right: 0;
-    width: fit-content; */
-    /* width: 100%; */
-    border-radius: 5px 19px 19px 4px;
-    cursor: pointer;
 }

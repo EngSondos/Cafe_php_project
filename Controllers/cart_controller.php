@@ -12,11 +12,14 @@ error_reporting(E_ALL);
 
 $userid = 1;
 
-if ($_SERVER["REQUEST_METHOD"] === 'GET') {
-    $carts = selectCarts($userid);
-    $products = selectProducts();
-    $comboBox = selectUserCarts($userid);
-} else if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+$carts = selectCarts($userid);
+$products = selectProducts();
+$comboBox = selectUserCarts($userid);
+
+//last step send those data to the view to be rendered
+render_carts($products, $carts, $comboBox);
+
+ if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $reqbody = file_get_contents("php://input");
     $data = json_decode($reqbody, true);
 
@@ -54,13 +57,12 @@ if ($_SERVER["REQUEST_METHOD"] === 'GET') {
 } else if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
     $reqbody = file_get_contents("php://input");
     $data = json_decode($reqbody, true);
-    updateUserCarts($userid, '');
+    
     deleteCart($data['cartid']);
-   
+    
+    updateUserCarts($userid, '');
 }
 
-//last step send those data to the view to be rendered
-render_carts($products, $carts, $comboBox);
 
 
 
