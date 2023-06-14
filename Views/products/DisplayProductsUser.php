@@ -1,5 +1,5 @@
 <?php
-$title="Shopping List";
+$title = "Shopping List";
 
 include "../../layout/head.php";
 
@@ -32,9 +32,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     }
 }
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    var_dump($_POST);
+// SEARCH for PRODUCT
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $ValueSearch = $_GET['search_term'] ?? "";
 }
 
 ?>
