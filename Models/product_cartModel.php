@@ -1,26 +1,9 @@
 <?php
-include '../connection_credits.php';
-include '../connection.php';
-
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-// $conn = dbconnect();
 
 //function to select all carts 
-function create_cart()
+function createCart($userid,$prodid,$price)
 {
     global $conn;
-
-    $data = file_get_contents("php://input");
-    $product = json_decode($data, true);
-
-    $userid = $product['usrid'];
-    $prodid = $product['productid'];
-    $price = $product['price'];
-
 
     $create_query = "insert into `cart_product` (user_id,product_id,price) values (:usrid,:product_id,:price);";
 
@@ -32,14 +15,14 @@ function create_cart()
 
     $stmt->execute();
 
-    createUserCarts($userid);
+    // createUserCarts($userid);
 
-    return $product;
+    // return $product;
 
 }
 
 //function to select all carts
-function select_carts($userid)
+function selectCarts($userid)
 {
     global $conn;
 
@@ -57,16 +40,9 @@ function select_carts($userid)
 }
 
 //function to update quantity
-function update_quantity()
+function updateCart($quantity,$product_id,$user_id,$productprice)
 {
     global $conn;
-    $data = file_get_contents("php://input");
-    $cart = json_decode($data, true);
-
-    $quantity = $cart['quantity'];
-    $product_id = $cart['product_id'];
-    $user_id = $cart['user_id'];
-    $productprice = $cart['price'];
 
     $update_query = "update `cart_product` set `quantity`=:stdquantity,`price`=:stdprdprice where `product_id`=:stdprdctid and `user_id` = :stduserid";
 
@@ -79,18 +55,14 @@ function update_quantity()
 
     
 
-    echo json_encode($cart);
+    // echo json_encode($cart);
     // return $cart;
 }
 
 //function to delete cart
-function delete_cart()
+function deleteCart($cart_id)
 {
     global $conn;
-    $data = file_get_contents("php://input");
-    $cart = json_decode($data, true);
-
-    $cart_id = $cart['cartid'];
 
     $update_query = "delete from `cart_product` where `cartid`=:stdid";
 
@@ -112,10 +84,8 @@ function deleteAllCarts()
     $stmt->execute();
 }
 
-///////////////////////////// not used yet ///////////////////////////////////////////
-
 //function to select all products
-function select_products()
+function selectProducts()
 {
     global $conn;
 
@@ -130,19 +100,3 @@ function select_products()
     return $products;
 }
 
-
-if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    create_cart();
-}
-
-if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
-    delete_cart();
-}
-
-if ($_SERVER["REQUEST_METHOD"] === 'UPDATE') {
-    // updateUserCarts();
-    update_quantity();
-}
-if($_SERVER["REQUEST_METHOD"] === 'GET'){
-    // select_carts();
-}

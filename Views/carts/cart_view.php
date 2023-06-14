@@ -7,13 +7,10 @@ function render_carts($products, $carts, $totalcarts)
 {
     /*first divide our page to two columns the sidebar and the carts */
     echo "
-    <div class='row h-100 mr-0'>".
-    //first column
-        "<div class='col-xl-4 h-100 pr-0 border'><div class='sidebar'>".
-    //show number of carts
-            "<h4 class='mycarts bg-light d-flex justify-content-center'>My Carts<span class='cartsnum'>" . sizeof($carts) . "</span></h4>".
-    //inject textarea to store notes in
-            "<div class='row justify-content-center m-0' style='height: 40vh;width: 100%;align-items: center; '>
+    <div class='row h-100 mr-0'>
+        <div class='col-xl-4 h-100 pr-0 border'><div class='sidebar'>
+            <h4 class='mycarts bg-light d-flex justify-content-center'>My Carts<span class='cartsnum'>" . sizeof($carts) . "</span></h4>
+            <div class='row justify-content-center m-0' style='height: 40vh;width: 100%;align-items: center; '>
                 <div id='row1'>
                     <div class='line-numbers'>
                         <span></span>
@@ -23,7 +20,7 @@ function render_carts($products, $carts, $totalcarts)
                     <button class='btn btn-danger savebtn' onclick='savenotes(1)'><i class='fa-solid fa-chevron-right'></i></button>
                     <div id='row2'>";
                     if(sizeof($totalcarts) > 0){
-                        echo "<pre id=''>".trim($totalcarts[0]["notes"])."</pre>";
+                        echo "<pre id=''>".$totalcarts[0]["notes"]."</pre>";
                     }else{
                         echo "You don't have any cart";
                     }
@@ -37,13 +34,12 @@ function render_carts($products, $carts, $totalcarts)
                     }
                 echo "<div class='row align-items-center justify-content-center mb-5 w-100'>
                     <button class='btn btn-primary' onclick='createorder(1)'>Order Now</button>
-                </div>".
-            "</div>
-        </div>".
-        "<div class='col-xl-8'>".
-        //container
-            "<div class='container'>".
-                "<div class='row' style='justify-content: center;height: 100%;align-items: center;'>";
+                </div>
+            </div>
+        </div>
+        <div class='col-xl-8'>
+            <div class='container'>
+                <div class='row' style='justify-content: center;height: 100%;align-items: center;'>";
                     //three columns of carts
                     if (sizeof($carts) > 0) {
                         foreach ($carts as $cart) {
@@ -96,12 +92,18 @@ function render_carts($products, $carts, $totalcarts)
                             <p>You may need to add something to cart</p>
                         </div>";
                     }
-            echo"</div>".
-            "</div>".
-        "</div>".
-    "</div>".
-
-    //the script that contains functions
-    "<script src='script.js'></script>";
+            echo"</div>
+            </div>
+        </div>
+    </div>
+    <div class='popupscreen'>
+    <div class='popupbox'>
+        <p class='warning-mssg'>Are you sure you want to delete this card?</p>
+        <div class='warningbtns'>
+            <button class='popbtn btn btn-primary'>cancle</button>
+            <button class='popbtn btn btn-danger' >ok</button>
+        </div>
+    </div>
+    <script src='script.js'></script>";
 
 }   

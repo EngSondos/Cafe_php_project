@@ -1,9 +1,10 @@
-function incrementquantity(
-  availablequantity,
-  product_id,
-  user_id,
-  product_price
-) {
+const Notes = document.getElementsByTagName("textarea")[0],
+lineNumbers = document.querySelector(".line-numbers");
+
+let numberOfLines = 0;
+
+
+function incrementquantity(availablequantity, product_id, user_id, product_price) {
   span = document.getElementById(product_id);
   span2 = document.getElementById(`prod${product_id}price`);
 
@@ -13,11 +14,9 @@ function incrementquantity(
   product_price *= quantity;
 
   if (counter < availablequantity && product_price < 5000) {
-    fetch("../Models/product_cartModel.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
+    fetch("../Controllers/cart_controller.php", {
+      method: "UPDATE",
+      headers: {"Content-Type": "application/json;charset=utf-8"},
       body: JSON.stringify({
         quantity: quantity,
         user_id: user_id,
@@ -25,15 +24,6 @@ function incrementquantity(
         price: product_price,
       }),
     })
-      .then((res) => {
-        // console.log(res)
-        return res.json();
-      })
-      .then((data) => {
-        // console.log(data);
-        span.innerHTML = data["quantity"];
-        span2.innerHTML = data["price"].toFixed(2) + " EGP";
-      });
   }
 }
 
@@ -48,11 +38,9 @@ function decrementquantity(product_id, user_id, product_price) {
   product_price *= quantity;
 
   if (counter > 1) {
-    fetch("../Models/product_cartModel.php", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
+    fetch("../Controllers/cart_controller.php", {
+      method: "UPDATE",
+      headers: {"Content-Type": "application/json;charset=utf-8"},
       body: JSON.stringify({
         quantity: quantity,
         user_id: user_id,
@@ -60,14 +48,6 @@ function decrementquantity(product_id, user_id, product_price) {
         price: product_price,
       }),
     })
-      .then((res) => {
-        // console.log(res.json())
-        return res.json();
-      })
-      .then((data) => {
-        span.innerHTML = data["quantity"];
-        span2.innerHTML = data["price"].toFixed(2) + " EGP";
-      });
   }
 }
 
@@ -80,11 +60,9 @@ function removecart(id) {
     btn.addEventListener("click", () => {
       res = btn.innerHTML;
       if (res == "ok") {
-        fetch("../Models/product_cartModel.php", {
+        fetch("../Controllers/cart_controller.php", {
           method: "DELETE",
-          headers: {
-            "Content-Type": "application/json;charset=utf-8",
-          },
+          headers: {"Content-Type": "application/json;charset=utf-8"},
           body: JSON.stringify({ cartid: id }),
         });
         popup[0].style = "display:none";
@@ -97,44 +75,67 @@ function removecart(id) {
 }
 
 function createorder(userid) {
-  fetch("../Models/ordersModel.php", {
+  fetch("../Controllers/cart_controller.php", {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
+    headers: {"Content-Type": "application/json;charset=utf-8"},
     body: JSON.stringify({ user_id: userid }),
   });
   location.reload();
 }
 
-//check if the textarea has a content or not
-const Notes = document.getElementsByTagName("textarea")[0],
-  lineNumbers = document.querySelector(".line-numbers");
-let numberOfLines = 0;
+function addToCart(e, product_id, product_price, user_id) {
+  e.preventDefault();
+  fetch("../../Controllers/cart_controller.php", {
+    method: "POST",
+    headers: {"Content-Type": "application/json;charset=utf-8"},
+    body: JSON.stringify({
+      usrid: user_id,
+      productid: product_id,
+      price: product_price,
+    }),
+  })
+}
+
+function savenotes(id) {
+  if (Notes.value.length > 0) {
+    fetch("../Controllers/cart_controller.php", {
+      method: "UPDATE",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({ notes: Notes.value, user_id: id }),
+    });
+    location.reload();
+  }
+}
+
 
 if (Notes) {
-  //so reload the numberline
   numberOfLines = Notes.value.split("\n").length - 1;
   for (let i = 0; i < numberOfLines; i++) {
     numberLines();
   }
-  Notes.addEventListener("keyup", (e) => {
-    if (e.keyCode == 13) {
+
+  Notes.addEventListener("keyup", (event) => {
+    console.log(event);
+    if (event.key === "Enter") {
       numberOfLines = e.target.value.split("\n").length;
       if (numberOfLines < 150) numberLines();
     }
   });
+
   Notes.addEventListener("keydown", (event) => {
     if (event.key === "Tab") {
       const start = Notes.selectionStart;
       const end = Notes.selectionEnd;
-  
+
       Notes.value =
         Notes.value.substring(0, start) + "\t" + Notes.value.substring(end);
-  
+
       event.preventDefault();
     }
   });
+
 }
 
 function numberLines() {
@@ -143,39 +144,3 @@ function numberLines() {
 
 
 
-function savenotes(id) {
-  if (Notes.value.length > 0) {
-    fetch("../Models/ordersModel.php", {
-      method: "UPDATE",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({ notes: Notes.value, userid: id }),
-    });
-    location.reload();
-  }
-}
-// let carts = document.getElementsByClassName('cart-img');
-// audio = new Audio('../assets/plateput.mp3')
-// // console.log(carts)
-// for (const cart of carts) {
-//    cart.addEventListener('mouseleave',()=>{
-//     audio.play();
-//    })
-// }
-
-function addToCart(e,product_id, product_price, user_id) {
-  e.preventDefault();
-  fetch("../../Models/product_cartModel.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify({
-      usrid: user_id,
-      productid: product_id,
-      price: product_price,
-    }),
-  })
-  //   alert("aaaaaa");
-}

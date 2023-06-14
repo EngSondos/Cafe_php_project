@@ -18,23 +18,24 @@ function selectUserCarts($userid )
 }
 
 //update usercarts
-function updateUserCarts()
+function updateUserCarts($userid,$notes)
 {
+    
     global $conn;
 
-    $data = file_get_contents("php://input");
-    $carts = json_decode($data, true);
+    if($notes == ''){
+        $notes = selectUserCarts($userid)[0]['notes'];
+    }
 
-    $notes = $carts['notes'];
-    $userid = $carts['userid'];
+    $totalPrice = countTotalPrice($userid);
 
-    $update_query = "update `carts` set `notes` = :note where `user_id`=:usrid" ;
+    $update_query = "update `carts` set `notes` = :note , `total_price` = :TP where `user_id`=:usrid" ;
 
     $stmt = $conn->prepare($update_query);
 
     $stmt->bindParam(':usrid', $userid);
     $stmt->bindParam(':note', $notes);
-
+    $stmt->bindParam(':TP', $totalPrice);
 
     $stmt->execute();
 }
@@ -52,7 +53,6 @@ function deleteUserCarts($userid )
 
     $stmt->execute();
 }
-
 
 //function to save totalprice of all carts 
 function createUserCarts($userid )
@@ -74,7 +74,7 @@ function createUserCarts($userid )
 //function to count totalprice
 function countTotalPrice($userid){
 
-    $allcarts = select_carts($userid);
+    $allcarts = selectCarts($userid);
     $totalPrice = 0;
 
     for($i=0;$i<sizeof($allcarts);$i++){
