@@ -1,5 +1,5 @@
 <?php
-$title="Update Product";
+$title = "Update Product";
 
 include "../../layout/head.php";
 
@@ -19,9 +19,9 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
-  
-    $image=imageValid();
-    var_dump( $image );
+
+    $image = imageValid();
+    var_dump($image);
     $name = $_POST['name'];
     $price = $_POST['price'];
     $quantity = $_POST['quantity'];
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     if ($_GET['action'] === 'update') {
         $product_id = $_GET['product_id'];
         UpdateProductQuery($product_id, $name, $image, $price, $quantity, $category_id);
-       header('Location:DisplayProductsAdmin.php');
+        header('Location:DisplayProductsAdmin.php');
         // $error_update= $error['name'];
         // Handle update form data here
     }
@@ -41,8 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
 <div class="container w-50">
     <h1 class="text-primary mx-auto w-50">Update Products <?= $_GET['product_id'] ?></h1>
-    <form method="post" action="?action=update&product_id=<?= $_GET['product_id'] ?>" enctype="multipart/form-data"
-        name="addForm">
+    <form method="post" action="?action=update&product_id=<?= $_GET['product_id'] ?>" enctype="multipart/form-data" name="addForm">
         <!--Name Input -->
         <div class="form-group">
             <label for="name">Name:</label>
@@ -56,13 +55,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         <!--Category_id Input -->
         <div class="form-group">
             <label for="name">category_id:</label>
-            <select name="category_id" id="category_id"
-                value="<?= SelectCategoryByIdQuery($product_updated['category_id'])     ?>"> //*
+            <select name="category_id" id="category_id" value="<?= SelectCategoryByIdQuery($product_updated['category_id'])     ?>"> //*
                 <?php
                 $rows = DisplayCategory();
                 var_dump($rows);
                 foreach ($rows as $row) {  ?>
-                <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
+                    <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                 <?php    }
 
                 ?>
@@ -71,8 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         <!--Quantity Input -->
         <div class="form-group">
             <label for="name">quantity:</label>
-            <input type="text" class="form-control" id="quantity" name="quantity"
-                value="<?= $product_updated['quantity'] ?>">
+            <input type="text" class="form-control" id="quantity" name="quantity" value="<?= $product_updated['quantity'] ?>">
         </div>
         <!--Image Input -->
         <div class="form-group">
@@ -93,12 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     //**Set Old Value For Category Id
     let category_id = document.querySelectorAll('#category_id option');
     for (let i = 0; i < category_id.length; i++) {
-        if (category_id[i].value == < ? = $product_updated['category_id'] ? > ) {
+        if (category_id[i].value == <?= $product_updated['category_id'] ?>) {
             let selected = category_id[i].setAttribute('selected', true); //**Set Selected Attribute 
         }
     }
 </script>
-
 <?php
 include "../../layout/footer.php"
 ?>

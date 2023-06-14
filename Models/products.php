@@ -2,7 +2,7 @@
 
 $table = 'products';
 
-//**ADD CATEGORY 
+//**ADD PRODUCT 
 function AddProductQuery($name, $image, $price, $quantity, $category_id)
 {
     global $conn;
@@ -11,12 +11,12 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
     $query = "INSERT INTO `products` (`name`,`image`, price, quantity, category_id) VALUES ( :productName, :productImage, :price, :quantity, :category_id)";
 
     $stmt = $conn->prepare($query);
-    // $image = $_FILES['image']['name'];
-    $target = "../../uploads/";
+    $target = "../../";
     $image_path =  $target . $image;
+    var_dump($_FILES['image']['tmp_name']);
     move_uploaded_file($_FILES['image']['tmp_name'], $image_path); // Upload the image with the unique name
     $stmt->bindParam(':productName', $name);
-    $stmt->bindParam(':productImage', $image_path);
+    $stmt->bindParam(':productImage', $image);
     $stmt->bindParam(':price', $price);
     $stmt->bindParam(':quantity', $quantity);
     $stmt->bindParam(':category_id', $category_id);
@@ -32,16 +32,13 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
 
 // ----------------------------------------------------------------
 
-//**DISPLAY ALL CATEGORY 
+//**DISPLAY ALL PRODUCT 
 function DisplayAllProductsQuery()
 {
     global $conn;
-    global $table;
 
     try {
         $query = "SELECT * FROM  `products`";
-        // var_dump($query);
-
         ### prepare query
         $stmt = $conn->prepare($query);
         $stmt->execute();
@@ -52,17 +49,15 @@ function DisplayAllProductsQuery()
     }
 }
 
+// ----------------------------------------------------------------
 
-
-//**DISPLAY CATEGORY 
+//**DISPLAY Available PRODUCT 
 function DisplayAvailableProductsQuery()
 {
     global $conn;
 
     try {
         $query = "SELECT * FROM  `products` WHERE `quantity` > 0";
-        // var_dump($query);
-
         ### prepare query
         $stmt = $conn->prepare($query);
         $stmt->execute();
@@ -82,8 +77,6 @@ function SelectProductByIdQuery($id)
 
     try {
         $query = "SELECT * FROM  `products` WHERE  id =:id";;
-        // var_dump($query);
-
         ### prepare query
         $stmt = $conn->prepare($query);
         $stmt->bindParam(":id", $id);
@@ -97,24 +90,42 @@ function SelectProductByIdQuery($id)
 
 // ----------------------------------------------------------------
 
+//*Select Image From DataBase */
+function selectImageQuery($id)
+{
+    global $conn;
+    // Get the image name from the database
+    $query = "SELECT `image` FROM `products` WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $imageName = $stmt->fetchColumn();
+    return $imageName;
+}
+
+// ----------------------------------------------------------------
+
 //*DELETE PRODUCT 
 function DeleteProductQuery($id)
 {
     global $conn;
     // try {
-    // alert($id);
+    //Select Image From DataBase
+    $imageName = selectImageQuery($id);
+    $imagePath = '../../' . $imageName;
     $query = "DELETE FROM `products` WHERE id = :id";
-    // var_dump($query);
 
     ### prepare query
     $stmt = $conn->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    var_dump($id);
+    // Delete the image file from the server
+    if (file_exists($imagePath)) {
+        unlink($imagePath);
+    } else {
+        echo "Image file not found";
+    }
     return $stmt->rowCount();
-    // } catch (Exception $e) {
-    //     echo $e->getMessage();
-    // }
 }
 
 // ----------------------------------------------------------------
