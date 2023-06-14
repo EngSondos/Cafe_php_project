@@ -51,7 +51,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         ?>
             <div class="col-3 mb-4">
                 <div class="card h-100">
-                    <img height="300" src="<?= $row['image'] ?>" class="card-img-top border border-secondary rounded" alt="...">
+                    <img height="300" src="../../<?= $row['image'] ?>" class="card-img-top border border-secondary rounded" alt="...">
                     <div class="card-body">
                         <div class="top d-flex justify-content-between align-items-center">
                             <h5 class="card-title text-left "><?= $row['name'] ?></h5>

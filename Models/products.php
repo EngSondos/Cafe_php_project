@@ -6,7 +6,6 @@ $table = 'products';
 function AddProductQuery($name, $image, $price, $quantity, $category_id)
 {
     global $conn;
-    global $table;
 
     $query = "INSERT INTO `products` (`name`,`image`, price, quantity, category_id) VALUES ( :productName, :productImage, :price, :quantity, :category_id)";
 
