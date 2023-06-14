@@ -3,24 +3,23 @@ lineNumbers = document.querySelector(".line-numbers");
 
 let numberOfLines = 0;
 
-console.log(Notes);
-
 if (Notes) {
-  
   numberOfLines = Notes.value.split("\n").length - 1;
-  console.log(Notes.value);
+  console.log("Dfdsa");
   for (let i = 0; i < numberOfLines; i++) {
     numberLines();
   }
 
   Notes.addEventListener("keyup", (event) => {
-    if (event.key === "Enter") {
-      numberOfLines = e.target.value.split("\n").length;
+    
+    if (event.keyCode === 13) {
+      numberOfLines = event.target.value.split("\n").length;
       if (numberOfLines < 150) numberLines();
     }
   });
 
   Notes.addEventListener("keydown", (event) => {
+    console.log(event)
     if (event.key === "Tab") {
       const start = Notes.selectionStart;
       const end = Notes.selectionEnd;
@@ -35,7 +34,6 @@ if (Notes) {
 }
 
 function numberLines() {
-  console.log("sdffsd");
   lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 }
 

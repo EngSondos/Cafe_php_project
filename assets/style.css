@@ -7,8 +7,8 @@ main{
 /*First Column*/
 .sidebar {
     position: fixed;
-    width: 24%;
-    background-color: rgb(188, 118, 5);
+    width: 30%;
+    background-color: rgb(148 111 87);
     left: 0;
     height: 100%;
     border-right:1px solid rgba(0, 0, 0, 0.301);
@@ -53,14 +53,16 @@ main{
     background-color: rgb(191, 191, 191);
 }
 #row1::-webkit-scrollbar-thumb{
-    border-radius: 0 10px 0 0 ;
+    /* border-radius: 0 10px 0 0 ; */
     background-color: rgb(57, 57, 57);
 }
 .line-numbers {
-    width: 10%;
+    width: 15%;
+    height: 65in;
     line-height: 1.9;
     padding-top: 6px;
-    padding-left: 10px;
+    padding-left: 6px;
+    background-color: rgb(204, 204, 204);
     text-align: center;
 }
 
@@ -102,7 +104,7 @@ textarea:focus {
     box-shadow: none;
     outline: none;
 }
-.line-numbers,
+
 p:first-child {
     height: 100%;
 }
@@ -124,8 +126,9 @@ p:first-child {
 .card {
     border-radius: 15px;
     overflow: hidden;
+    border: 0;
     margin-bottom: 30px;
-    background-color: rgba(255, 255, 255, 0.659);
+    background-color: rgb(148 111 87);
     backdrop-filter: blur(50px);
     border-right: 1px solid rgba(0, 0, 0, 0.379);
     border-bottom: 1px solid rgba(0, 0, 0, 0.379);
@@ -147,7 +150,7 @@ img {
 .card-header {
     padding: 10px 0;
     text-align: center;
-    background-color: rgb(188, 118, 5);
+    background-color: rgb(162 121 95);
     color: white;
     text-transform: capitalize;
     font-weight: 400;
@@ -192,7 +195,16 @@ img {
 
     opacity: 1;
 }
-
+.btn-increment , .btn-decrement{
+    background-color: #ffffffb8;
+    padding: 10px 14px;
+    border-radius: 24px;
+    transition: all 0.5s;
+}
+.btn-increment:hover , .btn-decrement:hover{
+    background-color: #ffffff;
+    transform: scale(1.1);
+}
 .unavailable,
 .available {
     text-align: center;
@@ -217,11 +229,16 @@ img {
 }
 
 .rmv-btn {
+    color: rgb(255, 255, 255);
     display: flex;
     width: fit-content;
     margin: auto;
-    font-size: 18px;
+    font-size: 23px;
     font-weight: 500;
+}
+.rmv-btn:hover{
+    color: rgb(217, 1, 1);
+    transform: rotate(35deg) scale(1.2) ;
 }
 /**/
 .popupscreen {

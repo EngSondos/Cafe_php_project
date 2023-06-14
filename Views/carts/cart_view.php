@@ -9,7 +9,7 @@ function render_carts($products, $carts, $totalcarts)
     echo "
     <main>
         <div class='row h-100 mr-0'>
-            <div class='col-xl-3 '><div class='sidebar'>
+            <div class='col-xl-4 '><div class='sidebar'>
                 <h4 class='mycarts bg-light d-flex justify-content-center'>My Carts<span class='cartsnum'>" . sizeof($carts) . "</span></h4>
                 <div class='row justify-content-center m-0' style='height: 40vh;width: 100%;align-items: center; '>
                     <div id='row1'>
@@ -38,7 +38,7 @@ function render_carts($products, $carts, $totalcarts)
                     </div>
                 </div>
             </div>
-            <div class='col-xl-9'>
+            <div class='col-xl-8'>
                 <div class='container pt-5'>
                     <div class='row' style='justify-content: center;height: 100%;align-items: center;'>";
                         //three columns of carts
@@ -52,7 +52,9 @@ function render_carts($products, $carts, $totalcarts)
                                                 <div class='card-img'>
                                                     <img src='../assets/imgs/{$product["image"]}'class='card-img-top' alt='product image'>
                                                     <div class='cardcontroller'>
-                                                        <button class='btn btn-info w-25' onclick='incrementquantity({$product["quantity"]},{$product["id"]},{$cart['user_id']},{$product['price']})'>plus</button>
+                                                        <button class='btn btn-increment w-15' onclick='incrementquantity({$product["quantity"]},{$product["id"]},{$cart['user_id']},{$product['price']})'>
+                                                            <i class='fa-solid fa-plus'></i>
+                                                        </button>
                                                         <span class='card-quantity w-25' id='{$product["id"]}'>";
                                         if ($product["quantity"] > 0) {
                                             echo "{$cart["quantity"]}";
@@ -60,7 +62,9 @@ function render_carts($products, $carts, $totalcarts)
                                             echo "0";
                                         };
                                         echo "</span>
-                                                <button class='btn btn-warning w-25' onclick='decrementquantity({$product["id"]},{$cart['user_id']},{$product['price']})'>minus</button>
+                                                <button class='btn btn-decrement w-15' onclick='decrementquantity({$product["id"]},{$cart['user_id']},{$product['price']})'>
+                                                    <i class='fa-solid fa-minus'></i>
+                                                </button>
                                             </div>";
                                         if ($product["quantity"] == 0) {
                                             echo "<div class='unavailable pro{$product["id"]}'>
@@ -79,7 +83,7 @@ function render_carts($products, $carts, $totalcarts)
                                                         <span class='card-price' id='prod{$product["id"]}price'>{$cart["price"]} EGP</span>
                                                     </div>
                                                 
-                                                <button class='btn btn-danger rmv-btn' onclick='removecart({$cart["cartid"]})'>Remove From Cart</button>
+                                                <button class='btn  rmv-btn' onclick='removecart({$cart["cartid"]})'><i class='fa-regular fa-trash-can'></i></button>
                                                 </div>
                                             </div>
                                         </div>";
