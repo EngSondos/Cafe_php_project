@@ -1,5 +1,6 @@
 <?php
-
+    ob_start();
+    session_start();
     $pageTitle = 'Add User';
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/navbar.php';
@@ -44,7 +45,6 @@
                 <input type="file" id="form1Example1322" name="image" class="form-control form-control-lg" />
                 <label class="form-label" for="form1Example1322">Upload Image</label>
             </div>
-
             <!-- Submit button -->
             <button type="submit" class="btn btn-primary btn-lg btn-block signup-btn mb-5">Add</button>
         </form>
@@ -65,4 +65,5 @@
 
 <?php
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php';
+    ob_end_flush();
 ?>

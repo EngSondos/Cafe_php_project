@@ -5,7 +5,7 @@
     }
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="#">Caffee<img width="25" src="../../assets/design-imgs/Food_(1).png" alt=""></a>
+  <a class="navbar-brand" href="#">Caffee<img width="25" src="/Cafe_php_project/assets/design-imgs/Food_(1).png" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -20,11 +20,11 @@
         if(isset($user) && $user['role'] === 0){ ?>
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
+                  <a><img src="<?php echo substr($user['image'], 15); ?>" width="30" alt=""></a>
+              </li>
+              <li class="nav-item">
               <a href="#" class="nav-link"><?= $user['username'] ?></a>
               </li>
-            <li class="nav-item">
-                    <a><img src="<?php echo $user['image'] ?>" width="30" alt=""></a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout.php">LogOut</a>
                 </li>
@@ -34,14 +34,14 @@
         if(isset($user) && $user['role'] === 1) { ?>
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
+                    <a><img src="<?php echo substr($user['image'], 15); ?>" width="30" alt=""></a>
+              </li>
+              <li class="nav-item">
                 <a href="#" class="nav-link"><?= $user['username'] ?></a>
               </li>
               <li class="nav-item">
-                    <a><img src="<?php echo $user['image'] ?>" width="30" alt=""></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout.php">LogOut</a>
-                </li>
+                  <a class="nav-link" href="logout.php">LogOut</a>
+              </li>
             </ul>
     <?php } 
       if(!isset($user)){ ?>

@@ -5,7 +5,11 @@
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/navbar.php';
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/Admin/getUsers.php';
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
+    if(!isLoggedIn()) {
+        header("Location:../../../../../../Cafe_php_project/Views/register/login.php");
+    }
     $users  = getAllUsers();
 
 ?>

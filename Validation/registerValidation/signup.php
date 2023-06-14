@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    // session_start();
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/users/user.php';
     function userValidation($data, $imageFile) {
         
@@ -66,14 +66,9 @@
             $errors[] = 'Username Not Match';
         }
 
-        // Role Validation
-        // if($role == 1) {
-        //     $role = 1;
-        // } else {
-        //     $role = 0;
-        // }
         if (empty($errors)) {
-            createNewUser($email, $password, $username, $image_dest, $role);
+            $newUser = createNewUser($email, $password, $username, $image_dest, $role);
+            if($newUser) {
                 if(isset($_SESSION['user'])) {
                     echo '<span class="alert alert-success">Added User Successfully</span>';
                     header("refresh:3;url=listAllUsers.php");
@@ -82,7 +77,10 @@
                     header("refresh:3;url=login.php");
                 }
                 exit();
-            } 
+            } else {
+                echo '<span class="alert alert-danger">This User Is Already have account!</span>';
+            }
+        }
         else {
             foreach ($errors as $err) {
                 echo '<span class="alert alert-danger">' . $err . '</span>';

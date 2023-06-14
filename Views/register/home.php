@@ -4,12 +4,9 @@
     include '../../layout/navbar.php';
     include '../../Controllers/users/users.php';
     
-    // if (!isLoggedIn()) {
-        
-    //     header('Location: login.php');
-        
-    //     exit();
-    // }
+    if (!isLoggedIn()) {
+        header('Location:login.php');
+    }
 
     $user = getCurrentUser();
 ?>

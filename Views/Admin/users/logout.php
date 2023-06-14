@@ -4,5 +4,5 @@
     session_start();
     session_unset();
     session_destroy();
-    header('Location:../../../../register/login.php');
+    header('Location:../../../../../../Cafe_php_project/Views/register/login.php');
     exit();

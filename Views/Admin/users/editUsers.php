@@ -1,8 +1,13 @@
 <?php
     ob_start();
+    session_start();
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
-    // session_start();
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/navbar.php';
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
+    if(!isLoggedIn()) {
+        header("Location:../../../../../../Cafe_php_project/Views/register/login.php");
+    }
     if(isset($_GET['do'])) {
 
         $do = $_GET['do'];
