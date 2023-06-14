@@ -1,24 +1,15 @@
 <?php
-include 'product_cartModel.php';
-//function to create order from carts
-function createOrder()
+
+function createOrder($userId,$products,$usercarts)
 {
     global $conn;
 
-    $data = file_get_contents("php://input");
-    $cart = json_decode($data, true);
-
-    $userId= $cart['user_id'];
-    
-    $products=select_carts($userId);
-    $usercarts = selectUserCarts($userId);
-
-
     try {
 
-        $stmt = $conn->prepare("INSERT INTO `Cafe`.`orders` (`user_id`, `total_price`) VALUES (:user_id, :total_price)");
+        $stmt = $conn->prepare("INSERT INTO `Cafe`.`orders` (`user_id`, `total_price`,`notes`) VALUES (:user_id, :total_price,:notes)");
         $stmt->bindParam(':user_id', $userId);
         $stmt->bindParam(':total_price', $usercarts[0]['total_price']);
+        $stmt->bindParam(':notes', $usercarts[0]['notes']);
         $stmt->execute();
 
         $orderId = $conn->lastInsertId();
@@ -32,16 +23,9 @@ function createOrder()
             $stmt->bindParam(':quantity', $product['quantity']);
             $stmt->execute();
         }
-
-        deleteAllCarts();   
-        deleteUserCarts($userId); 
         
-        // return $orderId;
     } catch (PDOException $e) {
         throw $e;
     }
 }
-if ($_SERVER["REQUEST_METHOD"] === 'POST') {
-    createOrder();
-    // header("Refresh:1");
-}
+
