@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             <div class="col-xl-3 col-lg-4 col-sm-6">
                 <div class="card_container">
                     <div class="img_card">
-                        <img src="<?= $row['image'] ?>" alt="">
+                        <img src="../../<?= $row['image'] ?>" alt="">
                     </div>
                     <div class="card-body">
                         <div class="card_top">

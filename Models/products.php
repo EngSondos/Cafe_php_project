@@ -12,11 +12,12 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
 
     $stmt = $conn->prepare($query);
     // $image = $_FILES['image']['name'];
-    $target = "../../uploads/";
+    $target = "../../";
     $image_path =  $target . $image;
+    var_dump($_FILES['image']['tmp_name']);
     move_uploaded_file($_FILES['image']['tmp_name'], $image_path); // Upload the image with the unique name
     $stmt->bindParam(':productName', $name);
-    $stmt->bindParam(':productImage', $image_path);
+    $stmt->bindParam(':productImage', $image);
     $stmt->bindParam(':price', $price);
     $stmt->bindParam(':quantity', $quantity);
     $stmt->bindParam(':category_id', $category_id);
@@ -40,8 +41,6 @@ function DisplayAllProductsQuery()
 
     try {
         $query = "SELECT * FROM  `products`";
-        // var_dump($query);
-
         ### prepare query
         $stmt = $conn->prepare($query);
         $stmt->execute();
@@ -52,9 +51,32 @@ function DisplayAllProductsQuery()
     }
 }
 
+//**DISPLAY ALL Products With Pagination
+function DisplayAllProductsQueryWithPagination()
+{
+    global $conn;
+    global $table;
 
+    try {
+        $query = "SELECT * FROM  `products`";
+        // var_dump($query);
 
-//**DISPLAY Product 
+        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        //Retrieve the total number of records in the database table 
+        $total_records = $stmt->rowCount();
+        //Set the number of records to display per page and calculate the total number of pages
+        $records_per_page = 8;
+        $total_pages = ceil($total_records / $records_per_page);
+        return $row;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
+//**DISPLAY Available Product 
 function DisplayAvailableProductsQuery()
 {
     global $conn;
@@ -94,15 +116,32 @@ function SelectProductByIdQuery($id)
         echo $e->getMessage();
     }
 }
-
 // ----------------------------------------------------------------
 
+//*Select Image From DataBase */
+function selectImageQuery($id)
+{
+    global $conn;
+    // Get the image name from the database
+    $query = "SELECT `image` FROM `products` WHERE id = :id";
+    $stmt = $conn->prepare($query);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    $imageName = $stmt->fetchColumn();
+    return $imageName;
+}
+
+
+// ----------------------------------------------------------------
 //*DELETE PRODUCT 
 function DeleteProductQuery($id)
 {
     global $conn;
     // try {
-    // alert($id);
+    //Select Image From DataBase
+    $imageName = selectImageQuery($id);
+    $imagePath = '../../' . $imageName;
+    // var_dump($imagePath);
     $query = "DELETE FROM `products` WHERE id = :id";
     // var_dump($query);
 
@@ -110,6 +149,12 @@ function DeleteProductQuery($id)
     $stmt = $conn->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
+    // Delete the image file from the server
+    if (file_exists($imagePath)) {
+        unlink($imagePath);
+    } else {
+        echo "Image file not found";
+    }
     // var_dump($id);
     return $stmt->rowCount();
     // } catch (Exception $e) {

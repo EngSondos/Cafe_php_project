@@ -80,7 +80,7 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
                                 }
 
                                 ?> </td>
-                        <td> <img height="70" width="70" src="<?= $row['image'] ?>" alt=""> </td>
+                        <td> <img height="70" width="70" src="../../<?= $row['image'] ?>" alt=""> </td>
 
                         <td><a href="UpdateProducts.php?product_id=<?= $row['id'] ?>" class="btn btn-warning edit-category">Edit</a></td>
                         <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
