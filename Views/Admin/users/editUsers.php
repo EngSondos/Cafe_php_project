@@ -1,15 +1,16 @@
 <?php
     ob_start();
-    require_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
     // session_start();
+    if(isset($_GET['do'])) {
+
+        $do = $_GET['do'];
     
-    $do = $_GET['do'];
-    
-    if ($do == 'edit') { 
+        if ($do == 'edit') { 
         
         // check if request userid is numeric & get the integer value of it
-            $userid = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 0;
+        $userid = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 0;
             
             $conn = connect();
             // To Get All Data From DataBase
@@ -25,7 +26,7 @@
 
                 <h1 class="text-center">Edit User</h1>
                 <div class="container">
-                    <form class="form-horizontal" method="POST">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
                         <!-- <input type="hidden" name="userid" value="<?php echo $userid ?>" /> -->
                         <!-- Start Username Field -->
                         <div class="form-group">
@@ -65,11 +66,9 @@
                         </div>
                         <!-- End Fullname Field -->
                         <!-- Image -->
-                        <div class="form-group">
-                            <lable class="col-sm-2 control-lable">Image</lable>
-                            <div class="col-sm-10 col-md-5">
-                                <input type="file" name="image" class="form-control" value="<?php echo $row['image'] ?>" autocomplete="off" />
-                            </div>
+                        <div class="col-sm-10 col-md-5">
+                            <input type="file" id="form1Example1322" name="image" class="form-control form-control-lg" />
+                            <label class="form-label" for="form1Example1322">Upload Image</label>
                         </div>
                         <!-- Start Button Field -->
                         <div class="form-group">
@@ -80,7 +79,7 @@
                         <!-- End Button Field -->
                     </form>
                 </div>
-    <?php }
+    <?php }}
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -89,13 +88,49 @@
             $username = $data['username'];
             $email = $data['email'];
             $role = $data['role'];
-            $password = empty($data['newpassword']) ? $data['oldpassword'] : sha1($data['newpassword']);
+            $password = empty($data['newpassword']) ? $data['oldpassword'] : password_hash($data['newpassword'], PASSWORD_DEFAULT);
             
-            // Password Regx
-            $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+            if(isset($_FILES)) {
+
+                // Handle image upload
+                $image = $_FILES['image'];
+        
+                $image_name = $image['name'];
+        
+                $image_tmp_name = $image['tmp_name'];
+        
+                $image_error = $image['error'];
+        
+                if ($image_error === UPLOAD_ERR_OK) {
+        
+                    $image_ext = pathinfo($image_name, PATHINFO_EXTENSION);
+        
+                    $allowed_exts = array('jpg', 'jpeg', 'png', 'gif');
+        
+                    if (in_array($image_ext, $allowed_exts)) {
+        
+                        $image_dest = $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/uploads/users/' . uniqid('', true) . '.' . $image_ext;
+        
+                        move_uploaded_file($image_tmp_name, $image_dest);
+                    } else {
+        
+                        $errors[] = 'Invalid image file type';
+                    }
+                }
+            } else {
+        
+                    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
+                    $user = getUserByEmail($email);
+
+                    $image_dest = $user['image'];
+                
+                    if (!$image_dest) {
+                        
+                        $image_dest = null;
+                }
+            }
             
             // Email Validation
-    
             if(empty($email)) {
                 $errors[] = 'Email Is Required';
             }   elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -105,7 +140,7 @@
             // pssword Validtion
             if(empty($password)) {
                 $errors[] = 'Password Is Required';
-            } elseif (!preg_match($password_regex, $password)) {
+            } elseif (strlen($password) < 7) {
                 $errors[] = 'Write Strong Password';
             }
             // Username Validation
@@ -126,8 +161,8 @@
                 $stmt2->execute(array($email));
                 $count = $stmt2->rowCount();
                 if ($count == 1) {
-                    $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, role = ? WHERE email = ?");
-                    $stmt->execute(array($username, $password, $role, $email));
+                    $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, image = ?, role = ? WHERE email = ?");
+                    $stmt->execute(array($username, $password, $image_dest, $role, $email));
                     $count = $stmt2->rowCount();
                     // echo Success Message
                     echo '<div class="alert alert-success">' . $stmt->rowCount() . ' Data Updated</div>';

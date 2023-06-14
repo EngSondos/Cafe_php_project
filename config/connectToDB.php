@@ -1,10 +1,10 @@
 <?php
-
-function connect() {
     $host = 'localhost';
     $user = 'root';
     $password = 'mangood1907';
     $database = 'cafe';
+function connect() {
+    global $host, $user, $password, $database;
     $dsn = "mysql:host=$host;dbname=$database;charset=utf8mb4";
     $options = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
