@@ -110,7 +110,7 @@ function DeleteProductQuery($id)
     $stmt = $conn->prepare($query);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    var_dump($id);
+    // var_dump($id);
     return $stmt->rowCount();
     // } catch (Exception $e) {
     //     echo $e->getMessage();
@@ -138,6 +138,27 @@ function UpdateProductQuery($id, $name, $image, $price, $quantity, $category_id)
         $stmt->bindParam(':category_id', $category_id);
         $stmt->bindParam(":id", $id);        # true --> query executed successfully
         return $stmt->execute();
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
+function searchProductQuery($ValueSearch)
+{
+    global $conn;
+    try {
+        // Query the database with the search term
+        $query = "SELECT * FROM `products` WHERE `name` LIKE '%$ValueSearch%'";
+        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($stmt->rowCount() > 0) {
+            return $row;
+        } else {
+            echo "<h2 class='my-4' >  No results found for: " . $ValueSearch   . "</h2>";
+            return $row;
+        }
     } catch (Exception $e) {
         echo $e->getMessage();
     }
