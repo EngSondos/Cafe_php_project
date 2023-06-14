@@ -24,12 +24,12 @@
 }
  */
 
-body{
+/* body{ */
 
-    background-image: url('./images/bg.jpg');
-    background-image: linear-gradient(rgba(0,0,0,.5) , rgba(0,0,0,.5)) , url('./images/bg.jpg');
+    /* background-image: url('./images/bg.jpg');
+    background-image: linear-gradient(rgba(0,0,0,.5) , rgba(0,0,0,.5)) , url('./images/bg.jpg'); */
 
-}
+/* } */
 
 .container{
 

@@ -1,10 +1,11 @@
 <?php 
     session_start();
     $pageTitle = 'List Users';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/navbar.php';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/Admin/getUsers.php';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
+    include "../../../layout/head.php";
+    include "../../../layout/navbar.php";
+    include "../../../Models/Admin/getUsers.php";
+    include "../../../config/connectToDB.php";
+
     $users  = getAllUsers();
 ?>
 <div class="container mt-5">
@@ -38,4 +39,4 @@
     </tbody>
 </table>
 </div>
-<?php include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php'; ?>
+<?php include '../../../layout/footer.php'; ?>

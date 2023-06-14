@@ -3,6 +3,17 @@
 $pageTitle = 'login';
 include '../../layout/head.php';
 include '../../layout/navbar.php';
+include '../../Validation/registerValidation/login.php';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    if(isset($_POST['email']) && isset($_POST['password'])) {
+
+            loginValidation($_POST['email'], $_POST['password']);
+        
+        }
+    }
+
 ?>
 <section class="vh-100">
     <div class="container py-5 h-100">
@@ -30,23 +41,13 @@ include '../../layout/navbar.php';
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-lg btn-block signup-btn">Sign Up</button>
+            <button type="submit" class="btn btn-primary btn-lg btn-block signup-btn">Sign In</button>
             <div class="d-flex justify-content-around align-items-left mt-4">
                 <a href="signup.php">or SignUp?</a>
             </div>
         </form>
         <div class='errors-container'>
-        <?php
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            include '../../Validation/registerValidation/login.php';
-    
-            if(isset($_POST['email']) && isset($_POST['password'])) {
-    
-                    loginValidation($_POST['email'], $_POST['password']);
-                
-                }
-            }
-        ?>
+      
         </div>
         </div>
     </div>

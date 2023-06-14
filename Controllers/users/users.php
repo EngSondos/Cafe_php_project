@@ -1,8 +1,8 @@
 <?php
 
-include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Validation/registerValidation/signup.php';
+include "../../Validation/registerValidation/signup.php";
 
-// Create a new User (Sign up)
+// Create a new User (Sign up)`
 function userController($data, $imageFile) {
     try{
         userValidation($data, $imageFile);
@@ -28,7 +28,7 @@ function loginUser($email, $password) {
 
 // if User Login Start Session
 function isLoggedIn() {
-    session_start();
+    // session_start();
     return isset($_SESSION['user']);
 }
 // to Get The Data Of User who already login

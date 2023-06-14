@@ -1,6 +1,6 @@
 <?php  
 
-include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
+include "../../config/connectToDB.php";
 
 // Create User To Database
 
