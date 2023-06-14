@@ -7,17 +7,25 @@ include "../../config/connectToDB.php";
 function createNewUser($email, $password, $username, $image, $role) {
 
     $conn = connect();
-
-    $stmt = $conn->prepare('INSERT INTO 
-                users (email, password, username, image, role) 
-                VALUES(:email, :password, :username, :image, :role);');
-    $stmt->execute(array(
-        ':email'    => $email,
-        ':password' => password_hash($password, PASSWORD_DEFAULT),
-        ':username' => $username,
-        ':image'    => $image,
-        ':role'     => $role
-    ));
+    $stmt = $conn->prepare("SELECT COUNT(*) as count FROM users WHERE email = ?");
+    $stmt->execute([$email]);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result['count'] > 0) {
+        // email address already exists in the database
+        return false;
+    } else {
+        $stmt = $conn->prepare('INSERT INTO 
+                    users (email, password, username, image, role) 
+                    VALUES(:email, :password, :username, :image, :role);');
+        $stmt->execute(array(
+            ':email'    => $email,
+            ':password' => password_hash($password, PASSWORD_DEFAULT),
+            ':username' => $username,
+            ':image'    => $image,
+            ':role'     => $role
+        ));
+        return true;
+}
 }
 
 function getUserByEmail($email) {

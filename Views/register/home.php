@@ -5,12 +5,9 @@
     // include "../../MiddleWares/user.php";
 
     
-    // if (!isLoggedIn()) {
-        
-    //     header('Location: login.php');
-        
-    //     exit();
-    // }
+    if (!isLoggedIn()) {
+        header('Location:login.php');
+    }
 
     $user = getCurrentUser();
 ?>

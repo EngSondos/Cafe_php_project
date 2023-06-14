@@ -23,6 +23,9 @@
         if(isset($user) && $user['role'] === 0){ ?>
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
+                  <a><img src="<?php echo substr($user['image'], 15); ?>" width="30" alt=""></a>
+              </li>
+              <li class="nav-item">
               <a href="#" class="nav-link"><?= $user['username'] ?></a>
               </li>
             <li class="nav-item">
@@ -39,6 +42,9 @@
             <li class="nav-item mr-4">
         <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
       </li>
+              <li class="nav-item">
+                    <a><img src="<?php echo substr($user['image'], 15); ?>" width="30" alt=""></a>
+              </li>
               <li class="nav-item">
                 <a href="#" class="nav-link"><?= $user['username'] ?></a>
               </li>
@@ -58,7 +64,7 @@
         <a class="nav-link" href="/Cafe_php_project/Views/register/login.php">Login</a>
       </li>
       <li class="nav-item ">
-        <a class="nav-link" href="/Cafe_php_project/Views/register/login.php">SignUp</a>
+        <a class="nav-link" href="/Cafe_php_project/Views/register/signup.php">SignUp</a>
       </li>
    <?php } ?>
   </ul>

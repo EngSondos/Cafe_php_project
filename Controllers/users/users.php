@@ -15,14 +15,25 @@ function userController($data, $imageFile) {
 // this function accept two parameters from validation file
 // when aleardy clean without errors any from user inputs
 function loginUser($email, $password) {
-
-    $user = getUserByEmail($email);
+    // $user = getUserByEmail($email);
+    $conn = connect();
+    
+    $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");
+    
+    $stmt->execute([$email]);
+    
+    $user = $stmt->fetch(PDO::FETCH_ASSOC);
+    
     if($user && password_verify($password, $user['password'])) {
+       
         session_start();
+       
         $_SESSION['user'] = $user;
+       
         return $_SESSION['user'];
+    
     } else {
-        return 'Your Are Not User Please try to signup';
+        return false;
     }
 }
 

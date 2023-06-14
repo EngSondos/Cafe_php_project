@@ -21,20 +21,24 @@
         } 
 
         if(empty($errors)) {
-            loginUser($email, $password);
-            
-            echo '<span class="alert alert-success">Welcome You Will Redircet To Home Now</span>';
-            
-            if($_SESSION['user']['role'] === 0) {
 
-                header("refresh:3;url=home.php");
-
-            } elseif ($_SESSION['user']['role'] === 1) {
-
-                header("refresh:3;url=../Admin/users/listAllUsers.php");
+            $userLogin = loginUser($email, $password);
+            if($userLogin) {
+                echo '<span class="alert alert-success">Welcome You Will Redircet To Home Now</span>';
             
+                if($_SESSION['user']['role'] === 0) {
+    
+                    header("refresh:3;url=home.php");
+    
+                } elseif ($_SESSION['user']['role'] === 1) {
+    
+                    header("refresh:3;url=../Admin/users/listAllUsers.php");
+                
+                }
+                exit();
+            } else {
+                echo '<span class="alert alert-danger">faild to login with wrong email or password!</span>';
             }
-            exit();
         } else {
             foreach($errors as $err) {
                 echo '<span class="alert alert-danger">' . $err . '</span>';
