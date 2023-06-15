@@ -79,18 +79,38 @@ function pagination()
 }
 
 
-function printPages($total_pages, $currentPage)
+// function printPages($total_pages, $currentPage)
+// {
+//     echo "<div>";
+//     for ($i = 1; $i <= $total_pages; $i++) {
+//         if ($i == $currentPage ) {
+//             echo "<strong>$i</strong> ";
+//         } else {
+//             echo "<a href='?page=$i'>$i</a> ";
+//         }
+//     }
+//     echo "</div>";
+// }
+
+function printPages($total_pages, $currentPage, $ValueSearch)
 {
-    echo "<div>";
+    echo "<div class='container_page_num' >";
+    if (isset($ValueSearch)) {
+        $searchTerm = "&search_term=" . ($ValueSearch);
+    } else {
+        $searchTerm = "";
+    }
     for ($i = 1; $i <= $total_pages; $i++) {
         if ($i == $currentPage) {
-            echo "<strong>$i</strong> ";
+            echo "<strong class='num_page_active'>$i</strong> ";
         } else {
-            echo "<a href='?page=$i'>$i</a> ";
+            echo "<a class='num_page' href='?page=$i$searchTerm'>$i</a> ";
         }
     }
     echo "</div>";
 }
+
+
 // ----------------------------------------------------------------
 
 //**DISPLAY Available Products With Pagination
@@ -116,7 +136,34 @@ function DisplayAvailableProductsQueryWithPagination()
     }
 }
 
-
+//** Search Query  With Pagination */
+function search_Product_With_Pagination_Query($ValueSearch)
+{
+    global $conn;
+    list(
+        $currentPage,
+        $total_pages,
+        $records_per_page, $offset
+    ) = pagination();
+    try {
+        // Query the database with the search term
+        $query = "SELECT * FROM `products` WHERE `name` LIKE '%$ValueSearch%' AND `quantity` > 0 LIMIT :limit OFFSET :offset";
+        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->bindValue(':limit', $records_per_page, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($stmt->rowCount() > 0) {
+            return $row;
+        } else {
+            echo "<h2 class='my-4' >  No results found for: " . $ValueSearch   . "</h2>";
+            return $row;
+        }
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
 
 
 // //**DISPLAY Available Products With Pagination

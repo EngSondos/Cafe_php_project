@@ -48,7 +48,7 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
 <!-- Main Css File For Product -->
 <link rel="stylesheet" href="../../assets/style_product.css">
 <!-- ----------------------------------------------------------------------------------------- -->
-<div class="container ">
+<div class="container p-50 ">
     <h1 class="text-primary mx-auto text-center my-4">All Products</h1>
     <!-- <h2 class="my-4">Products</h2> -->
     <!-- <a class="btn btn-primary" href="Add Products.php">Add Product</a> -->
@@ -58,10 +58,11 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
                                                                                                             } ?>">
         <input type="submit" value="Search">
     </form>
-    <div class="row ">
+    <div class="row container_products">
         <?php
         if (!empty($ValueSearch)) {
-            $Products = searchProductQuery($ValueSearch) ?? "";
+            $Products =  search_Product_With_Pagination_Query($ValueSearch) ?? "";
+            // $Products = searchProductQuery($ValueSearch) ?? "";
             $_GET['search_term'] = "";
             // var_dump($Products);
         } else {
@@ -98,7 +99,7 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
         $currentPage,
         $total_pages,
     ) = pagination();
-    printPages($total_pages, $currentPage);
+    printPages($total_pages, $currentPage, $ValueSearch);
 
     ?>
 
