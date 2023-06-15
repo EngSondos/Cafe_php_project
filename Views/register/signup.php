@@ -2,6 +2,8 @@
     ob_start();
 
     $pageTitle = 'Signup';
+    // include '../../layout/head.php';
+
     include '../../layout/head.php';
 
     include "../../MiddleWares/guest.php";

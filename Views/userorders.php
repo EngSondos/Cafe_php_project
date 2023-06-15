@@ -34,7 +34,7 @@ if (isset($_POST['start_date'], $_POST['end_date'])) {
   if (!validateDates($start_date, $end_date)) {
     echo "<div class='alert alert-danger' style='text-align: center' role='alert'>Invalid dates.</div>";
   } else {
-    $orders = filterorder($start_date, $end_date);
+    $orders = filterorder($start_date, $end_date,$userId);
   }
 } else {
   $orders = usersorder($userId);

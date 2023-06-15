@@ -3,6 +3,10 @@
     include '../../Controllers/users/users.php';
     include "../../MiddleWares/auth.php";
     // include "../../MiddleWares/user.php";
+    // include "../../assets/homestyle.css";
+    // include "Cafe_php_project/layout/CSS/homestyle.css";
+
+
 
     
     if (!isLoggedIn()) {
@@ -12,6 +16,7 @@
     $user = getCurrentUser();
 ?>
 
-    Welcome <?php echo $user['username']; ?>
+
+
 
 <?php include '../../layout/footer.php'; ?>

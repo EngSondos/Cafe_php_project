@@ -1,13 +1,10 @@
+
 <?php
 
 
 
 // include 'db_connection.php';
 // include '../connection.php';
-
-
-
-
 
 
 
@@ -93,7 +90,18 @@ function createOrder($userId, $products, $notes, $totalPrice, $status) {
       $stmt->bindParam(':price', $product['price']);
       $stmt->bindParam(':quantity', $product['quantity']);
       $stmt->execute();
+
+
+      //update product quantity
+      $stmt = $conn->prepare("UPDATE products SET quantity = quantity - :ordered_quantity WHERE id = :product_id");
+      $stmt->bindParam(':ordered_quantity', $product['quantity']);
+      $stmt->bindParam(':product_id', $product['product_id']);
+      $stmt->execute();
+
+    
     }
+
+    $conn->commit();
 
 
     return $orderId;
@@ -118,14 +126,16 @@ function getOrderProducts($orderId) {
 }
 
 
-function filterOrdersByDate($start_date, $end_date)
+function filterOrdersByDate($start_date, $end_date, $userId)
 {
   global $conn;
 
   try {
-    $stmt = $conn->prepare('SELECT * FROM orders WHERE created_at BETWEEN :start_date AND :end_date ORDER BY created_at DESC');
+    $stmt = $conn->prepare('SELECT * FROM orders WHERE created_at BETWEEN :start_date AND :end_date AND user_id = :user_id  ORDER BY created_at DESC');
     $stmt->bindParam(':start_date', $start_date);
     $stmt->bindParam(':end_date', $end_date);
+        $stmt->bindParam(':user_id', $userId);
+
     $stmt->execute();
     $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
