@@ -19,7 +19,6 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
-
     if ($_GET['action'] === 'add') {
         // AddProductQuery($_POST);
         // Handle add form data here
@@ -36,6 +35,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $ValueSearch = $_GET['search_term'] ?? "";
 }
+
+
+//Pagination for products
+
+$productPagination = DisplayAvailableProductsQueryWithPagination();
+// var_dump($productPagination);
+
+
 
 ?>
 <!-- Main Css File For Product -->
@@ -58,7 +65,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $_GET['search_term'] = "";
             // var_dump($Products);
         } else {
-            $Products = DisplayAvailableProductsQuery();
+            // $Products = DisplayAvailableProductsQuery();
+            $Products = $productPagination;
         }
         // var_dump(   $Products );
         foreach ($Products as $row) {
@@ -86,7 +94,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             </div>
         <?php } ?>
     </div>
+    <?php list(
+        $currentPage,
+        $total_pages,
+    ) = pagination();
+    printPages($total_pages, $currentPage);
 
+    ?>
 
 </div>
 
