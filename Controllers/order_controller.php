@@ -40,9 +40,9 @@ function create($userId, $products, $notes, $totalPrice, $status) {
 }
 
 
-function filterorder($start_date, $end_date){
+function filterorder($start_date, $end_date,$userId){
 
-  $orders = filterOrdersByDate($start_date, $end_date);
+  $orders = filterOrdersByDate($start_date, $end_date,$userId);
 
   foreach ($orders as &$order) {
     $orderProducts = getOrderProducts($order['id']);
@@ -64,3 +64,6 @@ function getById($orderId) {
 }
 
 
+function cancel($orderId) {
+  return cancelOrder($orderId);
+}

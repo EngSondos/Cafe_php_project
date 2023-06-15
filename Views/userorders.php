@@ -34,32 +34,30 @@ if (isset($_POST['start_date'], $_POST['end_date'])) {
   if (!validateDates($start_date, $end_date)) {
     echo "<div class='alert alert-danger' style='text-align: center' role='alert'>Invalid dates.</div>";
   } else {
-    $orders = filterorder($start_date, $end_date);
+    $orders = filterorder($start_date, $end_date,$userId);
   }
 } else {
   $orders = usersorder($userId);
 }
 
+
 if (isset($_POST['cancel_order'])) {
-    $orderId = $_POST['cancel_order'];
-    $order = getById($orderId);
-    if ($order['status'] == 'pending') {
-        try {
-          $stmt = $conn->prepare('UPDATE orders SET status = :status, deleted_at = :deleted_at WHERE id = :order_id');
-          $status = 'canceled';
-          $deleted_at = date('Y-m-d H:i:s');
-          $stmt->bindParam(':status', $status);
-          $stmt->bindParam(':deleted_at', $deleted_at);
-          $stmt->bindParam(':order_id', $orderId);
-          $stmt->execute();
-            echo "<div class='alert alert-success' style='text-align: center' role='alert'>Order $orderId has been canceled.</div>";
-        } catch(PDOException $e) {
-            echo "<div class='alert alert-danger' style='text-align: center'role='alert'>Error canceling order $orderId.</div>";
-        }
-    } else {
-        echo "<div class='alert alert-warning' style='text-align: center' role='alert'>Order $orderId cannot be canceled because it is not in 'pending' status.</div>";
-    }
+  $orderId = $_POST['cancel_order'];
+  $result = cancel($orderId, $conn);
+  if ($result) {
+    echo "<div class='alert alert-success' style='text-align: center' role='alert'>Order $orderId has been canceled.</div>";
+  } else {
+    echo "<div class='alert alert-warning' style='text-align: center' role='alert'>cant cancel Order $orderId   .</div>";
+  }
 }
+
+
+
+
+
+
+
+
 ?>
 <section>
 

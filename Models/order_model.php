@@ -1,4 +1,11 @@
+
 <?php
+
+
+
+// include 'db_connection.php';
+// include '../connection.php';
+
 
 
 function getAllOrders()
@@ -83,7 +90,18 @@ function createOrder($userId, $products, $notes, $totalPrice, $status) {
       $stmt->bindParam(':price', $product['price']);
       $stmt->bindParam(':quantity', $product['quantity']);
       $stmt->execute();
+
+
+      //update product quantity
+      $stmt2 = $conn->prepare("UPDATE products SET quantity = quantity - :ordered_quantity WHERE id = :product_id");
+      $stmt2->bindParam(':ordered_quantity', $product['quantity']);
+      $stmt2->bindParam(':product_id', $product['product_id']);
+      $stmt2->execute();
+
+    
     }
+
+    // $conn->commit();
 
 
     return $orderId;
@@ -108,14 +126,16 @@ function getOrderProducts($orderId) {
 }
 
 
-function filterOrdersByDate($start_date, $end_date)
+function filterOrdersByDate($start_date, $end_date, $userId)
 {
   global $conn;
 
   try {
-    $stmt = $conn->prepare('SELECT * FROM orders WHERE created_at BETWEEN :start_date AND :end_date ORDER BY created_at DESC');
+    $stmt = $conn->prepare('SELECT * FROM orders WHERE created_at BETWEEN :start_date AND :end_date AND user_id = :user_id  ORDER BY created_at DESC');
     $stmt->bindParam(':start_date', $start_date);
     $stmt->bindParam(':end_date', $end_date);
+        $stmt->bindParam(':user_id', $userId);
+
     $stmt->execute();
     $orders = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -153,5 +173,42 @@ function getOrderById($orderId) {
     return $order;
   } catch(PDOException $e) {
     throw $e;
+  }
+}
+
+
+function cancelOrder($orderId) {
+  global $conn;
+
+  $order = getById($orderId);
+  if ($order['status'] == 'pending') {
+    try {
+      $stmt = $conn->prepare('UPDATE orders SET status = :status, deleted_at = :deleted_at WHERE id = :order_id');
+      $status = 'canceled';
+      $deleted_at = date('Y-m-d H:i:s');
+      $stmt->bindParam(':status', $status);
+      $stmt->bindParam(':deleted_at', $deleted_at);
+      $stmt->bindParam(':order_id', $orderId);
+      $stmt->execute();
+
+      // retrieve products 
+      $stmt = $conn->prepare('SELECT product_id, quantity FROM order_product WHERE order_id = :order_id');
+      $stmt->bindParam(':order_id', $orderId);
+      $stmt->execute();
+      $products = $stmt->fetchAll();
+
+      // increase quantity
+      foreach ($products as $product) {
+        $stmt = $conn->prepare("UPDATE products SET quantity = quantity + :returned_quantity WHERE id = :product_id");
+        $stmt->bindParam(':returned_quantity', $product['quantity']);
+        $stmt->bindParam(':product_id', $product['product_id']);
+        $stmt->execute();
+      }
+      return true;
+    } catch(PDOException $e) {
+      return false;
+    }
+  } else {
+    return false;
   }
 }
