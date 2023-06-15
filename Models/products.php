@@ -31,24 +31,49 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
 
 // ----------------------------------------------------------------
 
-//**DISPLAY ALL PRODUCT 
-function DisplayAllProductsQuery()
+// //**DISPLAY ALL PRODUCT For Admin
+// function DisplayAllProductsQuery()
+// {
+//     global $conn;
+
+//     try {
+//         $query = "SELECT * FROM  `products`";
+//         ### prepare query
+//         $stmt = $conn->prepare($query);
+//         $stmt->execute();
+//         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//         return $row;
+//     } catch (Exception $e) {
+//         echo $e->getMessage();
+//     }
+// }
+
+//**DISPLAY Available Products With Pagination For Admin
+function Display_All_Products_Query_With_Pagination()
 {
     global $conn;
-
+    list(
+        $currentPage,
+        $total_pages,
+        $records_per_page, $offset
+    ) = pagination();
     try {
-        $query = "SELECT * FROM  `products`";
-        ### prepare query
+        // Build the SQL query with LIMIT and OFFSET clauses
+        $query = "SELECT * FROM `products` LIMIT :limit OFFSET :offset";
         $stmt = $conn->prepare($query);
+        $stmt->bindValue(':limit', $records_per_page, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
         $stmt->execute();
-        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $row;
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $results;
     } catch (Exception $e) {
         echo $e->getMessage();
     }
 }
 
+
 // ----------------------------------------------------------------
+//*Retrieve Product Per Page
 function pagination()
 {
     global $conn;
@@ -79,7 +104,7 @@ function pagination()
 }
 
 // ----------------------------------------------------------------
-
+//*Print Page 
 function printPages($total_pages, $currentPage, $ValueSearch)
 {
     echo "<div class='container_page_num' >";
@@ -100,7 +125,7 @@ function printPages($total_pages, $currentPage, $ValueSearch)
 
 // ----------------------------------------------------------------
 
-//**DISPLAY Available Products With Pagination
+//**DISPLAY Available Products With Pagination For Users Only
 function DisplayAvailableProductsQueryWithPagination()
 {
     global $conn;

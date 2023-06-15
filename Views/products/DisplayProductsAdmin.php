@@ -60,7 +60,8 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
             </thead>
             <tbody>
                 <?php
-                $Products = DisplayAllProductsQuery();
+                // $Products = DisplayAllProductsQuery();
+                $Products = Display_All_Products_Query_With_Pagination();
                 foreach ($Products as $row) {
                 ?>
                     <tr>
@@ -86,21 +87,16 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
                     </tr>
             </tbody>
         </table>
+        <?php list(
+            $currentPage,
+            $total_pages,
+        ) = pagination();
+        printPages($total_pages, $currentPage, null);
+
+        ?>
     </div>
 
     <!-- Optional: Place to the bottom of scripts -->
-    <script>
-        const editButtons = document.querySelectorAll('.edit-category');
-        editButtons.forEach(button => {
-            button.addEventListener('click', (event) => {
-                const categoryId = event.target.dataset.categoryId;
-                const editUrl = `?action=update&category_id=${categoryId}`;
-                document.querySelector('#modelId form').setAttribute('action', editUrl);
-            });
-        });
-
-        // const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-    </script>
 </body>
 
 </html>
