@@ -175,3 +175,40 @@ function getOrderById($orderId) {
     throw $e;
   }
 }
+
+
+function cancelOrder($orderId) {
+  global $conn;
+
+  $order = getById($orderId);
+  if ($order['status'] == 'pending') {
+    try {
+      $stmt = $conn->prepare('UPDATE orders SET status = :status, deleted_at = :deleted_at WHERE id = :order_id');
+      $status = 'canceled';
+      $deleted_at = date('Y-m-d H:i:s');
+      $stmt->bindParam(':status', $status);
+      $stmt->bindParam(':deleted_at', $deleted_at);
+      $stmt->bindParam(':order_id', $orderId);
+      $stmt->execute();
+
+      // retrieve products 
+      $stmt = $conn->prepare('SELECT product_id, quantity FROM order_product WHERE order_id = :order_id');
+      $stmt->bindParam(':order_id', $orderId);
+      $stmt->execute();
+      $products = $stmt->fetchAll();
+
+      // increase quantity
+      foreach ($products as $product) {
+        $stmt = $conn->prepare("UPDATE products SET quantity = quantity + :returned_quantity WHERE id = :product_id");
+        $stmt->bindParam(':returned_quantity', $product['quantity']);
+        $stmt->bindParam(':product_id', $product['product_id']);
+        $stmt->execute();
+      }
+      return true;
+    } catch(PDOException $e) {
+      return false;
+    }
+  } else {
+    return false;
+  }
+}

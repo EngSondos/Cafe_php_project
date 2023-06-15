@@ -64,3 +64,6 @@ function getById($orderId) {
 }
 
 
+function cancel($orderId) {
+  return cancelOrder($orderId);
+}
