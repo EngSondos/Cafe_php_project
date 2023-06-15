@@ -18,7 +18,7 @@ function render_carts($products, $carts, $totalcarts)
                         </div>
                         <textarea placeholder='write here the notes you need...'></textarea>
                         </div>
-                        <button class='btn btn-danger savebtn' onclick='savenotes(1)'><i class='fa-solid fa-chevron-right'></i></button>
+                        <button class='btn btn-danger savebtn' onclick='savenotes({$_SESSION['user']['id']})'><i class='fa-solid fa-chevron-right'></i></button>
                         <div id='row2'>";
                         if(sizeof($totalcarts) > 0){
                             echo "<pre id=''>".$totalcarts[0]["notes"]."</pre>";
@@ -34,7 +34,7 @@ function render_carts($products, $carts, $totalcarts)
                             echo "<span class='totalprice'>Total Price: 0 EGP </span>";
                         }
                     echo "<div class='row align-items-center justify-content-center mb-5 w-100'>
-                        <button class='btn btn-primary' onclick='createorder(1)'>Order Now</button>
+                        <button class='btn btn-primary' onclick='createorder({$_SESSION['user']['id']})'>Order Now</button>
                     </div>
                 </div>
             </div>

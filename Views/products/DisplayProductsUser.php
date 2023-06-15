@@ -69,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             </p>
 
                         </div>
-                        <a href="" class="btn btn-primary" onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,1 )">Add To Cart</a>
+                        <a href="" class="btn btn-primary" onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,<?= $_SESSION['user']['id'] ?> )">Add To Cart</a>
                     </div>
                 </div>
             </div>

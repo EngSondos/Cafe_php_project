@@ -1,10 +1,4 @@
 <?php
-// include "../connection_credits.php";
-// include "../connection.php";
-// $conn = dbconnect();
-
-//function to select all products
-// function select_products()
 
 //function to select all carts 
 function createCart($userid,$prodid,$price)

@@ -3,14 +3,18 @@ include '../connection_credits.php';
 include '../connection.php';
 include '../Models/product_cartModel.php';
 include '../Models/userCartModel.php';
-include '../Models/ordersModel.php';
+include '../Models//order_model.php';
 include '../Views/carts/cart_view.php';
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-$userid = 1;
+if(sizeof($_SESSION) == 0){
+    header('Location:http://localhost/Cafe_php_project/Views/register/login.php');
+}
+
+$userid = $_SESSION["user"]["id"];
 
 $carts = selectCarts($userid);
 $products = selectProducts();
@@ -39,7 +43,7 @@ render_carts($products, $carts, $comboBox);
         $products = selectCarts($data['user_id']);
         $usercarts = selectUserCarts($data['user_id']);
         if(sizeof($products) and sizeof($usercarts)){
-            createOrder($data['user_id'],$products,$usercarts);
+            createOrder($data['user_id'],$products,$usercarts[0]['notes'],$$usercarts[0]['total_price'],'pending');
             deleteAllCarts();   
             deleteUserCarts($data['user_id']); 
         }

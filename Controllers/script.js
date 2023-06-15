@@ -5,7 +5,6 @@ let numberOfLines = 0;
 
 if (Notes) {
   numberOfLines = Notes.value.split("\n").length - 1;
-  console.log("Dfdsa");
   for (let i = 0; i < numberOfLines; i++) {
     numberLines();
   }
@@ -60,25 +59,6 @@ function incrementquantity(availablequantity, product_id, user_id, product_price
     span.innerHTML = quantity;
     span2.innerHTML = product_price;
   }
-}
-
-
-
-
-function addToCart(e,product_id, product_price, user_id) {
-  e.preventDefault();
-  fetch("../../Models/product_cartModel.php", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json;charset=utf-8",
-    },
-    body: JSON.stringify({
-      usrid: user_id,
-      productid: product_id,
-      price: product_price,
-    }),
-  })
-  //   alert("aaaaaa");
 }
 
 function decrementquantity(product_id, user_id, product_price) {
@@ -164,7 +144,6 @@ function savenotes(id) {
     location.reload();
   }
 }
-
 
 
 
