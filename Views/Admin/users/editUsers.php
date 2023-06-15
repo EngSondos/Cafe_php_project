@@ -123,16 +123,10 @@
                     }
                 }
             } else {
-        
-                    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
-                    $user = getUserByEmail($email);
-
-                    $image_dest = $user['image'];
-                
-                    if (!$image_dest) {
-                        
-                        $image_dest = null;
-                }
+                include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
+                $user = getUserByEmail($email);
+                var_dump($user);
+                $image_dest = $user['image'];
             }
             
             // Email Validation
@@ -155,12 +149,6 @@
                 $errors[] = 'Username Not Match';
             }
     
-            // Role Validation
-            if($role == 1) {
-                $role = 1;
-            } else {
-                $role = 0;
-            }
             if (empty($errors)) {
                 $stmt2 = $conn->prepare("SELECT * FROM users WHERE email = ?");
                 $stmt2->execute(array($email));
@@ -171,7 +159,7 @@
                     $count = $stmt2->rowCount();
                     // echo Success Message
                     echo '<div class="alert alert-success">' . $stmt->rowCount() . ' Data Updated</div>';
-                    header("refresh:3;url=listAllUsers.php");
+                    // header("refresh:3;url=listAllUsers.php");
                     exit();
                 } else {
                     echo 'Something Wrong';
