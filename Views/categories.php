@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 }
 
 ?>
-
+<main style="width:80%;margin-left:auto">
 <div class="container w-50">
     <h1 class="text-primary mx-auto w-50">categories</h1>
     <form method="post" action="?action=add" enctype="multipart/form-data">
@@ -107,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         </div>
     </div>
 </div>
-
+</main>
 <!-- Optional: Place to the bottom of scripts -->
 <script>
         //*Passing the Category Id to the Url When Submit 

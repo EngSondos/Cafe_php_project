@@ -1,16 +1,6 @@
 <?php
 
 
-
-// include 'db_connection.php';
-// include '../connection.php';
-
-
-
-
-
-
-
 function getAllOrders()
 {
   global $conn;

@@ -149,3 +149,85 @@ function savenotes(id) {
 
 
 
+function move(e) {
+  if (selection && e.buttons) {
+      selection.x = e.x;
+      selection.y = e.y;
+      draw();
+  }
+}
+
+function down(e) {
+  let target = within(e.x, e.y);
+  if (selection && selection.selected) {
+      selection.selected = false;
+  }
+  if (target) {
+      selection = target;
+      selection.selected = true;
+      draw();
+  }
+}
+///////////////////////////////////////////////////
+
+const canvas = document.querySelector('canvas');
+const ctx = canvas.getContext('2d');
+
+
+ctx.beginPath();
+ctx.moveTo(0, 0);
+ctx.lineTo(0, 500);
+ctx.lineTo(canvas.width, 500);
+ctx.lineWidth = 5;
+ctx.strokeStyle = "black";
+
+ctx.stroke();
+
+stopped_at_y = 500;
+stopped_at_x = canvas.width;
+
+arc_stopped_at_y = 500;
+arc_stopped_at_x = 0;
+
+for(i=0;i<6;i++){
+  ctx.beginPath();
+  ctx.moveTo(canvas.width, stopped_at_y-= 80);
+  ctx.lineTo(0, stopped_at_y-= -0);
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = "#d8d8d8";
+
+  ctx.stroke();
+  ctx.beginPath();
+
+  ctx.arc(arc_stopped_at_x += 100, arc_stopped_at_y -= 80, 10, 0, 2 * Math.PI);
+  ctx.fillStyle = `rgba(100,100,${Math.random()*255})`
+  ctx.fill()
+  ctx.stroke();
+  
+}
+for(i=0;i<3;i++){
+
+  ctx.beginPath();
+
+  ctx.arc(arc_stopped_at_x += 100, arc_stopped_at_y += 80, 10, 0, 2 * Math.PI);
+  ctx.fillStyle = `rgba(100,100,${Math.random()*255})`
+  ctx.fill()
+  ctx.stroke();
+}
+var grad= ctx.createLinearGradient(100, 900, 900, 1000);
+grad.addColorStop(0, "purple");
+grad.addColorStop(1, "green");
+
+ctx.beginPath();
+
+
+ctx.moveTo(100, 420);
+ctx.lineTo(590,25);
+
+ctx.moveTo(600, 15);
+ctx.lineTo(900,260);
+ctx.lineWidth = 1;
+ctx.strokeStyle = grad;
+ctx.stroke();
+///////////////////////////////////////////
+const list_items = document

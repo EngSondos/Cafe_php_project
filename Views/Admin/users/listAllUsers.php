@@ -11,6 +11,7 @@
     $users  = getAllUsers();
 
 ?>
+<main style="width:80%;margin-left:auto">
 <div class="container mt-5">
 <?php 
     if(isset($_GET['delete'])) {
@@ -59,6 +60,7 @@
     </tbody>
 </table>
 </div>
+</main>
 <?php 
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php'; 
     ob_end_flush();

@@ -41,6 +41,7 @@ td {
 </style>
 </head>
 <body>
+<main style="width:80%;margin-left:auto">
 <div class="container ">
     <h1 class="text-primary mx-auto text-center my-4">Add Product</h1>
     <a class="btn btn-primary my-3"  href="Add Products.php">Add Product</a>
@@ -88,7 +89,7 @@ td {
         </tbody>
     </table>
 </div>
-
+</main>
 <!-- Optional: Place to the bottom of scripts -->
 <script>
     const editButtons = document.querySelectorAll('.edit-category');

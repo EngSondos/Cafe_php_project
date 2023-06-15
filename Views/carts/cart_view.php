@@ -9,7 +9,7 @@ function render_carts($products, $carts, $totalcarts)
     echo "
     <main>
         <div class='row h-100 mr-0'>
-            <div class='col-xl-4 '><div class='sidebar'>
+            <div class='col-xl-4 col-md-5 col-sm-6'><div class='sidebar'>
                 <h4 class='mycarts bg-light d-flex justify-content-center'>My Carts<span class='cartsnum'>" . sizeof($carts) . "</span></h4>
                 <div class='row justify-content-center m-0' style='height: 40vh;width: 100%;align-items: center; '>
                     <div id='row1'>
@@ -38,7 +38,7 @@ function render_carts($products, $carts, $totalcarts)
                     </div>
                 </div>
             </div>
-            <div class='col-xl-8'>
+            <div class='col-xl-8 col-md-7 col-sm-6'>
                 <div class='container pt-5'>
                     <div class='row' style='justify-content: center;height: 100%;align-items: center;'>";
                         //three columns of carts
@@ -47,7 +47,7 @@ function render_carts($products, $carts, $totalcarts)
                                 foreach ($products as $product) {
                                     if ($product['id'] === $cart['product_id']) {
                                         echo "
-                                        <div class='col-xl-4'>
+                                        <div class='col-xl-4 col-md-6 col-sm-12 '>
                                             <div class='card'>
                                                 <div class='card-img'>
                                                     <img src='../assets/imgs/{$product["image"]}'class='card-img-top' alt='product image'>

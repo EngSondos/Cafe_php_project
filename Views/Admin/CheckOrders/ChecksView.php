@@ -25,6 +25,7 @@ if(!empty($_POST)){
   var_dump($orders);
 }
 ?>
+<main style="width:80%;margin-left:auto">
  <div class="container">
   <div class="row mt-5 ">
     <div class="col-6 my-auto checktext"><h2>Checks Orders</h2></div>
@@ -118,7 +119,7 @@ if(!empty($_POST)){
 
 
     </div>
-
+    </main>
 
     <?php
     include "../../../layout/footer.php";

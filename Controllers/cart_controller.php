@@ -44,7 +44,7 @@ render_carts($products, $carts, $comboBox);
         $usercarts = selectUserCarts($data['user_id']);
         if(sizeof($products) and sizeof($usercarts)){
             createOrder($data['user_id'],$products,$usercarts[0]['notes'],$usercarts[0]['total_price'],'pending');
-            deleteAllCarts();   
+            deleteAllCarts($data['user_id']);   
             deleteUserCarts($data['user_id']); 
         }
     }

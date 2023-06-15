@@ -69,14 +69,14 @@ function deleteCart($cart_id)
 }
 
 //function to save totalprice of all carts 
-function deleteAllCarts()
+function deleteAllCarts($user_id)
 {
     global $conn;
 
-    $delete_query = "delete from `cart_product`";
+    $delete_query = "delete from `cart_product` where `user_id`=:user_id";
 
     $stmt = $conn->prepare($delete_query);
-
+    $stmt->bindParam(":user_id", $user_id);
     $stmt->execute();
 }
 
