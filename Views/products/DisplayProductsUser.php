@@ -18,7 +18,7 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
     DeleteProductQuery($_GET['delete_id']);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
 
     if ($_GET['action'] === 'add') {
         // AddProductQuery($_POST);
@@ -38,7 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 ?>
-
+<!-- Main Css File For Product -->
+<link rel="stylesheet" href="../../assets/style_product.css">
+<!-- ----------------------------------------------------------------------------------------- -->
 <div class="container ">
     <h1 class="text-primary mx-auto text-center my-4">All Products</h1>
     <!-- <h2 class="my-4">Products</h2> -->
@@ -61,28 +63,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         // var_dump(   $Products );
         foreach ($Products as $row) {
         ?>
-            <div class="col-3 mb-4">
-                <div class="card h-100">
-                    <img height="300" src="../../<?= $row['image'] ?>" class="card-img-top border border-secondary rounded" alt="...">
-                    <div class="card-body">
-                        <div class="top d-flex justify-content-between align-items-center">
-                            <h5 class="card-title text-left "><?= $row['name'] ?></h5>
-                            <h5 class="card-title text-right btn-primary p-2 rounded ">Stock : <?= $row['quantity'] ?></h5>
-                        </div>
-                        <div class="bottom d-flex justify-content-between align-items-center ">
-                            <p class="card-text m-0">Category :<b> <?= SelectCategoryByIdQuery($row['category_id'])   ?> </b>
-                            </p>
-                            <p class="card-text btn-warning p-2 rounded ">Price : <b><?= $row['price'] ?> EGP </b>
-                            </p>
-
-                        </div>
-                        <a href="" class="btn btn-primary" onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,1 )">Add To Cart</a>
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="card_container">
+                    <div class="img_card">
+                        <img src="../../<?= $row['image'] ?>" alt="">
                     </div>
+                    <div class="card_body_product">
+                        <div class="card_top">
+                            <h3>
+                                <?= $row['price'] ?> EGP
+                            </h3>
+                        </div>
+                        <div class="card_bottom">
+                            <h3>
+                                <?= $row['name'] ?>
+                            </h3>
+                            <button class="btn_card" onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,1 )">Add</button>
+                        </div>
+                    </div>
+                    <!-- <a href="" class="btn btn-primary" onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,1 )">Add To Cart</a> -->
                 </div>
             </div>
-        <?php     }   ?>
-
+        <?php } ?>
     </div>
+
+
 </div>
 
 <!-- Optional: Place to the bottom of scripts -->

@@ -1,0 +1,85 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: url(../assets/products/background.jpg);
+}
+/* font-family: 'Barlow', sans-serif;
+font-family: 'Domine', serif;
+font-family: 'Grandiflora One', serif;
+font-family: 'Lobster Two', cursive;
+font-family: 'Parisienne', cursive; */
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.container .card_container {
+  background-color: rgb(30 30 30);
+  padding: 20px;
+  color: white;
+  font-family: 'Barlow', sans-serif;
+  transition: all 0.3s;
+  border-radius: 6px;
+  margin-top: 30px;
+  box-shadow: 0 0 11px white;
+}
+
+.card_container:hover {
+  background-color: rgba(242, 155, 68, 0.634);
+  /* color: rgb(30 30 30); */
+}
+
+.card_container:hover .btn_card {
+  background-color: rgb(30 30 30);
+  color: rgb(242 154 68);
+}
+/* .card_container:hover .card_top h3 {
+  color: rgb(30 30 30);
+} */
+
+.img_card img {
+  /* width: ; */
+  height: 200px;
+}
+
+.card_body_product {
+  padding-top: 15px ;
+}
+.card_bottom {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn_card {
+  background-color: rgb(242 154 68);
+  padding: 0px 10px;
+  width: 50px;
+  /* color: white; */
+  font-weight: 600;
+  border-radius: 6px;
+}
+
+.card_top h3 {
+  font-family: 'Grandiflora One', serif;
+  font-size: 20px;
+  /* font-style: italic; */
+  /* font-family: 'Lobster Two', cursive; */
+  font-weight: 700;
+  /* font-family: 'Domine', serif; */
+}
+
+.card_bottom h3 {
+  font-size: 30px;
+  font-family: 'Barlow', sans-serif;
+  font-family: 'Grandiflora One', serif;
+  text-transform: capitalize;
+  font-family: 'Rancho', cursive;
+  /* font-family: 'Parisienne', cursive;  */
+  /* font-family: 'Lobster Two', cursive; */
+}
