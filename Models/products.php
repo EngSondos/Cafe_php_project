@@ -104,27 +104,29 @@ function selectImageQuery($id)
 
 // ----------------------------------------------------------------
 
-//*DELETE PRODUCT 
+//*Delete Product && Delete his image from database and the folder
 function DeleteProductQuery($id)
 {
     global $conn;
-    // try {
-    //Select Image From DataBase
-    $imageName = selectImageQuery($id);
-    $imagePath = '../../' . $imageName;
-    $query = "DELETE FROM `products` WHERE id = :id";
-
-    ### prepare query
-    $stmt = $conn->prepare($query);
-    $stmt->bindParam(":id", $id);
-    $stmt->execute();
-    // Delete the image file from the server
-    if (file_exists($imagePath)) {
-        unlink($imagePath);
-    } else {
-        echo "Image file not found";
+    try {
+        //Select Image From DataBase
+        $imageName = selectImageQuery($id);
+        $imagePath = '../../' . $imageName;
+        $query = "DELETE FROM `products` WHERE id = :id";
+        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        // Delete the image file from the server
+        if (file_exists($imagePath)) {
+            unlink($imagePath);
+        } else {
+            echo "Image file not found";
+        }
+        return $stmt->rowCount();
+    } catch (Exception $e) {
+        echo $e->getMessage();
     }
-    return $stmt->rowCount();
 }
 
 // ----------------------------------------------------------------
@@ -148,6 +150,28 @@ function UpdateProductQuery($id, $name, $image, $price, $quantity, $category_id)
         $stmt->bindParam(':category_id', $category_id);
         $stmt->bindParam(":id", $id);        # true --> query executed successfully
         return $stmt->execute();
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
+
+//** Search Query */
+function searchProductQuery($ValueSearch)
+{
+    global $conn;
+    try {
+        // Query the database with the search term
+        $query = "SELECT * FROM `products` WHERE `name` LIKE '%$ValueSearch%' AND `quantity` > 0 ";
+        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if ($stmt->rowCount() > 0) {
+            return $row;
+        } else {
+            echo "<h2 class='my-4' >  No results found for: " . $ValueSearch   . "</h2>";
+            return $row;
+        }
     } catch (Exception $e) {
         echo $e->getMessage();
     }

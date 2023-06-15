@@ -43,9 +43,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <h1 class="text-primary mx-auto text-center my-4">All Products</h1>
     <!-- <h2 class="my-4">Products</h2> -->
     <!-- <a class="btn btn-primary" href="Add Products.php">Add Product</a> -->
+    <form action="" method="GET" id="search-form">
+        <input type="text" name="search_term" id="search-input" placeholder="Enter search term..." value="<?php if (isset($_GET['search_term'])) {
+                                                                                                                echo $_GET['search_term'];
+                                                                                                            } ?>">
+        <input type="submit" value="Search">
+    </form>
     <div class="row ">
         <?php
-        $Products = DisplayAvailableProductsQuery();
+        if (!empty($ValueSearch)) {
+            $Products = searchProductQuery($ValueSearch) ?? "";
+            $_GET['search_term'] = "";
+            // var_dump($Products);
+        } else {
+            $Products = DisplayAvailableProductsQuery();
+        }
         // var_dump(   $Products );
         foreach ($Products as $row) {
         ?>
@@ -74,18 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 </div>
 
 <!-- Optional: Place to the bottom of scripts -->
-<script>
-    const editButtons = document.querySelectorAll('.edit-category');
-    editButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const categoryId = event.target.dataset.categoryId;
-            const editUrl = `?action=update&category_id=${categoryId}`;
-            document.querySelector('#modelId form').setAttribute('action', editUrl);
-        });
-    });
-
-    // const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-</script>
+<script src="../../Controllers/productScript.js"></script>
 <script src="../../Controllers/script.js"></script>
 <?php
 include "../../layout/footer.php"
