@@ -6,11 +6,6 @@
 body {
   background-image: url(../assets/products/background.jpg);
 }
-/* font-family: 'Barlow', sans-serif;
-font-family: 'Domine', serif;
-font-family: 'Grandiflora One', serif;
-font-family: 'Lobster Two', cursive;
-font-family: 'Parisienne', cursive; */
 
 img {
   width: 100%;
@@ -40,9 +35,6 @@ img {
   background-color: rgb(30 30 30);
   color: rgb(242 154 68);
 }
-/* .card_container:hover .card_top h3 {
-  color: rgb(30 30 30);
-} */
 
 .img_card img {
   /* width: ; */
@@ -67,24 +59,21 @@ img {
   font-weight: 600;
   border-radius: 6px;
 }
-
+.card_top {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
 .card_top h3 {
   font-family: 'Grandiflora One', serif;
   font-size: 20px;
-  /* font-style: italic; */
-  /* font-family: 'Lobster Two', cursive; */
   font-weight: 700;
-  /* font-family: 'Domine', serif; */
 }
 
 .card_bottom h3 {
   font-size: 30px;
-  font-family: 'Barlow', sans-serif;
-  font-family: 'Grandiflora One', serif;
   text-transform: capitalize;
   font-family: 'Rancho', cursive;
-  /* font-family: 'Parisienne', cursive;  */
-  /* font-family: 'Lobster Two', cursive; */
 }
 .container_page_num {
   text-align: center;
@@ -99,7 +88,6 @@ img {
 .num_page,
 .num_page_active {
   background-color: #f29b449b;
-  /* padding: 5px 10px; */
   display: block;
   margin-inline: 20px;
   font-size: 20px;
@@ -118,8 +106,30 @@ img {
 
 .num_page_active {
   background-color: #f29a44;
+  color: black;
+  box-shadow: 0 0 10px rgb(255, 255, 255);
 }
 .p-50 {
   padding-top: 50px;
   padding-bottom: 50px;
+}
+
+.UnAvailable {
+  color: red;
+}
+
+.Available {
+  color: #41ca41;
+}
+
+.container_avi {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.container_avi i {
+  font-size: 8px;
 }

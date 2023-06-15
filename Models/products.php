@@ -78,19 +78,7 @@ function pagination()
     ];
 }
 
-
-// function printPages($total_pages, $currentPage)
-// {
-//     echo "<div>";
-//     for ($i = 1; $i <= $total_pages; $i++) {
-//         if ($i == $currentPage ) {
-//             echo "<strong>$i</strong> ";
-//         } else {
-//             echo "<a href='?page=$i'>$i</a> ";
-//         }
-//     }
-//     echo "</div>";
-// }
+// ----------------------------------------------------------------
 
 function printPages($total_pages, $currentPage, $ValueSearch)
 {
@@ -109,7 +97,6 @@ function printPages($total_pages, $currentPage, $ValueSearch)
     }
     echo "</div>";
 }
-
 
 // ----------------------------------------------------------------
 
@@ -147,7 +134,7 @@ function search_Product_With_Pagination_Query($ValueSearch)
     ) = pagination();
     try {
         // Query the database with the search term
-        $query = "SELECT * FROM `products` WHERE `name` LIKE '%$ValueSearch%' AND `quantity` > 0 LIMIT :limit OFFSET :offset";
+        $query = "SELECT * FROM `products` WHERE `name` LIKE '%$ValueSearch%' AND LIMIT :limit OFFSET :offset";
         ### prepare query
         $stmt = $conn->prepare($query);
         $stmt->bindValue(':limit', $records_per_page, PDO::PARAM_INT);

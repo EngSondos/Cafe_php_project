@@ -36,11 +36,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $ValueSearch = $_GET['search_term'] ?? "";
 }
 
-
 //Pagination for products
-
 $productPagination = DisplayAvailableProductsQueryWithPagination();
-// var_dump($productPagination);
 
 
 
@@ -67,7 +64,7 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
             // var_dump($Products);
         } else {
             // $Products = DisplayAvailableProductsQuery();
-            $Products = $productPagination;
+            $Products = $productPagination ?? "";
         }
         // var_dump(   $Products );
         foreach ($Products as $row) {
@@ -80,17 +77,24 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
                     <div class="card_body_product">
                         <div class="card_top">
                             <h3>
-                                <?= $row['price'] ?> EGP
+                                <?= $row['quantity'] ?> EGP
                             </h3>
+                            <?php
+
+                            if ($row['quantity'] <= 0) {
+                                echo "  <p class='UnAvailable container_avi' ><i class='fa-solid fa-circle'></i> UnAvailable </p>";
+                            } else {
+                                echo "  <p class='Available container_avi'><i class='fa-solid fa-circle'></i>Available  </p>";
+                            }
+                            ?>
                         </div>
                         <div class="card_bottom">
                             <h3>
                                 <?= $row['name'] ?>
                             </h3>
-                            <button class="btn_card" onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,1 )">Add</button>
+                            <button class="btn_card" <?php echo ($row['quantity'] <= 0) ? 'disabled="true"' : ''; ?> onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,1 )">Add</button>
                         </div>
                     </div>
-                    <!-- <a href="" class="btn btn-primary" onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,1 )">Add To Cart</a> -->
                 </div>
             </div>
         <?php } ?>
