@@ -119,6 +119,11 @@ function createorder(userid) {
   location.reload();
 }
 
+function getuserid()
+{
+  // console.log(document.getElementById('user_id').value)
+  createorder(document.getElementById('user').value)
+}
 function addToCart(e, product_id, product_price, user_id) {
   e.preventDefault();
   fetch("../../Controllers/cart_controller.php", {

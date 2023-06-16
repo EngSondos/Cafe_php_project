@@ -11,7 +11,7 @@ function getUserName($user_id)
 function getAllUserMakeOrder()
 {
     global $conn ;
-    $query= "SELECT `id`,`username` FROM users"; 
+    $query= "SELECT `id`,`username` FROM users where role =0"; 
    $result = $conn->query($query);
     return  $result->fetchAll();
 }
