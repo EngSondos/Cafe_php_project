@@ -1,10 +1,12 @@
 <?php
-include '../connection_credits.php';
-include '../connection.php';
-include '../Models/product_cartModel.php';
-include '../Models/userCartModel.php';
-include '../Models//order_model.php';
-include '../Views/carts/cart_view.php';
+include_once '../connection_credits.php';
+include_once '../connection.php';
+include_once '../Models/product_cartModel.php';
+include_once '../Models/userCartModel.php';
+include_once '../Models//order_model.php';
+include_once '../Views/carts/cart_view.php';
+include_once '../Views/Admin/cart.php';
+
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -21,6 +23,9 @@ $products = selectProducts();
 $comboBox = selectUserCarts($userid);
 
 //last step send those data to the view to be rendered
+if($_SESSION['user']['role']==1)
+    render_carts_admin($products, $carts, $comboBox);
+else
 render_carts($products, $carts, $comboBox);
 
  if ($_SERVER["REQUEST_METHOD"] === 'POST') {
