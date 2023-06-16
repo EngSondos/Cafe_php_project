@@ -17,19 +17,13 @@
 .tableimg {
     width: 25px;
 }
-/* *{
 
-    background-image: url('./images/bg.jpg');
-    color: #fff;
+.custom-bg{
+
+background-color: #000000  !important;
+
 }
- */
 
-/* body{ */
-
-    /* background-image: url('./images/bg.jpg');
-    background-image: linear-gradient(rgba(0,0,0,.5) , rgba(0,0,0,.5)) , url('./images/bg.jpg'); */
-
-/* } */
 
 .container{
 
@@ -459,4 +453,24 @@ canvas {
 .list-group-item.active {
     background-color: rgb(165, 117, 82);
     border: 0;
+}
+
+ footer{
+
+
+    
+    background-image: linear-gradient(rgba(0,0,0,.8) , rgba(0,0,0,.8)) , url('../assets/images/footer.png');
+    height: 400px;
+
+} 
+
+footer ul{
+
+    margin-top: 60px;
+    color: white;
+font-size: 20px;}
+
+
+footer .container p{
+    color: white;
 }

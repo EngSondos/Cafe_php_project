@@ -52,12 +52,6 @@ if (isset($_POST['cancel_order'])) {
 }
 
 
-
-
-
-
-
-
 ?>
 <section>
 
