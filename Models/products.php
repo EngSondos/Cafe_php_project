@@ -283,29 +283,65 @@ function selectImageQuery($id)
 // ----------------------------------------------------------------
 
 //*Delete Product && Delete his image from database and the folder
+// function DeleteProductQuery($id)
+// {
+//     global $conn;
+//     try {
+//         //Select Image From DataBase
+//         $imageName = selectImageQuery($id);
+//         $imagePath = '../../' . $imageName;
+//         $query = "DELETE FROM `products` WHERE id = :id";
+//         ### prepare query
+//         $stmt = $conn->prepare($query);
+//         $stmt->bindParam(":id", $id);
+//         $stmt->execute();
+//         // Delete the image file from the server
+//         if (file_exists($imagePath)) {
+//             unlink($imagePath);
+//         } else {
+//             echo "Image file not found";
+//         }
+//         return $stmt->rowCount();
+//     } catch (Exception $e) {
+//         echo $e->getMessage();
+//     }
+// }
+
+//*Delete Product && Delete his image from database and the folder
 function DeleteProductQuery($id)
 {
     global $conn;
-    try {
-        //Select Image From DataBase
-        $imageName = selectImageQuery($id);
-        $imagePath = '../../' . $imageName;
-        $query = "DELETE FROM `products` WHERE id = :id";
-        ### prepare query
-        $stmt = $conn->prepare($query);
-        $stmt->bindParam(":id", $id);
-        $stmt->execute();
-        // Delete the image file from the server
-        if (file_exists($imagePath)) {
-            unlink($imagePath);
-        } else {
-            echo "Image file not found";
+    //*Check if the product in order_product table 
+    $queryIfProductExist = "SELECT * FROM `cart_product` WHERE product_id = :id";
+    $stmt = $conn->prepare($queryIfProductExist);
+    $stmt->bindParam(":id", $id);
+    $stmt->execute();
+    if ($stmt->rowCount() > 0) {
+        echo "Product with id: " . $id . " already exists in cart_product Table";
+    } else {
+        try {
+            //Select Image From DataBase
+            $imageName = selectImageQuery($id);
+            $imagePath = '../../' . $imageName;
+            $query = "DELETE FROM `products` WHERE id = :id";
+            ### prepare query
+            $stmt = $conn->prepare($query);
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+            // Delete the image file from the server
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            } else {
+                echo "Image file not found";
+            }
+            return $stmt->rowCount();
+        } catch (Exception $e) {
+            echo $e->getMessage();
         }
-        return $stmt->rowCount();
-    } catch (Exception $e) {
-        echo $e->getMessage();
     }
 }
+
+
 
 // ----------------------------------------------------------------
 

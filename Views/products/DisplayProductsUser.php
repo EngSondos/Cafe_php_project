@@ -42,7 +42,7 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
 
 
 ?>
-<!-- Main Css File For Product -->
+<!-- Main Css File For Product For User-->
 <link rel="stylesheet" href="../../assets/style_product.css">
 <!-- ----------------------------------------------------------------------------------------- -->
 <div class="container p-50 ">

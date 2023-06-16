@@ -75,6 +75,7 @@ img {
   text-transform: capitalize;
   font-family: 'Rancho', cursive;
 }
+
 .container_page_num {
   text-align: center;
   margin-top: 30px;
@@ -85,6 +86,7 @@ img {
   width: 30%;
   margin-inline: auto;
 }
+
 .num_page,
 .num_page_active {
   background-color: #f29b449b;
