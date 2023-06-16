@@ -1,36 +1,6 @@
 
 
 
-<footer>
-<div class="container">
-  <div class="row justify-content-between">
-    <div class="col-md-3">
-      <img src="../assets/images/pngwing.com.png" alt="">
-      <p>vsvsv</p>
-
-    </div>
-    <div class="col-md-3">
-      <ul class="footer-list">
-        <li>Privacy Policy</li>
-        <li>Returns</li>
-        <li>Terms and Condition</li>
-        <li>Latest News</li>
-        <li>Blog</li>
-      </ul>
-    </div>
-    <div class="col-md-3">
-      <ul class="footer-list">
-        <li>Contact Us</li>
-        <li>Purchase information</li>
-        <li>Purchase details</li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-
-
-</footer>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

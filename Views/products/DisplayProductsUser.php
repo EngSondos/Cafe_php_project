@@ -1,5 +1,5 @@
 <?php
-$title="Shopping List";
+$title = "Shopping List";
 
 include "../../layout/head.php";
 
@@ -93,5 +93,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </script>
 <script src="../../Controllers/script.js"></script>
 <?php
-include "../../layout/footer.php"
+include '../../layout/footer_user.php';
 ?>
