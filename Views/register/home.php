@@ -1,8 +1,13 @@
 <?php
-    session_start();
     include '../../layout/head.php';
-    include '../../layout/navbar.php';
     include '../../Controllers/users/users.php';
+    include "../../MiddleWares/auth.php";
+    // include "../../MiddleWares/user.php";
+    // include "../../assets/homestyle.css";
+    // include "Cafe_php_project/layout/CSS/homestyle.css";
+
+
+
     
     if (!isLoggedIn()) {
         header('Location:login.php');
@@ -11,6 +16,7 @@
     $user = getCurrentUser();
 ?>
 
-    Welcome <?php echo $user['username']; ?>
+
+
 
 <?php include '../../layout/footer.php'; ?>

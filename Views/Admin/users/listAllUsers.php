@@ -1,18 +1,17 @@
 <?php 
     ob_start();
-    session_start();
+
     $pageTitle = 'List Users';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/navbar.php';
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/Admin/getUsers.php';
+    include "../../../layout/head.php";
+    include "../../../Models/Admin/getUsers.php";
+    include "../../../config/connectToDB.php";
+    include "../../../MiddleWares/auth.php";
+    include "../../../MiddleWares/admin.php";
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
-    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
-    if(!isLoggedIn()) {
-        header("Location:../../../../../../Cafe_php_project/Views/register/login.php");
-    }
     $users  = getAllUsers();
 
 ?>
+<main style="width:80%;margin-left:auto">
 <div class="container mt-5">
 <?php 
     if(isset($_GET['delete'])) {
@@ -51,7 +50,7 @@
                 <td><?php echo $user['username']; ?></td>
                 <td><?php echo $user['email']; ?></td>
                 <td><?php echo ($user['role'] === 0) ? "Normal User" : "admin"; ?></td>
-                <td><img class="tableimg" width='30' src="<?php echo substr($user['image'], 15)?>" alt=""></td>
+                <td><img class="tableimg" width='30' src="<?php echo substr($user['image'], 17)?>" alt=""></td>
                 <td>
                     <a href="<?php echo 'editUsers.php?do=edit&id=' . $user['id']; ?>"  class="btn btn-primary">Edit</a>
                     <a href="<?php echo '?delete&id=' . $user['id']; ?>" class="btn btn-danger">Delete</a>
@@ -61,6 +60,7 @@
     </tbody>
 </table>
 </div>
+</main>
 <?php 
     include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php'; 
     ob_end_flush();

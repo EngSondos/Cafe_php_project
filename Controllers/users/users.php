@@ -1,8 +1,12 @@
 <?php
 
-include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Validation/registerValidation/signup.php';
+// include "../../Validation/registerValidation/";
+include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Validation/registerValidation/login.php';
+include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Validation/registerValidation/signup.php';
 include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
-// Create a new User (Sign up)
+
+
+// Create a new User (Sign up)`
 function userController($data, $imageFile) {
     try{
         userValidation($data, $imageFile);

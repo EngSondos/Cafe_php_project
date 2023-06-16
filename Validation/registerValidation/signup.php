@@ -1,6 +1,10 @@
 <?php
     // session_start();
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/users/user.php';
+    ob_start();
+
+    // include_once "../../Models/users/user.php";
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/users/user.php';
+
     function userValidation($data, $imageFile) {
         
         $errors = [];
@@ -88,3 +92,4 @@
         }
     }
 
+    ob_end_flush();

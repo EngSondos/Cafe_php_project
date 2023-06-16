@@ -5,7 +5,6 @@ function connect() {
     $user = 'root';
     $password = 'mangood1907';
     $database = 'cafe';
-    // global $host, $user, $password, $database;
     $dsn = "mysql:host=$host;dbname=$database;charset=utf8mb4";
     $options = array(
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,

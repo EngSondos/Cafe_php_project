@@ -1,5 +1,8 @@
 <?php 
     ob_start();
+    session_start();
+
+    // include '../../Controllers/users/users.php';
     if(isset($_SESSION['user'])) {
       $user = $_SESSION['user'];
     }
@@ -12,21 +15,25 @@
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav m-auto">
-      <li class="nav-item mr-4">
-        <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
-      </li>
+      
     </ul>
     <?php
         if(isset($user) && $user['role'] === 0){ ?>
             <ul class="navbar-nav ms-auto">
+              <li class="nav-item mr-4">
+                <a class="nav-link" href="home.php">Home <span class="sr-only">(current)</span></a>
+              </li>
               <li class="nav-item">
                   <a><img src="<?php echo substr($user['image'], 15); ?>" width="30" alt=""></a>
               </li>
               <li class="nav-item">
               <a href="#" class="nav-link"><?= $user['username'] ?></a>
               </li>
+            <li class="nav-item">
+                    <a><img src="<?=$user['image'] ?>" width="30" alt=""></a>
+                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="logout.php">LogOut</a>
+                    <a class="nav-link" href="/Cafe_php_project/Views/register/logout.php">LogOut</a>
                 </li>
             </ul>
     <?php }?>
@@ -39,9 +46,14 @@
               <li class="nav-item">
                 <a href="#" class="nav-link"><?= $user['username'] ?></a>
               </li>
+
+              
               <li class="nav-item">
-                  <a class="nav-link" href="logout.php">LogOut</a>
-              </li>
+                    <a><img src="<?php echo $user['image'] ?>" width="30" alt=""></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/Cafe_php_project/Views/register/logout.php">LogOut</a>
+                </li>
             </ul>
     <?php } 
       if(!isset($user)){ ?>

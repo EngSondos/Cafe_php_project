@@ -1,13 +1,13 @@
 <?php
     ob_start();
-    session_start();
-    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
+
+    require_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
-    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/navbar.php';
+    include "../../../MiddleWares/auth.php";
+    include "../../../MiddleWares/admin.php";
+
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
-    if(!isLoggedIn()) {
-        header("Location:../../../../../../Cafe_php_project/Views/register/login.php");
-    }
+   
     if(isset($_GET['do'])) {
 
         $do = $_GET['do'];
@@ -95,7 +95,7 @@
             $role = $data['role'];
             $password = empty($data['newpassword']) ? $data['oldpassword'] : password_hash($data['newpassword'], PASSWORD_DEFAULT);
             
-            if(isset($_FILES)) {
+            if(!empty($_FILES['image']['name'])) {
 
                 // Handle image upload
                 $image = $_FILES['image'];
@@ -172,6 +172,6 @@
             }
         }
     } 
-    include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php';
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/footer.php';
 ob_end_flush();
 ?>

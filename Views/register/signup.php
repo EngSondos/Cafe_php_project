@@ -1,7 +1,12 @@
 <?php
+    ob_start();
+
     $pageTitle = 'Signup';
+    // include '../../layout/head.php';
+
     include '../../layout/head.php';
-    include '../../layout/navbar.php';
+
+    include "../../MiddleWares/guest.php";
 
 ?>
 <section class="vh-100">
@@ -62,5 +67,7 @@
 </section>
 
 <?php
-include '../../layout/footer.php'
+include '../../layout/footer.php';
+ob_end_flush();
+
 ?>
