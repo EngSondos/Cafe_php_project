@@ -1,0 +1,130 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  /* background-image: url(../assets/products/background1.jpg); */
+  /* background-repeat: no-repeat; */
+  background-size: contain;
+  /* font-family: 'Rancho', cursive; */
+}
+.p-50 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.title_container {
+  /* background-color: rgb(239, 155, 38); */
+  width: fit-content;
+  margin: auto;
+  padding: 20px;
+  box-shadow: 0 0 30px white;
+  border-radius: 10px;
+}
+.title_product {
+  text-transform: capitalize;
+  font-size: 70px;
+  font-family: 'Rancho', cursive;
+  color: white !important;
+  margin: 0 !important;
+  transition: all 0.3s;
+}
+.title_product:hover {
+  color: rgb(239, 155, 38) !important;
+  text-shadow: 0 0 10px white;
+}
+.title_product i {
+  margin-inline: 10px;
+  font-size: 50px;
+  /* color: rgb(239, 155, 38) !important; */
+  color: black;
+  text-shadow: 0 0 10px white;
+}
+
+.btn_product {
+  background-color: #ccc;
+  border: none;
+  color: black;
+  font-family: 'Rancho', cursive;
+  font-size: 30px;
+}
+
+.btn_product:hover {
+  background-color: rgb(239, 155, 38);
+}
+/* .header_menu {
+  background-color: #252628;
+  background-image: url(../assets/products/back5\ -\ Copy\ 2.jpg);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: center 45%;
+  scale: 50%;
+  height: 300px;
+} */
+table {
+  border-collapse: collapse;
+  /* color: #9f7745 !important; */
+  color: rgb(239, 155, 38) !important;
+  text-transform: capitalize;
+}
+
+td {
+  padding: 30px;
+  border: 1px solid #ccc;
+  vertical-align: middle !important;
+  font-size: 20px;
+  /* color: white !important; */
+}
+
+tr:hover {
+  background-color: #767a8072 !important;
+  color: white !important;
+}
+
+.container_page_num {
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+  margin-inline: auto;
+}
+.num_page,
+.num_page_active {
+  background-color: #f29b449b;
+  display: block;
+  margin-inline: 20px;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  font-family: 'Rancho', cursive;
+  font-weight: 600;
+  color: white;
+}
+.num_page:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.num_page_active {
+  background-color: #f29a44;
+  color: black;
+  box-shadow: 0 0 10px rgb(255, 255, 255);
+}
+.btn_delete {
+  color: red !important;
+  font-size: 20px;
+}
+
+/* .btn_delete:hover {
+  color: rgb(255, 0, 0) !important;
+} */
+
+.btn_edit {
+  color: rgb(250, 185, 65) !important;
+  font-size: 20px;
+}

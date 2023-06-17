@@ -1,0 +1,137 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: url(../assets/products/background.jpg);
+}
+
+img {
+  width: 100%;
+  display: block;
+}
+
+.container_products {
+  min-height: 380px;
+}
+.container .card_container {
+  background-color: rgb(30 30 30);
+  padding: 20px;
+  color: white;
+  font-family: 'Barlow', sans-serif;
+  transition: all 0.3s;
+  border-radius: 6px;
+  margin-top: 30px;
+  box-shadow: 0 0 11px white;
+}
+
+.card_container:hover {
+  background-color: rgba(242, 155, 68, 0.634);
+  /* color: rgb(30 30 30); */
+}
+
+.card_container:hover .btn_card {
+  background-color: rgb(30 30 30);
+  color: rgb(242 154 68);
+}
+
+.img_card img {
+  /* width: ; */
+  height: 200px;
+}
+
+.card_body_product {
+  padding-top: 15px;
+}
+.card_bottom {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn_card {
+  background-color: rgb(242 154 68);
+  padding: 0px 10px;
+  width: 50px;
+  /* color: white; */
+  font-weight: 600;
+  border-radius: 6px;
+}
+.card_top {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+.card_top h3 {
+  font-family: 'Grandiflora One', serif;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.card_bottom h3 {
+  font-size: 30px;
+  text-transform: capitalize;
+  font-family: 'Rancho', cursive;
+}
+
+.container_page_num {
+  text-align: center;
+  margin-top: 30px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 30%;
+  margin-inline: auto;
+}
+
+.num_page,
+.num_page_active {
+  background-color: #f29b449b;
+  display: block;
+  margin-inline: 20px;
+  font-size: 20px;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 50%;
+  font-family: 'Rancho', cursive;
+  font-weight: 600;
+  color: white;
+}
+.num_page:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.num_page_active {
+  background-color: #f29a44;
+  color: black;
+  box-shadow: 0 0 10px rgb(255, 255, 255);
+}
+.p-50 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+
+.UnAvailable {
+  color: red;
+}
+
+.Available {
+  color: #41ca41;
+}
+
+.container_avi {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+}
+
+.container_avi i {
+  font-size: 8px;
+}

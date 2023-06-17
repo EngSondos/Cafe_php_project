@@ -1,0 +1,168 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  background-image: url(../Foods/background.jpg);
+}
+/* font-family: 'Barlow', sans-serif;
+  font-family: 'Domine', serif;
+  font-family: 'Grandiflora One', serif;
+  font-family: 'Lobster Two', cursive;
+  font-family: 'Parisienne', cursive; */
+.p-50 {
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+/***************************************************************************
+/* Sally Footer And Header */
+
+header {
+  background-image: url('../../assets/images/toedit.png');
+  /* background-size: cover; */
+  background-size: 100% 100%;
+  /* background-position:  50%; */
+  background-attachment: fixed;
+  
+  /* height: 100vh; */
+}
+
+header h1 {
+  color: rgb(255, 255, 255);
+  /* padding-top: 200px; */
+  padding-top: 100px;
+  padding-left: 70px;
+  font-size: 80px;
+  font-weight: 900;
+}
+
+header p {
+  color: white;
+  padding-left: 70px;
+  padding-top: 20px;
+  font-weight: 300;
+  font-size: 30px;
+  font-family: 'Merriweather Sans', sans-serif;
+}
+
+/* section {
+  height: 500px;
+} */
+
+header a {
+  margin-left: 350px;
+}
+
+header button {
+  width: 200px;
+  height: 50px;
+}
+
+footer {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
+    url('../../assets/images/footer.png');
+  /* height: 400px; */
+  /* position: absolute;
+  bottom: 0;
+  right: 0;
+  left: 0; */
+}
+
+footer ul {
+  margin-top: 60px;
+  color: white;
+  font-size: 20px;
+}
+
+footer .container p {
+  color: white;
+}
+/***************************************************************
+/* Khaled Ellithy Products */
+
+#products img {
+  /* width: 100%; */
+  margin: auto;
+  /* scale: 120%; */
+  display: block;
+}
+
+#products .container_product {
+  padding-top: 50px;
+  padding-bottom: 50px;
+  background-color: #d3ad7f;
+}
+#products .container .card_container {
+  /* background-color: rgb(30 30 30); */
+  background-color: #202020;
+  padding: 20px;
+  color: white;
+  font-family: 'Barlow', sans-serif;
+  transition: all 0.3s;
+  border-radius: 6px;
+  /* margin-top: 30px; */
+  /* box-shadow: 0 0 11px white; */
+  margin: 10px;
+}
+
+/* #products .card_container:hover {
+  background-color: #3e21189f;
+  color: rgb(30 30 30);
+} */
+
+/* .card_container:hover .card_top h3 {
+    color: rgb(30 30 30);
+  } */
+
+#products .img_card img {
+  /* width: ; */
+  height: 200px;
+}
+
+#products .card_body {
+  padding: 15px;
+}
+
+#products .card_top h3 {
+  font-family: 'Grandiflora One', serif;
+  font-size: 30px;
+  color: #e9c08c;
+  /* font-style: italic; */
+  /* font-family: 'Lobster Two', cursive; */
+  font-weight: 700;
+  /* font-family: 'Domine', serif; */
+}
+
+#products .card_bottom {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+#products .card_bottom h3 {
+  font-size: 25px;
+  font-family: 'Barlow', sans-serif;
+  text-transform: capitalize;
+  font-family: 'Rancho', cursive;
+  font-family: 'Grandiflora One', serif;
+}
+
+#products .card_bottom span {
+  font-size: 15px;
+  margin-left: -5px;
+}
+#products .btn_card {
+  background-color: #d3ad7f;
+  padding: 0px 10px;
+  width: 70px;
+  color: white;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s;
+}
+
+#products .btn_card:hover {
+  /* background-color: white; */
+  color: #202020;
+}
