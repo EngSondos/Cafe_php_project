@@ -1,13 +1,15 @@
 <?php
+ob_start();
+
 // include '../layout.php';
-include "../layout/head.php";
-include '../Controllers/order_controller.php';
-include "../Controllers/AdminController.php";
-include "../Models/AdminOrder.php";
-include "../connection_credits.php";
-include "../connection.php";
-include "../MiddleWares/auth.php";
-include "../MiddleWares/admin.php";
+include_once "../layout/head.php";
+include_once '../Controllers/order_controller.php';
+include_once "../Controllers/AdminController.php";
+include_once  "../Models/AdminOrder.php";
+include_once "../connection_credits.php";
+include_once "../connection.php";
+include_once "../MiddleWares/auth.php";
+include_once "../MiddleWares/admin.php";
 
 
     $orders = allorders();
@@ -20,8 +22,8 @@ include "../MiddleWares/admin.php";
     }
 
 ?>
-
-<div class="container">
+<main style="width:80%;margin-left:auto">
+<div class="container mt-3">
   <h2>View Orders</h2>
 
   <table class="table table-striped">
@@ -88,7 +90,7 @@ include "../MiddleWares/admin.php";
   </table>
 </div>
 
-
+</main>
 
 <script>
   const orderRows = document.querySelectorAll('.order-row');
@@ -107,6 +109,11 @@ include "../MiddleWares/admin.php";
   });
 
   function changeStatus(orderId) {
-    window.location.href = "/Cafe_Project/Views/adminorders.php?id=" + orderId + "&status=" + document.getElementById("status"+orderId).value;
+    window.location.href = "/Cafe_php_project/Views/adminorders.php?id=" + orderId + "&status=" + document.getElementById("status"+orderId).value;
 }
 </script>
+
+<?php 
+    ob_end_flush();
+
+?>

@@ -22,7 +22,7 @@ if (!empty($_GET['details'])) {
 
 if(!empty($_POST)){
   $orders = filterOrderByUserAndDate($_POST);
-  var_dump($orders);
+  // var_dump($orders);
 }
 ?>
 <main style="width:80%;margin-left:auto">

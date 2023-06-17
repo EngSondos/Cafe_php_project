@@ -1,14 +1,14 @@
 <?php
 $title="Update Product";
+ob_start();
 
 include "../../layout/head.php";
-
 include "../../Controllers/products.php";
 include "../../Controllers/categories.php";
 include "../../Models/products.php";
 include "../../Models/categories.php";
-include "/Cafe_php_cafe/connection_credits.php";
-include "/Cafe_php_cafe/connection.php";
+include "../../connection_credits.php";
+include "../../connection.php";
 include "../../Validation/validation.php";
 include "../../MiddleWares/auth.php";
 include "../../MiddleWares/admin.php";
@@ -104,5 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 </script>
 
 <?php
-include "../../layout/footer.php"
+include "../../layout/footer.php";
+    ob_end_flush();
+
 ?>
