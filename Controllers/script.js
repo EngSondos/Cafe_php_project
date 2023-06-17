@@ -111,6 +111,7 @@ function removecart(id) {
 }
 
 function createorder(userid) {
+  console.log(userid)
   fetch("../Controllers/cart_controller.php", {
     method: "POST",
     headers: {"Content-Type": "application/json;charset=utf-8"},
@@ -119,6 +120,13 @@ function createorder(userid) {
   location.reload();
 }
 
+function getuserid()
+{
+  console.log(document.getElementById('user').value)
+// console.log(document.getElementById('user').value);
+// console.log('sssssssssssssssssssssss');
+  createorder(document.getElementById('user').value)
+}
 function addToCart(e, product_id, product_price, user_id) {
   e.preventDefault();
   fetch("../../Controllers/cart_controller.php", {

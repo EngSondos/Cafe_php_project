@@ -1,20 +1,33 @@
 <?php
 $title="My Carts";
-// include '../layout.php';
-include '../layout/head.php';
-include "../Controllers/AdminController.php";
-include "../Models/AdminOrder.php";
-
-function render_carts($products, $carts, $totalcarts)
+// include '../layout/head.php';
+// include "../Controllers/AdminController.php";
+// include "../Models/AdminOrder.php";
+function render_carts_admin($products, $carts, $totalcarts)
 {
-    global $users;
+    $users= getAllUser();
     /*first divide our page to two columns the sidebar and the carts */
     echo "
     <main>
         <div class='row h-100 mr-0'>
             <div class='col-xl-4 col-md-5 col-sm-6'><div class='sidebar'>
-                <h4 class='mycarts bg-light d-flex justify-content-center'>My Carts<span class='cartsnum'>" . sizeof($carts) . "</span></h4>
-                <div class='row justify-content-center m-0' style='height: 40vh;width: 100%;align-items: center; '>
+                <h4 class='mycarts bg-light d-flex justify-content-center'>My Carts<span class='cartsnum'>" . sizeof($carts) . "</span></h4>";
+                    echo " 
+                    <div class='mx-auto w-50 '>
+                    <form action='AdminAddToCart.php' method='POST' >
+                    <select id='user' name='user_id'>"
+                   ;
+                    foreach($users as $user){
+                        echo "<option value ='";
+                        echo $user['id']; 
+                        echo"'>"; echo $user['username']; echo"</option> 
+                        
+                        ";
+                    }
+                    echo "</select>
+                    </div>
+                    ";
+                echo"<div class='row justify-content-center m-0' style='height: 40vh;width: 100%;align-items: center; '>
                    <div id='row1'>
                      <div class='line-numbers'>
                             <span></span>
@@ -37,10 +50,9 @@ function render_carts($products, $carts, $totalcarts)
                             echo "<span class='totalprice'>Total Price: 0 EGP </span>";
                         }
                     echo "<div class='row align-items-center justify-content-center mb-5 w-100'>";
-                  
-                    echo"<button class='btn btn-primary' onclick='createorder({$_SESSION['user']['id']})'>Order Now</button>";
-        
-                    echo "</div>
+                        echo"<input type='submit' class='btn btn-primary' value='Order Now'>
+                        </form>
+                        </div>
                 </div>
             </div>
             <div class='col-xl-8 col-md-7 col-sm-6'>

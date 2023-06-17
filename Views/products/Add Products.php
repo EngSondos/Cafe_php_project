@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         // Handle add form data here
         AddProductQuery($name, $image, $price, $quantity, $category_id);
         var_dump($_POST);
-        header('Location:DisplayProductsAdmin.php');
+        // header('Location:DisplayProductsAdmin.php');
 
         //   $error_add= $error['name'];
 

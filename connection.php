@@ -27,7 +27,7 @@ function connect_to_database($dbuser, $dbhost, $dbport, $dbname, $password)
 {
     $dsn = "mysql:host={$dbhost};dbname={$dbname};dbpass={$password}port={$dbport}";
 
-    $conn= new PDO($dsn, $dbuser);
+    $conn= new PDO($dsn, $dbuser, $password);
     try {
         if ($conn) {
             // echo "connection succeeded";
