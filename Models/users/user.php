@@ -44,3 +44,22 @@ function getUserByEmail($email) {
 
     return $user;
 }
+
+
+function CheckIfUserDeleted($userId)
+{
+    $conn = connect();
+
+    $query = "SELECT id FROM users WHERE id=:userId";
+
+    $stmt = $conn->prepare($query);
+
+    $stmt->execute(array( ':userId' => $userId ));
+    var_dump($stmt->rowCount());
+    if($stmt->rowCount()>0)
+    {
+        return false;
+    }
+    return true;
+
+}

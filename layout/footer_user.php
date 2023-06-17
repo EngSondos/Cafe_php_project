@@ -2,8 +2,8 @@
     <div class="container">
         <div class="row justify-content-between">
             <div class="col-md-3">
-                <img src="../assets/images/pngwing.com.png" alt="">
-                <p>vsvsv</p>
+                <!-- <img src="../assets/images/pngwing.png" alt="" width="50" height="50"> -->
+                <!-- <p>vsvsv</p> -->
 
             </div>
             <div class="col-md-3">

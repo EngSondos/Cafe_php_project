@@ -61,7 +61,7 @@ header button {
 
 footer {
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-    url('../assets/images/footer.png');
+    url('../../assets/images/footer.png');
   /* height: 400px; */
   /* position: absolute;
   bottom: 0;

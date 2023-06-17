@@ -4,9 +4,9 @@
 
 ini_set('display_errors', 1);
 ini_set('error_reporting', E_ALL);
-// include  $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
+include  $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
 // 
-include '../layout/head.php';
+// include '../layout/head.php';
 include  $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/connection_credits.php';
 include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/connection.php';
 
@@ -63,11 +63,11 @@ if (isset($_POST['cancel_order'])) {
 
         <div class="form-group me-3  w-25">
           <label for="start_date">Start Date:</label>
-          <input type="date" class="form-control" id="start_date" name="start_date">
+          <input type="date" class="form-control" id="start_date" name="start_date" value=<?= $_POST['start_date'] ??"" ?>>
         </div>
         <div class="form-group me-3  w-25">
           <label for="end_date">End Date:</label>
-          <input type="date" class="form-control" id="end_date" name="end_date">
+          <input type="date" class="form-control" id="end_date" name="end_date" value=<?= $_POST['end_date'] ??"" ?>>
         </div>
         <button type="submit" class="btn btn-primary mt-4 ">View Orders</button>
       </div>
