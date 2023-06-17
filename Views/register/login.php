@@ -40,6 +40,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-outline mb-4">
                 <input type="password" id="form1Example23" name="password" class="form-control form-control-lg" />
                 <label class="form-label" for="form1Example23">Password</label>
+                <br>
+                <?= $errors['password'] ?? "" ?>
             </div>
 
             <!-- Submit button -->
@@ -48,10 +50,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a href="signup.php">or SignUp?</a>
                 <a href="resetpassword.php">resest your password?</a>
             </div>
+            <br>
+            <?= $errors['success'] ?? "" ?>
         </form>
-        <div class='errors-container'>
-      
-        </div>
         </div>
     </div>
 </div>

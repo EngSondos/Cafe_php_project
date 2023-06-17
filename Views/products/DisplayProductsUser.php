@@ -19,7 +19,7 @@ include "../../Models/product_cartModel.php";
 $error_add;
 $error_update;
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
-    var_dump($_GET['delete_id']);
+    // var_dump($_GET['delete_id']);
     DeleteProductQuery($_GET['delete_id']);
 }
 

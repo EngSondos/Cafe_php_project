@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     if ($_GET['action'] === 'add') {
         // Handle add form data here
         AddProductQuery($name, $image, $price, $quantity, $category_id);
-        var_dump($_POST);
+        // var_dump($_POST);
         // header('Location:DisplayProductsAdmin.php');
 
         //   $error_add= $error['name'];
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
             <select name="category_id" id="">
                 <?php
                 $rows = DisplayCategory();
-                var_dump($rows);
+                // var_dump($rows);
                 foreach ($rows as $row) {  ?>
                     <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                 <?php    }

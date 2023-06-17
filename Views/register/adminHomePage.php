@@ -15,7 +15,7 @@
     
 
     $users  = getAllUsers();
-    $products = DisplayAllProductsQuery();
+    $products = Display_All_Products_Query_With_Pagination();
     $categories=DisplayCategory();
 
 echo '

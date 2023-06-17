@@ -1,6 +1,36 @@
-/* .navbar {
-  background-color: #f4ab5e!important;
-} */
+.ournav {
+  position: absolute !important;
+  width: 100% !important;
+  /* background: none !important; */
+}
+.ournav .nav-link {
+  color: #fff !important;
+}
+.ournav .nav-link:hover {
+  color: #ffffffb9 !important;
+  transition: 0.5s;
+}
+nav .user-img {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 37px;
+  padding: 1px;
+}
+nav .online-dote {
+  position: relative;
+}
+nav .online-dote::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50;
+    border: 1px solid #fff;
+    position: absolute;
+    top: -2px;
+    border-radius: 10px;
+    left: -2px;
+}
 .signup-btn {
   background-color: #fbb95b;
   border-color: #e78803;
