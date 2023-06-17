@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn btn-primary btn-lg btn-block signup-btn">Sign In</button>
             <div class="d-flex justify-content-around align-items-left mt-4">
                 <a href="signup.php">or SignUp?</a>
+                <a href="resetpassword.php">resest your password?</a>
             </div>
         </form>
         <div class='errors-container'>
