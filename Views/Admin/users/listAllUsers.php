@@ -11,7 +11,7 @@
     $users  = getAllUsers();
 
 ?>
-<main style="width:80%;margin-left:auto">
+<main style="width:80%;margin-left:auto" class="list-users-admin">
 <div class="container mt-5">
 <?php 
     if(isset($_GET['delete'])) {
@@ -30,8 +30,8 @@
     }
 
 ?>
-<h3 class="display-4">all users</h3>
-<a href="addUser.php" class="btn btn-dark ml-auto d-block w-25">Add User</a>
+<h3 class="display-4">all users</h3><hr>
+<a href="addUser.php" class="btn btn-info ml-auto d-block" style="width: 150px;">Add User <i class="fas fa-user-plus"></i></a>
 <table class="table text-center mt-4">
   <thead>
         <tr>
@@ -52,8 +52,8 @@
                 <td><?php echo ($user['role'] === 0) ? "Normal User" : "admin"; ?></td>
                 <td><img class="tableimg" width='30' src="<?php echo substr($user['image'], 17)?>" alt=""></td>
                 <td>
-                    <a href="<?php echo 'editUsers.php?do=edit&id=' . $user['id']; ?>"  class="btn btn-primary">Edit</a>
-                    <a href="<?php echo '?delete&id=' . $user['id']; ?>" class="btn btn-danger">Delete</a>
+                    <a href="<?php echo 'editUsers.php?do=edit&id=' . $user['id']; ?>"  class="btn btn-success">Edit <i class="fas fa-user-pen"></i></a>
+                    <a href="<?php echo '?delete&id=' . $user['id']; ?>" class="btn btn-danger">Delete <i class="fas fa-user-xmark"></i></a>
                 </td>
             </tr>
         <?php } ?>

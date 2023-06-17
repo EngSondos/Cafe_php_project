@@ -13,7 +13,7 @@ $user = getCurrentUser();
 <link rel="stylesheet" href="../../layout/CSS/styleHome.css">
 
 <!-- Start Header -->
-<header class="p-50">
+<header class="p-50" style="position:relative;margin:30px;border-radius:10px">
     <h1>Begin Your Day ,<br>
         With Your Fav Drink</h1>
     <p>

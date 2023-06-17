@@ -1,13 +1,57 @@
 /* .navbar {
   background-color: #f4ab5e!important;
 } */
-.signup-btn {
-  background-color: #fbb95b;
-  border-color: #e78803;
+body {
+  height: 100vh !important;
+  /* background-color: #3f230d !important; */
+  background-image: url('./design-imgs/coffee1.jpg') !important;
+  background-size: cover;
+  background-position: center;
+  position: relative;
 }
-.signup-btn:hover {
-  background-color: #f19e2a94;
-  border-color: #e78803;
+body::before {
+  z-index: 0;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(0 0 0 / 61%);
+}
+.ournav {
+  position: absolute !important;
+  width: 100% !important;
+  /* background: none !important; */
+  z-index: 100;
+}
+.ournav .nav-link {
+  color: #e2e2e2 !important;
+}
+.ournav .nav-link:hover {
+  color: #ffffffb9 !important;
+  transition: 0.5s;
+}
+nav .user-img {
+  border: 2px solid #fff;
+  border-radius: 50%;
+  width: 40px;
+  height: 37px;
+  padding: 1px;
+}
+nav .online-dote {
+  position: relative;
+}
+nav .online-dote::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    background-color: #4caf50;
+    border: 1px solid #fff;
+    position: absolute;
+    top: -2px;
+    border-radius: 10px;
+    left: -2px;
 }
 .errors-container {
   display: flex;
@@ -42,7 +86,27 @@
 .conrainer tbody tr {
   padding-bottom: 50px;
 }
-
+.bg-brown {
+  background-color: #3f230d;
+}
+.bg-brown .login-img {
+  box-shadow: 3px -4px 13px 9px #492912;
+  border-radius: 10px;
+}
+.bg-brown form label {
+  color: white;
+}
+.bg-brown form .login-btn {
+  background-color: #d4c085;;
+  border-color: #d4c085;;
+}
+.bg-brown form .login-btn:hover {
+  background-color: #d4c085c2;;
+  border-color: #d4c085;;
+}
+.bg-brown form a {
+  color: #ffffff;
+}
 main {
   height: 100vh;
 }
@@ -444,5 +508,23 @@ canvas {
   background-color: rgb(165, 117, 82);
   border: 0;
 }
-
-
+/* List Users in admin */
+.list-users-admin {
+  position: relative;
+  z-index: 1000;
+}
+.list-users-admin h3 {
+  z-index: 1;
+  color: white;
+  text-transform: capitalize;
+}
+.list-users-admin hr {
+  color: white;
+  border: 1px solid;
+  width: 150px;
+  margin: initial;
+  opacity: 0.6;
+}
+.list-users-admin table {
+  color: white;
+}

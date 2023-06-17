@@ -16,7 +16,7 @@ include "../connection.php";
         createOrder($_POST['user_id'],$products,$usercarts[0]['notes'],$usercarts[0]['total_price'],'pending');
         deleteAllCarts($adminid);   
         deleteUserCarts($adminid); 
-        var_dump('');
+        // var_dump('');
         header("Location:cart_controller.php");
 }
 }
