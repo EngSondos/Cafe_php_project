@@ -2,6 +2,7 @@
 $title = "Shopping List";
 
 include "../../layout/head.php";
+include "../../MiddleWares/auth.php";
 
 include "../../Controllers/categories.php";
 include "../../Models/products.php";
@@ -11,7 +12,6 @@ include "../../connection.php";
 include "../../Validation/validation.php";
 include "../../Models/product_cartModel.php";
 
-include "../../MiddleWares/auth.php";
 
 
 
@@ -23,8 +23,7 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
     DeleteProductQuery($_GET['delete_id']);
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
-
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
     if ($_GET['action'] === 'add') {
         // AddProductQuery($_POST);
         // Handle add form data here
@@ -37,60 +36,87 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
     }
 }
 
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    var_dump($_POST);
+// SEARCH for PRODUCT
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    $ValueSearch = $_GET['search_term'] ?? "";
 }
 
-?>
+//Pagination for products
+$productPagination = DisplayAvailableProductsQueryWithPagination();
 
-<div class="container ">
+
+
+?>
+<!-- Main Css File For Product For User-->
+<link rel="stylesheet" href="../../assets/style_product.css">
+<!-- ----------------------------------------------------------------------------------------- -->
+<div class="container p-50 ">
     <h1 class="text-primary mx-auto text-center my-4">All Products</h1>
     <!-- <h2 class="my-4">Products</h2> -->
     <!-- <a class="btn btn-primary" href="Add Products.php">Add Product</a> -->
-    <div class="row ">
+    <form action="" method="GET" id="search-form">
+        <input type="text" name="search_term" id="search-input" placeholder="Enter search term..." value="<?php if (isset($_GET['search_term'])) {
+                                                                                                                echo $_GET['search_term'];
+                                                                                                            } ?>">
+        <input type="submit" value="Search">
+    </form>
+    <div class="row container_products">
         <?php
-        $Products = DisplayAvailableProductsQuery();
+        if (!empty($ValueSearch)) {
+            $Products =  search_Product_With_Pagination_Query($ValueSearch) ?? "";
+            // $Products = searchProductQuery($ValueSearch) ?? "";
+            $_GET['search_term'] = "";
+            // var_dump($Products);
+        } else {
+            // $Products = DisplayAvailableProductsQuery();
+            $Products = $productPagination ?? "";
+        }
         // var_dump(   $Products );
         foreach ($Products as $row) {
         ?>
-            <div class="col-3 mb-4">
-                <div class="card h-100">
-                    <img height="300" src="<?= $row['image'] ?>" class="card-img-top border border-secondary rounded" alt="...">
-                    <div class="card-body">
-                        <div class="top d-flex justify-content-between align-items-center">
-                            <h5 class="card-title text-left "><?= $row['name'] ?></h5>
-                            <h5 class="card-title text-right btn-primary p-2 rounded ">Stock : <?= $row['quantity'] ?></h5>
-                        </div>
-                        <div class="bottom d-flex justify-content-between align-items-center ">
-                            <p class="card-text m-0">Category :<b> <?= SelectCategoryByIdQuery($row['category_id'])   ?> </b>
-                            </p>
-                            <p class="card-text btn-warning p-2 rounded ">Price : <b><?= $row['price'] ?> EGP </b>
-                            </p>
+            <div class="col-xl-3 col-lg-4 col-sm-6">
+                <div class="card_container">
+                    <div class="img_card">
+                        <img src="../../<?= $row['image'] ?>" alt="">
+                    </div>
+                    <div class="card_body_product">
+                        <div class="card_top">
+                            <h3>
+                                <?= $row['quantity'] ?> EGP
+                            </h3>
+                            <?php
 
+                            if ($row['quantity'] <= 0) {
+                                echo "  <p class='UnAvailable container_avi' ><i class='fa-solid fa-circle'></i> UnAvailable </p>";
+                            } else {
+                                echo "  <p class='Available container_avi'><i class='fa-solid fa-circle'></i>Available  </p>";
+                            }
+                            ?>
                         </div>
-                        <a href="" class="btn btn-primary" onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,<?= $_SESSION['user']['id'] ?> )">Add To Cart</a>
+                        <div class="card_bottom">
+                            <h3>
+                                <?= $row['name'] ?>
+                            </h3>
+                            <button class="btn_card" <?php echo ($row['quantity'] <= 0) ? 'disabled="true"' : ''; ?> onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,<?= $_SESSION['user']['id'] ?> )">Add</button>
+                        </div>
+                        <!-- <a href="" class="btn btn-primary" >Add To Cart</a> -->
                     </div>
                 </div>
             </div>
-        <?php     }   ?>
-
+        <?php } ?>
     </div>
+    <?php list(
+        $currentPage,
+        $total_pages,
+    ) = pagination();
+    printPages($total_pages, $currentPage, $ValueSearch);
+
+    ?>
+
 </div>
 
 <!-- Optional: Place to the bottom of scripts -->
-<script>
-    const editButtons = document.querySelectorAll('.edit-category');
-    editButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const categoryId = event.target.dataset.categoryId;
-            const editUrl = `?action=update&category_id=${categoryId}`;
-            document.querySelector('#modelId form').setAttribute('action', editUrl);
-        });
-    });
-
-    // const myModal = new bootstrap.Modal(document.getElementById('modalId'), options)
-</script>
+<script src="../../Controllers/productScript.js"></script>
 <script src="../../Controllers/script.js"></script>
 <?php
 include '../../layout/footer_user.php';
