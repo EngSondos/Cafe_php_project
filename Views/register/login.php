@@ -4,12 +4,12 @@ $pageTitle = 'login';
 include '../../layout/head.php';
 include '../../Validation/registerValidation/login.php';
 include "../../MiddleWares/guest.php";
-
+$errors=[];
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if(isset($_POST['email']) && isset($_POST['password'])) {
 
-            loginValidation($_POST['email'], $_POST['password']);
+            loginValidation($_POST['email'], $_POST['password'],$errors);
         
         }
     }
@@ -32,6 +32,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="form-outline mb-4">
                 <input type="email" id="form1Example13" name="email" class="form-control form-control-lg" />
                 <label class="form-label" for="form1Example13">Email address</label>
+                <br>
+                <?= $errors['email'] ?? "" ?>
             </div>
 
             <!-- Password input -->

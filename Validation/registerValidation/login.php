@@ -2,16 +2,16 @@
 
 include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
 
-    function loginValidation($email, $password) {
+    function loginValidation($email, $password,&$errors) {
         
-        $errors = [];
-        
+        $errors=[];
+
         $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
         
         if(empty($email)) {
-            $errors[] = 'Email Is Required';
+            $errors['email'] = 'Email Is Required';
         }   elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = 'Write a Valid Email';
+            $errors['email'] = 'Write a Valid Email';
         }
         // pssword Validtion
         if(empty($password)) {

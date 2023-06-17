@@ -30,7 +30,7 @@ function loginUser($email, $password) {
     
     if($user && password_verify($password, $user['password'])) {
        
-        session_start();
+        // session_start();
        
         $_SESSION['user'] = $user;
        
