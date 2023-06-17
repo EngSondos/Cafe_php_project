@@ -1,8 +1,8 @@
 <?php
 
-require $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/PHPMailer/Exception.php';
-require $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/PHPMailer/PHPMailer.php';
-require $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/PHPMailer/SMTP.php';
+require $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/PHPmailer/Exception.php';
+require $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/PHPmailer/PHPMailer.php';
+require $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/PHPmailer/SMTP.php';
 
 include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Views/register/resetpassword.php';
 // require $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/vendor/autoload.php';
@@ -32,8 +32,8 @@ try{
     $mail->isHTML(true);
     $mail->Subject = 'Password Reset Request';
     $mail->Body = '
-        <p>You have requested a password reset. Click the link below to reset your password:</p>
-        <a href="http://localhost/Cafe_php_project/Views/register/newPassword.php?codeverify='.$codeverify.'>Reset Password</a>';
+        <p>You have requested a password reset. Click the link below to reset your password:</p>'
+      .'  <a href="http://localhost/Cafe_php_project/Views/register/newPassword.php?codeverify='.$codeverify.'">Reset Password</a>';
     
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
 
