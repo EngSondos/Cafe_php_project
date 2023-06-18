@@ -33,7 +33,6 @@ $Products = DisplayNewestProductsQuery() ?? "";
 <!-- End Header -->
 
 <!-- Start Products -->
-
 <div id="products">
     <div class="container_product">
         <div class="container">

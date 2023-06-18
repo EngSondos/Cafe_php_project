@@ -118,13 +118,11 @@ footer .container p {
   transition: all 0.3s;
 }
 
-.latest_products:hover::after {
-  width: 0%;
-}
-
+.latest_products:hover::after,
 .latest_products:hover::before {
   width: 0%;
 }
+
 
 .latest_products:hover {
   text-shadow: 0 0 10px #fff;

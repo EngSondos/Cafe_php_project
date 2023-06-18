@@ -38,21 +38,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
 <main style="width:80%;margin-left:auto">
     <div class="container_admin_category">
-        <div class="container my-5">
+        <div class="container my-5 p-50 ">
 
-            <form method="post" action="?action=add" enctype="multipart/form-data">
+            <form method="post" action="?action=add" enctype="multipart/form-data" class="add_form">
                 <div class="form-group">
-                    <label for="name">Name:</label>
+                    <label for="name">Category Name:</label>
                     <input type="text" class="form-control" id="name" name="name">
                 </div>
                 <?= $error_add ?? '' ?>
-                <button type="submit" class="btn btn-primary my-3">Submit</button>
-                <button type="reset" class="btn btn-danger  my-3">Reset</button>
+                <div class="add_form_btns">
+                    <button type="submit" class=" my-3 btn_product btn_category">Add Category</button>
+                    <button type="reset" class="btn_product btn_category  my-3">Reset</button>
 
+                </div>
             </form>
-            <br>
-            <div class="title_container my-5">
-                <h1 class="text-primary mx-auto text-center my-4 title_product"> our Categories </h1>
+            <div class="title_admin ">
+                <h1 class=" mx-auto text-center my-2 title_product"> our Categories </h1>
             </div>
             <table class="table table-striped table-Secondary border-dark table-hover text-center table-bordered">
                 <thead>
@@ -65,7 +66,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                 </thead>
                 <tbody>
                     <?php
-                    $rows = DisplayCategory();
+                    // $rows = DisplayCategory();
+                    $rows = Display_All_Categories_Query_With_Pagination();
                     foreach ($rows as $row) {
                     ?>
                         <tr>
@@ -80,6 +82,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                     <?php }  ?>
                 </tbody>
             </table>
+            <?php list(
+                $currentPage,
+                $total_pages,
+            ) = pagination_category();
+            printPages_category($total_pages, $currentPage, null);
+
+            ?>
         </div>
 
 
@@ -107,7 +116,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     <!-- <button type="button" class="btn btn-primary">Save</button> -->
-                    <button type="submit" id="submit_button" class="btn btn-primary my-3" disabled>Submit</button>
+                    <button type="submit" id="submit_button" class="btn btn-primary my-3" disabled>Update</button>
 
                 </div>
                 </form>

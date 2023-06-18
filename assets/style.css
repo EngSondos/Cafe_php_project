@@ -26,8 +26,11 @@ body {
   background-color: rgb(0 0 0 / 61%);
 } */
 .ournav {
-  position: absolute !important;
-  width: 100% !important;
+  /* position: absolute !important; */
+  position: fixed;
+  right: 0;
+  left: 0;
+  /* width: 100% !important; */
   background: #d3ad7f !important;
   z-index: 100;
 }
@@ -40,6 +43,63 @@ body {
   color: #ffffffb9 !important;
   transition: 0.5s;
 }
+
+/* Float Shadow */
+.ournav .nav-link {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  position: relative;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform;
+  transition-property: transform;
+}
+.ournav .nav-link:before {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  content: '';
+  top: 100%;
+  left: 5%;
+  height: 10px;
+  width: 90%;
+  opacity: 0;
+  background: -webkit-radial-gradient(
+    center,
+    ellipse,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0) 80%
+  );
+  /* W3C */
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: transform, opacity;
+  transition-property: transform, opacity;
+}
+.ournav .nav-link:hover,
+.ournav .nav-link:focus,
+.ournav .nav-link:active {
+  -webkit-transform: translateY(-5px);
+  transform: translateY(-5px);
+  /* move the element up by 5px */
+}
+.ournav .nav-link:hover:before,
+.ournav .nav-link:focus:before,
+.ournav .nav-link:active:before {
+  opacity: 1;
+  -webkit-transform: translateY(5px);
+  transform: translateY(5px);
+  /* move the element down by 5px (it will stay in place because it's attached to the element that also moves up 5px) */
+}
+
 nav .user-img {
   border: 2px solid #fff;
   border-radius: 50%;
@@ -121,13 +181,16 @@ main {
 .container {
   /* height: 100%; */
 }
+
 /*First Column*/
 .sidebar {
   position: fixed;
   width: 30%;
   background-color: rgb(250 175 94);
   left: 0;
-  height: 94%;
+  /* height: 94%; */
+  bottom: 0;
+  height: calc(100% - 71px) !important;
   border-right: 1px solid rgba(0, 0, 0, 0.301);
   display: flex;
   flex-direction: column;
@@ -519,23 +582,25 @@ canvas {
 /* List Users in admin */
 .list-users-admin {
   position: relative;
-  z-index: 1000;
+  /* z-index: 1000; */
 }
 .list-users-admin h3 {
-  z-index: 1;
-  color: white;
+  /* z-index: 1; */
+  /* color: white; */
+  font-family: 'Rancho', cursive;
+
   text-transform: capitalize;
 }
-.list-users-admin hr {
+/* .list-users-admin hr {
   color: white;
   border: 1px solid;
   width: 150px;
   margin: initial;
   opacity: 0.6;
-}
-.list-users-admin table {
+} */
+/* .list-users-admin table {
   color: white;
-}
+} */
 
 /* Start Footer */
 footer {
@@ -553,3 +618,108 @@ footer .container p {
   color: white;
 }
 /* End Footer */
+
+.View_Orders,
+.Checks_Orders {
+  margin-top: 80px !important;
+  font-family: 'Rancho', cursive;
+  color: #202020 !important;
+  font-size: 45px !important;
+  margin-bottom: 20px;
+}
+
+.Checks_Orders {
+  /* font-size: 45px !important; */
+  /* margin-bottom: 20px; */
+}
+
+.title_admin {
+  text-transform: capitalize;
+  font-size: 40px;
+  color: #202020 !important;
+  margin-bottom: 30px;
+  position: relative;
+  width: fit-content;
+  padding: 10px;
+}
+
+.title_admin::after {
+  content: '';
+  width: 50%;
+  position: absolute;
+  height: 3px;
+  background-color: #202020 !important;
+  bottom: 0;
+  right: 0;
+  transition: all 0.3s;
+}
+
+.title_admin::before {
+  content: '';
+  width: 50%;
+  position: absolute;
+  height: 3px;
+  background-color: #202020 !important;
+  bottom: 0px;
+  left: 0;
+  transition: all 0.3s;
+}
+
+.title_admin:hover::after,
+.title_admin:hover::before {
+  width: 0%;
+}
+
+.container_all_users {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.btn_product {
+  background-color: #d79860 !important;
+  border: none;
+  color: #202020 !important;
+  font-family: 'Rancho', cursive;
+  font-size: 30px;
+  position: relative;
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.btn_category {
+  font-size: 20px;
+}
+.btn_product::after {
+  content: '';
+  background-color: #202020;
+  width: 0;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  right: 0;
+  z-index: -1;
+  transition: all 0.3s;
+  border-radius: 6px;
+}
+.btn_product:hover::after {
+  width: 100%;
+  /* color: white; */
+  /* background-color: white; */
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.btn_product:hover {
+  text-decoration: none;
+  color: #f29a44 !important;
+  border-radius: 6px;
+}
+
+.btn_product i {
+  font-size: 16px;
+}
