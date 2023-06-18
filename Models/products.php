@@ -12,7 +12,7 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
     $stmt = $conn->prepare($query);
     $target = "../../";
     $image_path =  $target . $image;
-    var_dump($_FILES['image']['tmp_name']);
+    // var_dump($_FILES['image']['tmp_name']);
     move_uploaded_file($_FILES['image']['tmp_name'], $image_path); // Upload the image with the unique name
     $stmt->bindParam(':productName', $name);
     $stmt->bindParam(':productImage', $image);

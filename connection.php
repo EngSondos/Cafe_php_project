@@ -1,7 +1,7 @@
 <?php
 $servername = "localhost";
 $username = "root";
-$password = "";
+$password = "mangood1907";
 
 try {
   $conn = new PDO("mysql:host=$servername;dbname=Cafe", $username, $password);
@@ -23,11 +23,11 @@ try {
 ## 2- construct connection
 
 
-function connect_to_database($dbuser, $dbhost, $dbport, $dbname)
+function connect_to_database($dbuser, $dbhost, $dbport, $dbname, $password)
 {
     $dsn = "mysql:host={$dbhost};dbname={$dbname};port={$dbport}";
 
-    $conn= new PDO($dsn, $dbuser);
+    $conn= new PDO($dsn, $dbuser, $password);
     try {
         if ($conn) {
             // echo "connection succeeded";
@@ -38,5 +38,5 @@ function connect_to_database($dbuser, $dbhost, $dbport, $dbname)
     };
 }
 
-$conn = connect_to_database($dbuser, $dbhost, $dbport, $dbname);
+$conn = connect_to_database($dbuser, $dbhost, $dbport, $dbname, $password);
 // echo $db;

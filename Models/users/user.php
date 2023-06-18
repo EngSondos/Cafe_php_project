@@ -55,7 +55,7 @@ function CheckIfUserDeleted($userId)
     $stmt = $conn->prepare($query);
 
     $stmt->execute(array( ':userId' => $userId ));
-    var_dump($stmt->rowCount());
+    // var_dump($stmt->rowCount());
     if($stmt->rowCount()>0)
     {
         return false;

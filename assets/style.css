@@ -111,9 +111,7 @@ nav .online-dote::before {
 main {
   height: 100vh;
 }
-.container {
-  /* height: 100%; */
-}
+
 /*First Column*/
 .sidebar {
   position: fixed;

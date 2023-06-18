@@ -125,7 +125,7 @@
             } else {
                 include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
                 $user = getUserByEmail($email);
-                var_dump($user);
+                // var_dump($user);
                 $image_dest = $user['image'];
             }
             

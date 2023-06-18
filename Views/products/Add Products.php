@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
             <select name="category_id" id="">
                 <?php
                 $rows = DisplayCategory();
-                var_dump($rows);
+                // var_dump($rows);
                 foreach ($rows as $row) {  ?>
                     <option value="<?= $row['id'] ?>"><?= $row['name'] ?></option>
                 <?php    }
