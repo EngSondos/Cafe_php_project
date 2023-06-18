@@ -83,5 +83,7 @@ $Products = DisplayNewestProductsQuery() ?? "";
 <!-- End Products -->
 
 
+<script src="../../Controllers/productScript.js"></script>
+<script src="../../Controllers/script.js"></script>
 
 <?php include '../../layout/footer_user.php'; ?>

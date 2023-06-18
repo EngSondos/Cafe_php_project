@@ -14,33 +14,9 @@ searchInput.addEventListener("input", function () {
 
 //**Click On Add Button */
 let addCarts = document.querySelectorAll(".card_bottom .btn_card");
-// console.log(addCart);
+console.log(addCarts);
 for (let i = 0; i < addCarts.length; i++) {
-  addCarts[i].addEventListener("click", function AddToCart() {
+  addCarts[i].addEventListener("click", function addToCart() {
     addCarts[i].innerHTML = '<i class="fa-solid fa-check"></i>';
   });
 }
-
-//**Swiper Js*/
-
-const swiper = new Swiper(".swiper", {
-  // Optional parameters
-  // direction: "vertical",
-  loop: true,
-
-  // If we need pagination
-  pagination: {
-    el: ".swiper-pagination",
-  },
-
-  // Navigation arrows
-  navigation: {
-    nextEl: ".swiper-button-next",
-    prevEl: ".swiper-button-prev",
-  },
-
-  // And if we need scrollbar
-  scrollbar: {
-    el: ".swiper-scrollbar",
-  },
-});

@@ -93,7 +93,7 @@ function pagination()
 {
     global $conn;
 
-    $query = "SELECT * FROM  `products` WHERE `quantity` > 0";
+    $query = "SELECT * FROM  `products`";
     ### prepare query
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -282,31 +282,22 @@ function DeleteProductQuery($id)
     $stmt = $conn->prepare($queryIfProductExist);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    if ($stmt->rowCount() > 0) {
-        echo "Product with id: " . $id . " already exists in Order Table";
-    } else {
-        try {
-            //Select Image From DataBase
-            $imageName = selectImageQuery($id);
-            $imagePath = '../../' . $imageName;
-            // $query = "DELETE FROM `products` WHERE id = :id";
-            $query = "UPDATE  `products` SET quantity = 0  WHERE id = :id";
-            ### prepare query
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            // Delete the image file from the server
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            } else {
-                echo "Image file not found";
-            }
-            return $stmt->rowCount();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+    try {
+        //Select Image From DataBase
+        $imageName = selectImageQuery($id);
+        $imagePath = '../../' . $imageName;
+        // $query = "DELETE FROM `products` WHERE id = :id";
+        $query = "UPDATE  `products` SET quantity = 0  WHERE id = :id";
+        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    } catch (Exception $e) {
+        echo $e->getMessage();
     }
 }
+// }
 
 
 

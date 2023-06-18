@@ -3,16 +3,18 @@ include_once '../connection_credits.php';
 include_once '../connection.php';
 include_once '../Models/product_cartModel.php';
 include_once '../Models/userCartModel.php';
-include_once '../Models//order_model.php';
+include_once '../Models/order_model.php';
 include_once '../Views/carts/cart_view.php';
 include_once '../Views/Admin/cart.php';
+include_once '../Controllers/AdminController.php';
+include_once '../Models/AdminOrder.php';
 
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-if(sizeof($_SESSION) == 0){
+if (sizeof($_SESSION) == 0) {
     header('Location:http://localhost/Cafe_php_project/Views/register/login.php');
 }
 
@@ -23,12 +25,12 @@ $products = selectProducts();
 $comboBox = selectUserCarts($userid);
 
 //last step send those data to the view to be rendered
-if($_SESSION['user']['role']==1)
+if ($_SESSION['user']['role'] == 1)
     render_carts_admin($products, $carts, $comboBox);
 else
-render_carts($products, $carts, $comboBox);
+    render_carts($products, $carts, $comboBox);
 
- if ($_SERVER["REQUEST_METHOD"] === 'POST') {
+if ($_SERVER["REQUEST_METHOD"] === 'POST') {
     $reqbody = file_get_contents("php://input");
     $data = json_decode($reqbody, true);
 
@@ -44,16 +46,15 @@ render_carts($products, $carts, $comboBox);
                 updateUserCarts($data['usrid'], $data['notes']);
             }
         }
-    }else{
+    } else {
         $products = selectCarts($data['user_id']);
         $usercarts = selectUserCarts($data['user_id']);
-        if(sizeof($products) and sizeof($usercarts)){
-            createOrder($data['user_id'],$products,$usercarts[0]['notes'],$usercarts[0]['total_price'],'pending');
-            deleteAllCarts($data['user_id']);   
-            deleteUserCarts($data['user_id']); 
+        if (sizeof($products) and sizeof($usercarts)) {
+            createOrder($data['user_id'], $products, $usercarts[0]['notes'], $usercarts[0]['total_price'], 'pending');
+            deleteAllCarts($data['user_id']);
+            deleteUserCarts($data['user_id']);
         }
     }
-
 } else if ($_SERVER["REQUEST_METHOD"] === 'UPDATE') {
     $reqbody = file_get_contents("php://input");
     $data = json_decode($reqbody, true);
@@ -66,12 +67,8 @@ render_carts($products, $carts, $comboBox);
 } else if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
     $reqbody = file_get_contents("php://input");
     $data = json_decode($reqbody, true);
-    
+
     deleteCart($data['cartid']);
-    
+
     updateUserCarts($userid, '');
 }
-
-
-
-

@@ -45,7 +45,6 @@ if (isset($_POST['cancel_order'])) {
   $orderId = $_POST['cancel_order'];
   $result = cancel($orderId, $conn);
   echo "<div class='alert alert-danger' style='text-align: center' role='alert'>Invalid dates.</div>";
-
 }
 
 
@@ -61,18 +60,18 @@ if (isset($_POST['cancel_order'])) {
 
         <div class="form-group me-3  w-25">
           <label for="start_date">Start Date:</label>
-          <input type="date" class="form-control" id="start_date" name="start_date" value=<?= $_POST['start_date'] ??"" ?>>
+          <input type="date" class="form-control" id="start_date" name="start_date" value=<?= $_POST['start_date'] ?? "" ?>>
         </div>
         <div class="form-group me-3  w-25">
           <label for="end_date">End Date:</label>
-          <input type="date" class="form-control" id="end_date" name="end_date" value=<?= $_POST['end_date'] ??"" ?>>
+          <input type="date" class="form-control" id="end_date" name="end_date" value=<?= $_POST['end_date'] ?? "" ?>>
         </div>
         <button type="submit" class="btn btn-primary mt-4 ">View Orders</button>
       </div>
 
     </form>
     <br>
-    <table class="table table-light">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Order ID</th>
@@ -122,7 +121,7 @@ if (isset($_POST['cancel_order'])) {
                       <td><?php echo $product['name']; ?></td>
                       <td><?php echo $product['quantity']; ?></td>
                       <td><?php echo $product['price']; ?></td>
-                      <td> <img src=" <?php echo $product['image']; ?>" alt=""></td>
+                      <td> <img width="40" height="40" src="../<?php echo $product['image']; ?>" alt=""></td>
 
 
                     </tr>
