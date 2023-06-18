@@ -31,22 +31,22 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
 
 // ----------------------------------------------------------------
 
-// //**DISPLAY ALL PRODUCT For Admin
-// function DisplayAllProductsQuery()
-// {
-//     global $conn;
+//**DISPLAY ALL PRODUCT * Without *  Pagination For Admin 
+function DisplayAllProductsQuery()
+{
+    global $conn;
 
-//     try {
-//         $query = "SELECT * FROM  `products`";
-//         ### prepare query
-//         $stmt = $conn->prepare($query);
-//         $stmt->execute();
-//         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//         return $row;
-//     } catch (Exception $e) {
-//         echo $e->getMessage();
-//     }
-// }
+    try {
+        $query = "SELECT * FROM  `products`";
+        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
 
 //**DISPLAY Available Products With Pagination For Admin
 function Display_All_Products_Query_With_Pagination()
@@ -73,7 +73,7 @@ function Display_All_Products_Query_With_Pagination()
 
 
 // ----------------------------------------------------------------
-//*Retrieve Product Per Page
+//*Retrieve Product Per Page and calculate number of pages
 function pagination()
 {
     global $conn;
@@ -177,58 +177,9 @@ function search_Product_With_Pagination_Query($ValueSearch)
     }
 }
 
-
-// //**DISPLAY Available Products With Pagination
-// function DisplayAvailableProductsQueryWithPagination()
-// {
-//     global $conn;
-
-//     try {
-//         $query = "SELECT * FROM  `products` WHERE `quantity` > 0";
-//         // var_dump($query);
-
-//         ### prepare query
-//         $stmt = $conn->prepare($query);
-//         $stmt->execute();
-//         $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//         //Retrieve the total number of records in the database table 
-//         $total_records = $stmt->rowCount();
-//         //Set the number of records to display per page and calculate the total number of pages
-//         $records_per_page = 8;
-//         $total_pages = ceil($total_records / $records_per_page);
-//         // Get the current page number
-//         if (isset($_GET['page'])) {
-//             $currentPage = $_GET['page'];
-//         } else {
-//             $currentPage = 1;
-//         }
-//         // Calculate the offset for the SQL query
-//         $offset = ($currentPage - 1) * $records_per_page;
-//         // Build the SQL query with LIMIT and OFFSET clauses
-//         $query = "SELECT * FROM `products` LIMIT :limit OFFSET :offset";
-//         $stmt = $conn->prepare($query);
-//         $stmt->bindValue(':limit', $records_per_page, PDO::PARAM_INT);
-//         $stmt->bindValue(':offset', $offset, PDO::PARAM_INT);
-//         $stmt->execute();
-//         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-//         // Generate links to navigate between pages
-//         echo "<div>";
-//         for ($i = 1; $i <= $total_pages; $i++) {
-//             if ($i == $currentPage) {
-//                 echo "<strong>$i</strong> ";
-//             } else {
-//                 echo "<a href='?page=$i'>$i</a> ";
-//             }
-//         }
-//         echo "</div>";
-//         return $results;
-//     } catch (Exception $e) {
-//         echo $e->getMessage();
-//     }
-// }
 // ----------------------------------------------------------------
 
-//**DISPLAY Available PRODUCT 
+//**DISPLAY Available PRODUCT * Without * Pagination
 function DisplayAvailableProductsQuery()
 {
     global $conn;
@@ -323,7 +274,8 @@ function DeleteProductQuery($id)
             //Select Image From DataBase
             $imageName = selectImageQuery($id);
             $imagePath = '../../' . $imageName;
-            $query = "DELETE FROM `products` WHERE id = :id";
+            // $query = "DELETE FROM `products` WHERE id = :id";
+            $query = "UPDATE  `products` SET quantity = 0  WHERE id = :id";
             ### prepare query
             $stmt = $conn->prepare($query);
             $stmt->bindParam(":id", $id);
