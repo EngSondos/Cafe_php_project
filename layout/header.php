@@ -2,9 +2,9 @@
 if (sizeof($_SESSION) > 0 and $_SESSION['user']['role'] == 1) {
     echo '<header>
             <!-- Sidebar -->
-            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-dark">
+            <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
                 <div class="position-sticky h-100">
-                    <div class="sidebarhead mb-0 d-flex">
+                    <div class="sidebar-head mb-0 d-flex">
                         <i class="fas fa-chart-area fa-fw me-3"></i>
                         <h2 class=" ">Admin DashBoard</h2>
                     </div>
