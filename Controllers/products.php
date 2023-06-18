@@ -1,5 +1,5 @@
 <?php
-//*Validation On Image */
+
 function imageValid()
 {
 
@@ -14,8 +14,55 @@ function imageValid()
     // Process the file
   } else {
     // File upload error occurred
-    $image = $product_updated['image'];
+    $image =  substr($product_updated['image'], 5);
   }
 
   return $image;
+}
+
+//*Add Product
+function AddProduct($name, $image, $price, $quantity, $category_id)
+{
+  $error = [];
+
+  //Store the product information in the database
+  $data = [
+    'name' => $name,
+    'image' => $image,
+    'price' => $price,
+    'quantity' => $quantity,
+    'category_id' => $category_id,
+  ];
+  $error = validation_Product($data);
+
+
+  if (empty($error)) {
+    // AddCategoryQuery($data);
+    AddProductQuery($name, $image, $price, $quantity, $category_id);
+  }
+  return $error;
+}
+
+//*Update Product
+function updateProduct($product_id, $name, $image, $price, $quantity, $category_id)
+{
+  $error = [];
+  $data = [
+    'name' => $name,
+    'image' => $image,
+    'price' => $price,
+    'quantity' => $quantity,
+    'category_id' => $category_id,
+  ];
+  $error = validation_Product($data);
+  if (empty($error)) {
+    UpdateProductQuery($product_id, $name, $image, $price, $quantity, $category_id);
+  }
+  return $error;
+}
+
+//*Delete Product
+function DeleteProduct($id)
+{
+  DeleteProductQuery($id);
 }
