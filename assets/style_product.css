@@ -9,8 +9,8 @@ body {
 
 .card_container img {
   /* width: 100%; */
-  display: block;
-  margin: auto;
+  /* display: block; */
+  /* margin: auto; */
 }
 
 .container_products {
@@ -41,6 +41,7 @@ body {
 
 .img_card img {
   /* width: ; */
+  object-fit: cover;
   height: 200px;
 }
 

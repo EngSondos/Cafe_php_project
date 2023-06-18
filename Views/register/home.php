@@ -1,26 +1,34 @@
 <?php
 include '../../layout/head.php';
 include '../../Controllers/users/users.php';
+include "../../Models/products.php";
+include "../../connection_credits.php";
+include "../../connection.php";
 include "../../MiddleWares/auth.php";
-
 if (!isLoggedIn()) {
     header('Location:login.php');
 }
 
 $user = getCurrentUser();
+
+//Pagination for products
+$Products = DisplayNewestProductsQuery() ?? "";
 ?>
 <!-- Style For Products In Home -->
 <link rel="stylesheet" href="../../layout/CSS/styleHome.css">
+<link rel="stylesheet" href="../../assets/style_product.css">
 
 <!-- Start Header -->
-<header class="p-50" style="position:relative;margin:30px;border-radius:10px">
+<header class="p-50">
     <h1>Begin Your Day ,<br>
         With Your Fav Drink</h1>
     <p>
         " From rich and velvety hot chocolates to refreshing<br> ice-cold lemonades,our drinks are crafted with <br>passion and care to satisfy every taste bud."
     </p>
+    <div class="order_btn">
+        <a href="#products"><button type="button" class="btn btn-light">Order Now</button></a>
 
-    <a href="#products"><button style="margin-top: 50px;" type="button" class="btn btn-light">Order Now</button></a>
+    </div>
 </header>
 <!-- End Header -->
 
@@ -30,72 +38,41 @@ $user = getCurrentUser();
     <div class="container_product">
         <div class="container">
             <div class="row">
-                <div class="col-xl-3 col-lg-4 col-sm-6">
-                    <div class="card_container">
-                        <div class="img_card">
-                            <img src="../../assets/products/1 (1).png" alt="">
-                        </div>
-                        <div class=" card_body">
-                            <div class="card_top">
-                                <h3>latte</h3>
-                            </div>
-                            <div class="card_bottom">
-                                <h3>50 <span>EGP</span> </h3>
-                                <button class="btn_card">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-sm-6">
-                    <div class="card_container">
-                        <div class="img_card">
-                            <img src="../../assets/products/1 (2).png" alt="">
-                        </div>
-                        <div class=" card_body">
-                            <div class="card_top">
-                                <h3>limen</h3>
-                            </div>
-                            <div class="card_bottom">
-                                <h3>50 <span>EGP</span></h3>
+                <div class="row container_products">
+                    <?php
+                    foreach ($Products as $row) {
+                    ?>
+                        <div class="col-xl-3 col-lg-4 col-sm-6">
+                            <div class="card_container">
+                                <div class="img_card">
+                                    <img src="../../<?= $row['image'] ?>" alt="">
+                                </div>
+                                <div class="card_body_product">
+                                    <div class="card_top">
+                                        <h3>
+                                            <?= $row['name'] ?>
+                                        </h3>
+                                        <?php
 
-                                <button class="btn_card">Add</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                                        if ($row['quantity'] <= 0) {
+                                            echo "  <p class='UnAvailable container_avi' ><i class='fa-solid fa-circle'></i> UnAvailable </p>";
+                                        } else {
+                                            echo "  <p class='Available container_avi'><i class='fa-solid fa-circle'></i>Available  </p>";
+                                        }
+                                        ?>
+                                    </div>
+                                    <div class="card_bottom">
+                                        <h3>
+                                            <?= $row['price'] ?> <span>EGP</span>
+                                        </h3>
 
-
-                <div class="col-xl-3 col-lg-4 col-sm-6">
-                    <div class="card_container">
-                        <div class="img_card">
-                            <img src="../../assets/products/1 (5).png" alt="">
-                        </div>
-                        <div class=" card_body">
-                            <div class="card_top">
-                                <h3>coffee</h3>
-                            </div>
-                            <div class="card_bottom">
-                                <h3>50 <span>EGP</span></h3>
-                                <button class="btn_card">Add</button>
+                                        <button class="btn_card" <?php echo ($row['quantity'] <= 0) ? 'disabled="true"' : ''; ?> onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,<?= $_SESSION['user']['id'] ?> )">Add</button>
+                                    </div>
+                                    <!-- <a href="" class="btn btn-primary" >Add To Cart</a> -->
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="col-xl-3 col-lg-4 col-sm-6">
-                    <div class="card_container">
-                        <div class="img_card">
-                            <img src="../../assets/products/1 (6).png" alt="">
-                        </div>
-                        <div class=" card_body">
-                            <div class="card_top">
-                                <h3>juice</h3>
-                            </div>
-                            <div class="card_bottom">
-                                <h3>50 <span>EGP</span></h3>
-                                <button class="btn_card">Add</button>
-                            </div>
-                        </div>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

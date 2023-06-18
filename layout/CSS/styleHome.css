@@ -25,7 +25,8 @@ header {
   background-size: 100% 100%;
   /* background-position:  50%; */
   background-attachment: fixed;
-
+  margin: 0 !important;
+  top: 0;
   /* height: 100vh; */
 }
 
@@ -51,10 +52,15 @@ header p {
   height: 500px;
 } */
 
-header a {
-  margin-left: 350px;
+.order_btn {
+  margin-left: 100px;
+  margin-top: 50px;
 }
 
+.order_btn a {
+  font-weight: 600;
+  font-size: 20px;
+}
 header button {
   width: 200px;
   height: 50px;
@@ -168,3 +174,7 @@ footer .container p {
   /* background-color: white; */
   color: #202020;
 }
+/* .swiper {
+  width: 600px;
+  height: 300px;
+} */

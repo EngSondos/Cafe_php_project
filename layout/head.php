@@ -22,6 +22,9 @@
     <link rel="stylesheet" href="../../../assets/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title><?= $title  ?></title>
+
+    <!-- CDN Swiper Css-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
     <!-- CDN Font Awesome V 6.4.0 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- CDN Font Google -->
@@ -54,5 +57,4 @@
     ?>
     <!-- Main Css File For Cart-->
     <!-- <link rel="stylesheet" href="../assets/style.css"> -->
-</head>
-
+    </head>

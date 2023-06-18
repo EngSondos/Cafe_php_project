@@ -27,7 +27,22 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
     }
 }
 
+// ----------------------------------------------------------------
+//**DISPLAY Newest PRODUCT 8 ITEMS ONLY IN HOME **
+function DisplayNewestProductsQuery()
+{
+    global $conn;
 
+    try {
+        $query = "SELECT * FROM `products`  WHERE `quantity` > 0 ORDER BY id ASC LIMIT 8";        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
 
 // ----------------------------------------------------------------
 
