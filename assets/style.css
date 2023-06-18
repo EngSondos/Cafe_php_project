@@ -175,9 +175,9 @@ nav .online-dote::before {
 .bg-brown form a {
   color: #ffffff;
 }
-main {
+/* main {
   height: 100vh;
-}
+} */
 .container {
   /* height: 100%; */
 }
@@ -621,7 +621,7 @@ footer .container p {
 
 .View_Orders,
 .Checks_Orders {
-  margin-top: 80px !important;
+  margin-top: 60px !important;
   font-family: 'Rancho', cursive;
   color: #202020 !important;
   font-size: 45px !important;
@@ -629,8 +629,7 @@ footer .container p {
 }
 
 .Checks_Orders {
-  /* font-size: 45px !important; */
-  /* margin-bottom: 20px; */
+  margin-top: 0px !important;
 }
 
 .title_admin {
@@ -722,4 +721,9 @@ footer .container p {
 
 .btn_product i {
   font-size: 16px;
+}
+
+.p-50 {
+  padding-top: 50px;
+  padding-bottom: 50px;
 }

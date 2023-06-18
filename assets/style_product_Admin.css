@@ -113,6 +113,7 @@ body {
   text-decoration: none;
   z-index: 1;
   overflow: hidden;
+  text-transform: capitalize;
 }
 
 .btn_category {
@@ -166,7 +167,7 @@ th {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  width: 200px;
+  width: fit-content;
   margin-inline: auto;
 }
 
@@ -174,7 +175,7 @@ th {
 .num_page_active {
   background-color: #796449ac;
   display: block;
-  margin-inline: 20px;
+  margin-inline: 25px;
   font-size: 20px;
   width: 50px;
   height: 50px;
@@ -217,4 +218,42 @@ th {
   text-align: right;
 }
 
+#Add_form .container_input {
+  display: flex !important;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+}
 
+#Add_form .container_input label {
+  width: 120px;
+  text-transform: capitalize;
+  font-size: 18px;
+}
+
+#Add_form .container_input select,
+#Add_form .container_input option {
+  width: 100%;
+  padding: 5px;
+  border-radius: 6px;
+}
+
+#Add_form .container_input input {
+  text-transform: capitalize;
+  border-radius: 6px;
+}
+
+.container_btn_form_submit {
+  text-align: right;
+}
+
+.Add_Products {
+  margin-top: 100px;
+}
+
+.container_form_add_product {
+  width: 80%;
+  margin-right: auto;
+}

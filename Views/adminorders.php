@@ -21,8 +21,8 @@ if (isset($_GET['status']) && isset($_GET['id'])) {
 }
 
 ?>
-<main style="width:80%;margin-left:auto ">
-  <div class="container mt-5">
+<main style="width:80%;margin-left:auto " class="p-50">
+  <div class="container mt-5  ">
     <h2 class="View_Orders title_admin">View Orders</h2>
 
     <table class="table table-striped border-dark table-hover text-center table-bordered">

@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
                 </div>
             </form>
-            <div class="title_admin ">
+            <div class="title_admin">
                 <h1 class=" mx-auto text-center my-2 title_product"> our Categories </h1>
             </div>
             <table class="table table-striped table-Secondary border-dark table-hover text-center table-bordered">

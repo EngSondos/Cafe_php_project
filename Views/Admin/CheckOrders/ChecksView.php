@@ -25,7 +25,7 @@ if (!empty($_POST)) {
   // var_dump($orders);
 }
 ?>
-<main style="width:80%;margin-left:auto">
+<main style="width:80%;margin-left:auto " class="p-50">
   <div class="container">
     <div class="row mt-5 ">
       <div class="col-12 my-auto checktext">
