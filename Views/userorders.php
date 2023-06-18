@@ -72,7 +72,7 @@ if (isset($_POST['cancel_order'])) {
 
     </form>
     <br>
-    <table class="table table-light">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Order ID</th>
