@@ -35,12 +35,19 @@ function validationForCategoryId($category_id, &$error): void
 {
     validationForEmpty($category_id, "category_id", $error);
 }
-function validation($data): array
+function validation_Product($data): array
 {
     global $error;
     validationForName($data['name'], $error);
     validationForPrice($data['price'], $error);
     validationForQuantity($data['quantity'], $error);
     validationForCategoryId($data['category_id'], $error);
+    return $error;
+}
+
+function validation_Category($data): array
+{
+    global $error;
+    validationForName($data['name'], $error);
     return $error;
 }

@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
 <main style="width:80%;margin-left:auto">
     <div class="container_admin_category">
-        <div class="container">
+        <div class="container my-5">
 
             <form method="post" action="?action=add" enctype="multipart/form-data">
                 <div class="form-group">
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
             <div class="title_container my-5">
                 <h1 class="text-primary mx-auto text-center my-4 title_product"> our Categories </h1>
             </div>
-            <table class="table table-striped table-Secondary border-dark  text-center table-bordered">
+            <table class="table table-striped table-Secondary border-dark table-hover text-center table-bordered">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -74,8 +74,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
                                 <td><?= $field ?></td>
                             <?php     }   ?>
                             <!-- Button trigger modal -->
-                            <td><a href="" class="btn btn-warning edit-category" data-toggle="modal" data-target="#modelId" data-category-id="<?= $row['id'] ?>">Edit</a></td>
-                            <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete</a></td>
+                            <td><a href="" class="btn btn-success edit-category" data-toggle="modal" data-target="#modelId" data-category-id="<?= $row['id'] ?>">Edit <i class="fa-solid fa-pen-to-square"></i></a></td>
+                            <td><a href="?delete_id=<?= $row['id'] ?>" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete <i class="fa-solid fa-trash"></i></a></td>
                         </tr>
                     <?php }  ?>
                 </tbody>
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Modal title</h5>
+                    <h5 class="modal-title">Update Category</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

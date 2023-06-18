@@ -6,7 +6,7 @@ function AddCategory($data)
 
     // if (empty($data)) {
 
-        $error = validation($data);
+        $error = validation_Category($data);
       
     // }
 
@@ -30,7 +30,7 @@ function DeleteCategory($id){
 function UpdateCategory($id, $data){
     if (!empty($data)) {
         $error = [];
-        $error = validation($data);
+        $error = validation_Category($data);
         if(empty($error)){
             UpdateCategoryQuery($id,$data);
         }
