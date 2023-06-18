@@ -25,8 +25,11 @@ if (isset($_SESSION['user'])) {
         <li class="nav-item mr-5 ml-5">
           <a href="/Cafe_php_project/Views/products/DisplayProductsUser.php" class="nav-link">Products<i class="fab fa-buffer pl-2"></i></a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item mr-5 ">
           <a href="/Cafe_php_project/Controllers/cart_controller.php" class="nav-link">Cart<i class="fas fa-cart-arrow-down pl-2"></i></a>
+        </li>
+        <li class="nav-item">
+          <a href="/Cafe_php_project/Views/userorders.php" class="nav-link">My Orders</a>
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">
