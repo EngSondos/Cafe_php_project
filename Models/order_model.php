@@ -21,13 +21,6 @@ function getAllOrders()
       $stmt = $conn->prepare('SELECT * FROM order_product WHERE order_id = :order_id');
       $stmt->bindParam(':order_id', $order['id']);
       $stmt->execute();
-      $orderProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-      $totalPrice =0;
-      foreach ($orderProducts as $product){
-        $totalPrice += $product['quantity'] * $product['price'];
-      }
-      $order['total_price'] = $totalPrice;
     }
 
     return $orders;
@@ -51,14 +44,8 @@ function getUserOrders($userId)
       $stmt = $conn->prepare('SELECT * FROM order_product WHERE order_id = :order_id');
       $stmt->bindParam(':order_id', $order['id']);
       $stmt->execute();
-      $orderProducts = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-      $totalPrice =0;
-      foreach ($orderProducts as $product){
-        $totalPrice += $product['quantity'] * $product['price'];
-      }
-      $order['total_price'] = $totalPrice;
-    }
+     }
 
     return $orders;
   } catch(PDOException $e) {
