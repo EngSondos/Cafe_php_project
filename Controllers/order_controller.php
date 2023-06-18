@@ -65,5 +65,11 @@ function getById($orderId) {
 
 
 function cancel($orderId) {
-  return cancelOrder($orderId);
+  $result = cancelOrder($orderId);
+  if ($result) {
+    header("Location: userorders.php?cancel_order=$orderId");
+    exit();
+  } else {
+    return false;
+  }
 }
