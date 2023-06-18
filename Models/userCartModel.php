@@ -1,6 +1,6 @@
 <?php
 //select usercarts
-function selectUserCarts($userid )
+function selectUserCarts($userid)
 {
     global $conn;
 
@@ -18,18 +18,18 @@ function selectUserCarts($userid )
 }
 
 //update usercarts
-function updateUserCarts($userid,$notes)
+function updateUserCarts($userid, $notes)
 {
-    
+
     global $conn;
 
-    if($notes == ''){
+    if ($notes == '') {
         $notes = selectUserCarts($userid)[0]['notes'];
     }
 
     $totalPrice = countTotalPrice($userid);
 
-    $update_query = "update `carts` set `notes` = :note , `total_price` = :TP where `user_id`=:usrid" ;
+    $update_query = "update `carts` set `notes` = :note , `total_price` = :TP where `user_id`=:usrid";
 
     $stmt = $conn->prepare($update_query);
 
@@ -41,7 +41,7 @@ function updateUserCarts($userid,$notes)
 }
 
 //delete usercarts
-function deleteUserCarts($userid )
+function deleteUserCarts($userid)
 {
     global $conn;
 
@@ -55,7 +55,7 @@ function deleteUserCarts($userid )
 }
 
 //function to save totalprice of all carts 
-function createUserCarts($userid )
+function createUserCarts($userid)
 {
     global $conn;
 
@@ -72,14 +72,22 @@ function createUserCarts($userid )
 }
 
 //function to count totalprice
-function countTotalPrice($userid){
+function countTotalPrice($userid)
+{
 
     $allcarts = selectCarts($userid);
+    $allproducts = selectProducts();
     $totalPrice = 0;
 
-    for($i=0;$i<sizeof($allcarts);$i++){
-        $totalPrice+= $allcarts[$i]['price'];
-    }
+    foreach ($allcarts as $cart) {
+        foreach ($allproducts as $product) {
+            if ($cart['product_id'] == $product['id']) {
+                if ($product['quantity'] > 0) {
+                    $totalPrice +=  $product['price'] * $cart['quantity'];
+                }
+            }
+        }
+    };
 
     return $totalPrice;
 }

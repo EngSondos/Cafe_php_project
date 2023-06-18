@@ -22,7 +22,7 @@ echo '
 <main style="width:80%;margin-left:auto" class="dashboard">
 <section class="X-Hero">
 <div>
-    <img class="animated-graph" src="https://d33wubrfki0l68.cloudfront.net/02fb31443b2b4a55ad03aa767ba58b044f1de489/ce304/assets/images/svg-vs-gif--sprout-chart.svg">
+    <img class="animated-graph" src="https://cdn.dribbble.com/users/3593/screenshots/2475280/linechart.gif">
 </div>
 </section>
 
@@ -46,6 +46,8 @@ echo '
         <div class="row">
             <div class="col-xl-4">
                 <div class="dash-card">
+                    <i class="fa-solid fa-users-viewfinder"></i>
+                    <br>
                     <span>Users</span>
                     <br>
                     <span>'.sizeof($users).'K</span>
@@ -53,6 +55,8 @@ echo '
             </div>
             <div class="col-xl-4">
                 <div class="dash-card">
+                    <i class="fa-solid fa-dolly"></i>
+                    <br>
                     <span>Products</span>
                     <br>
                     <span>'.sizeof($products).'K</span>
@@ -60,6 +64,8 @@ echo '
             </div>
             <div class="col-xl-4">
                 <div class="dash-card">
+                    <i class="fa-solid fa-tags"></i>
+                    <br>
                     <span>Categories</span>
                     <br>
                     <span>'.sizeof($categories).'</span>

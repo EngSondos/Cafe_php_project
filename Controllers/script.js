@@ -1,8 +1,9 @@
+//----------------------------------------MyCart Page Functions----------------------------------------//
 const Notes = document.getElementsByTagName("textarea")[0],
 lineNumbers = document.querySelector(".line-numbers");
 
 let numberOfLines = 0;
-
+//check if the textarea contains note or not
 if (Notes) {
   numberOfLines = Notes.value.split("\n").length - 1;
   for (let i = 0; i < numberOfLines; i++) {
@@ -32,10 +33,41 @@ if (Notes) {
 
 }
 
+//function to open|close sidebar 
+function Open_Close_Nav() {
+  const sidebar_btn = document.getElementsByClassName("sidebarbtn")[0];
+  console.log(sidebar_btn.classList.contains('openbtn'))
+  if (sidebar_btn.classList.contains('openbtn')) {
+    sidebar_btn.style.left = "390px";
+    sidebar_btn.classList.replace('openbtn', 'closebtn')
+    document.getElementById("mySidebar").style.width = "390px";
+    document.getElementById("main").style.marginLeft = "390px";
+  }
+  else if (sidebar_btn.classList.contains('closebtn')) {
+    sidebar_btn.style.left = "0";
+    sidebar_btn.classList.replace('closebtn', 'openbtn')
+    document.getElementById("mySidebar").style.width = "0";
+    document.getElementById("main").style.marginLeft = "0";
+  }
+}
+//function to create newlines
 function numberLines() {
   lineNumbers.innerHTML = Array(numberOfLines).fill("<span></span>").join("");
 }
-
+//function to save written notes
+function savenotes(id) {
+  if (Notes.value.length > 0) {
+    fetch("../Controllers/cart_controller.php", {
+      method: "UPDATE",
+      headers: {
+        "Content-Type": "application/json;charset=utf-8",
+      },
+      body: JSON.stringify({ notes: Notes.value, user_id: id }),
+    });
+    location.reload();
+  }
+}
+//function to increase the quantity of the product
 function incrementquantity(availablequantity, product_id, user_id, product_price) {
   span = document.getElementById(product_id);
   span2 = document.getElementById(`prod${product_id}price`);
@@ -55,12 +87,12 @@ function incrementquantity(availablequantity, product_id, user_id, product_price
         product_id: product_id,
         price: product_price,
       }),
-    });
+    })
     span.innerHTML = quantity;
-    span2.innerHTML = product_price;
+    span2.innerHTML = product_price.toFixed(2) + ' EGP';
   }
 }
-
+//function to decrease the quantity of the product
 function decrementquantity(product_id, user_id, product_price) {
   span = document.getElementById(product_id);
   span2 = document.getElementById(`prod${product_id}price`);
@@ -83,10 +115,10 @@ function decrementquantity(product_id, user_id, product_price) {
       }),
     })
     span.innerHTML = quantity;
-    span2.innerHTML = product_price;
+    span2.innerHTML = product_price.toFixed(2)+ ' EGP';
   }
 }
-
+//function to remove cart
 function removecart(id) {
   popup = document.getElementsByClassName("popupscreen");
   popup[0].style = "display:flex";
@@ -109,9 +141,8 @@ function removecart(id) {
     });
   }
 }
-
+//function to create order
 function createorder(userid) {
-  console.log(userid)
   fetch("../Controllers/cart_controller.php", {
     method: "POST",
     headers: {"Content-Type": "application/json;charset=utf-8"},
@@ -119,14 +150,7 @@ function createorder(userid) {
   });
   location.reload();
 }
-
-function getuserid()
-{
-  console.log(document.getElementById('user').value)
-// console.log(document.getElementById('user').value);
-// console.log('sssssssssssssssssssssss');
-  createorder(document.getElementById('user').value)
-}
+//----------------------------------------Products Page Functions----------------------------------------//
 function addToCart(e, product_id, product_price, user_id) {
   e.preventDefault();
   fetch("../../Controllers/cart_controller.php", {
@@ -139,50 +163,12 @@ function addToCart(e, product_id, product_price, user_id) {
     }),
   })
 }
-
-function savenotes(id) {
-  if (Notes.value.length > 0) {
-    fetch("../Controllers/cart_controller.php", {
-      method: "UPDATE",
-      headers: {
-        "Content-Type": "application/json;charset=utf-8",
-      },
-      body: JSON.stringify({ notes: Notes.value, user_id: id }),
-    });
-    location.reload();
-  }
-}
-
-
-
-
-
-function move(e) {
-  if (selection && e.buttons) {
-      selection.x = e.x;
-      selection.y = e.y;
-      draw();
-  }
-}
-
-function down(e) {
-  let target = within(e.x, e.y);
-  if (selection && selection.selected) {
-      selection.selected = false;
-  }
-  if (target) {
-      selection = target;
-      selection.selected = true;
-      draw();
-  }
-}
-///////////////////////////////////////////////////
-
+//----------------------------------------Admin HomePage Functions----------------------------------------//
 const canvas = document.querySelector('canvas');
 const ctx = canvas.getContext('2d');
 
-
-ctx.beginPath();
+if(canvas){
+  ctx.beginPath();
 ctx.moveTo(0, 0);
 ctx.lineTo(0, 500);
 ctx.lineTo(canvas.width, 500);
@@ -237,5 +223,5 @@ ctx.lineTo(900,260);
 ctx.lineWidth = 1;
 ctx.strokeStyle = grad;
 ctx.stroke();
-///////////////////////////////////////////
-const list_items = document
+}
+

@@ -72,7 +72,7 @@ if (isset($_POST['cancel_order'])) {
 
     </form>
     <br>
-    <table class="table table-light">
+    <table class="table table-striped">
       <thead>
         <tr>
           <th scope="col">Order ID</th>
@@ -122,7 +122,7 @@ if (isset($_POST['cancel_order'])) {
                       <td><?php echo $product['name']; ?></td>
                       <td><?php echo $product['quantity']; ?></td>
                       <td><?php echo $product['price']; ?></td>
-                      <td> <img src=" <?php echo $product['image']; ?>" alt=""></td>
+                      <td> <img src="/Cafe_php_project/uploads/<?php echo $product['image']; ?>" alt=""></td>
 
 
                     </tr>

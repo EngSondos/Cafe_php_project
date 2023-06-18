@@ -63,6 +63,7 @@ render_carts($products, $carts, $comboBox);
     } else {
         updateUserCarts($data['user_id'], $data['notes']);
     }
+    
 } else if ($_SERVER["REQUEST_METHOD"] === 'DELETE') {
     $reqbody = file_get_contents("php://input");
     $data = json_decode($reqbody, true);
