@@ -10,6 +10,8 @@ include_once $_SERVER["DOCUMENT_ROOT"] . '/Cafe_php_project/Controllers/users/us
 
 include "../../Controllers/categories.php";
 include "../../Models/categories.php";
+include "../../MiddleWares/auth.php";
+include "../../MiddleWares/admin.php";
 
 
 

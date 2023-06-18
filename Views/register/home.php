@@ -5,9 +5,7 @@ include "../../Models/products.php";
 include "../../connection_credits.php";
 include "../../connection.php";
 include "../../MiddleWares/auth.php";
-if (!isLoggedIn()) {
-    header('Location:login.php');
-}
+include "../../MiddleWares/user.php";
 
 $user = getCurrentUser();
 

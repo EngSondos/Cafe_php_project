@@ -13,7 +13,8 @@ include "../../Validation/validation.php";
 include "../../Models/product_cartModel.php";
 
 
-
+include "../../MiddleWares/auth.php";
+include "../../MiddleWares/admin.php";
 
 
 
