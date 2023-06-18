@@ -25,7 +25,7 @@ header {
   background-size: 100% 100%;
   /* background-position:  50%; */
   background-attachment: fixed;
-  
+
   /* height: 100vh; */
 }
 
@@ -143,15 +143,16 @@ footer .container p {
 
 #products .card_bottom h3 {
   font-size: 25px;
-  font-family: 'Barlow', sans-serif;
+  /* font-family: 'Barlow', sans-serif; */
   text-transform: capitalize;
-  font-family: 'Rancho', cursive;
+  /* font-family: 'Rancho', cursive; */
   font-family: 'Grandiflora One', serif;
 }
 
 #products .card_bottom span {
   font-size: 15px;
   margin-left: -5px;
+  font-weight: 700;
 }
 #products .btn_card {
   background-color: #d3ad7f;

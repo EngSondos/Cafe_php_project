@@ -16,23 +16,15 @@ include "../../Models/product_cartModel.php";
 
 
 
-$error_add;
-$error_update;
+
 if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
-    var_dump($_GET['delete_id']);
     DeleteProductQuery($_GET['delete_id']);
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST)) {
-    if ($_GET['action'] === 'add') {
-        // AddProductQuery($_POST);
-        // Handle add form data here
-        $error_add = $error['name'];
-    } else if ($_GET['action'] === 'update') {
+    if ($_GET['action'] === 'update') {
         $category_id = $_GET['category_id'];
         UpdateCategory($category_id, $_POST);
-        // $error_update= $error['name'];
-        // Handle update form data here
     }
 }
 
@@ -82,7 +74,7 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
                     <div class="card_body_product">
                         <div class="card_top">
                             <h3>
-                                <?= $row['quantity'] ?> EGP
+                                <?= $row['name'] ?>
                             </h3>
                             <?php
 
@@ -95,8 +87,9 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
                         </div>
                         <div class="card_bottom">
                             <h3>
-                                <?= $row['name'] ?>
+                                <?= $row['price'] ?> <span>EGP</span>
                             </h3>
+
                             <button class="btn_card" <?php echo ($row['quantity'] <= 0) ? 'disabled="true"' : ''; ?> onclick="addToCart(event,<?= $row['id'] ?>,<?= $row['price'] ?>,<?= $_SESSION['user']['id'] ?> )">Add</button>
                         </div>
                         <!-- <a href="" class="btn btn-primary" >Add To Cart</a> -->
@@ -114,10 +107,36 @@ $productPagination = DisplayAvailableProductsQueryWithPagination();
     ?>
 
 </div>
+<footer>
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-md-3">
+                <!-- <img src="../assets/images/pngwing.png" alt="" width="50" height="50"> -->
+                <!-- <p>vsvsv</p> -->
 
+            </div>
+            <div class="col-md-3">
+                <ul class="footer-list">
+                    <li>Privacy Policy</li>
+                    <li>Returns</li>
+                    <li>Terms and Condition</li>
+                    <li>Latest News</li>
+                    <li>Blog</li>
+                </ul>
+            </div>
+            <div class="col-md-3">
+                <ul class="footer-list">
+                    <li>Contact Us</li>
+                    <li>Purchase information</li>
+                    <li>Purchase details</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
 <!-- Optional: Place to the bottom of scripts -->
 <script src="../../Controllers/productScript.js"></script>
 <script src="../../Controllers/script.js"></script>
 <?php
-include '../../layout/footer_user.php';
+// include '../../layout/footer_user.php';
 ?>
