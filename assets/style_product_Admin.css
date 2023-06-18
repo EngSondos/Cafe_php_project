@@ -6,67 +6,133 @@
 body {
   /* background-image: url(../assets/products/background1.jpg); */
   /* background-repeat: no-repeat; */
-  background-size: contain;
+  /* background-size: contain; */
+  background-color: #eee !important;
   /* font-family: 'Rancho', cursive; */
+}
+
+.navbar {
+  background-color: #d3ad7f !important;
+  /* color: #202020; */
+}
+
+.navbar .navbar-nav li a {
+  color: #202020 !important;
 }
 .p-50 {
   padding-top: 50px;
   padding-bottom: 50px;
 }
 
-.title_container {
-  /* background-color: rgb(239, 155, 38); */
-  width: fit-content;
+.container_admin_product {
+  width: 90%;
   margin: auto;
-  padding: 20px;
-  box-shadow: 0 0 30px white;
+}
+
+.container_admin_category {
+  width: 80%;
+  margin: auto;
+}
+.title_container {
+  margin: auto;
   border-radius: 10px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
 }
 .title_product {
   text-transform: capitalize;
-  font-size: 70px;
+  font-size: 40px;
+  padding-bottom: 10px;
   font-family: 'Rancho', cursive;
-  color: white !important;
+  color: #d79860 !important;
   margin: 0 !important;
   transition: all 0.3s;
+  position: relative;
+}
+.title_product::after {
+  content: '';
+  width: 100%;
+  position: absolute;
+  height: 3px;
+  background-color: #d79860;
+  bottom: 0;
+  right: 0;
+  transition: all 0.3s;
+}
+
+.title_product::before {
+  content: '';
+  width: 0%;
+  position: absolute;
+  height: 3px;
+  background-color: #d79860;
+  bottom: 5px;
+  left: 0;
+  transition: all 0.3s;
+}
+
+.title_product:hover::after {
+  width: 0%;
+}
+
+.title_product:hover::before {
+  width: 100%;
 }
 .title_product:hover {
-  color: rgb(239, 155, 38) !important;
   text-shadow: 0 0 10px white;
 }
 .title_product i {
   margin-inline: 10px;
   font-size: 50px;
-  /* color: rgb(239, 155, 38) !important; */
   color: black;
   text-shadow: 0 0 10px white;
 }
 
 .btn_product {
-  background-color: #ccc;
+  background-color: #d79860;
   border: none;
-  color: black;
+  color: #202020;
   font-family: 'Rancho', cursive;
   font-size: 30px;
+  position: relative;
+  padding: 5px 10px;
+  border-radius: 6px;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.btn_product::after {
+  content: '';
+  background-color: #202020;
+  width: 0;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  right: 0;
+  z-index: -1;
+  transition: all 0.5s;
+  border-radius: 6px;
+}
+.btn_product:hover::after {
+  width: 100%;
+  /* color: white; */
+  /* background-color: white; */
+  text-decoration: none;
+  border-radius: 6px;
 }
 
 .btn_product:hover {
-  background-color: rgb(239, 155, 38);
+  text-decoration: none;
+  color: #f29a44;
+  border-radius: 6px;
 }
-/* .header_menu {
-  background-color: #252628;
-  background-image: url(../assets/products/back5\ -\ Copy\ 2.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  background-position: center 45%;
-  scale: 50%;
-  height: 300px;
-} */
+
 table {
   border-collapse: collapse;
-  /* color: #9f7745 !important; */
-  color: rgb(239, 155, 38) !important;
   text-transform: capitalize;
+  background-color: rgb(174 181 184 / 56%) !important;
 }
 
 td {
@@ -77,10 +143,10 @@ td {
   /* color: white !important; */
 }
 
-tr:hover {
-  background-color: #767a8072 !important;
+/* tr:hover {
+  background-color: #3e444abe !important;
   color: white !important;
-}
+} */
 
 .container_page_num {
   text-align: center;
@@ -89,12 +155,13 @@ tr:hover {
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  width: 30%;
+  width: 200px;
   margin-inline: auto;
 }
+
 .num_page,
 .num_page_active {
-  background-color: #f29b449b;
+  background-color: #796449ac;
   display: block;
   margin-inline: 20px;
   font-size: 20px;
@@ -107,14 +174,14 @@ tr:hover {
   color: white;
 }
 .num_page:hover {
-  color: black;
+  color: #202020;
   text-decoration: none;
 }
 
 .num_page_active {
-  background-color: #f29a44;
-  color: black;
-  box-shadow: 0 0 10px rgb(255, 255, 255);
+  background-color: #202020;
+  /* color: black; */
+  box-shadow: 0 0 30px rgb(255, 255, 255);
 }
 .btn_delete {
   color: red !important;
