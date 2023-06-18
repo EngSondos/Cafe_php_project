@@ -1,6 +1,12 @@
 .navbar {
   background-color: #f4ab5e !important;
 }
+.navbar-brand {
+  font-size: 30px !important;
+  color: #202020 !important;
+  font-family: 'Oregano', cursive;
+  text-shadow: 0 0 8px white;
+}
 body {
   /* height: 100vh !important; */
   background-color: #eee !important;

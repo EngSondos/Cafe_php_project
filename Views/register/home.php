@@ -37,6 +37,8 @@ $Products = DisplayNewestProductsQuery() ?? "";
 <div id="products">
     <div class="container_product">
         <div class="container">
+            <h2 class="latest_products">latest products</h2>
+
             <div class="row">
                 <div class="row container_products">
                     <?php

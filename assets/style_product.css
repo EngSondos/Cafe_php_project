@@ -3,14 +3,11 @@
   padding: 0;
   box-sizing: border-box;
 }
-body {
-  /* background-image: url(../assets/products/background.jpg); */
-}
 
 .card_container img {
-  /* width: 100%; */
+  width: 100%;
   /* display: block; */
-  /* margin: auto; */
+  margin: auto;
 }
 
 .container_products {
@@ -60,6 +57,7 @@ body {
   font-size: 30px;
   font-weight: 700;
   color: #e9c08c;
+  text-transform: capitalize;
 }
 
 .card_bottom h3 {

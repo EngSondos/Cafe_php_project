@@ -5,7 +5,6 @@
 }
 body {
   background-image: url(../Foods/background.jpg);
-  /* background-color: #202020; */
 }
 /* font-family: 'Barlow', sans-serif;
   font-family: 'Domine', serif;
@@ -21,18 +20,14 @@ body {
 
 header {
   background-image: url('../../assets/images/toedit.png');
-  /* background-size: cover; */
   background-size: 100% 100%;
-  /* background-position:  50%; */
   background-attachment: fixed;
   margin: 0 !important;
   top: 0;
-  /* height: 100vh; */
 }
 
 header h1 {
   color: rgb(255, 255, 255);
-  /* padding-top: 200px; */
   padding-top: 100px;
   padding-left: 70px;
   font-size: 80px;
@@ -47,10 +42,6 @@ header p {
   font-size: 30px;
   font-family: 'Merriweather Sans', sans-serif;
 }
-
-/* section {
-  height: 500px;
-} */
 
 .order_btn {
   margin-left: 100px;
@@ -69,11 +60,6 @@ header button {
 footer {
   background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
     url('../../assets/images/footer.png');
-  /* height: 400px; */
-  /* position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0; */
 }
 
 footer ul {
@@ -89,9 +75,7 @@ footer .container p {
 /* Khaled Ellithy Products */
 
 #products img {
-  /* width: 100%; */
   margin: auto;
-  /* scale: 120%; */
   display: block;
 }
 
@@ -100,27 +84,61 @@ footer .container p {
   padding-bottom: 50px;
   background-color: #d3ad7f;
 }
+
+.latest_products {
+  text-transform: capitalize;
+  font-size: 40px;
+  color: #202020;
+  font-family: 'Sriracha', cursive;
+  margin-bottom: 30px;
+  position: relative;
+  width: fit-content;
+  padding: 10px;
+}
+
+.latest_products::after {
+  content: '';
+  width: 50%;
+  position: absolute;
+  height: 3px;
+  background-color: #202020;
+  bottom: 0;
+  right: 0;
+  transition: all 0.3s;
+}
+
+.latest_products::before {
+  content: '';
+  width: 50%;
+  position: absolute;
+  height: 3px;
+  background-color: #202020;
+  bottom: 0px;
+  left: 0;
+  transition: all 0.3s;
+}
+
+.latest_products:hover::after {
+  width: 0%;
+}
+
+.latest_products:hover::before {
+  width: 0%;
+}
+
+.latest_products:hover {
+  text-shadow: 0 0 10px #fff;
+}
 #products .container .card_container {
-  /* background-color: rgb(30 30 30); */
   background-color: #202020;
   padding: 20px;
   color: white;
   font-family: 'Barlow', sans-serif;
   transition: all 0.3s;
   border-radius: 6px;
-  /* margin-top: 30px; */
-  /* box-shadow: 0 0 11px white; */
+
   margin: 10px;
 }
-
-/* #products .card_container:hover {
-  background-color: #3e21189f;
-  color: rgb(30 30 30);
-} */
-
-/* .card_container:hover .card_top h3 {
-    color: rgb(30 30 30);
-  } */
 
 #products .img_card img {
   /* width: ; */
@@ -135,10 +153,7 @@ footer .container p {
   font-family: 'Grandiflora One', serif;
   font-size: 30px;
   color: #e9c08c;
-  /* font-style: italic; */
-  /* font-family: 'Lobster Two', cursive; */
   font-weight: 700;
-  /* font-family: 'Domine', serif; */
 }
 
 #products .card_bottom {
@@ -149,9 +164,7 @@ footer .container p {
 
 #products .card_bottom h3 {
   font-size: 25px;
-  /* font-family: 'Barlow', sans-serif; */
   text-transform: capitalize;
-  /* font-family: 'Rancho', cursive; */
   font-family: 'Grandiflora One', serif;
 }
 
@@ -171,10 +184,5 @@ footer .container p {
 }
 
 #products .btn_card:hover {
-  /* background-color: white; */
   color: #202020;
 }
-/* .swiper {
-  width: 600px;
-  height: 300px;
-} */
