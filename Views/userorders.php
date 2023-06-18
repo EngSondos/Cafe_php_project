@@ -44,12 +44,10 @@ if (isset($_POST['start_date'], $_POST['end_date'])) {
 if (isset($_POST['cancel_order'])) {
   $orderId = $_POST['cancel_order'];
   $result = cancel($orderId, $conn);
-  if ($result) {
-    echo "<div class='alert alert-success' style='text-align: center' role='alert'>Order $orderId has been canceled.</div>";
-  } else {
-    echo "<div class='alert alert-warning' style='text-align: center' role='alert'>cant cancel Order $orderId   .</div>";
-  }
+  echo "<div class='alert alert-danger' style='text-align: center' role='alert'>Invalid dates.</div>";
+
 }
+
 
 
 ?>

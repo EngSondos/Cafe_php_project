@@ -30,6 +30,11 @@ if (sizeof($_SESSION) > 0 and $_SESSION['user']['role'] == 1) {
                             <i class="fa-solid fa-circle-check"></i>
                             <span>Check Order</span>
                         </a>
+
+                        <a href="http://localhost/Cafe_php_project/Views/adminorders.php" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fa-solid fa-circle-check"></i>
+                        <span>All Order</span>
+                    </a>
                     </div>
                 </div>
             </nav>
