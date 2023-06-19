@@ -1,6 +1,5 @@
 <?php
 $title = "My Carts";
-// include "../layout.php";
 include "../layout/head.php";
 
 function render_carts($products, $carts, $totalcarts)
@@ -10,7 +9,6 @@ function render_carts($products, $carts, $totalcarts)
     echo "
     <div id='mySidebar' class='sidebar'>
         <div class='sidebar-head'>
-            <!--<a href='javascript:void(0)' class='closebtn' onclick='closeNav()'>×</a>-->
             <span class='mycarts'>My Carts<span class='cartsnum'> " . sizeof($carts) . "</span></span>
         </div>
         <div class='row sidebar-body'>
@@ -40,7 +38,7 @@ function render_carts($products, $carts, $totalcarts)
     <button class='openbtn sidebarbtn' onclick='Open_Close_Nav()'><i class='fa-solid fa-circle-chevron-right'></i></button>  
     <div id='main'>
         <div class='container pt-5'>
-            <div class='row container_cards_user mx-auto'>";
+            <div class='row container_cards_user cards-row mx-auto'>";
     if (sizeof($carts) > 0) {
         foreach ($carts as $cart) {
             foreach ($products as $product) {

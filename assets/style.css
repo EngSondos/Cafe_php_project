@@ -322,7 +322,7 @@ footer .container p {
   height: 70vh;
   width: 100%;
   align-items: center;
-  background-color: #535353;
+  /* background-color: #535353; */
 }
 
 #writenotes,
@@ -458,16 +458,19 @@ pre:first-child {
   outline: none;
 }
 
-#main,
+/* #main,
 #main .container {
   height: 100%;
-}
-
-#main .row {
+} */
+#main .cards-row{
+  height: 100vh;
   justify-content: center;
-  height: 100%;
   align-items: center;
 }
+/* #main .row {
+  justify-content: center;
+  align-items: center;
+} */
 
 .emptycart {
   flex-direction: column;

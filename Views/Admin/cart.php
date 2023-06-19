@@ -10,7 +10,6 @@ function render_carts_admin($products, $carts, $totalcarts)
     echo "
     <div id='mySidebar' class='sidebar'>
         <div class='sidebar-head'>
-            <!--<a href='javascript:void(0)' class='closebtn' onclick='closeNav()'>×</a>-->
             <span class='mycarts'>My Carts<span class='cartsnum'> " . sizeof($carts) . "</span></span>";
     echo " 
                     <div class='mx-auto w-50 '>
@@ -27,35 +26,21 @@ function render_carts_admin($products, $carts, $totalcarts)
     }
     echo "</select>
                     </div>
-            </div>
-        <div class='row sidebar-body'>
-            <div id='writenotes'>
-                <div class='line-numbers'>
-                    <span></span>
-                </div>
-                <textarea placeholder='write here the notes you need...'></textarea>
-            </div>
-            <button class='btn savebtn' onclick='savenotes({$_SESSION["user"]["id"]})'>Save</button>
-            <div id='savednotes'>";
-    if (sizeof($totalcarts) > 0) {
-        echo "<pre id=''>" . $totalcarts[0]["notes"] . "</pre>";
-    } else {
-        echo "You don't have any cart";
-    }
-    echo '</div>
-        </div>';
+            </div>";
     if (sizeof($totalcarts) > 0) {
         echo "<span class='totalprice'>Total Price: " . $totalcarts[0]["total_price"] . " EGP" . "</span>";
     } else {
         echo "<span class='totalprice'>Total Price: 0 EGP </span>";
     }
-    echo "<input type='submit' class='btn orderbtn' value='Order Now'>
+    echo "<input type='submit' class='btn orderbtn' value='Order Now'";
+        if(sizeof($carts) == 0) {echo "disabled";} 
+    echo">
             </form>
             </div>
     <button class='openbtn sidebarbtn' onclick='Open_Close_Nav()'><i class='fa-solid fa-circle-chevron-right'></i></button>  
     <div id='main'>
         <div class='container pt-5'>
-            <div class='row'>";
+            <div class='row cards-row '>";
     if (sizeof($carts) > 0) {
         foreach ($carts as $cart) {
             foreach ($products as $product) {

@@ -1,6 +1,6 @@
 //----------------------------------------MyCart Page Functions----------------------------------------//
 const Notes = document.getElementsByTagName("textarea")[0],
-lineNumbers = document.querySelector(".line-numbers");
+  lineNumbers = document.querySelector(".line-numbers");
 
 let numberOfLines = 0;
 //check if the textarea contains note or not
@@ -11,7 +11,7 @@ if (Notes) {
   }
 
   Notes.addEventListener("keyup", (event) => {
-    
+
     if (event.keyCode === 13) {
       numberOfLines = event.target.value.split("\n").length;
       if (numberOfLines < 150) numberLines();
@@ -36,7 +36,6 @@ if (Notes) {
 //function to open|close sidebar 
 function Open_Close_Nav() {
   const sidebar_btn = document.getElementsByClassName("sidebarbtn")[0];
-  console.log(sidebar_btn.classList.contains('openbtn'))
   if (sidebar_btn.classList.contains('openbtn')) {
     sidebar_btn.style.left = "390px";
     sidebar_btn.classList.replace('openbtn', 'closebtn')
@@ -80,7 +79,7 @@ function incrementquantity(availablequantity, product_id, user_id, product_price
   if (counter < availablequantity && product_price < 5000) {
     fetch("../Controllers/cart_controller.php", {
       method: "UPDATE",
-      headers: {"Content-Type": "application/json;charset=utf-8"},
+      headers: { "Content-Type": "application/json;charset=utf-8" },
       body: JSON.stringify({
         quantity: quantity,
         user_id: user_id,
@@ -106,7 +105,7 @@ function decrementquantity(product_id, user_id, product_price) {
   if (counter > 1) {
     fetch("../Controllers/cart_controller.php", {
       method: "UPDATE",
-      headers: {"Content-Type": "application/json;charset=utf-8"},
+      headers: { "Content-Type": "application/json;charset=utf-8" },
       body: JSON.stringify({
         quantity: quantity,
         user_id: user_id,
@@ -115,7 +114,7 @@ function decrementquantity(product_id, user_id, product_price) {
       }),
     })
     span.innerHTML = quantity;
-    span2.innerHTML = product_price.toFixed(2)+ ' EGP';
+    span2.innerHTML = product_price.toFixed(2) + ' EGP';
   }
 }
 //function to remove cart
@@ -130,7 +129,7 @@ function removecart(id) {
       if (res == "ok") {
         fetch("../Controllers/cart_controller.php", {
           method: "DELETE",
-          headers: {"Content-Type": "application/json;charset=utf-8"},
+          headers: { "Content-Type": "application/json;charset=utf-8" },
           body: JSON.stringify({ cartid: id }),
         });
         popup[0].style = "display:none";
@@ -145,7 +144,7 @@ function removecart(id) {
 function createorder(userid) {
   fetch("../Controllers/cart_controller.php", {
     method: "POST",
-    headers: {"Content-Type": "application/json;charset=utf-8"},
+    headers: { "Content-Type": "application/json;charset=utf-8" },
     body: JSON.stringify({ user_id: userid }),
   });
   location.reload();
@@ -155,7 +154,7 @@ function addToCart(e, product_id, product_price, user_id) {
   e.preventDefault();
   fetch("../../Controllers/cart_controller.php", {
     method: "POST",
-    headers: {"Content-Type": "application/json;charset=utf-8"},
+    headers: { "Content-Type": "application/json;charset=utf-8" },
     body: JSON.stringify({
       usrid: user_id,
       productid: product_id,
@@ -165,63 +164,64 @@ function addToCart(e, product_id, product_price, user_id) {
 }
 //----------------------------------------Admin HomePage Functions----------------------------------------//
 const canvas = document.querySelector('canvas');
-const ctx = canvas.getContext('2d');
 
-if(canvas){
+
+if (canvas != null) {
+  const ctx = canvas.getContext('2d');
   ctx.beginPath();
-ctx.moveTo(0, 0);
-ctx.lineTo(0, 500);
-ctx.lineTo(canvas.width, 500);
-ctx.lineWidth = 5;
-ctx.strokeStyle = "black";
+  ctx.moveTo(0, 0);
+  ctx.lineTo(0, 500);
+  ctx.lineTo(canvas.width, 500);
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = "black";
 
-ctx.stroke();
+  ctx.stroke();
 
-stopped_at_y = 500;
-stopped_at_x = canvas.width;
+  stopped_at_y = 500;
+  stopped_at_x = canvas.width;
 
-arc_stopped_at_y = 500;
-arc_stopped_at_x = 0;
+  arc_stopped_at_y = 500;
+  arc_stopped_at_x = 0;
 
-for(i=0;i<6;i++){
+  for (i = 0; i < 6; i++) {
+    ctx.beginPath();
+    ctx.moveTo(canvas.width, stopped_at_y -= 80);
+    ctx.lineTo(0, stopped_at_y -= -0);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "#d8d8d8";
+
+    ctx.stroke();
+    ctx.beginPath();
+
+    ctx.arc(arc_stopped_at_x += 100, arc_stopped_at_y -= 80, 10, 0, 2 * Math.PI);
+    ctx.fillStyle = `rgba(100,100,${Math.random() * 255})`
+    ctx.fill()
+    ctx.stroke();
+
+  }
+  for (i = 0; i < 3; i++) {
+
+    ctx.beginPath();
+
+    ctx.arc(arc_stopped_at_x += 100, arc_stopped_at_y += 80, 10, 0, 2 * Math.PI);
+    ctx.fillStyle = `rgba(100,100,${Math.random() * 255})`
+    ctx.fill()
+    ctx.stroke();
+  }
+  var grad = ctx.createLinearGradient(100, 900, 900, 1000);
+  grad.addColorStop(0, "purple");
+  grad.addColorStop(1, "green");
+
   ctx.beginPath();
-  ctx.moveTo(canvas.width, stopped_at_y-= 80);
-  ctx.lineTo(0, stopped_at_y-= -0);
+
+
+  ctx.moveTo(100, 420);
+  ctx.lineTo(590, 25);
+
+  ctx.moveTo(600, 15);
+  ctx.lineTo(900, 260);
   ctx.lineWidth = 1;
-  ctx.strokeStyle = "#d8d8d8";
-
+  ctx.strokeStyle = grad;
   ctx.stroke();
-  ctx.beginPath();
-
-  ctx.arc(arc_stopped_at_x += 100, arc_stopped_at_y -= 80, 10, 0, 2 * Math.PI);
-  ctx.fillStyle = `rgba(100,100,${Math.random()*255})`
-  ctx.fill()
-  ctx.stroke();
-  
-}
-for(i=0;i<3;i++){
-
-  ctx.beginPath();
-
-  ctx.arc(arc_stopped_at_x += 100, arc_stopped_at_y += 80, 10, 0, 2 * Math.PI);
-  ctx.fillStyle = `rgba(100,100,${Math.random()*255})`
-  ctx.fill()
-  ctx.stroke();
-}
-var grad= ctx.createLinearGradient(100, 900, 900, 1000);
-grad.addColorStop(0, "purple");
-grad.addColorStop(1, "green");
-
-ctx.beginPath();
-
-
-ctx.moveTo(100, 420);
-ctx.lineTo(590,25);
-
-ctx.moveTo(600, 15);
-ctx.lineTo(900,260);
-ctx.lineWidth = 1;
-ctx.strokeStyle = grad;
-ctx.stroke();
 }
 

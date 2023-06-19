@@ -1,5 +1,5 @@
 <?php
-if (sizeof($_SESSION) > 0 and $_SESSION['user']['role'] == 1) {
+if (sizeof($_SESSION) > 0 and $_SESSION['user']['role'] == 1 and explode('/',$_SERVER["REQUEST_URI"])[3] != 'cart_controller.php') {
     echo '<header>
             <!-- Sidebar -->
             <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse">
