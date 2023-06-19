@@ -14,13 +14,10 @@
             userValidation($_POST, $_FILES, $errors);
         }
 ?>
-<section class="bg-brown">
+<section class="login_body">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center h-100 mt-4">
-        <div class="col-md-8 col-lg-7 col-xl-6 mt-4">
-            <img src="../../assets/design-imgs/cover.jpeg"
-            class="img-fluid login-img" alt="Phone image">
-        </div>
+   
         <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
         <div class="d-flex align-items-center mb-3 pb-1">
             <i class="fas fa-cubes fa-2x me-3" style="color: #d4c085;"></i>
@@ -55,7 +52,7 @@
             </div>
 
             <!-- Submit button -->
-            <button type="submit" class="btn btn-primary btn-lg btn-block login-btn">Sign Up</button>
+            <button type="submit" class="btn_product  btn-lg btn-block login-btn">Sign Up</button>
             <div class="d-flex justify-content-around align-items-left mt-4">
                 <a href="login.php">or Log In?</a>
             </div>
