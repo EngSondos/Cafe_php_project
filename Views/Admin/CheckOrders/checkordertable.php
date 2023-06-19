@@ -6,6 +6,7 @@
     <tr>
       <th> Detalis</th>
       <th>Order Id</th>
+      <th>User Name</th>
       <th>Date</th>
     </tr>
 
@@ -17,6 +18,7 @@
             <a class="colorbtn" href="/Cafe_php_project/Views/Admin/CheckOrders/ChecksView.php?details=<?= $order['id'] ?>&&user=<?= $order['user_id'] ?>"><i class="fa fa-eye"></i></a>
           </td>
           <td><?= $order['id'] ?></td>
+          <td><?=getUserName($order['user_id'])['username'] ?></td>
           <td><?= $order['created_at'] ?></td>
         </tr>
     <?php }

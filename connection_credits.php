@@ -1,7 +1,7 @@
 <?php
 
 $dbuser = 'root';  # database user
-$dbpassword = 'mangood1907';
+$dbpassword = '';
 $dbname = 'Cafe';  # database name
 $dbhost = 'localhost';
 $dbport = 3306;

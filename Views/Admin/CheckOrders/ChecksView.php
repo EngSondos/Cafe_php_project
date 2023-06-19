@@ -70,6 +70,7 @@ if (!empty($_POST)) {
       </div>
 
     </div>
+    <button onclick="goBack()" class="colorbtn"><i class="fa fa-arrow-left"></i></button>
 
     <?php if (empty($_POST)) { ?>
 
@@ -117,7 +118,11 @@ if (!empty($_POST)) {
 
   </div>
 </main>
-
+<script>
+  function goBack() {
+  window.history.back();
+}
+</script>
 <?php
 include "../../../layout/footer.php";
 ?>

@@ -42,7 +42,7 @@ function getOrderDetalis($order_id,$user_id)
 function getOrdersByDate($start_date,$end_date)
 {
   global  $conn;
-  $query = "Select * from orders where  orders.`created_at` between :start_date and :end_date ";
+  $query = "Select * from orders where  orders.`created_at` between :start_date and :end_date and user_id is not null";
   $result1 = $conn->prepare($query);
   $result1->bindParam(':start_date',$start_date);
   $result1->bindParam(':end_date',$end_date);
@@ -52,7 +52,7 @@ function getOrdersByDate($start_date,$end_date)
 
 function getOrdersByDateandUserId($start_date,$end_date,$user_id)
 {
-//    echo ($start_date+$end_date+$user_id);
+
     global  $conn;
     $query = "Select * from orders where   orders.`created_at` between :start_date and :end_date and user_id = :user_id ";
     $result1 = $conn->prepare($query);

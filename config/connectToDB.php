@@ -3,7 +3,7 @@
 function connect() {
     $host = 'localhost';
     $user = 'root';
-    $password = 'mangood1907';
+    $password = '';
     $database = 'Cafe';
     $dsn = "mysql:host=$host;dbname=$database;charset=utf8mb4";
     $options = array(
