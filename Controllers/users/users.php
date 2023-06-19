@@ -6,20 +6,10 @@ include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Validation/registerVal
 include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
 
 
-// Create a new User (Sign up)`
-function userController($data, $imageFile) {
-    try{
-        userValidation($data, $imageFile);
-    }
-    catch(ErrorException $err) {
-        echo $err;
-    }
-};
-
 // this function accept two parameters from validation file
 // when aleardy clean without errors any from user inputs
 function loginUser($email, $password) {
-    // $user = getUserByEmail($email);
+    
     $conn = connect();
     
     $stmt = $conn->prepare("SELECT * FROM users WHERE email = ?");

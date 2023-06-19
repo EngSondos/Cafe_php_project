@@ -28,15 +28,15 @@ function createNewUser($email, $password, $username, $image, $role) {
 }
 }
 
-function getUserByEmail($email) {
+function getUserById($id) {
     
     $conn = connect();
 
-    $query = "SELECT * FROM users WHERE email=:email";
+    $query = "SELECT * FROM users WHERE id=:id";
 
     $stmt = $conn->prepare($query);
 
-    $stmt->execute(array( ':email' => $email ));
+    $stmt->execute(array( ':id' => $id ));
 
     $user = $stmt->fetch();
 

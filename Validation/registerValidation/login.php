@@ -28,11 +28,11 @@ include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/user
                 if($_SESSION['user']['role'] === 0) {
                     echo '<div class="alert alert-success">Welcome ' . $_SESSION['user']['username'] . ' You Will Redircet To Home Now</div>';
     
-                    header("refresh:3;url=home.php");
+                    header("Location:home.php");
     
                 } elseif ($_SESSION['user']['role'] === 1) {
                     echo '<div class="alert alert-success">Welcome ' . $_SESSION['user']['username'] . ' You Will Redircet To Admin Panel Now</div>';
-                    header("refresh:3;url=../Admin/users/listAllUsers.php");
+                    header("Location:../Admin/users/listAllUsers.php");
                 }
                 exit();
             } else {

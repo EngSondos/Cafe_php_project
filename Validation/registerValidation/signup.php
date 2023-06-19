@@ -5,7 +5,8 @@
     // include_once "../../Models/users/user.php";
     include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Models/users/user.php';
 
-    function userValidation($data, $imageFile) {
+    $errorsValidation = [];
+    function userValidation($data, $imageFile, &$errorsValidation):void {
         
         $errors = [];
 
@@ -40,34 +41,34 @@
 
         } else {
     
-            $errors[] = 'Invalid image file type';
+            $errors['image'] = '<div class="alert alert-danger">Invalid image file type</div>';
        
         }
         
         } else {
     
-            $errors[] = 'Failed to upload image';
+            $errors['image'] = '<div class="alert alert-danger">Failed to upload image</div>';
         }
         
         // Email Validation
 
         if(empty($email)) {
-            $errors[] = 'Email Is Required';
+            $errors['email'] = '<div class="alert alert-danger">Email Is Required</div>';
         }   elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            $errors[] = 'Write a Valid Email';
+            $errors['email'] = '<div class="alert alert-danger">Write a Valid Email</div>';
         }
 
         // pssword Validtion
         if(empty($password)) {
-            $errors[] = 'Password Is Required';
+            $errors['password'] = '<div class="alert alert-danger">Password Is Required</div>';
         } elseif (!preg_match($password_regex, $password)) {
-            $errors[] = 'Write Strong Password';
+            $errors['password'] = '<div class="alert alert-danger">Write Strong Password</div>';
         }
         // Username Validation
         if(empty($username)) {
-            $errors[] = 'Username Is Required';
+            $errors['username'] = '<div class="alert alert-danger">Username Is Required</div>';
         } elseif (strlen($username) < 3) {
-            $errors[] = 'Username Not Match';
+            $errors['username'] = '<div class="alert alert-danger">Username Not Match</div>';
         }
 
         if (empty($errors)) {
@@ -75,10 +76,10 @@
             if($newUser) {
                 if(isset($_SESSION['user'])) {
                     echo '<span class="alert alert-success">Added User Successfully</span>';
-                    header("refresh:3;url=listAllUsers.php");
+                    header("Location:listAllUsers.php");
                 } else {
-                    echo '<span class="alert alert-success">signup Successfully</span>';
-                    header("refresh:3;url=login.php");
+                    echo '<span class="alert alert-success">Signup Successfully</span>';
+                    header("Location:login.php");
                 }
                 exit();
             } else {
@@ -86,10 +87,9 @@
             }
         }
         else {
-            foreach ($errors as $err) {
-                echo '<span class="alert alert-danger">' . $err . '</span>';
-            };
+            $errorsValidation = $errors;
         }
+        
     }
 
     ob_end_flush();

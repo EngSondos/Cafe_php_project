@@ -7,9 +7,14 @@
     include '../../layout/head.php';
 
     include "../../MiddleWares/guest.php";
-
+    
+    $errors = [];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Validation/registerValidation/signup.php';
+            userValidation($_POST, $_FILES, $errors);
+        }
 ?>
-<section class="vh-100 bg-brown">
+<section class="bg-brown">
     <div class="container py-5 h-100">
         <div class="row d-flex justify-content-center h-100 mt-4">
         <div class="col-md-8 col-lg-7 col-xl-6 mt-4">
@@ -26,23 +31,27 @@
             <div class="form-outline mb-4">
                 <input type="email" id="form1Example13" name="email" class="form-control form-control-lg" />
                 <label class="form-label" for="form1Example13">Email address</label>
+                <?= $errors['email'] ?? '' ?>
             </div>
             <!-- UserName input -->
             <div class="form-outline mb-4">
                 <input type="text" id="form1Example1311" name="username" class="form-control form-control-lg" />
                 <label class="form-label" for="form1Example1311">UserName</label>
+                <?= $errors['username'] ?? '' ?>
             </div>
 
             <!-- Password input -->
             <div class="form-outline mb-4">
                 <input type="password" id="form1Example23" name="password" class="form-control form-control-lg" />
                 <label class="form-label" for="form1Example23">Password</label>
+                <?= $errors['password'] ?? '' ?>
             </div>
 
             <!-- Image input -->
             <div class="form-outline mb-4">
                 <input type="file" id="form1Example1322" name="image" class="form-control form-control-lg" />
                 <label class="form-label" for="form1Example1322">Upload Image</label>
+                <?= $errors['image'] ?? '' ?>
             </div>
 
             <!-- Submit button -->
@@ -51,15 +60,6 @@
                 <a href="login.php">or Log In?</a>
             </div>
         </form>
-        <div class='errors-container'>
-        <?php
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-                include  '../../Controllers/users/users.php';
-                userController($_POST, $_FILES);
-            }
-        ?>
-        </div>
         </div>
         </div>
     </div>
