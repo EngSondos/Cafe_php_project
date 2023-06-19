@@ -12,7 +12,7 @@ $users  = getAllUsers();
 
 ?>
 <main style="width:80%;margin-left:auto" class="list-users-admin">
-    <div class="container mt-5">
+    <div class="container p-100">
         <?php
         if (isset($_GET['delete'])) {
             $id = $_GET['id'];

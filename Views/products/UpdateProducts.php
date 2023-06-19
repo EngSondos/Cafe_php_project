@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 <link rel="stylesheet" href="../../assets/style_product_Admin.css">
 
 <main style="width:80%;margin-left:auto">
-    <div class="container container_form_add_product" id="Add_form">
+    <div class="container container_form_add_product p-100" id="Add_form">
         <h1 class="title_admin mx-auto Add_Products">Update Product no <?= $_GET['product_id'] ?></h1>
         <form method="post" action="?action=update&product_id=<?= $_GET['product_id'] ?>" enctype="multipart/form-data" name="addForm">
             <!--Name Input -->

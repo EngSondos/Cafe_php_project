@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 
 <main style="width:80%;margin-left:auto">
     <div class="container_admin_category">
-        <div class="container my-5 p-50 ">
+        <div class="container p-100 ">
 
             <form method="post" action="?action=add" enctype="multipart/form-data" class="add_form">
                 <div class="form-group">

@@ -23,6 +23,11 @@ body {
   padding-top: 50px;
   padding-bottom: 50px;
 }
+.p-100 {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
 
 .container_admin_product {
   width: 90%;
@@ -249,9 +254,9 @@ th {
   text-align: right;
 }
 
-.Add_Products {
+/* .Add_Products {
   margin-top: 100px;
-}
+} */
 
 .container_form_add_product {
   width: 80%;

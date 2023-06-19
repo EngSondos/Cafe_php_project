@@ -35,8 +35,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'  && !empty($_POST)) {
 ?>
 <link rel="stylesheet" href="../../assets/style_product_Admin.css">
 <main style="width:80%;margin-left:auto">
-    <div class="container container_form_add_product  " id="Add_form">
-        <h1 class="title_admin mx-auto Add_Products">Add Products</h1>
+    <div class="container container_form_add_product p-100 " id="Add_form">
+        <h1 class="title_admin mx-auto Add_Products ">Add Products</h1>
         <form method="post" action="?action=add" enctype="multipart/form-data">
             <!--  Name Input  -->
             <div class=" container_input d-flex gap-2">
