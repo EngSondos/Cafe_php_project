@@ -14,9 +14,9 @@ searchInput.addEventListener("input", function () {
 
 //**Click On Add Button */
 let addCarts = document.querySelectorAll(".card_bottom .btn_card");
-// console.log(addCart);
+console.log(addCarts);
 for (let i = 0; i < addCarts.length; i++) {
-  addCarts[i].addEventListener("click", function AddToCart() {
+  addCarts[i].addEventListener("click", function addToCart() {
     addCarts[i].innerHTML = '<i class="fa-solid fa-check"></i>';
   });
 }

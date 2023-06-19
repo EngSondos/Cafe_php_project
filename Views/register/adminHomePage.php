@@ -1,22 +1,24 @@
 <?php
-    // $title="Home Page";
-    include "../../layout/head.php";
-    include "../../Models/Admin/getUsers.php";
-    include "../../Models/products.php";
-    include "../../connection_credits.php";
-    include "../../connection.php";
-    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
+// $title="Home Page";
+include "../../layout/head.php";
+include "../../Models/Admin/getUsers.php";
+include "../../Models/products.php";
+include "../../connection_credits.php";
+include "../../connection.php";
+include_once $_SERVER["DOCUMENT_ROOT"] . '/Cafe_php_project/Controllers/users/users.php';
 
 
-    include "../../Controllers/categories.php";
-    include "../../Models/categories.php";
+include "../../Controllers/categories.php";
+include "../../Models/categories.php";
+include "../../MiddleWares/auth.php";
+include "../../MiddleWares/admin.php";
 
 
-    
 
-    $users  = getAllUsers();
-    $products = Display_All_Products_Query_With_Pagination();
-    $categories=DisplayCategory();
+
+$users  = getAllUsers();
+$products = DisplayAllProductsQuery();
+$categories = DisplayCategory();
 
 echo '
 <main style="width:80%;margin-left:auto" class="dashboard">
@@ -50,7 +52,7 @@ echo '
                     <br>
                     <span>Users</span>
                     <br>
-                    <span>'.sizeof($users).'K</span>
+                    <span>' . sizeof($users) . 'K</span>
                 </div>
             </div>
             <div class="col-xl-4">
@@ -59,7 +61,7 @@ echo '
                     <br>
                     <span>Products</span>
                     <br>
-                    <span>'.sizeof($products).'K</span>
+                    <span>' . sizeof($products) . 'K</span>
                 </div>
             </div>
             <div class="col-xl-4">
@@ -68,7 +70,7 @@ echo '
                     <br>
                     <span>Categories</span>
                     <br>
-                    <span>'.sizeof($categories).'</span>
+                    <span>' . sizeof($categories) . '</span>
                 </div>
             </div>
         </div>

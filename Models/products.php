@@ -27,7 +27,22 @@ function AddProductQuery($name, $image, $price, $quantity, $category_id)
     }
 }
 
+// ----------------------------------------------------------------
+//**DISPLAY Newest PRODUCT 8 ITEMS ONLY IN HOME **
+function DisplayNewestProductsQuery()
+{
+    global $conn;
 
+    try {
+        $query = "SELECT * FROM `products`  WHERE `quantity` > 0 ORDER BY id ASC LIMIT 8";        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->execute();
+        $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $row;
+    } catch (Exception $e) {
+        echo $e->getMessage();
+    }
+}
 
 // ----------------------------------------------------------------
 
@@ -78,7 +93,7 @@ function pagination()
 {
     global $conn;
 
-    $query = "SELECT * FROM  `products` WHERE `quantity` > 0";
+    $query = "SELECT * FROM  `products`";
     ### prepare query
     $stmt = $conn->prepare($query);
     $stmt->execute();
@@ -267,31 +282,22 @@ function DeleteProductQuery($id)
     $stmt = $conn->prepare($queryIfProductExist);
     $stmt->bindParam(":id", $id);
     $stmt->execute();
-    if ($stmt->rowCount() > 0) {
-        echo "Product with id: " . $id . " already exists in Order Table";
-    } else {
-        try {
-            //Select Image From DataBase
-            $imageName = selectImageQuery($id);
-            $imagePath = '../../' . $imageName;
-            // $query = "DELETE FROM `products` WHERE id = :id";
-            $query = "UPDATE  `products` SET quantity = 0  WHERE id = :id";
-            ### prepare query
-            $stmt = $conn->prepare($query);
-            $stmt->bindParam(":id", $id);
-            $stmt->execute();
-            // Delete the image file from the server
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            } else {
-                echo "Image file not found";
-            }
-            return $stmt->rowCount();
-        } catch (Exception $e) {
-            echo $e->getMessage();
-        }
+    try {
+        //Select Image From DataBase
+        $imageName = selectImageQuery($id);
+        $imagePath = '../../' . $imageName;
+        // $query = "DELETE FROM `products` WHERE id = :id";
+        $query = "UPDATE  `products` SET quantity = 0  WHERE id = :id";
+        ### prepare query
+        $stmt = $conn->prepare($query);
+        $stmt->bindParam(":id", $id);
+        $stmt->execute();
+        return $stmt->rowCount();
+    } catch (Exception $e) {
+        echo $e->getMessage();
     }
 }
+// }
 
 
 

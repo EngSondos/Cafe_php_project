@@ -10,11 +10,18 @@ function imageValid()
 
   if ($_FILES['image']['error'] === UPLOAD_ERR_OK) {
     // File was uploaded successfully
+    $oldImage = "../../" . $product_updated['image'];
+    // Delete the image file from the server
+    if (file_exists($oldImage)) {
+      unlink($oldImage);
+    }
     $image = "assets/products/" . $_FILES['image']['name'];
     // Process the file
   } else {
     // File upload error occurred
-    $image =  substr($product_updated['image'], 5);
+    // $image =  substr(, 5);
+
+    $image =   $product_updated['image'];
   }
 
   return $image;

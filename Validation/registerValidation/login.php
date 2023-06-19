@@ -32,7 +32,7 @@ include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/user
     
                 } elseif ($_SESSION['user']['role'] === 1) {
                     echo '<div class="alert alert-success">Welcome ' . $_SESSION['user']['username'] . ' You Will Redircet To Admin Panel Now</div>';
-                    header("Location:../Admin/users/listAllUsers.php");
+                    header("refresh:3;url=../register/adminHomePage.php");
                 }
                 exit();
             } else {

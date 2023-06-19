@@ -29,12 +29,12 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
 <main style="width:80%;margin-left:auto">
     <div class="container_admin_product text-center mx-auto ">
         <div class="container p-50">
-            <div class="title_container">
-                <h1 class="text-primary mx-auto text-center my-4 title_product"> our Products </h1>
+            <div class="title_container ">
+                <h1 class=" mx-auto text-center my-4 title_admin "> our Products </h1>
                 <a class="my-3 btn_product" href="Add Products.php">Add Product</a>
             </div>
             .
-            <table class="table table-striped table-hover table-Secondary border-dark  text-center table-bordered align-vertical">
+            <table class="table table-striped border-dark table-hover text-center table-bordered">
                 <thead>
                     <tr>
                         <th>id</th>
@@ -71,8 +71,8 @@ if (isset($_GET['delete_id']) && !empty($_GET['delete_id'])) {
                                     ?> </td>
                             <td> <img height="70" width="70" src="../../<?= $row['image'] ?>" alt=""> </td>
 
-                            <td><a href="UpdateProducts.php?product_id=<?= $row['id'] ?>" class="btn_edit"><i class="fa-solid fa-pen-to-square"></i></a></td>
-                            <td><a href="?delete_id=<?= $row['id'] ?>" class="btn_delete" onclick="return confirm('Are you sure you want to delete this category?')"><i class="fa-solid fa-circle-xmark"></i></a></td>
+                            <td><a href="UpdateProducts.php?product_id=<?= $row['id'] ?>" class=" btn btn-success ">Edit <i class="fa-solid fa-pen-to-square"></i></a></td>
+                            <td><a href="?delete_id=<?= $row['id'] ?>" class=" btn btn-danger" onclick="return confirm('Are you sure you want to delete this category?')">Delete <i class="fa-solid fa-trash"></i></a></td>
                         <?php     }   ?>
                         </tr>
                 </tbody>

@@ -1,19 +1,19 @@
 <?php
-    ob_start();
+ob_start();
 
-    require_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/config/connectToDB.php';
-    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/layout/head.php';
-    include "../../../MiddleWares/auth.php";
-    include "../../../MiddleWares/admin.php";
+require_once $_SERVER["DOCUMENT_ROOT"] . '/Cafe_php_project/config/connectToDB.php';
+include_once $_SERVER["DOCUMENT_ROOT"] . '/Cafe_php_project/layout/head.php';
+include "../../../MiddleWares/auth.php";
+include "../../../MiddleWares/admin.php";
 
-    // include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
-
+    include_once $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
+   
     if(isset($_GET['do'])) {
 
-        $do = $_GET['do'];
-    
-        if ($do == 'edit') { 
-        
+    $do = $_GET['do'];
+
+    if ($do == 'edit') {
+
         // check if request userid is numeric & get the integer value of it
         $userid = isset($_GET['id']) && is_numeric($_GET['id']) ? intval($_GET['id']) : 0;
             
@@ -27,40 +27,42 @@
             // the row count
             $count = $stmt->rowCount();
             // if there's such id show the form
-            if ($stmt->rowCount() > 0) { 
-                ?>
-                <section class="vh-100">
-                    <div class="container py-5 h-100">
-                    <div class="row d-flex justify-content-center h-100 mt-5">
-                        <div class="col-md-7 col-lg-5 col-xl-5 offset-xl-1">
-                        <div class="d-flex align-items-center mb-3 pb-1">
-                        <i class="fas fa-cubes fa-2x me-3" style="color: #ff6219;"></i>
-                        <span class="h1 fw-bold mb-0" style="color: black;">Edit<span style='color: white;'>User</span></span>
-                        </div>
-                        <form class="form-horizontal" method="POST" enctype="multipart/form-data">
+            if ($stmt->rowCount() > 0) { ?>
+
+                <h1 class="text-center">Edit User</h1>
+                <div class="container">
+                    <form class="form-horizontal" method="POST" enctype="multipart/form-data">
                         <!-- <input type="hidden" name="userid" value="<?php echo $userid ?>" /> -->
                         <!-- Start Username Field -->
-                        <div class="form-outline mb-4">
-                            <lable class="col-sm-2 control-lable" style="color: white;">Username</lable>
-                            <div>
-                                <input type="text" name="username" value="<?php echo $row['username'] ?>" class="form-control form-control-lg" autocomplete="off" />
+                        <div class="form-group">
+                            <lable class="col-sm-2 control-lable">Username</lable>
+                            <div class="col-sm-10 col-md-5">
+                                <input type="text" name="username" value="<?php echo $row['username'] ?>" class="form-control" autocomplete="off" />
                             </div>
                         </div>
                         <!-- End Username Field -->
                         <!-- Start Password Field -->
-                        <div class="form-outline mb-4">
-                            <lable class="col-sm-2 control-lable" style="color: white;">Password</lable>
-                            <div>
-                                <input type="hidden" name="oldpassword" value="<?php echo $row['password'] ?>" class="form-control form-control-lg"/>
+                        <div class="form-group">
+                            <lable class="col-sm-2 control-lable">Password</lable>
+                            <div class="col-sm-10 col-md-5">
+                                <input type="hidden" name="oldpassword" value="<?php echo $row['password'] ?>" />
                                 <input type="password" name="newpassword" class="form-control" autocomplete="off" placeholder="If You Don't need to Change The Password Take This Empty" />
                             </div>
                         </div>
                         <!-- End Password Field -->
-                        <!-- <div class="form-group form-group-lg"> -->
-                        <div class="form-outline mb-4">
-                            <lable class="col-sm-2 control-lable" style="color: white;">Role</lable>
-                            <div>
-                                <select name="role" id="" class="form-control form-control-lg">
+                        <!-- Start Email Field -->
+                        <div class="form-group">
+                            <lable class="col-sm-2 control-lable">Email</lable>
+                            <div class="col-sm-10 col-md-5">
+                                <input type="email" name="email" class="form-control" value="<?php echo $row['email'] ?>" autocomplete="off" />
+                            </div>
+                        </div>
+                        <!-- End Email Field -->
+                        <!-- Start Fullname Field -->
+                        <div class="form-group form-group-lg">
+                            <lable class="col-sm-2 control-lable">Role</lable>
+                            <div class="col-sm-10 col-md-5">
+                                <select name="role" id="" class="form-control">
                                     <option value="<?php echo $row['role'] ?>"><?php echo $row['role'] == 0 ? 'Normal User' : 'Admin' ?></option>
                                     <option value="0">Normal User</option>
                                     <option value="1">Admin</option>
@@ -69,99 +71,103 @@
                         </div>
                         <!-- End Fullname Field -->
                         <!-- Image -->
-                        <div>
-                            <label class="form-label" style="color: white;" for="form1Example1322">Upload Image</label>
+                        <div class="col-sm-10 col-md-5">
                             <input type="file" id="form1Example1322" name="image" class="form-control form-control-lg" />
+                            <label class="form-label" for="form1Example1322">Upload Image</label>
                         </div>
                         <!-- Start Button Field -->
-                        <div class="form-group mt-2 w-25">
-                            <div>
-                                <input type="submit" value="Save" class="btn btn-primary w-100">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <input type="submit" value="Save" class="btn btn-primary">
                             </div>
                         </div>
                         <!-- End Button Field -->
                     </form>
                 </div>
-            </div>
-        </div>
-    </div>
-
     <?php }}
-        
+
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+            $errors = [];
             $data = $_POST;
             $username = $data['username'];
-            $id = $userid;
+            $email = $data['email'];
             $role = $data['role'];
             $password = empty($data['newpassword']) ? $data['oldpassword'] : password_hash($data['newpassword'], PASSWORD_DEFAULT);
             
             if(!empty($_FILES['image']['name'])) {
-                
+
                 // Handle image upload
                 $image = $_FILES['image'];
-                
+        
                 $image_name = $image['name'];
-                
+        
                 $image_tmp_name = $image['tmp_name'];
-                
+        
                 $image_error = $image['error'];
-                
+        
                 if ($image_error === UPLOAD_ERR_OK) {
-                    
+        
                     $image_ext = pathinfo($image_name, PATHINFO_EXTENSION);
-                    
+        
                     $allowed_exts = array('jpg', 'jpeg', 'png', 'gif');
-                    $editerrors = [];
-                    
+        
                     if (in_array($image_ext, $allowed_exts)) {
-                        
+        
                         $image_dest = $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/uploads/users/' . uniqid('', true) . '.' . $image_ext;
-                        
+        
                         move_uploaded_file($image_tmp_name, $image_dest);
                     } else {
-                        
-                        $editerrors['image'] = '<div class="alert alert-danger text-center" style="z-index: 100000;">Invalid image file type</div>';
+        
+                        $errors[] = 'Invalid image file type';
                     }
                 }
             } else {
                 include $_SERVER["DOCUMENT_ROOT"].'/Cafe_php_project/Controllers/users/users.php';
-                $user = getUserById($id);
-                // var_dump($user);
+                $user = getUserByEmail($email);
+                var_dump($user);
                 $image_dest = $user['image'];
-                
             }
-            $password_regex = "/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/";
+            
+            // Email Validation
+            if(empty($email)) {
+                $errors[] = 'Email Is Required';
+            }   elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                $errors[] = 'Write a Valid Email';
+            }
+    
             // pssword Validtion
             if(empty($password)) {
-                $editerrors['password'] = '<div class="alert alert-danger text-center" style="z-index: 100000;">Password Is Required</div>';
-            } elseif (!preg_match($password_regex, $password)) {
-                $editerrors['password'] = '<div class="alert alert-danger text-center" style="z-index: 100000;">Write Strong Password</div>';
+                $errors[] = 'Password Is Required';
+            } elseif (strlen($password) < 7) {
+                $errors[] = 'Write Strong Password';
             }
             // Username Validation
             if(empty($username)) {
-                $editerrors['username'] = '<div class="alert alert-danger text-center" style="z-index: 100000;">Username Is Required</div>';
+                $errors[] = 'Username Is Required';
             } elseif (strlen($username) < 3) {
-                $editerrors['username'] = '<div class="alert alert-danger text-center" style="z-index: 100000;">Username Not Match</div>';
+                $errors[] = 'Username Not Match';
             }
     
-            if (empty($editerrors)) {
-                $stmt2 = $conn->prepare("SELECT * FROM users WHERE id = ?");
-                $stmt2->execute(array($id));
+            if (empty($errors)) {
+                $stmt2 = $conn->prepare("SELECT * FROM users WHERE email = ?");
+                $stmt2->execute(array($email));
                 $count = $stmt2->rowCount();
                 if ($count == 1) {
-                    $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, image = ?, role = ? WHERE id = ?");
-                    $stmt->execute(array($username, $password, $image_dest, $role, $id));
+                    $stmt = $conn->prepare("UPDATE users SET username = ?, password = ?, image = ?, role = ? WHERE email = ?");
+                    $stmt->execute(array($username, $password, $image_dest, $role, $email));
                     $count = $stmt2->rowCount();
                     // echo Success Message
-                    echo '<div class="alert alert-success text-center mt-5">' . $stmt->rowCount() . ' Data Updated</div>';
+                    echo '<div class="alert alert-success">' . $stmt->rowCount() . ' Data Updated</div>';
+                    // header("refresh:3;url=listAllUsers.php");
                     exit();
                 } else {
                     echo 'Something Wrong';
                 }
             } 
             else {
-                foreach ($editerrors as $error) {
-                    echo $error;
+                foreach ($errors as $err) {
+                    echo '<span class="alert alert-danger">' . $err . '</span>';
                 }
             }
         }

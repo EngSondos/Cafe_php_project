@@ -11,7 +11,7 @@ if (isset($_SESSION['user'])) {
 ?>
 <nav class="navbar navbar-expand-lg navbar-dark ournav">
   <a class="navbar-brand" href="#">Cafeteria<img width="25" src="/Cafe_php_project/assets/design-imgs/Food_(1).png" alt=""></a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -49,6 +49,9 @@ if (isset($_SESSION['user'])) {
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a href="/Cafe_php_project/Views/register/adminHomePage.php" class="nav-link">Home<i class="fas fa-house-user pl-2"></i></a>
+        </li>
+        <li class="nav-item">
+          <a href="/Cafe_php_project/Views/products/DisplayProductsUserForAdmin.php" class="nav-link">Products<i class="fas fa-house-user pl-2"></i></a>
         </li>
         <li class="nav-item mr-3">
           <a href="/Cafe_php_project/Controllers/cart_controller.php" class="nav-link">Cart<i class="fas fa-cart-arrow-down pl-2"></i></a>
