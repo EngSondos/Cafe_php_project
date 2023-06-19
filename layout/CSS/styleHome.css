@@ -58,16 +58,6 @@ header button {
   height: 50px;
 }
 
-footer {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)),
-    url('../../assets/images/footer.png');
-}
-
-footer ul {
-  margin-top: 60px;
-  color: white;
-  font-size: 20px;
-}
 
 footer .container p {
   color: white;

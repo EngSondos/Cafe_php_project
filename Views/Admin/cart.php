@@ -49,7 +49,7 @@ function render_carts_admin($products, $carts, $totalcarts)
                         <div class='col-xl-4 col-md-6 col-sm-12 '>
                           <div class='card_container p-0 overflow-hidden'>
                               <div class='card-img'>
-                                    <img src='../uploads/{$product["image"]}'class='card-img-top' alt='product image'>
+                                    <img src='../{$product["image"]}'class='card-img-top' alt='product image'>
                                     <div class='cardcontroller'>
                                         <button class='btn btn-increment w-15' onclick='incrementquantity({$product["quantity"]},{$product["id"]},{$cart["user_id"]},{$product["price"]})'>
                                             <i class='fa-solid fa-plus'></i>
