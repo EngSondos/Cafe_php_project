@@ -36,21 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 //Pagination for products
 $productPagination = DisplayAvailableProductsQueryWithPagination();
 
-
+// var_dump($productPagination );
 
 ?>
 <!-- Main Css File For Product For User-->
 <link rel="stylesheet" href="../../assets/style_product.css">
 <!-- ----------------------------------------------------------------------------------------- -->
 <div class="container p-50 ">
-    <h1 class="text-primary mx-auto text-center my-4">All Products</h1>
+    <h1 class="  text-center my-4 all_products">All Products</h1>
     <!-- <h2 class="my-4">Products</h2> -->
     <!-- <a class="btn btn-primary" href="Add Products.php">Add Product</a> -->
-    <form action="" method="GET" id="search-form">
-        <input type="text" name="search_term" id="search-input" placeholder="Enter search term..." value="<?php if (isset($_GET['search_term'])) {
+    <form action="" method="GET" id="search-form" class="ml-auto w-50 text-right search_product_home">
+        <input type="text" name="search_term" id="search-input" placeholder="Search On Your Product" value="<?php if (isset($_GET['search_term'])) {
                                                                                                                 echo $_GET['search_term'];
                                                                                                             } ?>">
-        <input type="submit" value="Search">
+        <button type="submit" value="Search" class="btn_main">Search</button>
     </form>
     <div class="row container_products">
         <?php

@@ -874,6 +874,14 @@ footer ul {
 .btn_product i {
   font-size: 16px;
 }
+.container_btn_view {
+  padding-left: 30px;
+  padding-top: 15px;
+}
+.View_btn {
+  padding-top: 0 !important;
+  /* line-height: 20px !important; */
+}
 
 .p-50 {
   padding-top: 50px;

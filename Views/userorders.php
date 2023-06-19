@@ -53,20 +53,22 @@ if (isset($_POST['cancel_order'])) {
 <section>
 
 
-  <div class="container" style="margin-top: 50px;">
+  <div class="container p-100">
     <h2 style="text-align: center;">My Orders</h2>
     <form method="post" action="">
-      <div class="d-flex">
+      <div class="d-flex align-items-center">
 
-        <div class="form-group me-3  w-25">
+        <div class="form-group w-25">
           <label for="start_date">Start Date:</label>
           <input type="date" class="form-control" id="start_date" name="start_date" value=<?= $_POST['start_date'] ?? "" ?>>
         </div>
-        <div class="form-group me-3  w-25">
+        <div class="form-group   w-25">
           <label for="end_date">End Date:</label>
           <input type="date" class="form-control" id="end_date" name="end_date" value=<?= $_POST['end_date'] ?? "" ?>>
         </div>
-        <button type="submit" class="btn btn-primary mt-4 ">View Orders</button>
+        <div class="container_btn_view">
+          <button type="submit" class="btn_product View_btn ">View Orders</button>
+        </div>
       </div>
 
     </form>

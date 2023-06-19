@@ -174,7 +174,7 @@ function search_Product_With_Pagination_Query($ValueSearch)
     ) = pagination();
     try {
         // Query the database with the search term
-        $query = "SELECT * FROM `products` WHERE `name` LIKE '%$ValueSearch%' AND LIMIT :limit OFFSET :offset";
+        $query = "SELECT * FROM `products` WHERE `name` LIKE '%$ValueSearch%' LIMIT :limit OFFSET :offset";
         ### prepare query
         $stmt = $conn->prepare($query);
         $stmt->bindValue(':limit', $records_per_page, PDO::PARAM_INT);
